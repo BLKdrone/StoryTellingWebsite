@@ -1,0 +1,111 @@
+import type { StoryPageData } from '@/lib/story'
+
+// The story is data-driven: every screen is a plain page object in this array.
+// `background` and `sound` are intentionally empty — real image/audio files
+// will be dropped in later. `backgroundColor` is a simple placeholder tint so
+// the layout is visible in the meantime.
+export const pages: StoryPageData[] = [
+  {
+    id: 'welcome',
+    type: 'text-whale',
+    navigation: 'tap-anywhere',
+    background: '',
+    backgroundColor: '#12263a',
+    sound: '',
+    transition: 'fade',
+    text: "Hi. I'm Nara, a whale who likes to listen. Take a slow breath — there's no rush here.",
+  },
+  {
+    id: 'invitation',
+    type: 'text-whale',
+    navigation: 'tap-anywhere',
+    background: '',
+    backgroundColor: '#163049',
+    sound: '',
+    transition: 'fade',
+    text: "Tonight, let's drift beneath the surface together and check in on how you really are.",
+  },
+  {
+    id: 'descent',
+    type: 'animation',
+    navigation: 'tap-anywhere',
+    background: '',
+    backgroundColor: '#0e2033',
+    sound: '',
+    transition: 'dive',
+    title: 'Descending',
+    text: 'Watch the light soften as we sink into the calm. Tap when you feel settled.',
+    duration: 4000,
+  },
+  {
+    id: 'mood-check',
+    type: 'question',
+    navigation: 'button',
+    background: '',
+    backgroundColor: '#1a3a52',
+    sound: '',
+    transition: 'fade',
+    question: 'How are you feeling right now?',
+    options: ['Calm', 'Anxious', 'Tired', 'Numb'],
+  },
+  {
+    id: 'weight',
+    type: 'collect-answer',
+    navigation: 'button',
+    background: '',
+    backgroundColor: '#15304a',
+    sound: '',
+    transition: 'fade',
+    prompt: "What's one thing weighing on you today?",
+    placeholder: 'Type it out, just for you…',
+    buttonLabel: 'Let it drift',
+  },
+  {
+    id: 'breathe',
+    type: 'transition',
+    navigation: 'button',
+    background: '',
+    backgroundColor: '#0c1e30',
+    sound: '',
+    transition: 'breathe',
+    text: 'Breathe with me. In… and out.',
+    duration: 5000,
+  },
+  {
+    id: 'kindness',
+    type: 'reflection-input',
+    navigation: 'button',
+    background: '',
+    backgroundColor: '#1c3d55',
+    sound: '',
+    transition: 'fade',
+    prompt: 'Write one kind sentence to yourself.',
+    placeholder: 'You deserve gentleness…',
+    buttonLabel: 'Hold onto this',
+  },
+  {
+    id: 'ascent',
+    type: 'transition',
+    navigation: 'button',
+    background: '',
+    backgroundColor: '#1f4a63',
+    sound: '',
+    transition: 'rise',
+    text: 'Rising back toward the surface…',
+    duration: 3500,
+  },
+  {
+    id: 'farewell',
+    type: 'text-whale',
+    navigation: 'tap-anywhere',
+    background: '',
+    backgroundColor: '#24607a',
+    sound: '',
+    transition: 'fade',
+    text: 'Thank you for spending this quiet moment with me. Come back whenever you need to slow down. — Nara',
+  },
+]
+
+export function getPageIndexById(id: string): number {
+  return pages.findIndex((p) => p.id === id)
+}
