@@ -25,15 +25,35 @@ export default function HomePage() {
           </p>
         </div>
 
-        <Link
-          href={`/${first.id}`}
-          className={cn(
-            buttonVariants({ size: 'lg' }),
-            'h-14 w-full max-w-xs rounded-2xl text-base',
-          )}
-        >
-          Begin
-        </Link>
+        <div className="flex w-full max-w-xs flex-col gap-3">
+          <Link
+            href={`/${first.id}`}
+            className={cn(
+              buttonVariants({ size: 'lg' }),
+              'h-14 w-full rounded-2xl text-base',
+            )}
+          >
+            Begin the journey
+          </Link>
+          <Link
+            href="/mood-checkin"
+            className={cn(
+              buttonVariants({ variant: 'secondary', size: 'lg' }),
+              'h-14 w-full rounded-2xl text-base',
+            )}
+          >
+            Quick mood check-in
+          </Link>
+          <Link
+            href="/quiz"
+            className={cn(
+              buttonVariants({ variant: 'ghost', size: 'lg' }),
+              'h-12 w-full rounded-2xl text-base',
+            )}
+          >
+            Which sea creature are you?
+          </Link>
+        </div>
       </main>
     </MobileFrame>
   )

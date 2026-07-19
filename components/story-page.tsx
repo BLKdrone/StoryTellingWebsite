@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { StoryPageData } from '@/lib/story'
 import { Button } from '@/components/ui/button'
+import { BottleFold } from '@/components/bottle-fold'
 
 interface StoryPageProps {
   page: StoryPageData
@@ -219,11 +220,17 @@ function CollectAnswerVariant({
   isLast?: boolean
 }) {
   const [answer, setAnswer] = useState('')
+  const [sealing, setSealing] = useState(false)
 
   const handleSubmit = () => {
     // For now: keep it in local state and log it. (No Supabase yet.)
     console.log('[v0] collected answer:', page.id, '=>', answer)
-    onAdvance(answer)
+    // Play the "fold into bottle" animation, then advance.
+    setSealing(true)
+  }
+
+  if (sealing) {
+    return <BottleFold answer={answer} onComplete={() => onAdvance(answer)} />
   }
 
   return (
