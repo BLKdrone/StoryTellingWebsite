@@ -85,7 +85,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q1',
     question: 'After a long, draining day, what helps you feel like yourself again?',
     backgroundColor: '#1a5566',
-    background: '',
+    background: '/public/background/intro/02.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Talking it out with someone I trust' },
@@ -99,7 +99,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q2',
     question: 'When a plan suddenly changes, your first reaction is to…',
     backgroundColor: '#184b5c',
-    background: '',
+    background: '/public/background/intro/background%201.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Rally everyone and make the best of it' },
@@ -113,7 +113,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q3',
     question: 'How do you usually handle a big feeling?',
     backgroundColor: '#164252',
-    background: '',
+    background: '/public/background/intro/background%202.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Share it out loud right away' },
@@ -127,7 +127,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q4',
     question: 'Your ideal kind of rest looks like…',
     backgroundColor: '#133948',
-    background: '',
+    background: '/public/background/intro/01.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Laughing with people I love' },
@@ -141,7 +141,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q5',
     question: 'Friends would say you are the one who…',
     backgroundColor: '#10303e',
-    background: '',
+    background: '/public/background/intro/background%203.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Brings everyone together' },
@@ -155,7 +155,7 @@ export const quizQuestions: QuizQuestion[] = [
     id: 'q6',
     question: 'What do you most want more of right now?',
     backgroundColor: '#0c2734',
-    background: '',
+    background: '/public/background/intro/02.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Connection' },

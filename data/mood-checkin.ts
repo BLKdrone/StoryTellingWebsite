@@ -28,8 +28,8 @@ export const moodQuestion = {
   id: 'mood-checkin',
   question: 'How are you arriving today?',
   helper: 'There is no wrong answer — just notice what feels closest.',
-  background: '',
-  backgroundColor: '#15384a',
+  background: '/public/background/intro/02.PNG',
+  // backgroundColor: '#15384a',
   sound: '',
 }
 
@@ -47,7 +47,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     message:
       "It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
     suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
-    background: '',
+    background: '/public/background/intro/background%201.PNG',
     backgroundColor: '#3a5a2f',
     sound: '',
   },
@@ -57,7 +57,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     message:
       'Not every day needs a headline. Neutral is a resting place, and rest is allowed.',
     suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
-    background: '',
+    background: '/public/background/intro/background%202.PNG',
     backgroundColor: '#2f4a55',
     sound: '',
   },
@@ -67,7 +67,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     message:
       'Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
     suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
-    background: '',
+    background: '/public/background/intro/01.PNG',
     backgroundColor: '#243a5a',
     sound: '',
   },
@@ -77,7 +77,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     message:
       'When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
     suggestion: 'Breathe in for four counts, hold for four, out for four. Just once. Then again if it helps.',
-    background: '',
+    background: '/public/background/intro/background%203.PNG',
     backgroundColor: '#4a2f3f',
     sound: '',
   },

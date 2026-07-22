@@ -31,8 +31,11 @@ export function MoodFlow() {
     <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
       <div
         aria-hidden
-        className="absolute inset-0"
-        style={{ backgroundColor: moodQuestion.backgroundColor }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          // backgroundColor: moodQuestion.backgroundColor,
+          backgroundImage: moodQuestion.background ? `url(${moodQuestion.background})` : undefined,
+        }}
       />
       <div
         aria-hidden

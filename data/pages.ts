@@ -9,7 +9,7 @@ export const pages: StoryPageData[] = [
     id: 'welcome',
     type: 'text-whale',
     navigation: 'tap-anywhere',
-    background: '',
+    background: '/background/intro/02.PNG',
     backgroundColor: '#12263a',
     sound: '',
     transition: 'fade',
