@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
+import { ChapterCheckpoint } from '@/components/chapter-checkpoint'
 import { cn } from '@/lib/utils'
 import {
   animals,
@@ -16,6 +16,7 @@ export function QuizFlow() {
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<QuizOption['letter'][]>([])
   const [result, setResult] = useState<AnimalKey | null>(null)
+  const [checkpoint, setCheckpoint] = useState(false)
 
   const total = quizQuestions.length
 
@@ -39,8 +40,12 @@ export function QuizFlow() {
     setResult(null)
   }
 
+  if (checkpoint) {
+    return <ChapterCheckpoint currentChapter="quiz" onRestart={() => setCheckpoint(false)} />
+  }
+
   if (result) {
-    return <QuizResult animalKey={result} onRestart={restart} />
+    return <QuizResult animalKey={result} onRestart={restart} onContinue={() => setCheckpoint(true)} />
   }
 
   const page = quizQuestions[index]
@@ -104,9 +109,11 @@ export function QuizFlow() {
 function QuizResult({
   animalKey,
   onRestart,
+  onContinue,
 }: {
   animalKey: AnimalKey
   onRestart: () => void
+  onContinue: () => void
 }) {
   const animal = animals[animalKey]
 
@@ -150,15 +157,14 @@ function QuizResult({
           >
             Take it again
           </Button>
-          <Link
-            href="/"
-            className={cn(
-              buttonVariants({ variant: 'ghost', size: 'lg' }),
-              'h-12 w-full rounded-2xl text-base',
-            )}
+          <Button
+            variant="ghost"
+            size="lg"
+            className="h-12 w-full rounded-2xl text-base"
+            onClick={onContinue}
           >
-            Back to start
-          </Link>
+            Continue to checkpoint
+          </Button>
         </div>
       </div>
     </div>

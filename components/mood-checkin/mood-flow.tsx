@@ -1,9 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { ChapterCheckpoint } from '@/components/chapter-checkpoint'
 import {
   moodBranches,
   moodOptions,
@@ -13,14 +12,19 @@ import {
 
 export function MoodFlow() {
   const [mood, setMood] = useState<MoodKey | null>(null)
+  const [checkpoint, setCheckpoint] = useState(false)
 
   const handleSelect = (key: MoodKey) => {
     console.log('[v0] mood check-in:', key)
     setMood(key)
   }
 
+  if (checkpoint) {
+    return <ChapterCheckpoint currentChapter="mood-checkin" onRestart={() => setCheckpoint(false)} />
+  }
+
   if (mood) {
-    return <MoodBranchView moodKey={mood} onBack={() => setMood(null)} />
+    return <MoodBranchView moodKey={mood} onBack={() => setMood(null)} onContinue={() => setCheckpoint(true)} />
   }
 
   return (
@@ -71,9 +75,11 @@ export function MoodFlow() {
 function MoodBranchView({
   moodKey,
   onBack,
+  onContinue,
 }: {
   moodKey: MoodKey
   onBack: () => void
+  onContinue: () => void
 }) {
   const branch = moodBranches[moodKey]
 
@@ -119,15 +125,14 @@ function MoodBranchView({
           >
             Check in again
           </Button>
-          <Link
-            href="/"
-            className={cn(
-              buttonVariants({ variant: 'ghost', size: 'lg' }),
-              'h-12 w-full rounded-2xl text-base',
-            )}
+          <Button
+            variant="ghost"
+            size="lg"
+            className="h-12 w-full rounded-2xl text-base"
+            onClick={onContinue}
           >
-            Back to start
-          </Link>
+            Continue to checkpoint
+          </Button>
         </div>
       </div>
     </div>
