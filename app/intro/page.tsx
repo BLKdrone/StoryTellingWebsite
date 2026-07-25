@@ -7,25 +7,25 @@ import { StoryPage } from '@/components/story-page'
 import { introPages } from '@/data/intro'
 
 export default function IntroPage() {
-  const router = useRouter()
-  const [currentIndex, setCurrentIndex] = useState(0)
+    const router = useRouter()
+    const [currentIndex, setCurrentIndex] = useState(0)
 
-  const handleAdvance = () => {
-    if (currentIndex < introPages.length - 1) {
-      setCurrentIndex(currentIndex + 1)
-    } else {
-      // Intro complete — go to main story
-      router.push('/mood-check')
+    const handleAdvance = () => {
+        if (currentIndex < introPages.length - 1) {
+            setCurrentIndex(currentIndex + 1)
+        } else {
+            // Intro complete — go to main story
+            router.push('/mood-check')
+        }
     }
-  }
 
-  const page = introPages[currentIndex]
+    const page = introPages[currentIndex]
 
-  return (
-    <MobileFrame>
-      <StoryPage page={page} onAdvance={handleAdvance} />
-    </MobileFrame>
-  )
+    return (
+        <MobileFrame>
+            <StoryPage page={page} onAdvance={handleAdvance} />
+        </MobileFrame>
+    )
 }
 
 // function TabContent({ tab }: { tab: TabKey }) {

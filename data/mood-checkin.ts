@@ -29,6 +29,7 @@ export const moodQuestion = {
   question: 'How are you arriving today?',
   helper: 'There is no wrong answer — just notice what feels closest.',
   background: '/public/background/intro/02.PNG',
+  navigation: 'tap-anywhere',
   // backgroundColor: '#15384a',
   sound: '',
 }
