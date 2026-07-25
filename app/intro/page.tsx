@@ -1,23 +1,32 @@
-// 'use client'
+'use client'
 
-// import { Suspense } from 'react'
-// import { useSearchParams } from 'next/navigation'
-// import { MobileFrame } from '@/components/mobile-frame'
-// import { MoodFlow } from '@/components/mood-checkin/mood-flow'
-// import { QuizFlow } from '@/components/quiz/quiz-flow'
-// import { SelfWorthFlow } from '@/components/self-worth/self-worth-flow'
-// import { BurnoutFlow } from '@/components/burnout/burnout-flow'
-// import { Button } from '@/components/ui/button'
-// import { cn } from '@/lib/utils'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { MobileFrame } from '@/components/mobile-frame'
+import { StoryPage } from '@/components/story-page'
+import { introPages } from '@/data/intro'
 
-// type TabKey = 'quiz' | 'mood-checkin' | 'self-worth' | 'burnout'
+export default function IntroPage() {
+  const router = useRouter()
+  const [currentIndex, setCurrentIndex] = useState(0)
 
-// const tabs: Array<{ id: TabKey; label: string }> = [
-//   { id: 'quiz', label: 'Quiz' },
-//   { id: 'mood-checkin', label: 'Mood Check-in' },
-//   { id: 'self-worth', label: 'Self-worth' },
-//   { id: 'burnout', label: 'Burnout' },
-// ]
+  const handleAdvance = () => {
+    if (currentIndex < introPages.length - 1) {
+      setCurrentIndex(currentIndex + 1)
+    } else {
+      // Intro complete — go to main story
+      router.push('/mood-check')
+    }
+  }
+
+  const page = introPages[currentIndex]
+
+  return (
+    <MobileFrame>
+      <StoryPage page={page} onAdvance={handleAdvance} />
+    </MobileFrame>
+  )
+}
 
 // function TabContent({ tab }: { tab: TabKey }) {
 //   switch (tab) {
