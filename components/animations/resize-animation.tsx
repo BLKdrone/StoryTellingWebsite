@@ -28,8 +28,8 @@ export function ResizeAnimation({
     <motion.div
       role="button"
       tabIndex={0}
-      aria-label="Press and hold to resize"
-      className={`flex select-none items-center justify-center rounded-2xl border border-primary/40 bg-card shadow-lg outline-none ${className ?? ''}`}
+      aria-label="กดๆๆๆๆๆ"
+      className={`flex select-none items-center justify-center rounded-2xl y/40 bg-card shadow-lg outline-none ${className ?? ''}`}
       style={{ width: size, height: size }}
       initial={{ scale: 1 }}
       // Grow while pressed (pointer or keyboard), shrink back otherwise.

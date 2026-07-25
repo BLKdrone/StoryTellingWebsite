@@ -24,7 +24,7 @@ export default function AnimationsDemoPage() {
         <section className="flex flex-col gap-3">
           <h2 className="text-sm font-medium text-foreground">Fold in half (tap)</h2>
           <p className="text-xs text-muted-foreground">
-            Tap the sheet to fold it 3 times, halving its width each fold.
+            fold it 3 times, 
           </p>
           <div className="flex justify-center py-4">
             <FoldAnimation folds={3}>
@@ -38,7 +38,7 @@ export default function AnimationsDemoPage() {
         <section className="flex flex-col gap-3">
           <h2 className="text-sm font-medium text-foreground">Resize (press &amp; hold)</h2>
           <p className="text-xs text-muted-foreground">
-            Press and hold the square to grow it; release to shrink back.
+            กดค้างเพื่อให้น้อลโต
           </p>
           <div className="flex justify-center py-4">
             <ResizeAnimation>
@@ -50,7 +50,7 @@ export default function AnimationsDemoPage() {
         <section className="flex flex-col gap-3">
           <h2 className="text-sm font-medium text-foreground">Zoom (on enter)</h2>
           <p className="text-xs text-muted-foreground">
-            Zooms toward focal point 30% 40% when it mounts.
+            Zooms เข้า 30% 40% 
           </p>
           <div className="flex flex-col items-center gap-4 py-4">
             <ZoomAnimation key={zoomKey} focalPoint="30% 40%">

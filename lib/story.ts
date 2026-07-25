@@ -21,8 +21,9 @@ export interface StoryPageData {
   navigation: Navigation
 
   // Shared presentation props for every variant.
+   /** Path to a background image, or multiple paths to cycle through as a slideshow. Empty string/array = no image. */
   /** Path to a real background image. Left empty for now — supplied separately. */
-  background: string
+  background: string | string[]
   /** Placeholder solid color shown while there is no background image. */
   backgroundColor: string
   /** Path to a sound file to play on this page. Empty = silent. */

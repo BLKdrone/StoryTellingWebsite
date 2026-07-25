@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { StoryPageData } from '@/lib/story'
 import { Button } from '@/components/ui/button'
 import { BottleFold } from '@/components/bottle-fold'
+import { BackgroundSlideshow } from './animations/background-slideshow'
 
 interface StoryPageProps {
   page: StoryPageData
@@ -41,38 +42,39 @@ export function StoryPage({ page, onAdvance, isLast }: StoryPageProps) {
   // Only tap-anywhere pages get screen-level interaction handlers.
   const tapHandlers = tappable
     ? {
-        role: 'button' as const,
-        tabIndex: 0,
-        'aria-label': 'Tap anywhere to continue',
-        onClick: () => onAdvance(),
-        onKeyDown: (e: React.KeyboardEvent) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            onAdvance()
-          }
-        },
-      }
+      role: 'button' as const,
+      tabIndex: 0,
+      'aria-label': 'Tap anywhere to continue',
+      onClick: () => onAdvance(),
+      onKeyDown: (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onAdvance()
+        }
+      },
+    }
     : {}
+  const images = Array.isArray(page.background)
+    ? page.background.filter(Boolean)
+    : page.background
+      ? [page.background]
+      : []
 
-  return (
+ return (
     <div
       className="relative flex min-h-dvh w-full flex-1 flex-col"
       {...tapHandlers}
     >
-      {/* Background layer: real image when provided, else a solid placeholder */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={
-          page.background
-            ? {
-                backgroundImage: `url(${page.background})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }
-            : { backgroundColor: page.backgroundColor || 'var(--background)' }
-        }
-      />
+      {/* Background layer: slideshow when multiple images, static image when one, else a solid placeholder */}
+      {images.length > 0 ? (
+        <BackgroundSlideshow images={images} backgroundColor={page.backgroundColor} />
+      ) : (
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ backgroundColor: page.backgroundColor || 'var(--background)' }}
+        />
+      )}
       {/* Readability scrim */}
       <div
         aria-hidden

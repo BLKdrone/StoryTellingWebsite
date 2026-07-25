@@ -55,7 +55,7 @@ export function FoldAnimation({
     onComplete?.()
   }
 
-  const sheetClasses = `overflow-hidden rounded-md border border-primary/40 bg-card shadow-lg ${className ?? ''}`
+  const sheetClasses = `overflow-hidden rounded-md bg-card shadow-lg ${className ?? ''}`
 
   return (
     <div

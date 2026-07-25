@@ -22,7 +22,7 @@ export function BottleFold({
   return (
     <div className="relative flex flex-1 flex-col items-center justify-between py-8">
       <p className="text-balance text-center text-sm text-muted-foreground">
-        Sealing your words away…
+        ปล่อยมันไป
       </p>
 
       {/* The note that folds and flies */}
@@ -53,7 +53,7 @@ export function BottleFold({
             else if (phase === 'toss') setPhase('settle')
           }}
           style={{ transformOrigin: 'center' }}
-          className="flex h-16 w-64 items-center justify-center rounded-md border border-primary/40 bg-card px-4 shadow-lg"
+          className="flex h-16 w-64 items-center justify-center rounded-md  bg-card px-4 shadow-lg"
         >
           <span className="line-clamp-2 text-center text-sm text-foreground/80">
             {answer || 'your words'}
