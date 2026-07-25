@@ -1,20 +1,20 @@
-// Data-driven "which sea creature are you?" quiz.
-// Each option carries an animal letter; the result is the most frequent letter.
+// Chapter: Quiz
+// "Which sea creature are you?" personality quiz (3 sample questions)
+// Uses the same scoring system as their existing quiz data
 
 export type AnimalKey = 'dolphin' | 'dugong' | 'octopus' | 'pufferfish' | 'sea-turtle'
 
 export interface QuizOption {
-  /** Answer letter A–E, mapped to an animal via `letterToAnimal`. */
   letter: 'A' | 'B' | 'C' | 'D' | 'E'
   label: string
 }
 
 export interface QuizQuestion {
   id: string
+  type: 'question'
+  navigation: 'button'
   question: string
-  /** Placeholder color for this page. Progressively darkened in the UI. */
   backgroundColor: string
-  /** Real background image, supplied later. */
   background: string
   sound: string
   options: QuizOption[]
@@ -25,7 +25,6 @@ export interface AnimalResult {
   name: string
   tagline: string
   description: string
-  /** Placeholder icon tint (no illustration/image). */
   iconColor: string
 }
 
@@ -83,9 +82,11 @@ export const animals: Record<AnimalKey, AnimalResult> = {
 export const quizQuestions: QuizQuestion[] = [
   {
     id: 'q1',
+    type: 'question',
+    navigation: 'button',
     question: 'After a long, draining day, what helps you feel like yourself again?',
     backgroundColor: '#1a5566',
-    background: '/public/background/intro/02.PNG',
+    background: '/background/quiz/1.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Talking it out with someone I trust' },
@@ -97,9 +98,11 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 'q2',
+    type: 'question',
+    navigation: 'button',
     question: 'When a plan suddenly changes, your first reaction is to…',
     backgroundColor: '#184b5c',
-    background: '/public/background/intro/background%201.PNG',
+    background: '/background/quiz/2.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Rally everyone and make the best of it' },
@@ -111,9 +114,11 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 'q3',
+    type: 'question',
+    navigation: 'button',
     question: 'How do you usually handle a big feeling?',
     backgroundColor: '#164252',
-    background: '/public/background/intro/background%202.PNG',
+    background: '/background/quiz/3.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'Share it out loud right away' },
@@ -123,57 +128,17 @@ export const quizQuestions: QuizQuestion[] = [
       { letter: 'E', label: 'Sit with it slowly until it settles' },
     ],
   },
-  {
-    id: 'q4',
-    question: 'Your ideal kind of rest looks like…',
-    backgroundColor: '#133948',
-    background: '/public/background/intro/01.PNG',
-    sound: '',
-    options: [
-      { letter: 'A', label: 'Laughing with people I love' },
-      { letter: 'B', label: 'Floating with zero obligations' },
-      { letter: 'C', label: 'Tinkering with something interesting' },
-      { letter: 'D', label: 'Cozy and tucked away from the world' },
-      { letter: 'E', label: 'Wandering somewhere new but calm' },
-    ],
-  },
-  {
-    id: 'q5',
-    question: 'Friends would say you are the one who…',
-    backgroundColor: '#10303e',
-    background: '/public/background/intro/background%203.PNG',
-    sound: '',
-    options: [
-      { letter: 'A', label: 'Brings everyone together' },
-      { letter: 'B', label: 'Keeps things calm and grounded' },
-      { letter: 'C', label: 'Always has a clever idea' },
-      { letter: 'D', label: 'Feels things most deeply' },
-      { letter: 'E', label: 'Quietly shows up, every time' },
-    ],
-  },
-  {
-    id: 'q6',
-    question: 'What do you most want more of right now?',
-    backgroundColor: '#0c2734',
-    background: '/public/background/intro/02.PNG',
-    sound: '',
-    options: [
-      { letter: 'A', label: 'Connection' },
-      { letter: 'B', label: 'Ease' },
-      { letter: 'C', label: 'Clarity' },
-      { letter: 'D', label: 'Safety' },
-      { letter: 'E', label: 'Patience with myself' },
-    ],
-  },
 ]
 
-/** Count answer letters and return the most frequent animal (ties broken by earliest letter). */
+/** Count answer letters and return the most frequent animal */
 export function scoreQuiz(letters: QuizOption['letter'][]): AnimalKey {
   const counts: Record<string, number> = {}
   for (const l of letters) counts[l] = (counts[l] ?? 0) + 1
+  
   const order: QuizOption['letter'][] = ['A', 'B', 'C', 'D', 'E']
   let best = order[0]
   let bestCount = -1
+  
   for (const letter of order) {
     const c = counts[letter] ?? 0
     if (c > bestCount) {
@@ -181,5 +146,6 @@ export function scoreQuiz(letters: QuizOption['letter'][]): AnimalKey {
       best = letter
     }
   }
+  
   return letterToAnimal[best]
 }

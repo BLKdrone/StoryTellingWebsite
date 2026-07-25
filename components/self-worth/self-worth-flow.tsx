@@ -1,47 +1,47 @@
-'use client'
+// 'use client'
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { ChapterCheckpoint } from '@/components/chapter-checkpoint'
+// import { useState } from 'react'
+// import { Button } from '@/components/ui/button'
+// import { ChapterCheckpoint } from '@/components/chapter-checkpoint'
 
-export function SelfWorthFlow() {
-    const [completed, setCompleted] = useState(false)
+// export function SelfWorthFlow() {
+//     const [completed, setCompleted] = useState(false)
 
-    if (completed) {
-        return <ChapterCheckpoint currentChapter="self-worth" onRestart={() => setCompleted(false)} />
-    }
+//     if (completed) {
+//         return <ChapterCheckpoint currentChapter="self-worth" onRestart={() => setCompleted(false)} />
+//     }
 
-    return (
-        <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
-            <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#10354d' }} />
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
+//     return (
+//         <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
+//             <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#10354d' }} />
+//             <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
 
-            <div className="relative z-10 flex min-h-dvh flex-1 flex-col justify-center gap-8 p-6 text-center">
-                <div className="space-y-3">
-                    <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">Chapter three</p>
-                    <h1 className="font-serif text-3xl leading-snug text-foreground">
-                        A gentle reminder that your worth is not a performance.
-                    </h1>
-                    <p className="text-balance text-lg leading-relaxed text-muted-foreground">
-                        You do not have to earn rest, care, or tenderness. They are part of your life, too.
-                    </p>
-                </div>
+//             <div className="relative z-10 flex min-h-dvh flex-1 flex-col justify-center gap-8 p-6 text-center">
+//                 <div className="space-y-3">
+//                     <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">Chapter three</p>
+//                     <h1 className="font-serif text-3xl leading-snug text-foreground">
+//                         A gentle reminder that your worth is not a performance.
+//                     </h1>
+//                     <p className="text-balance text-lg leading-relaxed text-muted-foreground">
+//                         You do not have to earn rest, care, or tenderness. They are part of your life, too.
+//                     </p>
+//                 </div>
 
-                <div className="rounded-2xl border border-border/70 bg-card/60 p-5 text-left shadow-sm">
-                    <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Reflection</p>
-                    <p className="mt-3 text-balance text-base leading-relaxed text-foreground">
-                        What would it feel like to let yourself be held by the same kindness you offer others?
-                    </p>
-                </div>
+//                 <div className="rounded-2xl border border-border/70 bg-card/60 p-5 text-left shadow-sm">
+//                     <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Reflection</p>
+//                     <p className="mt-3 text-balance text-base leading-relaxed text-foreground">
+//                         What would it feel like to let yourself be held by the same kindness you offer others?
+//                     </p>
+//                 </div>
 
-                <Button
-                    size="lg"
-                    className="h-14 w-full rounded-2xl text-base"
-                    onClick={() => setCompleted(true)}
-                >
-                    Finish this chapter
-                </Button>
-            </div>
-        </div>
-    )
-}
+//                 <Button
+//                     size="lg"
+//                     className="h-14 w-full rounded-2xl text-base"
+//                     onClick={() => setCompleted(true)}
+//                 >
+//                     Finish this chapter
+//                 </Button>
+//             </div>
+//         </div>
+//     )
+// }

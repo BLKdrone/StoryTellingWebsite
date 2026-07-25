@@ -133,14 +133,25 @@ function TapHint() {
 
 function TextWhaleVariant({ page }: { page: StoryPageData }) {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
-      <WhaleShape />
-      {page.text ? (
-        <p className="text-balance font-serif text-2xl leading-relaxed text-foreground">
-          {page.text}
-        </p>
-      ) : null}
-      <TapHint />
+    <div className="flex flex-1 flex-col">
+      {/* TOP: Whale (flex-1 = takes 1/3 space) */}
+      <div className="flex flex-1 items-center justify-center">
+        <WhaleShape />
+      </div>
+
+      {/* MIDDLE: Text (flex-1 = takes 1/3 space, stays centered) */}
+      <div className="flex flex-1 items-center justify-center px-6 text-center">
+        {page.text ? (
+          <p className="text-balance font-serif text-2xl leading-relaxed text-foreground max-w-md">
+            {page.text}
+          </p>
+        ) : null}
+      </div>
+
+      {/* BOTTOM: Hint (flex-1 = takes 1/3 space) */}
+      <div className="flex flex-1 items-center justify-center">
+        <TapHint />
+      </div>
     </div>
   )
 }

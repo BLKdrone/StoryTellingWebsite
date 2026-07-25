@@ -1,0 +1,32 @@
+export const introPages = [
+  {
+    id: 'intro-1',
+    type: 'text-whale',
+    navigation: 'tap-anywhere',
+    background: '/background/intro/01.PNG',
+    backgroundColor: '#0c1e30',
+    sound: '',
+    transition: 'fade',
+    text: 'You ve found yourself by the edge of a vast, quiet ocean.',
+  },
+  {
+    id: 'intro-2',
+    type: 'text-whale',
+    navigation: 'tap-anywhere',
+    background: '/background/intro/02.PNG',
+    backgroundColor: '#10283a',
+    sound: '',
+    transition: 'fade',
+    text: 'The water is calm. Peaceful. Like i',
+  },
+  {
+    id: 'intro-3',
+    type: 'text-whale',
+    navigation: 'tap-anywhere',
+    background: '/background/intro/03.PNG',
+    backgroundColor: '#15384a',
+    sound: '',
+    transition: 'fade',
+    text: 'A gentle presence appears. "Hello," says the whale. "',
+  },
+]

@@ -2,10 +2,17 @@
 
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
-import { pages } from '@/data/pages'
 import { StoryPage } from '@/components/story-page'
 
-export function StoryStep({ index }: { index: number }) {
+export function StoryStep({ 
+  index, 
+  pages,
+  chapter 
+}: { 
+  index: number
+  pages: StoryPageData[]
+  chapter: string
+}) {
   const router = useRouter()
   const page = pages[index]
   const isLast = index === pages.length - 1
@@ -13,13 +20,13 @@ export function StoryStep({ index }: { index: number }) {
   const onAdvance = useCallback(
     (_answer?: string) => {
       if (isLast) {
-        router.push('/')
+        router.push('/') // or next chapter
         return
       }
       const next = pages[index + 1]
-      router.push(`/${next.id}`)
+      router.push(`/${chapter}/${next.id}`)
     },
-    [index, isLast, router],
+    [index, isLast, router, chapter, pages],
   )
 
   if (!page) return null
