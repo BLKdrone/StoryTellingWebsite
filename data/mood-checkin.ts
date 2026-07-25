@@ -30,8 +30,8 @@ export interface MoodBranch {
 
 export const moodQuestion = {
   id: 'mood-checkin',
-  question: 'How are you arriving today?',
-  helper: 'There is no wrong answer — just notice what feels closest.',
+  question: 'ก่อนอื่น เธอ อยากให้ฉันเรียกเธอว่ายังไงเหรอ',
+  helper: 'หหหห',
   background: '/public/background/intro/02.PNG',
   navigation: 'tap-anywhere',
   // backgroundColor: '#15384a',
@@ -52,13 +52,13 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     pages: [
       {
         title: 'That warmth suits you',
-        message: "1It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
-        suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
+        message: "1ห.",
+        suggestion: 'หห.',
         background: '/public/background/intro/background%201.PNG',
         sound: '',
       },
       {
-        title: '2That warmth suits you',
+        title: '2หหu',
         message: "2It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
         suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
         background: '/public/background/intro/background%201.PNG',

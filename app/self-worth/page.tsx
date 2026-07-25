@@ -1,16 +1,45 @@
-import type { Metadata } from 'next'
-import { MobileFrame } from '@/components/mobile-frame'
-import { SelfWorthFlow } from '@/components/self-worth/self-worth-flow'
+'use client'
 
-export const metadata: Metadata = {
-    title: 'Self-worth · Mentalhealthwebsite',
-    description: 'A gentle chapter on remembering your worth beyond performance.',
-}
+import { useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { MobileFrame } from '@/components/mobile-frame'
 
 export default function SelfWorthPage() {
-    return (
-        <MobileFrame>
-            <SelfWorthFlow />
-        </MobileFrame>
-    )
+  const router = useRouter()
+
+  return (
+    <MobileFrame>
+      <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
+        <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#10354d' }} />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
+
+        <div className="relative z-10 flex min-h-dvh flex-1 flex-col justify-center gap-8 p-6 text-center">
+          <div className="space-y-3">
+            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">Chapter three</p>
+            <h1 className="font-serif text-3xl leading-snug text-foreground">
+              A gentle reminder that your worth is not a performance.
+            </h1>
+            <p className="text-balance text-lg leading-relaxed text-muted-foreground">
+              You do not have to earn rest, care, or tenderness. They are part of your life, too.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border/70 bg-card/60 p-5 text-left shadow-sm">
+            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Reflection</p>
+            <p className="mt-3 text-balance text-base leading-relaxed text-foreground">
+              What would it feel like to let yourself be held by the same kindness you offer others?
+            </p>
+          </div>
+
+          <Button
+            size="lg"
+            className="h-14 w-full rounded-2xl text-base"
+            onClick={() => router.push('/chapter-checkpoint?from=self-worth')}
+          >
+            Finish this chapter
+          </Button>
+        </div>
+      </div>
+    </MobileFrame>
+  )
 }

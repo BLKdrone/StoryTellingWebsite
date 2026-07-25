@@ -67,12 +67,12 @@ export function StoryPage({ page, onAdvance, isLast }: StoryPageProps) {
     >
       {/* Background layer: slideshow when multiple images, static image when one, else a solid placeholder */}
       {images.length > 0 ? (
-        <BackgroundSlideshow images={images} backgroundColor={page.backgroundColor} />
+        <BackgroundSlideshow images={images} />
       ) : (
         <div
           aria-hidden
           className="absolute inset-0"
-          style={{ backgroundColor: page.backgroundColor || 'var(--background)' }}
+          // style={{ backgroundColor: page.backgroundColor || 'var(--background)' }}
         />
       )}
       {/* Readability scrim */}
@@ -112,16 +112,16 @@ function PageContent({ page, onAdvance, isLast }: StoryPageProps) {
 /* Variants                                                            */
 /* ------------------------------------------------------------------ */
 
-function WhaleShape() {
-  // Simple colored placeholder standing in for the whale illustration.
-  return (
-    <div className="animate-float relative h-28 w-44">
-      <div className="absolute inset-0 rounded-[50%] bg-primary/70" />
-      <div className="absolute -right-6 top-1/2 h-10 w-14 -translate-y-1/2 rounded-[50%] bg-primary/70" />
-      <div className="absolute left-8 top-6 h-3 w-3 rounded-full bg-background" />
-    </div>
-  )
-}
+// function WhaleShape() {
+//   // Simple colored placeholder standing in for the whale illustration.
+//   return (
+//     <div className="animate-float relative h-28 w-44">
+//       <div className="absolute inset-0 rounded-[50%] bg-primary/70" />
+//       <div className="absolute -right-6 top-1/2 h-10 w-14 -translate-y-1/2 rounded-[50%] bg-primary/70" />
+//       <div className="absolute left-8 top-6 h-3 w-3 rounded-full bg-background" />
+//     </div>
+//   )
+// }
 
 function TapHint() {
   return (
@@ -134,7 +134,7 @@ function TapHint() {
 function TextWhaleVariant({ page }: { page: StoryPageData }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
-      <WhaleShape />
+      {/* <WhaleShape /> */}
       {page.text ? (
         <p className="text-balance font-serif text-2xl leading-relaxed text-foreground">
           {page.text}

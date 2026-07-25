@@ -10,7 +10,7 @@ const STORAGE_KEY = 'quiet-journey-progress'
 
 const chapterOptions: Array<{ id: ChapterKey; label: string; href: string }> = [
     { id: 'quiz', label: 'Quiz', href: '/quiz' },
-    { id: 'mood-checkin', label: 'Mood check-in', href: '/mood-checkin' },
+    { id: 'mood-checkin', label: 'Happiness', href: '/mood-checkin' },
     { id: 'self-worth', label: 'Self-worth', href: '/self-worth' },
     { id: 'burnout', label: 'Burnout', href: '/burnout' },
 ]
@@ -93,12 +93,12 @@ export function ChapterCheckpoint({
                     <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
                         Chapter checkpoint
                     </p>
-                    <h1 className="font-serif text-3xl text-foreground">
+                    {/* <h1 className="font-serif text-3xl text-foreground">
                         You have reached the next quiet turn.
                     </h1>
                     <p className="max-w-sm text-balance text-base leading-relaxed text-muted-foreground">
                         Choose any chapter to continue from here. The conclusion waits until all four are complete.
-                    </p>
+                    </p> */}
                 </div>
 
                 <div className="flex w-full max-w-sm flex-col gap-3">
@@ -131,11 +131,11 @@ export function ChapterCheckpoint({
                             'h-14 w-full max-w-sm rounded-2xl text-base',
                         )}
                     >
-                        Continue to conclusion
+                        Continue
                     </Link>
                 ) : (
                     <p className="text-sm text-muted-foreground">
-                        Complete the remaining chapters to unlock the conclusion.
+                       ss.
                     </p>
                 )}
 

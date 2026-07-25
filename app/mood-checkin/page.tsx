@@ -14,6 +14,20 @@ export default function MoodCheckinPage() {
   const [pageState, setPageState] = useState<PageState>('question')
   const [selectedMood, setSelectedMood] = useState<MoodKey | null>(null)
   const [branchIndex, setBranchIndex] = useState(0)
+
+  const handleBack = () => {
+    if (pageState === 'branch') {
+      if (branchIndex > 0) {
+        setBranchIndex((i) => i - 1)
+      } else {
+        setPageState('options')
+        setSelectedMood(null)
+      }
+    } else if (pageState === 'options') {
+      setPageState('question')
+    }
+  }
+
   // Step 1: Show question with tap-anywhere
   const handleAdvanceQuestion = () => {
     setPageState('options')
@@ -65,7 +79,18 @@ export default function MoodCheckinPage() {
   if (pageState === 'options' && !selectedMood) {
     return (
       <MobileFrame>
-        <div
+        <div className="relative flex flex-col flex-1 min-h-dvh w-full">
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              handleBack()
+            }}
+            className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+            aria-label="Go back"
+          >
+            ← Back
+          </button>
+          <div
           onClick={handleAdvanceOptions}
           className="relative flex min-h-dvh w-full flex-1 flex-col items-center justify-center gap-8 p-8 text-center cursor-pointer"
           role="button"
@@ -109,6 +134,7 @@ export default function MoodCheckinPage() {
             <p className="text-xs text-white/60 pt-4">Tap anywhere to continue →</p>
           </div>
         </div>
+        </div>
       </MobileFrame>
     )
   }
@@ -128,7 +154,19 @@ export default function MoodCheckinPage() {
 
     return (
       <MobileFrame>
-        <StoryPage page={branchPage} onAdvance={handleAdvanceBranch} />
+        <div className="relative flex flex-col flex-1 min-h-dvh w-full">
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              handleBack()
+            }}
+            className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+            aria-label="Go back"
+          >
+            ← Back
+          </button>
+          <StoryPage page={branchPage} onAdvance={handleAdvanceBranch} />
+        </div>
       </MobileFrame>
     )
   }

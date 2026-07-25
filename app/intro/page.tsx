@@ -10,12 +10,18 @@ export default function IntroPage() {
     const router = useRouter()
     const [currentIndex, setCurrentIndex] = useState(0)
 
+    const handleBack = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1)
+        }
+    }
+
     const handleAdvance = () => {
         if (currentIndex < introPages.length - 1) {
             setCurrentIndex(currentIndex + 1)
         } else {
-            // Intro complete — go to main story
-            router.push('/mood-check')
+            // Intro complete — go to quiz
+            router.push('/quiz')
         }
     }
 
@@ -23,7 +29,21 @@ export default function IntroPage() {
 
     return (
         <MobileFrame>
-            <StoryPage page={page} onAdvance={handleAdvance} />
+            <div className="relative flex flex-col flex-1 min-h-dvh w-full">
+                {currentIndex > 0 && (
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            handleBack()
+                        }}
+                        className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+                        aria-label="Go back"
+                    >
+                        ← Back
+                    </button>
+                )}
+                <StoryPage page={page} onAdvance={handleAdvance} />
+            </div>
         </MobileFrame>
     )
 }

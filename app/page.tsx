@@ -3,7 +3,7 @@ import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { pages } from '@/data/pages'
+// import { pages } from '@/data/pages'
 
 const heroImages = [
   '/background/intro/background1.PNG',
@@ -12,7 +12,7 @@ const heroImages = [
 ]
 
 export default function HomePage() {
-  const first = pages[0]
+  // const first = pages[0]
 
   return (
     <MobileFrame>
@@ -32,12 +32,12 @@ export default function HomePage() {
 
           <div className="flex flex-col gap-3">
             <h1 className="text-balance font-serif text-4xl leading-tight text-foreground">
-              A Quiet Journey
+              Where our (heavy) hearts float
+              (ลายมือ หัวฟีลสีน้ำ/เทียน)
             </h1>
-            <p className="text-pretty leading-relaxed text-muted-foreground">
-              A gentle, whale-guided moment to slow down, breathe, and check in
-              with yourself.
-            </p>
+            {/* <p className="text-pretty leading-relaxed text-muted-foreground">
+             หห
+            </p> */}
           </div>
 
           <div className="flex w-full max-w-xs flex-col mt-32 gap-3">
@@ -50,7 +50,7 @@ export default function HomePage() {
             >
               เริ่มต้น
             </Link>
-            <Link
+            {/* <Link
               href="/mood-checkin"
               className={cn(
                 buttonVariants({ variant: 'secondary', size: 'lg' }),
@@ -76,8 +76,15 @@ export default function HomePage() {
               )}
             >
               ทำค้าง
-            </Link>
+            </Link> */}
           </div>
+          <p className="border-2 border-white text-pretty leading-relaxed text-muted-foreground pl-4">
+            banner ขึ้น ประมาณ 15 วินาที ค่อยๆ งาง
+            คำชี้แจง: นี่เป็นแบบทดสอบเพื่อพาคุณสำรวจความรู้สึกในช่วงนี้
+            ไม่ใช่แบบทดสอบเพอการวินิจฉัยโรค หากทำแบบทดสอบแล้วเกิด
+            ความรู้สึกไม่สบายใจ สามารถหยุดทำได้ทันที และหากต้องการความ
+            ช่วยเหลือทันที ติดต่อ 1323 สายด่วนสุขภาพจิตได้ตลอด 24 ชม.
+          </p>
         </main>
       </div>
     </MobileFrame>
