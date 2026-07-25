@@ -25,8 +25,8 @@ export interface StoryPageData {
   /** Path to a real background image. Left empty for now — supplied separately. */
   background: string | string[]
   /** Placeholder solid color shown while there is no background image. */
-  backgroundColor: string
-  /** Path to a sound file to play on this page. Empty = silent. */
+  // backgroundColor: string
+  // /** Path to a sound file to play on this page. Empty = silent. */
   sound: string
   /** Name of a transition/animation effect for this page. */
   transition: string

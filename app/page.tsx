@@ -42,7 +42,7 @@ export default function HomePage() {
 
           <div className="flex w-full max-w-xs flex-col mt-32 gap-3">
             <Link
-              href={`/${first.id}`}
+              href="/intro"
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'h-14 w-full rounded-2xl text-base',

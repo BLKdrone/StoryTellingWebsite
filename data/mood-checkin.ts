@@ -10,8 +10,7 @@ export interface MoodOption {
   color: string
 }
 
-export interface MoodBranch {
-  key: MoodKey
+export interface MoodPage {
   title: string
   message: string
   /** A small suggested next step for this mood. */
@@ -19,9 +18,14 @@ export interface MoodBranch {
   /** Real background image, supplied later. */
   background: string
   /** Placeholder solid color while there is no image. */
-  backgroundColor: string
-  /** Sound file, supplied later. */
+  // backgroundColor: string
+  // /** Sound file, supplied later. */
   sound: string
+}
+
+export interface MoodBranch {
+  key: MoodKey
+  pages: MoodPage[]   // <-- was single title/message/suggestion, now an array
 }
 
 export const moodQuestion = {
@@ -41,45 +45,128 @@ export const moodOptions: MoodOption[] = [
   { key: 'overwhelmed', label: 'Overwhelmed', color: '#a15b6f' },
 ]
 
+
 export const moodBranches: Record<MoodKey, MoodBranch> = {
   happy: {
     key: 'happy',
-    title: 'That warmth suits you',
-    message:
-      "It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
-    suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
-    background: '/public/background/intro/background%201.PNG',
-    backgroundColor: '#3a5a2f',
-    sound: '',
+    pages: [
+      {
+        title: 'That warmth suits you',
+        message: "1It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
+        suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
+        background: '/public/background/intro/background%201.PNG',
+        sound: '',
+      },
+      {
+        title: '2That warmth suits you',
+        message: "2It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
+        suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
+        background: '/public/background/intro/background%201.PNG',
+        sound: '',
+      },
+      {
+        title: 'That warmth suits you',
+        message: "3It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
+        suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
+        background: '/public/background/intro/background%201.PNG',
+        sound: '',
+      },
+    ],
   },
   neutral: {
     key: 'neutral',
-    title: 'Steady is okay too',
-    message:
-      'Not every day needs a headline. Neutral is a resting place, and rest is allowed.',
-    suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
-    background: '/public/background/intro/background%202.PNG',
-    backgroundColor: '#2f4a55',
-    sound: '',
+    pages: [
+      {
+        title: 'Steady is okay too',
+        message:
+          '1Not every day needs a headline. Neutral is a resting place, and rest is allowed.',
+        suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
+        background: '/public/background/intro/background%202.PNG',
+        // backgroundColor: '#2f4a55',
+        sound: '',
+      },
+      {
+        title: 'Steady is okay too',
+        message:
+          '2',
+        suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
+        background: '/public/background/intro/background%202.PNG',
+        // backgroundColor: '#2f4a55',
+        sound: '',
+      },
+      {
+        title: 'Steady is okay too',
+        message:
+          '3Not every day needs a headline. Neutral is a resting place, and rest is allowed.',
+        suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
+        background: '/public/background/intro/background%202.PNG',
+        // backgroundColor: '#2f4a55',
+        sound: '',
+      },
+    ],
   },
   sad: {
     key: 'sad',
-    title: "I'm glad you told me",
-    message:
-      'Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
-    suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
-    background: '/public/background/intro/01.PNG',
-    backgroundColor: '#243a5a',
-    sound: '',
+    pages: [
+      {
+        title: "1I'm glad you told me",
+        message:
+          '1Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
+        suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
+        background: '/public/background/intro/01.PNG',
+        // backgroundColor: '#243a5a',
+        sound: '',
+      },
+      {
+        title: "2I'm glad you told me",
+        message:
+          '2Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
+        suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
+        background: '/public/background/intro/01.PNG',
+        // backgroundColor: '#243a5a',
+        sound: '',
+      },
+      {
+        title: "I'm glad you told me",
+        message:
+          '3Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
+        suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
+        background: '/public/background/intro/01.PNG',
+        // backgroundColor: '#243a5a',
+        sound: '',
+      },
+    ],
   },
   overwhelmed: {
-    key: 'overwhelmed',
-    title: "Let's make the world smaller",
-    message:
-      'When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
-    suggestion: 'Breathe in for four counts, hold for four, out for four. Just once. Then again if it helps.',
-    background: '/public/background/intro/background%203.PNG',
-    backgroundColor: '#4a2f3f',
-    sound: '',
+    key: 'sad',
+    pages: [
+      {
+        title: "Let's make the world smaller",
+        message:
+          '1When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
+        suggestion: 'Breathe in for four counts, hold for four, out for four. Just once. Then again if it helps.',
+        background: '/public/background/intro/background%203.PNG',
+        // backgroundColor: '#4a2f3f',
+        sound: '',
+      },
+       {
+        title: "Let's make the world smaller",
+        message:
+          '2When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
+        suggestion: 'Breathe in for four counts, hold for four, out for four. Just once. Then again if it helps.',
+        background: '/public/background/intro/background%203.PNG',
+        // backgroundColor: '#4a2f3f',
+        sound: '',
+      },
+       {
+        title: "Let's make the world smaller",
+        message:
+          '3When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
+        suggestion: 'Breathe in for four counts, hold for four, out for four. Just once. Then again if it helps.',
+        background: '/public/background/intro/background%203.PNG',
+        // backgroundColor: '#4a2f3f',
+        sound: '',
+      },
+    ],
   },
 }
