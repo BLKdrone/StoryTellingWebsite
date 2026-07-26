@@ -32,17 +32,17 @@ export const moodQuestion = {
   id: 'mood-checkin',
   question: 'ก่อนอื่น เธอ อยากให้ฉันเรียกเธอว่ายังไงเหรอ',
   helper: 'หหหห',
-  background: '/public/background/intro/02.PNG',
+  background: '/background/intro/02.PNG',
   navigation: 'tap-anywhere',
   // backgroundColor: '#15384a',
   sound: '',
 }
 
 export const moodOptions: MoodOption[] = [
-  { key: 'happy', label: 'Happy', color: '#e0b64a' },
-  { key: 'neutral', label: 'Neutral', color: '#6f8fa3' },
-  { key: 'sad', label: 'Sad', color: '#4a6f9c' },
-  { key: 'overwhelmed', label: 'Overwhelmed', color: '#a15b6f' },
+  { key: 'happy', label: 'มีความสุข', color: '#e0b64a' },
+  { key: 'neutral', label: 'เฉยๆ', color: '#6f8fa3' },
+  { key: 'sad', label: 'เศร้า เสียใจ', color: '#4a6f9c' },
+  { key: 'overwhelmed', label: 'หงุดหงด', color: '#a15b6f' },
 ]
 
 
@@ -51,24 +51,24 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     key: 'happy',
     pages: [
       {
-        title: 'That warmth suits you',
-        message: "1ห.",
+        title: 'T11111ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต',
+        message: "1ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต",
         suggestion: 'หห.',
-        background: '/public/background/intro/background%201.PNG',
+        background: '/background/intro/happy.PNG',
         sound: '',
       },
       {
         title: '2หหu',
-        message: "2It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
-        suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
-        background: '/public/background/intro/background%201.PNG',
+        message: "2ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต.",
+        suggestion: 'ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต',
+        background: '/background/mood-checkin/happy.PNG',
         sound: '',
       },
       {
-        title: 'That warmth suits you',
-        message: "3It's worth savoring the good moments as fully as the hard ones. Let this feeling take up space.",
-        suggestion: 'Name one thing that helped you feel this way, and let yourself enjoy it a little longer.',
-        background: '/public/background/intro/background%201.PNG',
+        title: '3ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต',
+        message: "3ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต",
+        suggestion: 'ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต',
+        background: '/background/mood-checkin/happy.PNG',
         sound: '',
       },
     ],
@@ -77,20 +77,20 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     key: 'neutral',
     pages: [
       {
-        title: 'Steady is okay too',
+        title: '1เฉยๆก็ดีๆๆ',
         message:
-          '1Not every day needs a headline. Neutral is a resting place, and rest is allowed.',
-        suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
-        background: '/public/background/intro/background%202.PNG',
+          '1เฉยๆก็ดีๆๆ',
+        suggestion: 'เฉยๆก็ดีๆๆ.',
+        background: '/background/mood-checkin/sad2.PNG',
         // backgroundColor: '#2f4a55',
         sound: '',
       },
       {
-        title: 'Steady is okay too',
+        title: '2 เฉยๆก็ดีๆๆ',
         message:
           '2',
-        suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
-        background: '/public/background/intro/background%202.PNG',
+        suggestion: 'เฉยๆก็ดีๆๆ',
+        background: '/background/mood-checkin/sad2.PNG',
         // backgroundColor: '#2f4a55',
         sound: '',
       },
@@ -99,7 +99,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         message:
           '3Not every day needs a headline. Neutral is a resting place, and rest is allowed.',
         suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
-        background: '/public/background/intro/background%202.PNG',
+        background: '/background/mood-checkin/sad2.PNG',
         // backgroundColor: '#2f4a55',
         sound: '',
       },
@@ -109,11 +109,11 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     key: 'sad',
     pages: [
       {
-        title: "1I'm glad you told me",
+        title: "1sad111111111e",
         message:
-          '1Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
-        suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
-        background: '/public/background/intro/01.PNG',
+          '1Sadness is heavy SADDDDDD',
+        suggestion: 'SADDDDDDDDDfuhsdofjvfncnkvpwsflk,',
+        background: '/background/mood-checkin/sad2.PNG',
         // backgroundColor: '#243a5a',
         sound: '',
       },
@@ -122,7 +122,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         message:
           '2Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
         suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
-        background: '/public/background/intro/01.PNG',
+        background: '/background/mood-checkin/sad2.PNG',
         // backgroundColor: '#243a5a',
         sound: '',
       },
@@ -138,18 +138,18 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     ],
   },
   overwhelmed: {
-    key: 'sad',
+    key: 'overwhelmed',
     pages: [
       {
-        title: "Let's make the world smaller",
+        title: "overwhelmed",
         message:
-          '1When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
-        suggestion: 'Breathe in for four counts, hold for four, out for four. Just once. Then again if it helps.',
+          '1overwhelmed111111 too mu.',
+        suggestion: 'Breathe in overwhelmed',
         background: '/public/background/intro/background%203.PNG',
         // backgroundColor: '#4a2f3f',
         sound: '',
       },
-       {
+      {
         title: "Let's make the world smaller",
         message:
           '2When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
@@ -158,7 +158,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         // backgroundColor: '#4a2f3f',
         sound: '',
       },
-       {
+      {
         title: "Let's make the world smaller",
         message:
           '3When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',

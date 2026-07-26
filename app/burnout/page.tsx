@@ -1,45 +1,48 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
 import { MobileFrame } from '@/components/mobile-frame'
+import { StoryPage } from '@/components/story-page'
+import { burnoutPages } from '@/data/burnout'
 
 export default function BurnoutPage() {
-  const router = useRouter()
+    const router = useRouter()
+    const [currentIndex, setCurrentIndex] = useState(0)
 
-  return (
-    <MobileFrame>
-      <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
-        <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#142f3d' }} />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
+    const handleBack = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex((index) => index - 1)
+        }
+    }
 
-        <div className="relative z-10 flex min-h-dvh flex-1 flex-col justify-center gap-8 p-6 text-center">
-          <div className="space-y-3">
-            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">Chapter four</p>
-            <h1 className="font-serif text-3xl leading-snug text-foreground">
-              When everything feels heavy, your body may be asking for a gentler pace.
-            </h1>
-            <p className="text-balance text-lg leading-relaxed text-muted-foreground">
-              Burnout is not weakness. It is a sign that care needs to be returned inward.
-            </p>
-          </div>
+    const handleAdvance = () => {
+        if (currentIndex < burnoutPages.length - 1) {
+            setCurrentIndex((index) => index + 1)
+        } else {
+            router.push('/chapter-checkpoint?from=burnout')
+        }
+    }
 
-          <div className="rounded-2xl border border-border/70 bg-card/60 p-5 text-left shadow-sm">
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Practice</p>
-            <p className="mt-3 text-balance text-base leading-relaxed text-foreground">
-              Name one thing you can postpone, delegate, or let be enough for today.
-            </p>
-          </div>
+    const page = burnoutPages[currentIndex]
 
-          <Button
-            size="lg"
-            className="h-14 w-full rounded-2xl text-base"
-            onClick={() => router.push('/chapter-checkpoint?from=burnout')}
-          >
-            Finish this chapter
-          </Button>
-        </div>
-      </div>
-    </MobileFrame>
-  )
+    return (
+        <MobileFrame>
+            <div className="relative flex min-h-dvh w-full flex-1 flex-col">
+                {currentIndex > 0 && (
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            handleBack()
+                        }}
+                        className="absolute left-6 top-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+                        aria-label="Go back"
+                    >
+                        ← Back
+                    </button>
+                )}
+                <StoryPage page={page} onAdvance={handleAdvance} />
+            </div>
+        </MobileFrame>
+    )
 }

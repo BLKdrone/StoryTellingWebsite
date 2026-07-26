@@ -13,6 +13,9 @@ import {
   type QuizOption,
 } from '@/data/quiz'
 
+// Shared style: black text sitting on a white rounded-radius-5 rectangle "chip"
+const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
+
 export default function QuizPage() {
   const router = useRouter()
   const [index, setIndex] = useState(0)
@@ -53,8 +56,8 @@ export default function QuizPage() {
         <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
           <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#0a2230' }} />
           <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 p-6 text-center">
-            <p className="text-sm uppercase tracking-widest text-muted-foreground">
-              Your sea creature
+            <p className="text-sm uppercase tracking-widest">
+              <span className={textChip}>เมื่อเปิดออกเป็นสิ่งที่ใช่หรือไม่</span>
             </p>
 
             <div
@@ -67,23 +70,31 @@ export default function QuizPage() {
               </span>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <h1 className="font-serif text-4xl text-foreground">{animal.name}</h1>
-              <p className="text-lg text-primary">{animal.tagline}</p>
+            <div className="flex flex-col items-center gap-2">
+              <h1 className="font-serif text-4xl">
+                <span className={textChip}>{animal.name}</span>
+              </h1>
+              <p className="text-lg">
+                <span className={textChip}>{animal.tagline}</span>
+              </p>
             </div>
 
-            <p className="max-w-sm text-balance text-base leading-relaxed text-muted-foreground">
-              {animal.description}
+            <p className="max-w-sm text-balance text-base leading-relaxed">
+              <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.description}</span>
             </p>
 
             <div className="mt-4 flex w-full max-w-xs flex-col gap-3">
-              <Button size="lg" className="h-14 w-full rounded-2xl text-base" onClick={restart}>
+              <Button
+                size="lg"
+                className="h-14 w-full rounded-[5px] bg-white text-base text-black hover:bg-white/90"
+                onClick={restart}
+              >
                 Take it again
               </Button>
               <Button
                 variant="ghost"
                 size="lg"
-                className="h-12 w-full rounded-2xl text-base"
+                className="h-12 w-full rounded-[5px] bg-white text-base text-black hover:bg-white/90"
                 onClick={() => router.push('/chapter-checkpoint?from=quiz')}
               >
                 Continue to checkpoint
@@ -114,7 +125,7 @@ export default function QuizPage() {
                 e.stopPropagation()
                 handleBack()
               }}
-              className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+              className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm font-medium text-black backdrop-blur-md transition-colors hover:bg-white/90"
               aria-label="Go back"
             >
               ← Back
@@ -132,13 +143,15 @@ export default function QuizPage() {
               />
             ))}
           </div>
-          <p className="mt-3 text-center text-sm text-muted-foreground">
-            Question {index + 1} of {total}
+          <p className="mt-3 text-center text-sm">
+            <span className={textChip}>
+              คำถาม {index + 1} / {total}
+            </span>
           </p>
 
           <div className="flex flex-1 flex-col justify-center gap-8">
-            <h1 className="text-balance text-center font-serif text-2xl leading-relaxed text-foreground">
-              {page.question}
+            <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">
+              <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
             </h1>
             <div className="flex flex-col gap-3">
               {page.options.map((option) => (
@@ -146,7 +159,7 @@ export default function QuizPage() {
                   key={option.letter}
                   variant="secondary"
                   size="lg"
-                  className="h-auto min-h-14 w-full whitespace-normal rounded-2xl py-3 text-left text-base"
+                  className="h-auto min-h-14 w-full whitespace-normal rounded-[5px] bg-white py-3 text-left text-base text-black hover:bg-white/90"
                   onClick={() => handleSelect(option.letter)}
                 >
                   {option.label}

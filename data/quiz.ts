@@ -29,6 +29,7 @@ export interface AnimalResult {
   iconColor: string
 }
 
+
 export const letterToAnimal: Record<QuizOption['letter'], AnimalKey> = {
   A: 'dolphin',
   B: 'dugong',
