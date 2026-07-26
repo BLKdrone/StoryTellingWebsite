@@ -18,19 +18,45 @@ export function StoryPage({ page, onAdvance, isLast }: StoryPageProps) {
 
   // --- shared: sound ---------------------------------------------------
   const audioRef = useRef<HTMLAudioElement | null>(null)
+
   useEffect(() => {
-    if (!page.sound) return
-    const audio = new Audio(page.sound)
-    audio.loop = page.type === 'transition' || page.type === 'animation'
-    audio.play().catch(() => {
-      // Autoplay may be blocked until the user interacts — that's fine.
-    })
-    audioRef.current = audio
-    return () => {
-      audio.pause()
+    if (!page.sound) {
+      audioRef.current?.pause()
       audioRef.current = null
+      return
     }
-  }, [page.sound, page.type])
+
+    if (!audioRef.current) {
+      const audio = new Audio(page.sound)
+      audio.loop = true
+      audioRef.current = audio
+    } else if (audioRef.current.src !== window.location.origin + page.sound) {
+      audioRef.current.src = page.sound
+    }
+
+    const audio = audioRef.current
+    const tryPlay = () => {
+      void audio.play().catch(() => {
+        // Autoplay may be blocked until the user interacts — that's fine.
+      })
+    }
+
+    tryPlay()
+
+    const resumeOnInteraction = () => {
+      if (audio.paused) {
+        tryPlay()
+      }
+    }
+
+    window.addEventListener('pointerdown', resumeOnInteraction, { once: true })
+    window.addEventListener('keydown', resumeOnInteraction, { once: true })
+
+    return () => {
+      window.removeEventListener('pointerdown', resumeOnInteraction)
+      window.removeEventListener('keydown', resumeOnInteraction)
+    }
+  }, [page.sound])
 
   // --- transition: auto-advance when the animation finishes ------------
   useEffect(() => {
@@ -60,7 +86,7 @@ export function StoryPage({ page, onAdvance, isLast }: StoryPageProps) {
       ? [page.background]
       : []
 
- return (
+  return (
     <div
       className="relative flex min-h-dvh w-full flex-1 flex-col"
       {...tapHandlers}
@@ -72,7 +98,7 @@ export function StoryPage({ page, onAdvance, isLast }: StoryPageProps) {
         <div
           aria-hidden
           className="absolute inset-0"
-          // style={{ backgroundColor: page.backgroundColor || 'var(--background)' }}
+        // style={{ backgroundColor: page.backgroundColor || 'var(--background)' }}
         />
       )}
       {/* Readability scrim */}
