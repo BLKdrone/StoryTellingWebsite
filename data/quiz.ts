@@ -1,6 +1,6 @@
 // แบบทดสอบเชิงข้อมูล "คุณคือสัตว์ทะเลชนิดใด"
 // แต่ละตัวเลือกจะมีตัวอักษรกำกับสัตว์ ผลลัพธ์คือตัวอักษรที่ถูกเลือกบ่อยที่สุด
-
+import type { StoryPageData } from '@/lib/story'
 export type AnimalKey = 'dolphin' | 'dugong' | 'octopus' | 'pufferfish' | 'sea-turtle'
 
 export interface QuizOption {
@@ -11,6 +11,7 @@ export interface QuizOption {
 
 export interface QuizQuestion {
   id: string
+  navigation: 'button'
   question: string
   /** สีพื้นหลังชั่วคราวของหน้านี้ จะถูกทำให้เข้มขึ้นทีละน้อยในหน้าจอจริง */
   backgroundColor: string
@@ -19,6 +20,16 @@ export interface QuizQuestion {
   sound: string
   options: QuizOption[]
 }
+/** หน้าคั่นบท / เกริ่นเรื่อง ไม่มีตัวเลือก แตะที่ไหนก็ได้เพื่อไปต่อ */
+export interface ChapterBreak {
+  id: string
+  navigation: 'tap-anywhere'
+  question: string
+  background: string
+  sound: string
+}
+
+export type QuizPageData = QuizQuestion | ChapterBreak
 
 export interface AnimalResult {
   key: AnimalKey
@@ -81,7 +92,21 @@ export const animals: Record<AnimalKey, AnimalResult> = {
   },
 }
 
-export const quizQuestions: QuizQuestion[] = [
+export const quizQuestions: QuizPageData[] = [
+  {
+    id: 'investigation-1',
+    navigation: 'tap-anywhere',
+    question: 'บทที่ 1: การสืบสวน',
+    background: '/background/investigation/01.PNG',
+    sound: '',
+  },
+  {
+    id: 'investigation-1',
+    navigation: 'tap-anywhere',
+    question: 'บทที่ 1: การสืบสวน',
+    background: '/background/investigation/01.PNG',
+    sound: '',
+  },
   {
     id: 'q1',
     question:
@@ -96,6 +121,7 @@ export const quizQuestions: QuizQuestion[] = [
       { letter: 'D', label: 'ผู้ช่างสังเกต - ตื่นตัวอยู่ตลอด ระมัดระวัง ใส่ใจผู้อื่นเสมอ' },
       { letter: 'E', label: 'คนเจ้าระเบียบ - มุ่งมั่น ไม่หวั่นไหว มีวินัย และมีความละเอียด' },
     ],
+    navigation: 'button',
   },
   {
     id: 'q2',
@@ -111,6 +137,15 @@ export const quizQuestions: QuizQuestion[] = [
       { letter: 'D', label: 'สำรวจสิ่งแปลกใหม่ - เบี่ยงเบนความสนใจด้วยการค้นหาปริศนาหรือสิ่งใหม่ ๆ ที่น่าตื่นเต้น' },
       { letter: 'E', label: 'กลับสู่ชายฝั่ง - หันกลับไปหาความคุ้นเคย จัดระเบียบชีวิตและสิ่งรอบตัว เพื่อให้รู้สึกควบคุมทุกอย่างได้อีกครั้ง' },
     ],
+    navigation: 'button',
+  },
+
+  {
+    id: 'investigation-1',
+    navigation: 'tap-anywhere',
+    question: 'บทที่ 1: การสืบสวน',
+    background: '/background/investigation/01.PNG',
+    sound: '',
   },
   {
     id: 'q3',
@@ -126,6 +161,7 @@ export const quizQuestions: QuizQuestion[] = [
       { letter: 'D', label: 'สังเกตทิศทางน้ำ - หยุดคิด วิเคราะห์ต้นตอของปัญหา เพื่อหาทางออกที่เหมาะสม' },
       { letter: 'E', label: 'ยึดหลักถ่วงสมอ - ยึดมั่นในหลักการและสิ่งที่ถูกต้อง เพื่อพาทุกคนกลับเข้าสู่เส้นทางที่ควรเป็น' },
     ],
+    navigation: 'button',
   },
   {
     id: 'q4',
@@ -141,6 +177,14 @@ export const quizQuestions: QuizQuestion[] = [
       { letter: 'D', label: 'อยากรู้อยากเห็น - เริ่มสำรวจความเป็นไปได้ และอยากเข้าใจโลกใหม่นี้มากขึ้น' },
       { letter: 'E', label: 'ต่อต้านและโหยหาอดีต - รู้สึกสูญเสีย และพยายามหาทางกลับไปสู่เส้นทางเดิม' },
     ],
+    navigation: 'button',
+  },
+  {
+    id: 'investigation-1',
+    navigation: 'tap-anywhere',
+    question: 'บทที่ 1: การสืบสวน',
+    background: '/background/investigation/01.PNG',
+    sound: '',
   },
   {
     id: 'q5',
@@ -156,6 +200,7 @@ export const quizQuestions: QuizQuestion[] = [
       { letter: 'D', label: 'แรงบันดาลใจไม่สิ้นสุด - ความคิดสร้างสรรค์และไอเดียใหม่ ๆ ที่ผุดขึ้นไม่หยุด' },
       { letter: 'E', label: 'หน้าที่และเป้าหมาย - "ตอนนี้เราไปถึงไหนแล้ว" "เรายังเป็นคนที่พึ่งพาได้ไหม"' },
     ],
+    navigation: 'button',
   },
   {
     id: 'q6',
@@ -171,7 +216,15 @@ export const quizQuestions: QuizQuestion[] = [
       { letter: 'D', label: 'อิสรภาพ - การได้คิด ฝัน และเป็นตัวของตัวเอง' },
       { letter: 'E', label: 'ความซื่อสัตย์ถูกต้อง - การยืนหยัดในสิ่งที่ถูกต้องและรักษาคำมั่นสัญญา' },
     ],
+    navigation: 'button',
   },
+  {
+    id: 'investigation-1',
+    navigation: 'tap-anywhere',
+    question: 'บทที่ 1: การสืบสวน',
+    background: '/background/investigation/01.PNG',
+    sound: '',
+  }
 ]
 
 /** นับตัวอักษรคำตอบ แล้วคืนค่าสัตว์ที่ถูกเลือกบ่อยที่สุด (กรณีเสมอกันให้ยึดตัวอักษรที่มาก่อน) */

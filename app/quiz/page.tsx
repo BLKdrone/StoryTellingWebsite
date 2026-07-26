@@ -23,6 +23,7 @@ export default function QuizPage() {
   const [result, setResult] = useState<AnimalKey | null>(null)
 
   const total = quizQuestions.length
+  const page = quizQuestions[index]
 
   const handleSelect = (letter: QuizOption['letter']) => {
     const nextAnswers = [...answers, letter]
@@ -35,6 +36,12 @@ export default function QuizPage() {
     }
   }
 
+  const handleAdvance = () => {
+    if (index + 1 < total) {
+      setIndex((i) => i + 1)
+    }
+  }
+
   const restart = () => {
     setIndex(0)
     setAnswers([])
@@ -43,8 +50,10 @@ export default function QuizPage() {
 
   const handleBack = () => {
     if (index > 0) {
+      if (page.navigation === 'button') {
+        setAnswers((prev) => prev.slice(0, -1))
+      }
       setIndex((i) => i - 1)
-      setAnswers((prev) => prev.slice(0, -1))
     }
   }
 
@@ -106,7 +115,50 @@ export default function QuizPage() {
     )
   }
 
-  const page = quizQuestions[index]
+  // Chapter-break page: full-screen tap target, no options, no progress bar
+  if (page.navigation === 'tap-anywhere') {
+    return (
+      <MobileFrame>
+        <div
+          key={page.id}
+          role="button"
+          tabIndex={0}
+          onClick={handleAdvance}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') handleAdvance()
+          }}
+          className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
+        >
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-cover bg-center transition-colors duration-700"
+            style={{ backgroundImage: `url(${page.background})` }}
+          />
+
+          <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+            {index > 0 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleBack()
+                }}
+                className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm font-medium text-black backdrop-blur-md transition-colors hover:bg-white/90"
+                aria-label="Go back"
+              >
+                ← Back
+              </button>
+            )}
+
+            <div className="flex flex-1 flex-col items-center justify-center">
+              <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">
+                <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </MobileFrame>
+    )
+  }
 
   return (
     <MobileFrame>
@@ -116,7 +168,6 @@ export default function QuizPage() {
           className="absolute inset-0 transition-colors duration-700"
           style={{ backgroundColor: page.backgroundColor }}
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
 
         <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
           {index > 0 && (
@@ -143,11 +194,6 @@ export default function QuizPage() {
               />
             ))}
           </div>
-          <p className="mt-3 text-center text-sm">
-            <span className={textChip}>
-              คำถาม {index + 1} / {total}
-            </span>
-          </p>
 
           <div className="flex flex-1 flex-col justify-center gap-8">
             <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">

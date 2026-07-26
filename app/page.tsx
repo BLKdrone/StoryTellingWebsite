@@ -23,21 +23,12 @@ export default function HomePage() {
           className="absolute inset-0 bg-gradient-to-b via-transparent "
         />
 
-
         <main className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-10 p-8 text-center">
-          {/* <div className="animate-float h-24 w-40 relative" aria-hidden>
-            <div className="absolute inset-0 rounded-[50%] bg-primary/70" />
-            <div className="absolute -right-5 top-1/2 h-8 w-12 -translate-y-1/2 rounded-[50%] bg-primary/70" />
-          </div> */}
-
           <div className="flex flex-col gap-3">
-            <h1 className="text-balance font-serif text-4xl leading-tight text-foreground">
+            {/* font-storybook = your hand-lettered display face (e.g. Fraunces italic or Caveat), set in tailwind config */}
+            <h1 className="text-balance font-storybook text-4xl leading-tight text-foreground drop-shadow-sm">
               Where our (heavy) hearts float
-              (ลายมือ หัวฟีลสีน้ำ/เทียน)
             </h1>
-            {/* <p className="text-pretty leading-relaxed text-muted-foreground">
-             หห
-            </p> */}
           </div>
 
           <div className="flex w-full max-w-xs flex-col mt-32 gap-3">
@@ -45,12 +36,13 @@ export default function HomePage() {
               href="/intro"
               className={cn(
                 buttonVariants({ size: 'lg' }),
-                'h-14 w-full rounded-2xl text-base',
+                'h-14 w-full rounded-2xl text-base font-medium tracking-wide shadow-md transition-transform active:scale-[0.98]',
               )}
             >
               เริ่มต้น
             </Link>
-            {/* <Link
+          </div>
+          {/* <Link
               href="/mood-checkin"
               className={cn(
                 buttonVariants({ variant: 'secondary', size: 'lg' }),
@@ -77,16 +69,14 @@ export default function HomePage() {
             >
               ทำค้าง
             </Link> */}
-          </div>
-          <p className="border-2 border-white text-pretty leading-relaxed text-muted-foreground pl-4">
-            banner ขึ้น ประมาณ 15 วินาที ค่อยๆ งาง
+          <p className="rounded-2xl border border-white/40 bg-black/20 px-4 py-3 text-pretty font-body text-sm leading-relaxed text-muted-foreground backdrop-blur-sm">
             คำชี้แจง: นี่เป็นแบบทดสอบเพื่อพาคุณสำรวจความรู้สึกในช่วงนี้
-            ไม่ใช่แบบทดสอบเพอการวินิจฉัยโรค หากทำแบบทดสอบแล้วเกิด
+            ไม่ใช่แบบทดสอบเพื่อการวินิจฉัยโรค หากทำแบบทดสอบแล้วเกิด
             ความรู้สึกไม่สบายใจ สามารถหยุดทำได้ทันที และหากต้องการความ
             ช่วยเหลือทันที ติดต่อ 1323 สายด่วนสุขภาพจิตได้ตลอด 24 ชม.
           </p>
         </main>
-      </div>
-    </MobileFrame>
+      </div >
+    </MobileFrame >
   )
 }
