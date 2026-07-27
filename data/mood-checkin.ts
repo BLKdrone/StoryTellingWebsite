@@ -1,73 +1,105 @@
 // Mood check-in: one branching question that leads to one of four mood paths.
-// Every branch carries placeholder background/sound fields to be filled later.
+// The "sad" path additionally branches into an A/B choice partway through,
+// then converges back into a shared ending.
 
 export type MoodKey = 'happy' | 'neutral' | 'sad' | 'overwhelmed'
 
 export interface MoodOption {
   key: MoodKey
   label: string
-  /** Placeholder tint for the option chip. */
-  color: string
+  /** Background image for the option chip. */
+  background: string
 }
 
-export interface MoodPage {
-  title: string
-  message: string
-  /** A small suggested next step for this mood. */
-  suggestion: string
+export interface MoodChoice {
+  /** Text shown on the choice button. */
+  label: string
+  /** The page(s) shown after this choice is picked, before converging back. */
+  nextPages: MoodPage[]
+}
+
+interface MoodPageBase {
+  id: string
   /** Real background image, supplied later. */
   background: string
-  /** Placeholder solid color while there is no image. */
-  // backgroundColor: string
-  // /** Sound file, supplied later. */
+  /** Sound file, supplied later. */
   sound: string
+  /** ถ้ามีค่า จะแฟลชสีนี้ตอนเปลี่ยนมาหน้านี้ ถ้าไม่ใส่ = ไม่มีทรานซิชัน */
+  flashTransition?: 'black' | 'white'
 }
+
+export interface MoodTapPage extends MoodPageBase {
+  navigation: 'tap-anywhere'
+  text: string
+}
+
+export interface MoodChoicePage extends MoodPageBase {
+  navigation: 'button'
+  text: string
+  choices: MoodChoice[]
+}
+
+export type MoodPage = MoodTapPage | MoodChoicePage
 
 export interface MoodBranch {
   key: MoodKey
-  pages: MoodPage[]   // <-- was single title/message/suggestion, now an array
+  pages: MoodPage[]
+  /**
+   * Shared ending pages played after a choice's nextPages finish.
+   * Only used by branches that contain a choice page (currently: sad).
+   */
+  convergePages?: MoodPage[]
 }
 
-export const moodQuestion = {
-  id: 'mood-checkin',
-  question: 'ก่อนอื่น เธอ อยากให้ฉันเรียกเธอว่ายังไงเหรอ',
-  helper: 'หหหห',
+export const moodIntro = {
+  id: 'mood-intro',
+  navigation: 'tap-anywhere' as const,
+  pages: [
+    { text: 'ถ้าตอนนี้ท้องฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ ท้องฟ้าของคุณในตอนนี้เป็นยังไงกันหรอ' },
+    { text: 'เลือกท้องฟ้าที่ตรงกับความรู้สึกของคุณตอนนี้ดูสิ' },
+  ],
   background: '/background/intro/02.PNG',
-  navigation: 'tap-anywhere',
-  // backgroundColor: '#15384a',
   sound: '',
 }
 
 export const moodOptions: MoodOption[] = [
-  { key: 'happy', label: 'มีความสุข', color: '#e0b64a' },
-  { key: 'neutral', label: 'เฉยๆ', color: '#6f8fa3' },
-  { key: 'sad', label: 'เศร้า เสียใจ', color: '#4a6f9c' },
-  { key: 'overwhelmed', label: 'หงุดหงด', color: '#a15b6f' },
+  { key: 'happy', label: 'มีความสุข', background: '/background/mood-checkin/2.PNG' },
+  { key: 'neutral', label: 'เฉยๆ', background: '/background/mood-checkin/2.PNG' },
+  { key: 'sad', label: 'เศร้า เสียใจ', background: '/background/mood-checkin/2.PNG' },
+  { key: 'overwhelmed', label: 'หงุดหงิด', background: '/background/mood-checkin/2.PNG' },
 ]
 
+export const moodQuestion = {
+  id: 'mood-question',
+  navigation: 'button' as const,
+  text: 'เลือกท้องฟ้าที่ตรงกับความรู้สึกของคุณตอนนี้ดูสิ',
+  background: '/background/intro/02.PNG',
+  options: moodOptions,
+  sound: '',
+}
 
 export const moodBranches: Record<MoodKey, MoodBranch> = {
   happy: {
     key: 'happy',
     pages: [
       {
-        title: 'T11111ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต',
-        message: "1ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต",
-        suggestion: 'หห.',
-        background: '/background/intro/happy.PNG',
-        sound: '',
-      },
-      {
-        title: '2หหu',
-        message: "2ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต.",
-        suggestion: 'ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต',
+        id: 'happy-1',
+        navigation: 'tap-anywhere',
+        text: 'ท้องฟ้าสดใส\nท้องฟ้าที่คุณเลือกมามีความอบอุ่นมากเลยนะ\nให้ความอบอุ่นนี้อยู่กับคุณไปตลอดวันนะ',
         background: '/background/mood-checkin/happy.PNG',
         sound: '',
       },
       {
-        title: '3ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต',
-        message: "3ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต",
-        suggestion: 'ท้องฟ้าที่คุณเลือกมามีความอบอุ่มมากเลยต',
+        id: 'happy-2',
+        navigation: 'tap-anywhere',
+        text: 'ความสุขเล็กๆ\nท้องฟ้าที่คุณเลือกมาช่างดูอบอุ่นมากเลยนะ\nลองนึกถึงสิ่งเล็กๆ ที่ทำให้คุณมีความสุขวันนี้ดูสิ',
+        background: '/background/mood-checkin/happy.PNG',
+        sound: '',
+      },
+      {
+        id: 'happy-3',
+        navigation: 'tap-anywhere',
+        text: 'เล่าให้ฟังหน่อยได้ไหม\nลองเล่าให้ฟังหน่อยได้ไหมว่าอะไรทำให้ท้องฟ้าของคุณสดใส\nอยากจดจำความรู้สึกดีๆ แบบนี้ไว้นะ',
         background: '/background/mood-checkin/happy.PNG',
         sound: '',
       },
@@ -77,30 +109,24 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     key: 'neutral',
     pages: [
       {
-        title: '1เฉยๆก็ดีๆๆ',
-        message:
-          '1เฉยๆก็ดีๆๆ',
-        suggestion: 'เฉยๆก็ดีๆๆ.',
-        background: '/background/mood-checkin/sad2.PNG',
-        // backgroundColor: '#2f4a55',
+        id: 'neutral-1',
+        navigation: 'tap-anywhere',
+        text: 'ท้องฟ้าสงบ\nโอ้ ท้องฟ้าของคุณช่างดูสงบเงียบจริงๆ เห็นแล้วรู้สึกสงบดีจัง\nไม่ใช่ทุกวันต้องมีเรื่องราวเด่นเสมอไป เฉยๆ ก็เป็นที่พักได้เหมือนกัน',
+        background: '/background/mood-checkin/neutral.PNG',
         sound: '',
       },
       {
-        title: '2 เฉยๆก็ดีๆๆ',
-        message:
-          '2',
-        suggestion: 'เฉยๆก็ดีๆๆ',
-        background: '/background/mood-checkin/sad2.PNG',
-        // backgroundColor: '#2f4a55',
+        id: 'neutral-2',
+        navigation: 'tap-anywhere',
+        text: 'ช่วงนี้เป็นไงบ้าง\nสงสัยจังเลยว่าชีวิตในช่วงสัปดาห์ที่ผ่านมาเป็นยังไงบ้าง\nลองเล่าให้ฟังหน่อยสิ',
+        background: '/background/mood-checkin/neutral.PNG',
         sound: '',
       },
       {
-        title: 'Steady is okay too',
-        message:
-          '3Not every day needs a headline. Neutral is a resting place, and rest is allowed.',
-        suggestion: 'Take one slow breath and notice one small, ordinary thing you appreciate right now.',
-        background: '/background/mood-checkin/sad2.PNG',
-        // backgroundColor: '#2f4a55',
+        id: 'neutral-3',
+        navigation: 'tap-anywhere',
+        text: 'ช้าลงหน่อยนะ\nในวันที่โลกหมุนไวเกินไป อยากให้คุณลองก้าวให้ช้าลงหน่อย แล้วค่อยๆ จดจำ ซึมซับความสุขที่เกิดกับคุณ\nไหนคุณลองเล่าให้เราฟังหน่อย ช่วงนี้ความสุขของคุณมาจากอะไรบ้างนะ',
+        background: '/background/mood-checkin/neutral.PNG',
         sound: '',
       },
     ],
@@ -109,30 +135,66 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     key: 'sad',
     pages: [
       {
-        title: "1sad111111111e",
-        message:
-          '1Sadness is heavy SADDDDDD',
-        suggestion: 'SADDDDDDDDDfuhsdofjvfncnkvpwsflk,',
-        background: '/background/mood-checkin/sad2.PNG',
-        // backgroundColor: '#243a5a',
+        id: 'sad-1',
+        navigation: 'tap-anywhere',
+        text: 'ท้องฟ้าครึ้มฝน\nท่ามกลางบรรยากาศที่เงียบงัน สัมผัสได้ถึงกลิ่นอายของความเศร้า คล้ายกับว่าตอนนี้พยากรณ์อากาศในใจของคุณกำลังมีฝนตกหนักอยู่ใช่ไหม\nลองเล่าให้เราฟังหน่อยได้ไหม',
+        background: '/background/mood-checkin/rain.PNG',
         sound: '',
       },
       {
-        title: "2I'm glad you told me",
-        message:
-          '2Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
-        suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
-        background: '/background/mood-checkin/sad2.PNG',
-        // backgroundColor: '#243a5a',
+        id: 'sad-2',
+        navigation: 'tap-anywhere',
+        text: 'อะไรเป็นสาเหตุ\nอะไรเป็นสาเหตุของปรากฏการณ์ที่เกิดขึ้นในครั้งนี้หรอ\nลองเล่าให้ฟังหน่อยนะ',
+        background: '/background/mood-checkin/rain.PNG',
         sound: '',
       },
       {
-        title: "I'm glad you told me",
-        message:
-          '3Sadness is heavy, and you carried it here anyway. You do not have to fix it right now — just be with it gently.',
-        suggestion: 'Place a hand on your chest and let yourself feel it for a moment. You are not alone in this.',
-        background: '/public/background/intro/01.PNG',
-        // backgroundColor: '#243a5a',
+        id: 'sad-3',
+        navigation: 'button',
+        text: 'คุณเก่งมากนะ\nคุณเก่งมากนะ ที่ผ่านเรื่องราวนี้มาได้ คุณอยากโยนเหตุการณ์นี้ทิ้งไปไหม',
+        background: '/background/mood-checkin/rain.PNG',
+        sound: '',
+        choices: [
+          {
+            label: 'โยน',
+            nextPages: [
+              {
+                id: 'sad-throw-1',
+                navigation: 'tap-anywhere',
+                text: 'ปล่อยไปให้ไกล\nตอนนี้ความทุกข์ของคุณได้โยนบินไปไกลเกินกว่าจะมองเห็นแล้วนะ',
+                background: '/background/mood-checkin/rain-clearing.PNG',
+                sound: '',
+              },
+            ],
+          },
+          {
+            label: 'ไม่โยน',
+            nextPages: [
+              {
+                id: 'sad-keep-1',
+                navigation: 'tap-anywhere',
+                text: 'ไม่เป็นไรนะ\nไม่เป็นไรนะที่จะเสียใจ แต่อย่าให้ความเศร้ากลบแสงสว่างในตัวคุณ ให้เรื่องนี้เป็นประสบการณ์ที่จะทำให้คุณเติบโตขึ้นนะ',
+                background: '/background/mood-checkin/rain.PNG',
+                sound: '',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    convergePages: [
+      {
+        id: 'sad-converge-1',
+        navigation: 'tap-anywhere',
+        text: 'ยังจำได้ไหม\nคุณยังจำเรื่องราวที่ทำให้ท้องฟ้าของคุณสดใสได้ไหม เล่าให้ฟังหน่อยสิ',
+        background: '/background/mood-checkin/sad2.PNG',
+        sound: '',
+      },
+      {
+        id: 'sad-converge-2',
+        navigation: 'tap-anywhere',
+        text: 'ความสุขไม่ได้หายไปไหน\nความสุขเหล่านั้นมันไม่ได้หายไปไหนนะ ในวันที่เธอเศร้าเสียใจ อย่าลืมโอบกอดตัวเองไว้ในวันที่มีแค่ตัวเอง แล้วก็ให้รู้ว่ารอยแผลในวันนี้คือบทเรียนที่ทำให้คุณเติบโตขึ้น',
+        background: '/background/mood-checkin/sad2.PNG',
         sound: '',
       },
     ],
@@ -141,30 +203,38 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     key: 'overwhelmed',
     pages: [
       {
-        title: "overwhelmed",
-        message:
-          '1overwhelmed111111 too mu.',
-        suggestion: 'Breathe in overwhelmed',
-        background: '/public/background/intro/background%203.PNG',
-        // backgroundColor: '#4a2f3f',
+        id: 'overwhelmed-1',
+        navigation: 'tap-anywhere',
+        text: 'พายุโหมกระหน่ำ\nตอนนี้คุณอยู่ท่ามกลางพายุโหม พร้อมฟ้าผ่ามากมาย',
+        background: '/background/mood-checkin/storm.PNG',
         sound: '',
       },
       {
-        title: "Let's make the world smaller",
-        message:
-          '2When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
-        suggestion: 'Breathe in for four counts, hold for four, out for four. Just once. Then again if it helps.',
-        background: '/public/background/intro/background%203.PNG',
-        // backgroundColor: '#4a2f3f',
+        id: 'overwhelmed-2',
+        navigation: 'tap-anywhere',
+        text: 'อะไรทำให้ไม่สบายใจ\nตอนนี้มีเรื่องอะไรที่ทำให้คุณไม่สบายใจ ที่ทำให้ท้องฟ้าของคุณเป็นแบบนี้หรอ\nลองเล่าให้ฟังหน่อย',
+        background: '/background/mood-checkin/storm.PNG',
         sound: '',
       },
       {
-        title: "Let's make the world smaller",
-        message:
-          '3When everything feels like too much, we only need the very next breath. Nothing else has to be solved this second.',
-        suggestion: 'Breathe in for four counts, hold for four, out for four. Just once. Then again if it helps.',
-        background: '/public/background/intro/background%203.PNG',
-        // backgroundColor: '#4a2f3f',
+        id: 'overwhelmed-3',
+        navigation: 'tap-anywhere',
+        text: 'คงจะรู้สึกอารมณ์ไม่ดี\nคุณคงจะรู้สึกอารมณ์ไม่ดีกับเหตุการณ์ที่เกิดขึ้นมากๆ เลยสินะ\nไม่เป็นไรนะถ้าวันนี้จะไม่ได้ตั้งใจ เพราะในความไม่สมบูรณ์แบบนั้น คุณก็ได้เติบโตขึ้นอีกขั้นหนึ่งแล้ว',
+        background: '/background/mood-checkin/storm.PNG',
+        sound: '',
+      },
+      {
+        id: 'overwhelmed-4',
+        navigation: 'tap-anywhere',
+        text: 'พายุผ่านไปแล้ว\nไม่ว่าตอนนี้จะเป็นยังไง ยังมีแสงแดดของวันที่สดใสรออยู่ข้างหน้านะ',
+        background: '/background/mood-checkin/storm-clearing.PNG',
+        sound: '',
+      },
+      {
+        id: 'overwhelmed-5',
+        navigation: 'tap-anywhere',
+        text: 'อยากทำอะไรต่อไป\nแล้วถ้าพายุผ่านไปแล้ว คุณอยากจะทำอะไรต่อไป',
+        background: '/background/mood-checkin/sunflower.PNG',
         sound: '',
       },
     ],
