@@ -13,20 +13,21 @@ export interface QuizQuestion {
   id: string
   navigation: 'button'
   question: string
-  /** สีพื้นหลังชั่วคราวของหน้านี้ จะถูกทำให้เข้มขึ้นทีละน้อยในหน้าจอจริง */
   backgroundColor: string
-  /** ภาพพื้นหลังจริง จะใส่ในภายหลัง */
-  background: string
+  background: string | string[]
   sound: string
   options: QuizOption[]
+  /** ถ้ามีค่า จะแฟลชสีนี้ตอนเปลี่ยนมาหน้านี้ ถ้าไม่ใส่ = ไม่มีทรานซิชัน */
+  flashTransition?: 'black' | 'white'
 }
-/** หน้าคั่นบท / เกริ่นเรื่อง ไม่มีตัวเลือก แตะที่ไหนก็ได้เพื่อไปต่อ */
+
 export interface ChapterBreak {
   id: string
   navigation: 'tap-anywhere'
   question: string
-  background: string
+  background: string | string[]
   sound: string
+  flashTransition?: 'black' | 'white'
 }
 
 export type QuizPageData = QuizQuestion | ChapterBreak
@@ -143,8 +144,14 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-1',
     navigation: 'tap-anywhere',
-    question: 'บทที่ 1: การสืบสวน',
-    background: '/background/investigation/01.PNG',
+    question: 'mflv[4kr',
+    background: [
+      '/background/hurricane/1.PNG',
+      '/background/hurricane/2.PNG',
+      '/background/hurricane/3.PNG',
+      '/background/hurricane/4.PNG',
+
+    ],
     sound: '',
   },
   {
@@ -221,7 +228,15 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-1',
     navigation: 'tap-anywhere',
-    question: 'บทที่ 1: การสืบสวน',
+    question: 'flashblack testqqq',
+    background: '/background/investigation/01.PNG',
+    sound: '',
+    flashTransition:'black',
+  },
+  {
+    id: 'investigation-1',
+    navigation: 'tap-anywhere',
+    question: 'เป็นของสำคัญที่คุณต้องการหรือไม่',
     background: '/background/investigation/01.PNG',
     sound: '',
   }

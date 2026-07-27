@@ -3,6 +3,8 @@ import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { LoginButton } from '@/components/login-button'
+
 // import { pages } from '@/data/pages'
 
 const heroImages = [
@@ -75,6 +77,7 @@ export default function HomePage() {
             ความรู้สึกไม่สบายใจ สามารถหยุดทำได้ทันที และหากต้องการความ
             ช่วยเหลือทันที ติดต่อ 1323 สายด่วนสุขภาพจิตได้ตลอด 24 ชม.
           </p>
+          <LoginButton />
         </main>
       </div >
     </MobileFrame >

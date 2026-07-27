@@ -12,6 +12,8 @@ import {
   type AnimalKey,
   type QuizOption,
 } from '@/data/quiz'
+import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
+import { motion, AnimatePresence } from 'motion/react'
 
 // Shared style: black text sitting on a white rounded-radius-5 rectangle "chip"
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
@@ -39,6 +41,8 @@ export default function QuizPage() {
   const handleAdvance = () => {
     if (index + 1 < total) {
       setIndex((i) => i + 1)
+    } else {
+      setResult(scoreQuiz(answers))
     }
   }
 
@@ -117,6 +121,7 @@ export default function QuizPage() {
 
   // Chapter-break page: full-screen tap target, no options, no progress bar
   if (page.navigation === 'tap-anywhere') {
+    const background = Array.isArray(page.background) ? page.background : [page.background]
     return (
       <MobileFrame>
         <div
@@ -129,11 +134,7 @@ export default function QuizPage() {
           }}
           className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
         >
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-cover bg-center transition-colors duration-700"
-            style={{ backgroundImage: `url(${page.background})` }}
-          />
+          <BackgroundSlideshow images={background} intervalMs={1200} />
 
           <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
             {index > 0 && (
@@ -155,19 +156,32 @@ export default function QuizPage() {
               </h1>
             </div>
           </div>
+          <AnimatePresence>
+            {page.flashTransition && (
+              <motion.div
+                key={page.id}
+                aria-hidden
+                className={cn(
+                  'pointer-events-none absolute inset-0 z-50',
+                  page.flashTransition === 'black' ? 'bg-black' : 'bg-white',
+                )}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+              />
+            )}
+          </AnimatePresence>
         </div>
       </MobileFrame>
     )
   }
 
+  const background = Array.isArray(page.background) ? page.background : [page.background]
   return (
     <MobileFrame>
       <div key={page.id} className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
-        <div
-          aria-hidden
-          className="absolute inset-0 transition-colors duration-700"
-          style={{ backgroundColor: page.backgroundColor }}
-        />
+        <BackgroundSlideshow images={background} intervalMs={1200} />
 
         <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
           {index > 0 && (
@@ -213,6 +227,22 @@ export default function QuizPage() {
               ))}
             </div>
           </div>
+          <AnimatePresence>
+            {page.flashTransition && (
+              <motion.div
+                key={page.id}
+                aria-hidden
+                className={cn(
+                  'pointer-events-none absolute inset-0 z-50',
+                  page.flashTransition === 'black' ? 'bg-black' : 'bg-white',
+                )}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+              />
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </MobileFrame>

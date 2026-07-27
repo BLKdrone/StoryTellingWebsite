@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Nunito, Fraunces } from 'next/font/google'
+import AuthProvider from '@/components/auth-provider'
 import './globals.css'
 
 const nunito = Nunito({
@@ -43,8 +44,10 @@ export default function RootLayout({
       style={{ backgroundColor: '#1a1a1a' }}
     >
       <body className="antialiased font-sans" style={{ backgroundColor: '#1a1a1a' }}>
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <AuthProvider>
+          {children}
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </AuthProvider>
       </body>
     </html>
   )
