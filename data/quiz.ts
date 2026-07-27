@@ -102,7 +102,7 @@ export const quizQuestions: QuizPageData[] = [
     sound: '',
   },
   {
-    id: 'investigation-1',
+    id: 'investigation-2',
     navigation: 'tap-anywhere',
     question: 'บทที่ 1: การสืบสวน',
     background: '/background/investigation/01.PNG',
@@ -142,7 +142,7 @@ export const quizQuestions: QuizPageData[] = [
   },
 
   {
-    id: 'investigation-1',
+    id: 'investigation-3',
     navigation: 'tap-anywhere',
     question: 'mflv[4kr',
     background: [
@@ -187,7 +187,7 @@ export const quizQuestions: QuizPageData[] = [
     navigation: 'button',
   },
   {
-    id: 'investigation-1',
+    id: 'investigation-4',
     navigation: 'tap-anywhere',
     question: 'บทที่ 1: การสืบสวน',
     background: '/background/investigation/01.PNG',
@@ -226,7 +226,7 @@ export const quizQuestions: QuizPageData[] = [
     navigation: 'button',
   },
   {
-    id: 'investigation-1',
+    id: 'investigation-5',
     navigation: 'tap-anywhere',
     question: 'flashblack testqqq',
     background: '/background/investigation/01.PNG',
@@ -234,7 +234,7 @@ export const quizQuestions: QuizPageData[] = [
     flashTransition:'black',
   },
   {
-    id: 'investigation-1',
+    id: 'investigation-6',
     navigation: 'tap-anywhere',
     question: 'เป็นของสำคัญที่คุณต้องการหรือไม่',
     background: '/background/investigation/01.PNG',

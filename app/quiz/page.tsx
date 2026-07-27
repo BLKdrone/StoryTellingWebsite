@@ -168,7 +168,7 @@ export default function QuizPage() {
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                transition={{ duration: 5, ease: 'easeInOut' }}
               />
             )}
           </AnimatePresence>
@@ -239,7 +239,7 @@ export default function QuizPage() {
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                transition={{ duration: 5, ease: 'easeInOut' }}
               />
             )}
           </AnimatePresence>
