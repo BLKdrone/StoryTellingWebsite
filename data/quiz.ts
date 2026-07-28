@@ -21,7 +21,7 @@ export interface QuizQuestion {
   flashTransition?: 'black' | 'white'
 }
 
-export interface ChapterBreak {
+export interface QuizTabPage {
   id: string
   navigation: 'tap-anywhere'
   question: string
@@ -30,7 +30,7 @@ export interface ChapterBreak {
   flashTransition?: 'black' | 'white'
 }
 
-export type QuizPageData = QuizQuestion | ChapterBreak
+export type QuizPageData = QuizQuestion | QuizTabPage
 
 export interface AnimalResult {
   key: AnimalKey

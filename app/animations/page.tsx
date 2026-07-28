@@ -27,7 +27,7 @@ export default function AnimationsDemoPage() {
             fold it 3 times, 
           </p>
           <div className="flex justify-center py-4">
-            <FoldAnimation folds={3}>
+            <FoldAnimation >
               <span className="px-4 text-center text-sm text-foreground/80">
                 A quiet note
               </span>

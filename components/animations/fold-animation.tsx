@@ -3,194 +3,191 @@
 import { useState, type ReactNode } from 'react'
 import { motion, useAnimationControls } from 'motion/react'
 
-type FoldAxis = 'horizontal' | 'vertical'
-
-const MAX_FOLDS = 4
-
-/**
- * FoldAnimation — a rectangle that folds like paper, one fold per tap/click.
- * Each fold splits the CURRENT visible sheet into two equal, side-by-side
- * panels that meet at a center crease, then rotates the second panel
- * (right, for horizontal folds; bottom, for vertical folds) back around
- * that shared crease edge until it lands flat on top of the first panel —
- * a true "fold in half," not an offset flap swinging out to the side.
- * Horizontal folds (right-over-left) happen first, then vertical folds
- * (bottom-over-top). Capped at 4 folds total. White paper, brown crease
- * lines left behind at every fold. CSS/Framer Motion only, no images.
- */
 export function FoldAnimation({
   children,
-  horizontalFolds = 2,
-  verticalFolds = 2,
-  foldDuration = 0.3,
-  width = 256,
-  height = 160,
+  foldDuration = 0.5,
+  width = 595,
+  height = 842,
   className,
   onComplete,
 }: {
   children?: ReactNode
-  /** How many horizontal folds (right-over-left) to perform first. Defaults to 2. */
-  horizontalFolds?: number
-  /** How many vertical folds (bottom-over-top) to perform after. Defaults to 2. */
-  verticalFolds?: number
-  /** Total folds are capped at 4 regardless of the two counts above. */
   foldDuration?: number
   width?: number
   height?: number
   className?: string
-  onComplete?: () => void
+  onComplete?: (step: number) => void
 }) {
-  const flap = useAnimationControls()
+  const [step, setStep] = useState<number>(0)
+  const [running, setRunning] = useState<boolean>(false)
 
-  const foldSequence: FoldAxis[] = [
-    ...Array(Math.max(0, horizontalFolds)).fill('horizontal' as const),
-    ...Array(Math.max(0, verticalFolds)).fill('vertical' as const),
-  ].slice(0, MAX_FOLDS)
+  const step1Controls = useAnimationControls()
+  const step2Controls = useAnimationControls()
+  const step3Controls = useAnimationControls()
 
-  // Size of the flat, folded-so-far sheet (before the fold currently in progress, if any).
-  const [currentWidth, setCurrentWidth] = useState(width)
-  const [currentHeight, setCurrentHeight] = useState(height)
-  const [foldIndex, setFoldIndex] = useState(0)
-  const [running, setRunning] = useState(false)
-  // Crease lines left behind by completed folds.
-  const [creases, setCreases] = useState({ right: false, bottom: false })
-
-  const isComplete = foldIndex >= foldSequence.length
-  const activeAxis: FoldAxis | null = running ? foldSequence[foldIndex] : null
-
-  // Performs exactly ONE fold per call/tap.
-  const run = async () => {
-    if (running || isComplete) return
-    const axis = foldSequence[foldIndex]
+  const handleNextFold = async () => {
+    if (running) return
     setRunning(true)
 
-    if (axis === 'horizontal') {
-      await flap.start({
-        rotateY: -180,
-        transition: { duration: foldDuration, ease: 'easeInOut' },
-      })
-      setCurrentWidth((w) => w / 2)
-      setCreases((c) => ({ ...c, right: true }))
-    } else {
-      await flap.start({
+    const easeCurve = [0.4, 0.0, 0.2, 1] as const
+
+    if (step === 0) {
+      await step1Controls.start({
         rotateX: 180,
-        transition: { duration: foldDuration, ease: 'easeInOut' },
+        transition: { duration: foldDuration, ease: easeCurve },
       })
-      setCurrentHeight((h) => h / 2)
-      setCreases((c) => ({ ...c, bottom: true }))
+      setStep(1)
+    } else if (step === 1) {
+      await step2Controls.start({
+        rotateY: -180,
+        transition: { duration: foldDuration, ease: easeCurve },
+      })
+      setStep(2)
+    } else if (step === 2) {
+      await step3Controls.start({
+        rotateX: 180,
+        transition: { duration: foldDuration, ease: easeCurve },
+      })
+      setStep(3)
+    } else {
+      await Promise.all([
+        step3Controls.start({ rotateX: 0, transition: { duration: foldDuration } }),
+        step2Controls.start({ rotateY: 0, transition: { duration: foldDuration } }),
+        step1Controls.start({ rotateX: 0, transition: { duration: foldDuration } }),
+      ])
+      setStep(0)
     }
 
-    flap.set(axis === 'horizontal' ? { rotateY: 0 } : { rotateX: 0 })
     setRunning(false)
-
-    const nextIndex = foldIndex + 1
-    setFoldIndex(nextIndex)
-    if (nextIndex >= foldSequence.length) {
-      onComplete?.()
-    }
+    onComplete?.(step === 3 ? 0 : step + 1)
   }
 
-  const sheetClasses = `overflow-hidden bg-white shadow-lg ${className ?? ''}`
-  const creaseColor = '#8b5a2b'
-  const creaseLine = `1.5px solid ${creaseColor}`
-
-  // Half-dimensions for the fold currently in progress (measured from the
-  // sheet's size *before* this fold, i.e. currentWidth/currentHeight).
-  const halfW = currentWidth / 2
-  const halfH = currentHeight / 2
+  const baseSheet = `overflow-hidden border border-slate-300 bg-white shadow-md ${className ?? ''}`
 
   return (
     <div
       role="button"
       tabIndex={0}
-      aria-label={isComplete ? 'Fully folded' : 'Tap to fold'}
-      aria-disabled={isComplete}
-      onClick={run}
+      aria-label="Click to fold sheet"
+      onClick={handleNextFold}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()
-          run()
+          handleNextFold()
         }
       }}
-      className={`flex items-center justify-center outline-none ${
-        isComplete || running ? 'cursor-default' : 'cursor-pointer'
-      }`}
-      style={{ perspective: 1200 }}
+      className="inline-flex cursor-pointer select-none items-center justify-center p-8 outline-none"
+      style={{ perspective: 2000 }}
     >
-      {activeAxis === 'horizontal' ? (
-        // Mid-fold: two half-width panels meeting at a center crease.
+      <div className="relative" style={{ width, height, transformStyle: 'preserve-3d' }}>
+        {/* z-0: TOP-LEFT BASE QUADRANT (bottom of the stack, stays put) */}
         <div
-          className="relative rounded-md"
-          style={{ width: currentWidth, height: currentHeight, transformStyle: 'preserve-3d' }}
+          className={`absolute left-0 top-0 ${baseSheet}`}
+          style={{ width: width / 2, height: height / 2, zIndex: 0 }}
         >
-          {/* Left (static) panel */}
+          <div className="flex items-center justify-center pointer-events-none" style={{ width, height }}>
+            {children}
+          </div>
+        </div>
+
+        {/* z-10: TOP-RIGHT QUADRANT (folds left onto base in step 2) */}
+        <motion.div
+          className={`absolute right-0 top-0 ${baseSheet}`}
+          style={{
+            width: width / 2,
+            height: height / 2,
+            zIndex: 10,
+            transformOrigin: 'left center',
+            transformStyle: 'preserve-3d',
+          }}
+          initial={{ rotateY: 0 }}
+          animate={step2Controls}
+        >
           <div
-            className={`absolute left-0 top-0 h-full rounded-l-md ${sheetClasses}`}
-            style={{ width: halfW, borderRight: creaseLine }}
+            className="flex items-center justify-center pointer-events-none"
+            style={{ width, height, marginLeft: -width / 2 }}
           >
-            <div className="flex h-full w-full items-center justify-center">{children}</div>
+            {children}
+          </div>
+          <div
+            className="absolute inset-0 bg-black/5"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+          />
+        </motion.div>
+
+        {/* z-20: BOTTOM HALF (folds up in step 1; its own right side also folds in step 2) */}
+        <motion.div
+          className="absolute left-0 top-1/2 w-full"
+          style={{ height: height / 2, zIndex: 20, transformOrigin: 'top center', transformStyle: 'preserve-3d' }}
+          initial={{ rotateX: 0 }}
+          animate={step1Controls}
+        >
+          <div className={`absolute left-0 top-0 ${baseSheet}`} style={{ width: width / 2, height: height / 2 }}>
+            <div
+              className="flex items-center justify-center pointer-events-none"
+              style={{ width, height, marginTop: -height / 2 }}
+            >
+              {children}
+            </div>
           </div>
 
-          {/* Right panel — hinges at the shared crease (its own left edge). */}
           <motion.div
-            className={`absolute top-0 h-full rounded-r-md ${sheetClasses}`}
+            className={`absolute right-0 top-0 ${baseSheet}`}
             style={{
-              left: halfW,
-              width: halfW,
+              width: width / 2,
+              height: height / 2,
               transformOrigin: 'left center',
               transformStyle: 'preserve-3d',
-              borderLeft: creaseLine,
             }}
             initial={{ rotateY: 0 }}
-            animate={flap}
+            animate={step2Controls}
           >
-            <div className="flex h-full w-full items-center justify-center">{children}</div>
+            <div
+              className="flex items-center justify-center pointer-events-none"
+              style={{ width, height, marginLeft: -width / 2, marginTop: -height / 2 }}
+            >
+              {children}
+            </div>
+            <div
+              className="absolute inset-0 bg-black/5"
+              style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+            />
           </motion.div>
-        </div>
-      ) : activeAxis === 'vertical' ? (
-        // Mid-fold: two half-height panels meeting at a center crease.
-        <div
-          className="relative rounded-md"
-          style={{ width: currentWidth, height: currentHeight, transformStyle: 'preserve-3d' }}
-        >
-          {/* Top (static) panel */}
-          <div
-            className={`absolute left-0 top-0 w-full rounded-t-md ${sheetClasses}`}
-            style={{ height: halfH, borderBottom: creaseLine }}
-          >
-            <div className="flex h-full w-full items-center justify-center">{children}</div>
-          </div>
 
-          {/* Bottom panel — hinges at the shared crease (its own top edge). */}
-          <motion.div
-            className={`absolute w-full rounded-b-md ${sheetClasses}`}
-            style={{
-              top: halfH,
-              height: halfH,
-              transformOrigin: 'center top',
-              transformStyle: 'preserve-3d',
-              borderTop: creaseLine,
-            }}
-            initial={{ rotateX: 0 }}
-            animate={flap}
-          >
-            <div className="flex h-full w-full items-center justify-center">{children}</div>
-          </motion.div>
-        </div>
-      ) : (
-        // Idle: flat, already-folded sheet with any crease lines left behind.
-        <div
-          className={`rounded-md ${sheetClasses}`}
+          <div
+            className="absolute inset-0 bg-black/10"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateX(180deg)' }}
+          />
+        </motion.div>
+
+        {/* z-30: QUARTER FLAP — the currently-topmost quarter, rendered LAST so it always
+            paints above the other two layers. It shows the same content the top-right
+            layer shows once folded (that's what's visually on top after step 2). */}
+        <motion.div
+          className={`absolute left-0 ${baseSheet}`}
           style={{
-            width: currentWidth,
-            height: currentHeight,
-            borderRight: creases.right ? creaseLine : undefined,
-            borderBottom: creases.bottom ? creaseLine : undefined,
+            top: height / 4,
+            width: width / 2,
+            height: height / 4,
+            zIndex: 30,
+            transformOrigin: 'top center',
+            transformStyle: 'preserve-3d',
           }}
+          initial={{ rotateX: 0 }}
+          animate={step3Controls}
         >
-          <div className="flex h-full w-full items-center justify-center">{children}</div>
-        </div>
-      )}
+          <div
+            className="flex items-center justify-center pointer-events-none"
+            style={{ width, height, marginLeft: -width / 2, marginTop: -(height / 4) }}
+          >
+            {children}
+          </div>
+          <div
+            className="absolute inset-0 bg-black/10"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateX(180deg)' }}
+          />
+        </motion.div>
+      </div>
     </div>
   )
 }

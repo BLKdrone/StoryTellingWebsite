@@ -15,7 +15,6 @@ export default function MoodCheckinPage() {
   const [pageState, setPageState] = useState<PageState>('question')
   const [selectedMood, setSelectedMood] = useState<MoodKey | null>(null)
 
-  const [questionIndex, setQuestionIndex] = useState(0)
   const [exitingMood, setExitingMood] = useState<MoodKey | null>(null)
 
   const [branchIndex, setBranchIndex] = useState(0)
@@ -23,6 +22,10 @@ export default function MoodCheckinPage() {
   const [subIndex, setSubIndex] = useState(0)
   const [inConverge, setInConverge] = useState(false)
   const [convergeIndex, setConvergeIndex] = useState(0)
+
+  // Input state for pages with placeholder
+  const [answer, setAnswer] = useState('')
+  const [answers, setAnswers] = useState<Record<string, string>>({})
 
   const resetBranchState = () => {
     setBranchIndex(0)
@@ -58,18 +61,12 @@ export default function MoodCheckinPage() {
       }
     } else if (pageState === 'options') {
       setPageState('question')
-      setQuestionIndex(moodIntro.pages.length - 1)
-    } else if (pageState === 'question' && questionIndex > 0) {
-      setQuestionIndex((i) => i - 1)
     }
   }
 
   const handleAdvanceQuestion = () => {
-    if (questionIndex < moodIntro.pages.length - 1) {
-      setQuestionIndex((i) => i + 1)
-    } else {
-      setPageState('options')
-    }
+    // Single intro page, advance to options
+    setPageState('options')
   }
 
   const handleAdvanceOptions = () => {
@@ -88,7 +85,20 @@ export default function MoodCheckinPage() {
   }
 
   const finishBranch = () => {
+    // Save answers before moving forward
+    console.log('User answers:', answers)
     router.push('/chapter-checkpoint?from=mood-checkin')
+  }
+
+  const handleSubmit = () => {
+    if (!inConverge && !subPages && branchIndex < moodBranches[selectedMood!].pages.length) {
+      const currentPage = moodBranches[selectedMood!].pages[branchIndex]
+      if (currentPage.id) {
+        setAnswers({ ...answers, [currentPage.id]: answer })
+      }
+    }
+    setAnswer('')
+    handleAdvanceBranch()
   }
 
   const handleAdvanceBranch = () => {
@@ -132,14 +142,12 @@ export default function MoodCheckinPage() {
     setSubIndex(0)
   }
 
-  // Page 1: Intro (two tap-anywhere lines from moodIntro.pages)
+  // Page 1: Intro (single tap-anywhere page from moodIntro)
   if (pageState === 'question') {
-    const intro = moodIntro.pages[questionIndex]
-
     return (
       <MobileFrame>
         <div
-          key={`mood-intro-${questionIndex}`}
+          key="mood-intro"
           role="button"
           tabIndex={0}
           onClick={handleAdvanceQuestion}
@@ -152,14 +160,20 @@ export default function MoodCheckinPage() {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
-            <p className="text-base text-white whitespace-pre-line">{intro.text}</p>
+            <p className="text-base text-white whitespace-pre-line">{moodIntro.text}</p>
           </div>
+          {moodIntro.flashTransition && (
+            <div
+              className="pointer-events-none absolute inset-0 z-20 animate-fade-out"
+              style={{ backgroundColor: moodIntro.flashTransition }}
+            />
+          )}
         </div>
       </MobileFrame>
     )
   }
 
-  // Page 2: Mood options with tap-anywhere to continue
+  // Page 2: Mood options
   if (pageState === 'options' && !selectedMood) {
     return (
       <MobileFrame>
@@ -278,7 +292,7 @@ export default function MoodCheckinPage() {
       </button>
     )
 
-    // Choice page: render buttons instead of tap-anywhere.
+    // Choice page: render buttons instead of tap-anywhere
     if (page.navigation === 'button') {
       return (
         <MobileFrame>
@@ -299,27 +313,36 @@ export default function MoodCheckinPage() {
                 <p className="text-sm text-white/90 whitespace-pre-line">{page.text}</p>
 
                 <div className="flex flex-col gap-3 items-center">
-                  {page.choices.map((choice, i) => (
-                    <button
-                      key={i}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handleSelectChoice(choice.nextPages)
-                      }}
-                      className="rounded-lg px-6 py-3 font-medium text-white bg-white/20 backdrop-blur-md transition-all hover:scale-105 hover:bg-white/30 active:scale-95"
-                    >
-                      {choice.label}
-                    </button>
-                  ))}
+                  {page.navigation === 'button' && page.choices
+                    ? page.choices.map((choice, i) => (
+                        <button
+                          key={i}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleSelectChoice(choice.nextPages)
+                          }}
+                          className="rounded-lg px-6 py-3 font-medium text-white bg-white/20 backdrop-blur-md transition-all hover:scale-105 hover:bg-white/30 active:scale-95"
+                        >
+                          {choice.label}
+                        </button>
+                      ))
+                    : null}
                 </div>
               </div>
+
+              {page.flashTransition && (
+                <div
+                  className="pointer-events-none absolute inset-0 z-20 animate-fade-out"
+                  style={{ backgroundColor: page.flashTransition }}
+                />
+              )}
             </div>
           </div>
         </MobileFrame>
       )
     }
 
-    // Ordinary tap-anywhere page (page.navigation === 'tap-anywhere').
+    // Ordinary tap-anywhere page
     return (
       <MobileFrame>
         <div className="relative flex flex-col flex-1 min-h-dvh w-full">
@@ -328,7 +351,7 @@ export default function MoodCheckinPage() {
             key={page.id}
             role="button"
             tabIndex={0}
-            onClick={handleAdvanceBranch}
+            onClick={page.placeholder ? undefined : handleAdvanceBranch}
             className="relative flex min-h-dvh w-full flex-1 flex-col cursor-pointer"
             style={{
               backgroundImage: `url(${page.background})`,
@@ -339,7 +362,32 @@ export default function MoodCheckinPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
             <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
               <p className="text-base text-white whitespace-pre-line">{page.text}</p>
+
+              {/* Input field for pages with placeholder */}
+              {page.placeholder && (
+                <input
+                  autoFocus
+                  type="text"
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  placeholder={page.placeholder}
+                  className="mt-6 w-full max-w-sm rounded-2xl border border-border bg-input/40 px-4 py-4 text-base text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
+                      handleSubmit()
+                    }
+                  }}
+                />
+              )}
+
+              {/* Show hint text */}
+              {page.placeholder && (
+                <p className="text-xs text-white/60 pt-4">
+                  {page.buttonLabel || 'Press Enter to continue'}
+                </p>
+              )}
             </div>
+
             {page.flashTransition && (
               <div
                 className="pointer-events-none absolute inset-0 z-20 animate-fade-out"

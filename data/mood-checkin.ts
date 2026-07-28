@@ -11,34 +11,35 @@ export interface MoodOption {
   background: string
 }
 
-export interface MoodChoice {
-  /** Text shown on the choice button. */
-  label: string
-  /** The page(s) shown after this choice is picked, before converging back. */
-  nextPages: MoodPage[]
-}
-
-interface MoodPageBase {
+export interface MoodTapPage {
+  navigation: 'tap-anywhere'
+  text: string
   id: string
   /** Real background image, supplied later. */
   background: string
   /** Sound file, supplied later. */
   sound: string
-  /** ถ้ามีค่า จะแฟลชสีนี้ตอนเปลี่ยนมาหน้านี้ ถ้าไม่ใส่ = ไม่มีทรานซิชัน */
+  placeholder?: string
+  buttonLabel?: string
   flashTransition?: 'black' | 'white'
 }
 
-export interface MoodTapPage extends MoodPageBase {
-  navigation: 'tap-anywhere'
-  text: string
+export interface MoodChoice {
+  label: string
+  nextPages: MoodTapPage[]
 }
 
-export interface MoodChoicePage extends MoodPageBase {
+export interface MoodChoicePage {
   navigation: 'button'
   text: string
+  id: string
+  background: string
+  sound: string
+  flashTransition?: 'black' | 'white'
   choices: MoodChoice[]
 }
 
+// A branch page can be either a tap-anywhere page or a button/choice page.
 export type MoodPage = MoodTapPage | MoodChoicePage
 
 export interface MoodBranch {
@@ -48,16 +49,13 @@ export interface MoodBranch {
    * Shared ending pages played after a choice's nextPages finish.
    * Only used by branches that contain a choice page (currently: sad).
    */
-  convergePages?: MoodPage[]
+  convergePages?: MoodTapPage[]
 }
 
-export const moodIntro = {
+export const moodIntro: MoodTapPage = {
   id: 'mood-intro',
-  navigation: 'tap-anywhere' as const,
-  pages: [
-    { text: 'ถ้าตอนนี้ท้องฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ ท้องฟ้าของคุณในตอนนี้เป็นยังไงกันหรอ' },
-    { text: 'เลือกท้องฟ้าที่ตรงกับความรู้สึกของคุณตอนนี้ดูสิ' },
-  ],
+  navigation: 'tap-anywhere',
+  text: 'ถ้าตอนนี้ท้งฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ ท้องฟ้าของคุณในตอนนี้เป็นยังไงกันหรอ',
   background: '/background/intro/02.PNG',
   sound: '',
 }
@@ -69,13 +67,19 @@ export const moodOptions: MoodOption[] = [
   { key: 'overwhelmed', label: 'หงุดหงิด', background: '/background/mood-checkin/2.PNG' },
 ]
 
-export const moodQuestion = {
+export const moodQuestion: MoodChoicePage = {
   id: 'mood-question',
-  navigation: 'button' as const,
+  navigation: 'button',
   text: 'เลือกท้องฟ้าที่ตรงกับความรู้สึกของคุณตอนนี้ดูสิ',
   background: '/background/intro/02.PNG',
-  options: moodOptions,
   sound: '',
+  choices: [], // options are rendered separately via moodOptions in the UI
+}
+
+// Value used by the "question" screen(s) in page.tsx — an ordered list of
+// tap-anywhere intro pages shown before the mood-selection screen.
+export const MoodPageData = {
+  pages: [moodIntro] as MoodTapPage[],
 }
 
 export const moodBranches: Record<MoodKey, MoodBranch> = {
@@ -102,6 +106,8 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         text: 'เล่าให้ฟังหน่อยได้ไหม\nลองเล่าให้ฟังหน่อยได้ไหมว่าอะไรทำให้ท้องฟ้าของคุณสดใส\nอยากจดจำความรู้สึกดีๆ แบบนี้ไว้นะ',
         background: '/background/mood-checkin/happy.PNG',
         sound: '',
+        placeholder: 'Type it out',
+        buttonLabel: 'Let it drift',
       },
     ],
   },
