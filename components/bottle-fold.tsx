@@ -13,11 +13,13 @@ type Phase = 'fold' | 'toss' | 'settle'
 export function BottleFold({
   answer,
   onComplete,
+  skipFold = false,
 }: {
   answer: string
   onComplete: () => void
+  skipFold?: boolean
 }) {
-  const [phase, setPhase] = useState<Phase>('fold')
+  const [phase, setPhase] = useState<Phase>(skipFold ? 'toss' : 'fold')
 
   return (
     <div className="relative flex flex-1 flex-col items-center justify-between py-8">

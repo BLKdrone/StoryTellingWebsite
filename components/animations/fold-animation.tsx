@@ -1,13 +1,25 @@
 'use client'
 
 import { useState, type ReactNode } from 'react'
+import { flushSync } from 'react-dom'
 import { motion, useAnimationControls } from 'motion/react'
+
+type FoldAxis = 'vertical' | 'horizontal'
+const FOLD_SEQUENCE: FoldAxis[] = ['vertical', 'horizontal', 'vertical']
+
+type FlapRect = {
+  top: number
+  left: number
+  w: number
+  h: number
+  axis: FoldAxis
+}
 
 export function FoldAnimation({
   children,
   foldDuration = 0.5,
-  width = 595,
-  height = 842,
+  width = 300,
+  height = 420,
   className,
   onComplete,
 }: {
@@ -18,175 +30,104 @@ export function FoldAnimation({
   className?: string
   onComplete?: (step: number) => void
 }) {
-  const [step, setStep] = useState<number>(0)
-  const [running, setRunning] = useState<boolean>(false)
+  const [visW, setVisW] = useState(width)
+  const [visH, setVisH] = useState(height)
+  const [step, setStep] = useState(0)
+  const [running, setRunning] = useState(false)
+  const [flapRect, setFlapRect] = useState<FlapRect | null>(null)
+  const flap = useAnimationControls()
 
-  const step1Controls = useAnimationControls()
-  const step2Controls = useAnimationControls()
-  const step3Controls = useAnimationControls()
+  const isComplete = step >= FOLD_SEQUENCE.length
+  const easeCurve = [0.4, 0, 0.2, 1] as const
 
-  const handleNextFold = async () => {
+  const handleTap = async () => {
     if (running) return
     setRunning(true)
 
-    const easeCurve = [0.4, 0.0, 0.2, 1] as const
+    if (!isComplete) {
+      const axis = FOLD_SEQUENCE[step]
 
-    if (step === 0) {
-      await step1Controls.start({
-        rotateX: 180,
-        transition: { duration: foldDuration, ease: easeCurve },
-      })
-      setStep(1)
-    } else if (step === 1) {
-      await step2Controls.start({
-        rotateY: -180,
-        transition: { duration: foldDuration, ease: easeCurve },
-      })
-      setStep(2)
-    } else if (step === 2) {
-      await step3Controls.start({
-        rotateX: 180,
-        transition: { duration: foldDuration, ease: easeCurve },
-      })
-      setStep(3)
+      if (axis === 'vertical') {
+        const halfH = visH / 2
+        // flushSync forces React to commit + paint the flap BEFORE we touch its
+        // animation controls, so .start() has something real to animate.
+        flushSync(() => {
+          setFlapRect({ top: halfH, left: 0, w: visW, h: halfH, axis })
+          setVisH(halfH)
+        })
+        flap.set({ rotateX: 0 })
+        await flap.start({ rotateX: 180, transition: { duration: foldDuration, ease: easeCurve } })
+      } else {
+        const halfW = visW / 2
+        flushSync(() => {
+          setFlapRect({ top: 0, left: halfW, w: halfW, h: visH, axis })
+          setVisW(halfW)
+        })
+        flap.set({ rotateY: 0 })
+        await flap.start({ rotateY: -180, transition: { duration: foldDuration, ease: easeCurve } })
+      }
+
+      setFlapRect(null)
+      const next = step + 1
+      setStep(next)
+      onComplete?.(next)
     } else {
-      await Promise.all([
-        step3Controls.start({ rotateX: 0, transition: { duration: foldDuration } }),
-        step2Controls.start({ rotateY: 0, transition: { duration: foldDuration } }),
-        step1Controls.start({ rotateX: 0, transition: { duration: foldDuration } }),
-      ])
+      setVisW(width)
+      setVisH(height)
       setStep(0)
+      onComplete?.(0)
     }
 
     setRunning(false)
-    onComplete?.(step === 3 ? 0 : step + 1)
   }
 
-  const baseSheet = `overflow-hidden border border-slate-300 bg-white shadow-md ${className ?? ''}`
+  const paperClasses = `overflow-hidden border border-slate-300 bg-white shadow-md ${className ?? ''}`
 
   return (
     <div
       role="button"
       tabIndex={0}
-      aria-label="Click to fold sheet"
-      onClick={handleNextFold}
+      aria-label={isComplete ? 'Tap to unfold' : 'Tap to fold'}
+      onClick={handleTap}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()
-          handleNextFold()
+          handleTap()
         }
       }}
       className="inline-flex cursor-pointer select-none items-center justify-center p-8 outline-none"
-      style={{ perspective: 2000 }}
+      style={{ perspective: 1600 }}
     >
       <div className="relative" style={{ width, height, transformStyle: 'preserve-3d' }}>
-        {/* z-0: TOP-LEFT BASE QUADRANT (bottom of the stack, stays put) */}
-        <div
-          className={`absolute left-0 top-0 ${baseSheet}`}
-          style={{ width: width / 2, height: height / 2, zIndex: 0 }}
-        >
-          <div className="flex items-center justify-center pointer-events-none" style={{ width, height }}>
+        <div className={`absolute left-0 top-0 ${paperClasses}`} style={{ width: visW, height: visH }}>
+          <div className="flex items-center justify-center" style={{ width, height }}>
             {children}
           </div>
         </div>
 
-        {/* z-10: TOP-RIGHT QUADRANT (folds left onto base in step 2) */}
-        <motion.div
-          className={`absolute right-0 top-0 ${baseSheet}`}
-          style={{
-            width: width / 2,
-            height: height / 2,
-            zIndex: 10,
-            transformOrigin: 'left center',
-            transformStyle: 'preserve-3d',
-          }}
-          initial={{ rotateY: 0 }}
-          animate={step2Controls}
-        >
-          <div
-            className="flex items-center justify-center pointer-events-none"
-            style={{ width, height, marginLeft: -width / 2 }}
-          >
-            {children}
-          </div>
-          <div
-            className="absolute inset-0 bg-black/5"
-            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-          />
-        </motion.div>
-
-        {/* z-20: BOTTOM HALF (folds up in step 1; its own right side also folds in step 2) */}
-        <motion.div
-          className="absolute left-0 top-1/2 w-full"
-          style={{ height: height / 2, zIndex: 20, transformOrigin: 'top center', transformStyle: 'preserve-3d' }}
-          initial={{ rotateX: 0 }}
-          animate={step1Controls}
-        >
-          <div className={`absolute left-0 top-0 ${baseSheet}`} style={{ width: width / 2, height: height / 2 }}>
-            <div
-              className="flex items-center justify-center pointer-events-none"
-              style={{ width, height, marginTop: -height / 2 }}
-            >
-              {children}
-            </div>
-          </div>
-
+        {flapRect && (
           <motion.div
-            className={`absolute right-0 top-0 ${baseSheet}`}
+            className={paperClasses}
             style={{
-              width: width / 2,
-              height: height / 2,
-              transformOrigin: 'left center',
+              position: 'absolute',
+              top: flapRect.top,
+              left: flapRect.left,
+              width: flapRect.w,
+              height: flapRect.h,
+              transformOrigin: flapRect.axis === 'vertical' ? 'top center' : 'left center',
               transformStyle: 'preserve-3d',
+              ...(flapRect.axis === 'vertical'
+                ? { borderTop: '1.5px solid #8b5a2b' }
+                : { borderLeft: '1.5px solid #8b5a2b' }),
             }}
-            initial={{ rotateY: 0 }}
-            animate={step2Controls}
+            animate={flap}
           >
-            <div
-              className="flex items-center justify-center pointer-events-none"
-              style={{ width, height, marginLeft: -width / 2, marginTop: -height / 2 }}
-            >
-              {children}
-            </div>
             <div
               className="absolute inset-0 bg-black/5"
-              style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+              style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
             />
           </motion.div>
-
-          <div
-            className="absolute inset-0 bg-black/10"
-            style={{ backfaceVisibility: 'hidden', transform: 'rotateX(180deg)' }}
-          />
-        </motion.div>
-
-        {/* z-30: QUARTER FLAP — the currently-topmost quarter, rendered LAST so it always
-            paints above the other two layers. It shows the same content the top-right
-            layer shows once folded (that's what's visually on top after step 2). */}
-        <motion.div
-          className={`absolute left-0 ${baseSheet}`}
-          style={{
-            top: height / 4,
-            width: width / 2,
-            height: height / 4,
-            zIndex: 30,
-            transformOrigin: 'top center',
-            transformStyle: 'preserve-3d',
-          }}
-          initial={{ rotateX: 0 }}
-          animate={step3Controls}
-        >
-          <div
-            className="flex items-center justify-center pointer-events-none"
-            style={{ width, height, marginLeft: -width / 2, marginTop: -(height / 4) }}
-          >
-            {children}
-          </div>
-          <div
-            className="absolute inset-0 bg-black/10"
-            style={{ backfaceVisibility: 'hidden', transform: 'rotateX(180deg)' }}
-          />
-        </motion.div>
+        )}
       </div>
     </div>
   )
