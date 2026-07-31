@@ -87,7 +87,7 @@ export default function MoodCheckinPage() {
   const finishBranch = () => {
     // Save answers before moving forward
     console.log('User answers:', answers)
-    router.push('/chapter-checkpoint?from=mood-checkin')
+    router.push('/bottle')
   }
 
   const handleSubmit = () => {
