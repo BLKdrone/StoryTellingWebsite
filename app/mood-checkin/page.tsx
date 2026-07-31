@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { MobileFrame } from '@/components/mobile-frame'
 import { moodIntro, moodQuestion, moodBranches, moodOptions } from '@/data/mood-checkin'
 import type { MoodKey, MoodPage } from '@/data/mood-checkin'
+import { supabase } from '@/lib/supabase'
 
 type PageState = 'question' | 'options' | 'branch' | 'complete'
 
@@ -84,24 +85,21 @@ export default function MoodCheckinPage() {
     }, MOOD_EXIT_DURATION_MS)
   }
 
-  const finishBranch = () => {
-    // Save answers before moving forward
-    console.log('User answers:', answers)
-    router.push('/bottle')
-  }
 
   const handleSubmit = () => {
+    let snapshot = answers
     if (!inConverge && !subPages && branchIndex < moodBranches[selectedMood!].pages.length) {
       const currentPage = moodBranches[selectedMood!].pages[branchIndex]
       if (currentPage.id) {
-        setAnswers({ ...answers, [currentPage.id]: answer })
+        snapshot = { ...answers, [currentPage.id]: answer }
+        setAnswers(snapshot)
       }
     }
     setAnswer('')
-    handleAdvanceBranch()
+    handleAdvanceBranch(snapshot)
   }
 
-  const handleAdvanceBranch = () => {
+  const handleAdvanceBranch = (snapshot: Record<string, string> = answers) => {
     if (!selectedMood) return
     const branch = moodBranches[selectedMood]
 
@@ -109,7 +107,7 @@ export default function MoodCheckinPage() {
       if (convergeIndex < branch.convergePages.length - 1) {
         setConvergeIndex((i) => i + 1)
       } else {
-        finishBranch()
+        finishBranch(snapshot)
       }
       return
     }
@@ -121,7 +119,7 @@ export default function MoodCheckinPage() {
         setInConverge(true)
         setConvergeIndex(0)
       } else {
-        finishBranch()
+        finishBranch(snapshot)
       }
       return
     }
@@ -133,10 +131,25 @@ export default function MoodCheckinPage() {
       setInConverge(true)
       setConvergeIndex(0)
     } else {
-      finishBranch()
+      finishBranch(snapshot)
     }
   }
 
+  const finishBranch = async (finalAnswers: Record<string, string> = answers) => {
+    const { error } = await supabase.from('mood_checkin_responses').insert({
+      mood: selectedMood,
+      answers: finalAnswers,
+    })
+    if (error) {
+      console.error('Failed to save mood check-in:', {
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code,
+      })
+    }
+    router.push('/bottle')
+  }
   const handleSelectChoice = (nextPages: MoodPage[]) => {
     setSubPages(nextPages)
     setSubIndex(0)
@@ -276,8 +289,8 @@ export default function MoodCheckinPage() {
       inConverge && branch.convergePages
         ? branch.convergePages[convergeIndex]
         : subPages
-        ? subPages[subIndex]
-        : branch.pages[branchIndex]
+          ? subPages[subIndex]
+          : branch.pages[branchIndex]
 
     const backButton = (
       <button
@@ -315,17 +328,17 @@ export default function MoodCheckinPage() {
                 <div className="flex flex-col gap-3 items-center">
                   {page.navigation === 'button' && page.choices
                     ? page.choices.map((choice, i) => (
-                        <button
-                          key={i}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            handleSelectChoice(choice.nextPages)
-                          }}
-                          className="rounded-lg px-6 py-3 font-medium text-white bg-white/20 backdrop-blur-md transition-all hover:scale-105 hover:bg-white/30 active:scale-95"
-                        >
-                          {choice.label}
-                        </button>
-                      ))
+                      <button
+                        key={i}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleSelectChoice(choice.nextPages)
+                        }}
+                        className="rounded-lg px-6 py-3 font-medium text-white bg-white/20 backdrop-blur-md transition-all hover:scale-105 hover:bg-white/30 active:scale-95"
+                      >
+                        {choice.label}
+                      </button>
+                    ))
                     : null}
                 </div>
               </div>
@@ -351,7 +364,7 @@ export default function MoodCheckinPage() {
             key={page.id}
             role="button"
             tabIndex={0}
-            onClick={page.placeholder ? undefined : handleAdvanceBranch}
+            onClick={page.placeholder ? undefined : () => handleAdvanceBranch()}
             className="relative flex min-h-dvh w-full flex-1 flex-col cursor-pointer"
             style={{
               backgroundImage: `url(${page.background})`,

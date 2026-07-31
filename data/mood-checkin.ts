@@ -250,6 +250,8 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         text: 'แล้วถ้าพายุผ่านไปแล้ว คุณอยากจะทำอะไรต่อไป',
         background: '/background/mood-checkin/sunflower.PNG',
         sound: '',
+        placeholder: 'Type it out',
+        buttonLabel: 'Let it drift',
       },
     ],
   },

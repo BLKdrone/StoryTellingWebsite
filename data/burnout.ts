@@ -12,7 +12,7 @@ export const burnoutPages: StoryPageData[] = [
         ],
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
         transition: 'fade',
-        text: 'When everything feels heavy, your body may be asking for a gentler pace.',
+        text: 'ddddddddddd.',
     },
     {
         id: 'burnout-input',
@@ -25,8 +25,8 @@ export const burnoutPages: StoryPageData[] = [
         ],
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
         transition: 'fade',
-        prompt: 'Name one thing you can postpone, delegate, or let be enough for today.',
-        placeholder: 'Write it here...',
+        prompt: 'Ndr todayddddddddddddddd.',
+        placeholder: 'ddddddddddddddddddd.',
         buttonLabel: 'Continue',
     },
     {
@@ -40,6 +40,6 @@ export const burnoutPages: StoryPageData[] = [
         ],
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
         transition: 'fade',
-        text: 'You made a small but meaningful choice for your energy today.',
+        text: 'dddddddddddddddddddddddddddddddddddd.',
     },
 ]
