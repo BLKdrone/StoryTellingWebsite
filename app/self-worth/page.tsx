@@ -98,9 +98,9 @@ export default function SelfWorthPage() {
 
         return (
             <MobileFrame>
-                <div key={page.id} className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
+                <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
                     <BackgroundSlideshow images={page.background} intervalMs={1200} />
-                    <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+                    <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col justify-center gap-8">
                             <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
@@ -150,14 +150,13 @@ export default function SelfWorthPage() {
     return (
         <MobileFrame>
             <div
-                key={page.id}
                 role="button"
                 tabIndex={0}
                 onClick={() => advance()}
                 className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
             >
                 <BackgroundSlideshow images={page.background} intervalMs={1200} />
-                <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+                <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                     {backButton}
                     <div className="flex flex-1 flex-col items-center justify-center text-center">
                         <p className="text-balance whitespace-pre-line text-base leading-relaxed">

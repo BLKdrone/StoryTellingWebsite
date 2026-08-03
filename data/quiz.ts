@@ -98,14 +98,22 @@ export const quizQuestions: QuizPageData[] = [
     id: 'investigation-1',
     navigation: 'tap-anywhere',
     question: 'บทที่ 1: การสืบสวน',
-    background: '/background/investigation/01.PNG',
+    background: [
+      '/background/intro/background1.webp',
+      '/background/intro/background2.webp',
+      '/background/intro/background3.webp',
+    ],
     sound: '',
   },
   {
     id: 'investigation-2',
     navigation: 'tap-anywhere',
-    question: 'บทที่ 1: การสืบสวน',
-    background: '/background/investigation/01.PNG',
+    question: 'บทที่ 1: การสืบสวfffffffffffน',
+    background: [
+      '/background/intro/background1.webp',
+      '/background/intro/background2.webp',
+      '/background/intro/background3.webp',
+    ],
     sound: '',
   },
   {
@@ -113,7 +121,7 @@ export const quizQuestions: QuizPageData[] = [
     question:
       'ณ ชายฝั่งที่เต็มไปด้วยเม็ดทรายสีเหลืองนวล ทะเลเป็นประกายจากแสงแดด เสียงคลื่นกระทบฝั่งเป็นจังหวะ คุณนั่งมองไปที่ชายหาดที่เต็มไปด้วยผู้คนมากมายที่ต่างก็มีประสบการณ์ชีวิตและบุคลิกภาพ เมื่อคุณมองมาที่ตัวคุณ คนอื่นมักมองคุณเป็น...',
     backgroundColor: '#1a5566',
-    background: '/public/background/intro/02.PNG',
+    background: '/background/intro/02.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'ผู้เชื่อมความสัมพันธ์ - เต็มเปี่ยมด้วยพลังงาน สร้างความสดใส ความร่าเริง' },
@@ -129,7 +137,7 @@ export const quizQuestions: QuizPageData[] = [
     question:
       'คุณค่อย ๆ ว่ายน้ำออกจากชายฝั่งที่คุ้นเคย ทิ้งผืนทรายและเสียงคลื่นไว้เบื้องหลัง ยิ่งดำดิ่งลงไป แสงอาทิตย์ก็ยิ่งจางหาย ราวกับถูกกลืนกินโดยผืนน้ำอันกว้างใหญ่ ความเย็นค่อย ๆ แทรกซึมเข้าสู่ร่างกาย ท่ามกลางความมืดที่กำลังโอบล้อมนั้น คุณรู้สึกได้ว่าพลังในตัวเองกำลังร่อยหรอลงไป คุณจึงเลือกเติมพลังให้ตัวเองผ่านการ...',
     backgroundColor: '#184b5c',
-    background: '/public/background/intro/background%201.PNG',
+    background: '/background/intro/background%201.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'ว่ายหาแสงสว่าง - มองหาเพื่อนร่วมทาง พูดคุยระบายความรู้สึก และเติมพลังจากการได้อยู่กับผู้คนรอบตัว' },
@@ -146,10 +154,10 @@ export const quizQuestions: QuizPageData[] = [
     navigation: 'tap-anywhere',
     question: 'mflv[4kr',
     background: [
-      '/background/hurricane/1.PNG',
-      '/background/hurricane/2.PNG',
-      '/background/hurricane/3.PNG',
-      '/background/hurricane/4.PNG',
+      '/background/quiz/hurricane/1.webp',
+      '/background/quiz/hurricane/2.webp',
+      '/background/quiz/hurricane/3.webp',
+      '/background/quiz/hurricane/4.webp',
 
     ],
     sound: '',
@@ -159,7 +167,7 @@ export const quizQuestions: QuizPageData[] = [
     question:
       'จู่ ๆ กระแสน้ำก็เปลี่ยนทิศ เสียงคำรามของคลื่นใต้น้ำกึกก้องไปทั่ว ความสงบถูกแทนที่ด้วยความปั่นป่วน เพื่อนร่วมทางของคุณเริ่มปะทะกันด้วยถ้อยคำและอารมณ์ ท่ามกลางเกลียวคลื่นที่หมุนวนอย่างบ้าคลั่งนั้น ปฏิกิริยาแรกของคุณคือ...',
     backgroundColor: '#164252',
-    background: '/public/background/intro/background%202.PNG',
+    background: '/background/intro/background%202.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'กระโดดข้ามคลื่น - ใช้อารมณ์ขันหรือเสียงหัวเราะ เปลี่ยนบรรยากาศให้กลับมาผ่อนคลายโดยเร็ว' },
@@ -175,7 +183,7 @@ export const quizQuestions: QuizPageData[] = [
     question:
       'กระแสน้ำพัดพาคุณไปไกลเกินกว่าที่เคยรู้จัก เมื่อคุณลืมตาขึ้นอีกครั้ง โลกที่อยู่ตรงหน้ากลับไม่ใช่ที่เดิมอีกต่อไป ทุกอย่างดูแปลกตา เงียบงัน และเต็มไปด้วยความไม่แน่นอน หัวใจของคุณจะรู้สึก...',
     backgroundColor: '#133948',
-    background: '/public/background/intro/01.PNG',
+    background: '/background/intro/01.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'ตื่นเต้นกระปรี้กระเปร่า - รักความไม่แน่นอนนี้ โลกใหม่หมายถึงโอกาสและการผจญภัย' },
@@ -190,7 +198,11 @@ export const quizQuestions: QuizPageData[] = [
     id: 'investigation-4',
     navigation: 'tap-anywhere',
     question: 'บทที่ 1: การสืบสวน',
-    background: '/background/investigation/01.PNG',
+   background: [
+      '/background/intro/background1.webp',
+      '/background/intro/background2.webp',
+      '/background/intro/background3.webp',
+    ],
     sound: '',
   },
   {
@@ -198,7 +210,7 @@ export const quizQuestions: QuizPageData[] = [
     question:
       'คุณว่ายเข้าสู่ถ้ำใต้ทะเลที่เงียบงัน มีเพียงเสียงลมหายใจของตัวเอง ในความนิ่งเงียบนั้น ความคิดของคุณค่อย ๆ ลอยขึ้นมาจากก้นบึ้งของจิตใจ วนเวียนอยู่กับ...',
     backgroundColor: '#10303e',
-    background: '/public/background/intro/background%203.PNG',
+    background: '/background/intro/background%203.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'ภาพแห่งความสุข - "พรุ่งนี้จะทำอะไรดี" "จะชวนใครไปไหม" และภาพจำเสียงหัวเราะ' },
@@ -214,7 +226,7 @@ export const quizQuestions: QuizPageData[] = [
     question:
       'ที่ก้นถ้ำลึกลงไป คุณพบหีบสมบัติใบใหญ่ เมื่อเปิดมันออก สิ่งที่อยู่ภายในไม่ใช่ทองคำหรืออัญมณี แต่มันเก็บสิ่งล้ำค่าที่สุดในชีวิตคุณ ที่คุณจะปกป้องไว้ไม่ว่าอะไรจะเกิดขึ้น สิ่งนั้นคือ...',
     backgroundColor: '#0c2734',
-    background: '/public/background/intro/02.PNG',
+    background: '/background/intro/02.PNG',
     sound: '',
     options: [
       { letter: 'A', label: 'มิตรภาพ - การได้เป็นส่วนหนึ่ง และเชื่อมโยงกับผู้อื่น' },

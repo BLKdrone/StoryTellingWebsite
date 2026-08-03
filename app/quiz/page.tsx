@@ -125,7 +125,6 @@ export default function QuizPage() {
     return (
       <MobileFrame>
         <div
-          key={page.id}
           role="button"
           tabIndex={0}
           onClick={handleAdvance}
@@ -136,7 +135,7 @@ export default function QuizPage() {
         >
           <BackgroundSlideshow images={background} intervalMs={1200} />
 
-          <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+          <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
             {index > 0 && (
               <button
                 onClick={(e) => {
@@ -180,10 +179,10 @@ export default function QuizPage() {
   const background = Array.isArray(page.background) ? page.background : [page.background]
   return (
     <MobileFrame>
-      <div key={page.id} className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
+      <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
         <BackgroundSlideshow images={background} intervalMs={1200} />
 
-        <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+        <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
           {index > 0 && (
             <button
               onClick={(e) => {

@@ -8,9 +8,9 @@ import { LoginButton } from '@/components/login-button'
 // import { pages } from '@/data/pages'
 
 const heroImages = [
-  '/background/intro/background1.PNG',
-  '/background/intro/background2.PNG',
-  '/background/intro/background3.PNG',
+  '/background/intro/background1.webp',
+  '/background/intro/background2.webp',
+  '/background/intro/background3.webp',
 ]
 
 export default function HomePage() {

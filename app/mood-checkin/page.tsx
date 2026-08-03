@@ -312,15 +312,19 @@ export default function MoodCheckinPage() {
           <div className="relative flex flex-col flex-1 min-h-dvh w-full">
             {backButton}
             <div
-              key={page.id}
-              className="relative flex min-h-dvh w-full flex-1 flex-col items-center justify-center gap-8 p-8 text-center"
+              key={page.background}
+              className="absolute inset-0 z-0"
               style={{
                 backgroundImage: `url(${page.background})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
+            />
+            <div
+              key={page.id}
+              className="relative z-10 flex min-h-dvh w-full flex-1 flex-col items-center justify-center gap-8 p-8 text-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 -z-10" />
 
               <div className="relative z-10 space-y-6 w-full">
                 <p className="text-sm text-white/90 whitespace-pre-line">{page.text}</p>
@@ -361,18 +365,22 @@ export default function MoodCheckinPage() {
         <div className="relative flex flex-col flex-1 min-h-dvh w-full">
           {backButton}
           <div
-            key={page.id}
-            role="button"
-            tabIndex={0}
-            onClick={page.placeholder ? undefined : () => handleAdvanceBranch()}
-            className="relative flex min-h-dvh w-full flex-1 flex-col cursor-pointer"
+            key={page.background}
+            className="absolute inset-0 z-0"
             style={{
               backgroundImage: `url(${page.background})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
+          />
+          <div
+            key={page.id}
+            role="button"
+            tabIndex={0}
+            onClick={page.placeholder ? undefined : () => handleAdvanceBranch()}
+            className="relative z-10 flex min-h-dvh w-full flex-1 flex-col cursor-pointer"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 -z-10" />
             <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
               <p className="text-base text-white whitespace-pre-line">{page.text}</p>
 
