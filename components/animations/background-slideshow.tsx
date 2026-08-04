@@ -38,8 +38,8 @@ export function BackgroundSlideshow({
   const prevIndex = useRef(0)
   const imageCacheRef = useRef<Record<string, HTMLImageElement>>({})
 
-  // Preload every image up front, not just current + next. This avoids the
-  // "interval outruns the fetch" race that caused blank flashes.
+  // Preload only the current and the next image to save bandwidth.
+  // We rely on the interval check to not advance until the next is ready.
   useEffect(() => {
     if (!images.length) return
 
@@ -78,8 +78,11 @@ export function BackgroundSlideshow({
       })
     }
 
-    images.forEach(preloadImage)
-  }, [images])
+    preloadImage(images[index])
+    if (images.length > 1) {
+      preloadImage(images[(index + 1) % images.length])
+    }
+  }, [images, index])
 
   // Advance the slide only once the next image is actually ready. If it
   // isn't, skip this tick and try again on the next one rather than

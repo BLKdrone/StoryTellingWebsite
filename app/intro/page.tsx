@@ -3,12 +3,15 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { MobileFrame } from '@/components/mobile-frame'
-import { StoryPage } from '@/components/story-page'
-import { introPages } from '@/data/intro'
+import { introPages, type IntroPage } from '@/data/intro'
+
+const NAME_TOKEN = '{{name}}'
 
 export default function IntroPage() {
     const router = useRouter()
     const [currentIndex, setCurrentIndex] = useState(0)
+    const [name, setName] = useState('')
+    const [inputValue, setInputValue] = useState('')
 
     const handleBack = () => {
         if (currentIndex > 0) {
@@ -25,7 +28,18 @@ export default function IntroPage() {
         }
     }
 
-    const page = introPages[currentIndex]
+    const handleNameSubmit = () => {
+        const trimmed = inputValue.trim()
+        if (!trimmed) return
+        setName(trimmed)
+        handleAdvance()
+    }
+
+    const page: IntroPage = introPages[currentIndex]
+    const resolvedText = page.text.includes(NAME_TOKEN)
+        ? page.text.replace(NAME_TOKEN, name)
+        : page.text
+    const bg = Array.isArray(page.background) ? page.background[0] : page.background
 
     return (
         <MobileFrame>
@@ -42,73 +56,46 @@ export default function IntroPage() {
                         ← Back
                     </button>
                 )}
-                <StoryPage page={page} onAdvance={handleAdvance} />
+
+                {page.navigation === 'text-input' ? (
+                    <div
+                        className="relative flex flex-1 flex-col items-center justify-end gap-4 bg-cover bg-center p-6 pb-16"
+                        style={{ backgroundImage: `url(${bg})` }}
+                    >
+                        <p className="text-center text-lg font-medium text-white drop-shadow">
+                            {resolvedText}
+                        </p>
+                        <input
+                            type="text"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') handleNameSubmit()
+                            }}
+                            placeholder={page.placeholder}
+                            className="w-full max-w-xs rounded-full bg-white/90 px-5 py-3 text-center text-base text-black outline-none placeholder:text-black/40"
+                            autoFocus
+                        />
+                        <button
+                            onClick={handleNameSubmit}
+                            disabled={!inputValue.trim()}
+                            className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-black transition-opacity disabled:opacity-40"
+                        >
+                            {page.buttonLabel ?? 'ต่อไป'}
+                        </button>
+                    </div>
+                ) : (
+                    <div
+                        className="relative flex flex-1 flex-col items-end justify-end bg-cover bg-center p-6 pb-16"
+                        style={{ backgroundImage: `url(${bg})` }}
+                        onClick={handleAdvance}
+                    >
+                        <p className="text-center text-lg font-medium text-white drop-shadow">
+                            {resolvedText}
+                        </p>
+                    </div>
+                )}
             </div>
         </MobileFrame>
     )
 }
-
-// function TabContent({ tab }: { tab: TabKey }) {
-//   switch (tab) {
-//     case 'quiz':
-//       return <QuizFlow />
-//     case 'mood-checkin':
-//       return <MoodFlow />
-//     case 'self-worth':
-//       return <SelfWorthFlow />
-//     case 'burnout':
-//       return <BurnoutFlow />
-//     default:
-//       return <QuizFlow />
-//   }
-// }
-
-// function TabsClient() {
-//   const searchParams = useSearchParams()
-//   const currentTab = (searchParams.get('tab') || 'quiz') as TabKey
-
-//   const createTabUrl = (tab: TabKey) => {
-//     const params = new URLSearchParams(searchParams)
-//     params.set('tab', tab)
-//     return `?${params.toString()}`
-//   }
-
-//   return (
-//     <MobileFrame>
-//       <div className="relative flex min-h-dvh w-full flex-col">
-//         {/* Tab Navigation */}
-//         <div className="sticky top-0 z-20 border-b border-white/10 bg-black/40 backdrop-blur-sm">
-//           <div className="flex overflow-x-auto">
-//             {tabs.map((tab) => (
-//               <a
-//                 key={tab.id}
-//                 href={createTabUrl(tab.id)}
-//                 className={cn(
-//                   'flex-1 border-b-2 px-4 py-3 text-sm font-medium transition-colors min-w-max',
-//                   currentTab === tab.id
-//                     ? 'border-white text-white'
-//                     : 'border-transparent text-white/60 hover:text-white/80',
-//                 )}
-//               >
-//                 {tab.label}
-//               </a>
-//             ))}
-//           </div>
-//         </div>
-
-//         {/* Tab Content */}
-//         <div className="flex-1">
-//           <TabContent tab={currentTab} />
-//         </div>
-//       </div>
-//     </MobileFrame>
-//   )
-// }
-
-// export default function ChaptersPage() {
-//   return (
-//     <Suspense fallback={<MobileFrame><div>Loading...</div></MobileFrame>}>
-//       <TabsClient />
-//     </Suspense>
-//   )
-// }

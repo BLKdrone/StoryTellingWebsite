@@ -92,9 +92,51 @@ export default function QuizPage() {
               </p>
             </div>
 
+            <p className="max-w-sm text-balance text-base italic leading-relaxed">
+              <span className={cn(textChip, 'py-2 leading-relaxed')}>&ldquo;{animal.quote}&rdquo;</span>
+            </p>
+
             <p className="max-w-sm text-balance text-base leading-relaxed">
               <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.description}</span>
             </p>
+
+            <div className="flex w-full max-w-sm flex-col gap-3 text-left">
+              <div>
+                <p className="mb-1 text-xs uppercase tracking-widest">
+                  <span className={textChip}>Vibes</span>
+                </p>
+                <p className="text-sm leading-relaxed">
+                  <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.vibes}</span>
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-1 text-xs uppercase tracking-widest">
+                  <span className={textChip}>Behavior & Habitat</span>
+                </p>
+                <p className="text-sm leading-relaxed">
+                  <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.behaviorHabitat}</span>
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-1 text-xs uppercase tracking-widest">
+                  <span className={textChip}>Strength</span>
+                </p>
+                <p className="text-sm leading-relaxed">
+                  <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.strength}</span>
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-1 text-xs uppercase tracking-widest">
+                  <span className={textChip}>Weakness</span>
+                </p>
+                <p className="text-sm leading-relaxed">
+                  <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.weakness}</span>
+                </p>
+              </div>
+            </div>
 
             <div className="mt-4 flex w-full max-w-xs flex-col gap-3">
               <Button
