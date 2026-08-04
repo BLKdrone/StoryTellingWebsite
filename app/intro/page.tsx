@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { MobileFrame } from '@/components/mobile-frame'
 import { introPages, type IntroPage } from '@/data/intro'
 
@@ -58,10 +59,8 @@ export default function IntroPage() {
                 )}
 
                 {page.navigation === 'text-input' ? (
-                    <div
-                        className="relative flex flex-1 flex-col items-center justify-end gap-4 bg-cover bg-center p-6 pb-16"
-                        style={{ backgroundImage: `url(${bg})` }}
-                    >
+                    <div className="relative flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
+                        <Image src={bg} alt="" fill className="object-cover -z-10" priority />
                         <p className="text-center text-lg font-medium text-white drop-shadow">
                             {resolvedText}
                         </p>
@@ -86,10 +85,10 @@ export default function IntroPage() {
                     </div>
                 ) : (
                     <div
-                        className="relative flex flex-1 flex-col items-end justify-end bg-cover bg-center p-6 pb-16"
-                        style={{ backgroundImage: `url(${bg})` }}
+                        className="relative flex flex-1 flex-col items-end justify-end p-6 pb-16 cursor-pointer"
                         onClick={handleAdvance}
                     >
+                        <Image src={bg} alt="" fill className="object-cover -z-10" priority />
                         <p className="text-center text-lg font-medium text-white drop-shadow">
                             {resolvedText}
                         </p>
