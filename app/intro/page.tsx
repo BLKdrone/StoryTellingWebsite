@@ -24,7 +24,6 @@ export default function IntroPage() {
         if (currentIndex < introPages.length - 1) {
             setCurrentIndex(currentIndex + 1)
         } else {
-            // Intro complete — go to quiz
             router.push('/quiz')
         }
     }
@@ -45,6 +44,9 @@ export default function IntroPage() {
     return (
         <MobileFrame>
             <div className="relative flex flex-col flex-1 min-h-dvh w-full">
+                {/* Background sits first in the DOM, no z-index tricks needed */}
+                <Image src={bg} alt="" fill className="object-cover" priority />
+
                 {currentIndex > 0 && (
                     <button
                         onClick={(e) => {
@@ -59,8 +61,7 @@ export default function IntroPage() {
                 )}
 
                 {page.navigation === 'text-input' ? (
-                    <div className="relative flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
-                        <Image src={bg} alt="" fill className="object-cover -z-10" priority />
+                    <div className="relative z-10 flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
                         <p className="text-center text-lg font-medium text-white drop-shadow">
                             {resolvedText}
                         </p>
@@ -85,10 +86,9 @@ export default function IntroPage() {
                     </div>
                 ) : (
                     <div
-                        className="relative flex flex-1 flex-col items-end justify-end p-6 pb-16 cursor-pointer"
+                        className="relative z-10 flex flex-1 flex-col items-end justify-end p-6 pb-16 cursor-pointer"
                         onClick={handleAdvance}
                     >
-                        <Image src={bg} alt="" fill className="object-cover -z-10" priority />
                         <p className="text-center text-lg font-medium text-white drop-shadow">
                             {resolvedText}
                         </p>

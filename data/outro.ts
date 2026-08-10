@@ -14,9 +14,9 @@ export interface OutroTapPage {
 // Real illustrated backgrounds aren't ready yet — every page cycles through
 // the same placeholder slideshow until actual art is supplied.
 const shoreBackground = [
-  '/background/intro/background1.PNG',
-  '/background/intro/background2.PNG',
-  '/background/intro/background3.PNG',
+  '/background/intro/background1.webp',
+  '/background/intro/background2.webp',
+  '/background/intro/background3.webp',
 ]
 
 export const outroPages: OutroTapPage[] = [

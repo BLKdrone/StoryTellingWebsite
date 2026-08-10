@@ -6,26 +6,30 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import {
-  animals,
   quizQuestions,
   scoreQuiz,
-  type AnimalKey,
   type QuizOption,
 } from '@/data/quiz'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 import { motion, AnimatePresence } from 'motion/react'
+import { saveQuizResult } from '@/lib/quiz-result'
 
-// Shared style: black text sitting on a white rounded-radius-5 rectangle "chip"
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
 export default function QuizPage() {
   const router = useRouter()
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<QuizOption['letter'][]>([])
-  const [result, setResult] = useState<AnimalKey | null>(null)
+  // const [result, setResult] = useState<AnimalKey | null>(null)
 
   const total = quizQuestions.length
   const page = quizQuestions[index]
+
+  const finish = (finalAnswers: QuizOption['letter'][]) => {
+    const scored = scoreQuiz(finalAnswers)
+    saveQuizResult(scored)
+    router.push('/chapter-checkpoint?from=burnout')
+  }
 
   const handleSelect = (letter: QuizOption['letter']) => {
     const nextAnswers = [...answers, letter]
@@ -34,7 +38,7 @@ export default function QuizPage() {
     if (index + 1 < total) {
       setIndex((i) => i + 1)
     } else {
-      setResult(scoreQuiz(nextAnswers))
+      finish(nextAnswers)
     }
   }
 
@@ -42,14 +46,8 @@ export default function QuizPage() {
     if (index + 1 < total) {
       setIndex((i) => i + 1)
     } else {
-      setResult(scoreQuiz(answers))
+      finish(answers)
     }
-  }
-
-  const restart = () => {
-    setIndex(0)
-    setAnswers([])
-    setResult(null)
   }
 
   const handleBack = () => {
@@ -61,105 +59,105 @@ export default function QuizPage() {
     }
   }
 
-  if (result) {
-    const animal = animals[result]
+  // if (result) {
+  //   const animal = animals[result]
 
-    return (
-      <MobileFrame>
-        <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
-          <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#0a2230' }} />
-          <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 p-6 text-center">
-            <p className="text-sm uppercase tracking-widest">
-              <span className={textChip}>เมื่อเปิดออกเป็นสิ่งที่ใช่หรือไม่</span>
-            </p>
+  //   return (
+  //     <MobileFrame>
+  //       <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
+  //         <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#0a2230' }} />
+  //         <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 p-6 text-center">
+  //           <p className="text-sm uppercase tracking-widest">
+  //             <span className={textChip}>เมื่อเปิดออกเป็นสิ่งที่ใช่หรือไม่</span>
+  //           </p>
 
-            <div
-              className="animate-float flex h-32 w-32 items-center justify-center rounded-full"
-              style={{ backgroundColor: animal.iconColor }}
-              aria-hidden
-            >
-              <span className="font-serif text-4xl text-background">
-                {animal.name.charAt(0)}
-              </span>
-            </div>
+  //           <div
+  //             className="animate-float flex h-32 w-32 items-center justify-center rounded-full"
+  //             style={{ backgroundColor: animal.iconColor }}
+  //             aria-hidden
+  //           >
+  //             <span className="font-serif text-4xl text-background">
+  //               {animal.name.charAt(0)}
+  //             </span>
+  //           </div>
 
-            <div className="flex flex-col items-center gap-2">
-              <h1 className="font-serif text-4xl">
-                <span className={textChip}>{animal.name}</span>
-              </h1>
-              <p className="text-lg">
-                <span className={textChip}>{animal.tagline}</span>
-              </p>
-            </div>
+  //           <div className="flex flex-col items-center gap-2">
+  //             <h1 className="font-serif text-4xl">
+  //               <span className={textChip}>{animal.name}</span>
+  //             </h1>
+  //             <p className="text-lg">
+  //               <span className={textChip}>{animal.tagline}</span>
+  //             </p>
+  //           </div>
 
-            <p className="max-w-sm text-balance text-base italic leading-relaxed">
-              <span className={cn(textChip, 'py-2 leading-relaxed')}>&ldquo;{animal.quote}&rdquo;</span>
-            </p>
+  //           <p className="max-w-sm text-balance text-base italic leading-relaxed">
+  //             <span className={cn(textChip, 'py-2 leading-relaxed')}>&ldquo;{animal.quote}&rdquo;</span>
+  //           </p>
 
-            <p className="max-w-sm text-balance text-base leading-relaxed">
-              <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.description}</span>
-            </p>
+  //           <p className="max-w-sm text-balance text-base leading-relaxed">
+  //             <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.description}</span>
+  //           </p>
 
-            <div className="flex w-full max-w-sm flex-col gap-3 text-left">
-              <div>
-                <p className="mb-1 text-xs uppercase tracking-widest">
-                  <span className={textChip}>Vibes</span>
-                </p>
-                <p className="text-sm leading-relaxed">
-                  <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.vibes}</span>
-                </p>
-              </div>
+  //           <div className="flex w-full max-w-sm flex-col gap-3 text-left">
+  //             <div>
+  //               <p className="mb-1 text-xs uppercase tracking-widest">
+  //                 <span className={textChip}>Vibes</span>
+  //               </p>
+  //               <p className="text-sm leading-relaxed">
+  //                 <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.vibes}</span>
+  //               </p>
+  //             </div>
 
-              <div>
-                <p className="mb-1 text-xs uppercase tracking-widest">
-                  <span className={textChip}>Behavior & Habitat</span>
-                </p>
-                <p className="text-sm leading-relaxed">
-                  <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.behaviorHabitat}</span>
-                </p>
-              </div>
+  //             <div>
+  //               <p className="mb-1 text-xs uppercase tracking-widest">
+  //                 <span className={textChip}>Behavior & Habitat</span>
+  //               </p>
+  //               <p className="text-sm leading-relaxed">
+  //                 <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.behaviorHabitat}</span>
+  //               </p>
+  //             </div>
 
-              <div>
-                <p className="mb-1 text-xs uppercase tracking-widest">
-                  <span className={textChip}>Strength</span>
-                </p>
-                <p className="text-sm leading-relaxed">
-                  <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.strength}</span>
-                </p>
-              </div>
+  //             <div>
+  //               <p className="mb-1 text-xs uppercase tracking-widest">
+  //                 <span className={textChip}>Strength</span>
+  //               </p>
+  //               <p className="text-sm leading-relaxed">
+  //                 <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.strength}</span>
+  //               </p>
+  //             </div>
 
-              <div>
-                <p className="mb-1 text-xs uppercase tracking-widest">
-                  <span className={textChip}>Weakness</span>
-                </p>
-                <p className="text-sm leading-relaxed">
-                  <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.weakness}</span>
-                </p>
-              </div>
-            </div>
+  //             <div>
+  //               <p className="mb-1 text-xs uppercase tracking-widest">
+  //                 <span className={textChip}>Weakness</span>
+  //               </p>
+  //               <p className="text-sm leading-relaxed">
+  //                 <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.weakness}</span>
+  //               </p>
+  //             </div>
+  //           </div>
 
-            <div className="mt-4 flex w-full max-w-xs flex-col gap-3">
-              <Button
-                size="lg"
-                className="h-14 w-full rounded-[5px] bg-white text-base text-black hover:bg-white/90"
-                onClick={restart}
-              >
-                Take it again
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                className="h-12 w-full rounded-[5px] bg-white text-base text-black hover:bg-white/90"
-                onClick={() => router.push('/chapter-checkpoint?from=quiz')}
-              >
-                Continue to checkpoint
-              </Button>
-            </div>
-          </div>
-        </div>
-      </MobileFrame>
-    )
-  }
+  //           <div className="mt-4 flex w-full max-w-xs flex-col gap-3">
+  //             <Button
+  //               size="lg"
+  //               className="h-14 w-full rounded-[5px] bg-white text-base text-black hover:bg-white/90"
+  //               onClick={restart}
+  //             >
+  //               Take it again
+  //             </Button>
+  //             <Button
+  //               variant="ghost"
+  //               size="lg"
+  //               className="h-12 w-full rounded-[5px] bg-white text-base text-black hover:bg-white/90"
+  //               onClick={() => router.push('/chapter-checkpoint?from=quiz')}
+  //             >
+  //               Continue to checkpoint
+  //             </Button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </MobileFrame>
+  //   )
+  // }
 
   // Chapter-break page: full-screen tap target, no options, no progress bar
   if (page.navigation === 'tap-anywhere') {
@@ -173,11 +171,11 @@ export default function QuizPage() {
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') handleAdvance()
           }}
-          className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
+          className="animate-fade-in relative flex flex-1 cursor-pointer flex-col overflow-hidden"
         >
           <BackgroundSlideshow images={background} intervalMs={1200} />
 
-          <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+          <div key={page.id} className="relative z-10 flex flex-1 flex-col p-6">
             {index > 0 && (
               <button
                 onClick={(e) => {
@@ -221,10 +219,10 @@ export default function QuizPage() {
   const background = Array.isArray(page.background) ? page.background : [page.background]
   return (
     <MobileFrame>
-      <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
+      <div className="animate-fade-in relative flex flex-1 flex-col overflow-hidden">
         <BackgroundSlideshow images={background} intervalMs={1200} />
 
-        <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+        <div key={page.id} className="relative z-10 flex flex-1 flex-col p-6">
           {index > 0 && (
             <button
               onClick={(e) => {
@@ -250,7 +248,7 @@ export default function QuizPage() {
             ))}
           </div>
 
-          <div className="flex flex-1 flex-col justify-center gap-8">
+          <div className="flex flex-1 flex-col justify-center gap-8 py-8">
             <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">
               <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
             </h1>

@@ -62,6 +62,8 @@ export interface AnimalResult {
   weakness: string
   /** สีไอคอนชั่วคราว (ยังไม่มีภาพประกอบ) */
   iconColor: string
+  background: string | string[]
+  animal: string | string[]
 }
 
 export const animals: Record<AnimalKey, AnimalResult> = {
@@ -80,6 +82,8 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     weakness:
       'มักกลัวการตกกระแส (FOMO) เบื่อง่ายกับกิจวัตรประจำวัน ลำบากใจเมื่อต้องทำงานคนเดียวหรือต้องใช้สมาธิขั้นสูง และบางครั้งก็ทำให้ตัวเองเหนื่อยล้าจากการพยายามทำให้บรรยากาศสนุกอยู่ตลอดเวลา',
     iconColor: '#4bb3c9',
+    background: '/background/intro/background1.webp',
+    animal: '/background/quiz/character/dolphin/background.webp',
   },
   dugong: {
     key: 'dugong',
@@ -97,6 +101,8 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     weakness:
       'ประสบปัญหาในการกำหนดขอบเขตในความพยายามที่จะรักษาความสันติ หลีกเลี่ยงการเผชิญหน้าที่จำเป็น มักซึมซับความเครียดของผู้อื่น และปล่อยให้ถูกเอาเปรียบได้ง่าย',
     iconColor: '#7a9a7e',
+    background: '/background/quiz/character/dolphin/background.webp',
+    animal: '/background/quiz/character/dolphin/background.webp',
   },
   octopus: {
     key: 'octopus',
@@ -114,6 +120,8 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     weakness:
       'มีแนวโน้มที่จะคิดมากเกินไปจนไม่กล้าตัดสินใจ มักถูกดึงดูดด้วยไอเดียใหม่ๆ ที่น่าตื่นเต้น ทำให้ยากที่จะทำสิ่งใดสิ่งหนึ่งให้เสร็จสมบูรณ์ อาจแยกตัวไปอยู่ในพื้นที่ของตัวเองเมื่อต้องใช้ความคิด',
     iconColor: '#b06a8f',
+    background: '/background/quiz/character/dolphin/background.webp',
+    animal: '/background/quiz/character/dolphin/background.webp',
   },
   pufferfish: {
     key: 'pufferfish',
@@ -131,6 +139,8 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     weakness:
       'รู้สึกหนักใจได้ง่ายจากความเครียดและสิ่งรอบตัว มักมีปฏิกิริยาตอบสนองแรกเมื่อรู้สึกว่ามีความกังวลหรือไม่ปลอดภัย คือ การสร้างกำแพงป้องกัน ซึ่งอาจผลักไสผู้คนรอบตัวออกไป ในเวลาที่จริง ๆ แล้วต้องการการปลอบโยนมากที่สุด',
     iconColor: '#c9a24b',
+    background: '/background/quiz/character/dolphin/background.webp',
+    animal: '/background/quiz/character/dolphin/background.webp',
   },
   'sea-turtle': {
     key: 'sea-turtle',
@@ -147,6 +157,8 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     weakness:
       'อาจมีความเข้มงวดและตึงเครียดเกินไป เนื่องจากมักชอบทำตามแผนที่วางไว้ ทำให้ปรับตัวเข้ากับการเปลี่ยนแปลงกะทันหันได้ช้า ดื้อรั้นเมื่อถูกบังคับให้ออกนอกเส้นทางที่เลือกไว้',
     iconColor: '#5b8f74',
+    background: '/background/quiz/character/dolphin/background.webp',
+    animal: '/background/quiz/character/dolphin/background.webp',
   },
 }
 
@@ -255,7 +267,7 @@ export const quizQuestions: QuizPageData[] = [
     id: 'investigation-4',
     navigation: 'tap-anywhere',
     question: 'บทที่ 1: การสืบสวน',
-   background: [
+    background: [
       '/background/intro/background1.webp',
       '/background/intro/background2.webp',
       '/background/intro/background3.webp',
@@ -300,7 +312,7 @@ export const quizQuestions: QuizPageData[] = [
     question: 'flashblack testqqq',
     background: '/background/investigation/01.PNG',
     sound: '',
-    flashTransition:'black',
+    flashTransition: 'black',
   },
   {
     id: 'investigation-6',
