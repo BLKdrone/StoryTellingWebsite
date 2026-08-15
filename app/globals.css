@@ -157,6 +157,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -196,11 +197,13 @@
 }
 
 @keyframes breathe {
+
   0%,
   100% {
     transform: scale(1);
     opacity: 0.55;
   }
+
   50% {
     transform: scale(1.35);
     opacity: 1;
@@ -208,10 +211,12 @@
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0) rotate(-2deg);
   }
+
   50% {
     transform: translateY(-18px) rotate(2deg);
   }
@@ -222,6 +227,7 @@
     transform: translateY(40px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -232,7 +238,58 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
+}
+
+/* Animal-specific animations */
+@keyframes animal-zoom {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes animal-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes animal-glide {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(30px, -30px);
+  }
+}
+
+/* Apply animations to animal elements */
+.animate-animal-zoom {
+  animation: animal-zoom 3s ease-in-out infinite;
+}
+
+.animate-animal-float {
+  animation: animal-float 4s ease-in-out infinite;
+}
+
+.animate-animal-glide {
+  animation: animal-glide 5s ease-in-out infinite;
 }

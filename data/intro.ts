@@ -30,7 +30,11 @@ export const introPages: IntroPage[] = [
     navigation: 'tap-anywhere',
     speaker: 'narration',
     text: 'เธออยู่บนชายหาดที่เธอไม่รู้จัก ผืนน้ำตรงหน้าทอประกายสะท้อนแสงแดด เธอสูดหายใจเข้า และได้กลิ่นทะเล',
-    background: ['/background/intro/background1.webp'],
+    background: [
+      '/background/intro/background1.webp',
+      '/background/intro/background2.webp',
+      '/background/intro/background3.webp',
+    ],
     sound: '',
     transition: 'fade',
   },
@@ -39,7 +43,7 @@ export const introPages: IntroPage[] = [
     navigation: 'tap-anywhere',
     speaker: 'whale',
     text: 'วาฬ: ฉันเอง ปลาวาฬ! ยินดีต้อนรับสู่ทะเลแห่งนี้',
-     background: ['/background/intro/whale2.webp'],
+    background: ['/background/intro/whale2.webp'],
     sound: '',
     transition: 'fade', // storyboard note: whale "zooms" in on this transition
   },
@@ -86,7 +90,7 @@ export const introPages: IntroPage[] = [
     navigation: 'tap-anywhere',
     speaker: 'whale',
     text: 'วาฬ: ในระหว่างการเดินทางนี้ ฉันจะทำให้เธอได้ลองตอบคำถามต่อไปนี้ เพื่อฉันจะได้รู้จักเธอมากขึ้น',
-    background: ['/background/intro/background2.webp'],
+    background: ['/background/intro/whale4.webp'],
     sound: '',
     transition: 'fade',
   },
@@ -97,7 +101,6 @@ export const introPages: IntroPage[] = [
     text: 'ถ้าเธอพร้อมแล้ว ก็ตามฉันลงมาในทะเลเลย!',
     background: [
       '/background/intro/background2.webp',
-      '/background/intro/background3.webp',
     ],
     sound: '',
     transition: 'dive',

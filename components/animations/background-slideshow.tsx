@@ -7,11 +7,15 @@ import Image from 'next/image'
 interface BackgroundSlideshowProps {
   images: string[]
   intervalMs?: number
+  fill?: boolean
+  imageClassName?: string
 }
 
 export function BackgroundSlideshow({
   images,
   intervalMs = 1000,
+  fill = true,
+  imageClassName = 'object-cover',
 }: BackgroundSlideshowProps) {
   // Strip out any falsy/empty entries up front — this is the root fix
   const safeImages = images.filter((src): src is string => Boolean(src))
@@ -62,8 +66,10 @@ export function BackgroundSlideshow({
         <Image
           src={safeImages[safePrevIndex]}
           alt=""
-          fill
-          className="object-cover"
+          fill={fill}
+          width={fill ? undefined : 400}
+          height={fill ? undefined : 200}
+          className={imageClassName}
           priority
         />
       </div>
@@ -80,8 +86,10 @@ export function BackgroundSlideshow({
         <Image
           src={safeImages[safeIndex]}
           alt=""
-          fill
-          className="object-cover"
+          fill={fill}
+          width={fill ? undefined : 400}
+          height={fill ? undefined : 200}
+          className={imageClassName}
           priority
         />
       </motion.div>

@@ -50,43 +50,51 @@ export default function OutroPage() {
   }
 
   if (showResult) {
-    if (!result) {
+    if (!result || !animals[result]) {
       // No stored result (e.g. user navigated here directly) — send them back
       router.push('/quiz')
       return null
     }
 
     const animal = animals[result]
+    const backgroundSrc = typeof animal.background === 'string' ? animal.background : animal.background?.[0]
+    const animalSrc = typeof animal.animal === 'string' ? animal.animal : animal.animal?.[0]
 
     return (
       <MobileFrame>
         <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
           <div aria-hidden className="absolute inset-0 bg-[#0a2230]">
-            {animal.background && (
+            {backgroundSrc &&
               <img
-                src={animal.background}
+                src={backgroundSrc}
                 alt=""
                 className="h-full w-full object-cover opacity-30 mix-blend-overlay"
               />
-            )}
+            }
           </div>
-          <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 p-6 text-center">
+          <div className="relative flex h-48 w-48 items-center justify-center" aria-hidden>
             <p className="text-sm uppercase tracking-widest">
               <span className={textChip}>เมื่อเปิดออกเป็นสิ่งที่ใช่หรือไม่</span>
             </p>
-            <div
-              className="animate-float flex h-32 w-32 items-center justify-center overflow-hidden rounded-full"
-              aria-hidden
-            >
+            {animal.animal && (
               <img
-                src={animal.background}
-                alt=""
-                className="h-full w-full object-cover"
+                src={typeof animal.animal === 'string' ? animal.animal : animal.animal[0]}
+                alt={animal.name}
+                className={cn(
+                  'h-full w-full object-contain',
+                  animal.animationType === 'zoom' && 'animate-animal-zoom',
+                  animal.animationType === 'float' && 'animate-animal-float',
+                  animal.animationType === 'glide' && 'animate-animal-glide'
+                )}
               />
-            </div>
-            <span className="font-serif text-4xl text-background">
-              {animal.name.charAt(0)}
-            </span>
+            )}
+            {animal.decoration && (
+              <img
+                src={animal.decoration}
+                alt=""
+                className="absolute inset-0 h-full w-full object-contain pointer-events-none"
+              />
+            )}
           </div>
 
           <div className="flex flex-col items-center gap-2">
