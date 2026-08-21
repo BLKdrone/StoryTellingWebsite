@@ -293,11 +293,11 @@
 
 @keyframes animal-glide {
   0% {
-    transform: translate(40vw, -10%);
+    transform: translate(30vw, -10%);
   }
 
   100% {
-    transform: translate(5vw, 25%);
+    transform: translate(0vw, 25%);
   }
 }
 

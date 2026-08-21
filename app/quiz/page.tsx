@@ -190,7 +190,7 @@ export default function QuizPage() {
             <WhaleGlide
               frames={page.decorationFrames}
               motion={page.decorationMotion ?? 'glide'}
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-auto z-10"
+              className="absolute top-0 left-0 -translate-x-1/2 w-[800px] h-auto z-10"
             />
           )}
 
