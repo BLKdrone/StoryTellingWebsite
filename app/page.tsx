@@ -30,7 +30,7 @@ export default function HomePage() {
         <main className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-10 p-8 text-center">
           <div className="flex w-full max-w-xs flex-col mt-32 gap-3">
             <Link
-              href="/quiz"
+              href="/intro"
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'h-14 w-full rounded-2xl text-base font-medium tracking-wide shadow-md transition-transform active:scale-[0.98]',

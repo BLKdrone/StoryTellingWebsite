@@ -62,7 +62,7 @@ export default function IntroPage() {
 
                 {page.navigation === 'text-input' ? (
                     <div className="relative z-10 flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
-                        <p className="text-center text-lg font-medium text-white drop-shadow">
+                        <p className="text-center text-lg font-medium text-black [text-shadow:0_1px_4px_rgba(255,255,255,0.6)]">
                             {resolvedText}
                         </p>
                         <input
@@ -89,7 +89,7 @@ export default function IntroPage() {
                         className="relative z-10 flex flex-1 flex-col items-end justify-end p-6 pb-16 cursor-pointer"
                         onClick={handleAdvance}
                     >
-                        <p className="text-center text-lg font-medium text-white drop-shadow">
+                        <p className="text-center text-lg font-medium text-black [text-shadow:0_1px_4px_rgba(255,255,255,0.6)]">
                             {resolvedText}
                         </p>
                     </div>
