@@ -13,6 +13,7 @@ import {
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 import { motion, AnimatePresence } from 'motion/react'
 import { saveQuizResult } from '@/lib/quiz-result'
+import { WhaleGlide } from '@/components/whale-guilde'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -57,6 +58,16 @@ export default function QuizPage() {
       }
       setIndex((i) => i - 1)
     }
+  }
+
+  {
+    page.navigation === 'tap-anywhere' && page.decorationFrames && (
+      <WhaleGlide
+        frames={page.decorationFrames}
+        motion={page.decorationMotion ?? 'glide'}
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-32 h-auto z-10"
+      />
+    )
   }
 
   // if (result) {
@@ -175,6 +186,14 @@ export default function QuizPage() {
         >
           <BackgroundSlideshow images={background} intervalMs={1200} />
 
+          {page.decorationFrames && (
+            <WhaleGlide
+              frames={page.decorationFrames}
+              motion={page.decorationMotion ?? 'glide'}
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-auto z-10"
+            />
+          )}
+
           <div key={page.id} className="relative z-10 flex flex-1 flex-col p-6">
             {index > 0 && (
               <button
@@ -189,7 +208,7 @@ export default function QuizPage() {
               </button>
             )}
 
-            <div className="flex flex-1 flex-col items-center justify-center">
+            <div className="flex flex-1 flex-col items-center justify-end pb-16">
               <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">
                 <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
               </h1>

@@ -155,6 +155,9 @@ export default function MoodCheckinPage() {
     setSubPages(nextPages)
     setSubIndex(0)
   }
+  const DEFAULT_DECORATION = '/background/quiz/character/seal/animal.webp'
+  const interpolateText = (text: string) =>
+    text.replace(/\{text-([\w-]+)\}/g, (_, id) => answers[id] ?? '')
 
   // Page 1: Intro (single tap-anywhere page from moodIntro)
   if (pageState === 'question') {
@@ -305,6 +308,15 @@ export default function MoodCheckinPage() {
             >
               <Image src={page.background} alt="" fill className="object-cover" priority />
             </div>
+            {page.decorationFrames && (
+              <Image
+                src={page.decorationFrames}
+                alt=""
+                fill
+                className="object-contain"
+                priority
+              />
+            )}
             <div
               key={page.id}
               className="relative z-10 flex min-h-dvh w-full flex-1 flex-col items-center justify-center gap-8 p-8 text-center"
@@ -355,6 +367,17 @@ export default function MoodCheckinPage() {
           >
             <Image src={page.background} alt="" fill className="object-cover" priority />
           </div>
+          {page.decorationFrames && (
+            <div key={`decoration-${page.id}`} className="absolute inset-0 z-[5] pointer-events-none">
+              <Image
+                src={page.decorationFrames}
+                alt=""
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          )}
           <div
             key={page.id}
             role="button"

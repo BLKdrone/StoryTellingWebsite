@@ -1,18 +1,20 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Nunito, Fraunces } from 'next/font/google'
+import { Fraunces, Bai_Jamjuree } from 'next/font/google'
 import AuthProvider from '@/components/auth-provider'
 import './globals.css'
 
-const nunito = Nunito({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  variable: '--font-nunito',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-fraunces',
   display: 'swap',
 })
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  variable: '--font-fraunces',
+const baiJamjuree = Bai_Jamjuree({
+  subsets: ['latin', 'thai'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-bai-jamjuree',
   display: 'swap',
 })
 
@@ -40,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.variable} ${fraunces.variable}`}
+      className={`${fraunces.variable} ${baiJamjuree.variable}`}
       style={{ backgroundColor: '#1a1a1a' }}
     >
       <body className="antialiased font-sans" style={{ backgroundColor: '#1a1a1a' }}>

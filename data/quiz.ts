@@ -28,6 +28,8 @@ export interface QuizTabPage {
   background: string | string[]
   sound: string
   flashTransition?: 'black' | 'white'
+  decorationFrames?: string[]
+  decorationMotion?: 'glide' | 'bob'
 }
 
 export type QuizPageData = QuizQuestion | QuizTabPage
@@ -177,7 +179,7 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-1',
     navigation: 'tap-anywhere',
-    question: 'บทที่ 1: การสืบสวน',
+    question: 'ณ ชายฝั่งที่เต็มไปด้วยเม็ดทรายสีเหลืองนวล ทะเลเป็นประกายจากแสงแดด เสียงคลื่นกระทบฝั่งเป็นจังหวะ',
     background: [
       '/background/intro/background1.webp',
       '/background/intro/background2.webp',
@@ -188,13 +190,36 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-2',
     navigation: 'tap-anywhere',
-    question: 'บทที่ 1: การสืบสวfffffffffffน',
+    question: 'คุณค่อย ๆ ว่ายน้ำออกจากชายฝั่งที่คุ้นเคย ทิ้งผืนทรายและเสียงคลื่นไว้เบื้องหลัง',
     background: [
       '/background/intro/background1.webp',
       '/background/intro/background2.webp',
       '/background/intro/background3.webp',
     ],
     sound: '',
+  },
+  {
+    id: 'investigation-2',
+    navigation: 'tap-anywhere',
+    question: '  คุณนังมองไปทีชายหาดที่เต็มไปด้วยผู้คนมากมายที่ต่างก็ประสบการณ์ชีวิตและบุคลกภาพ',
+    background: [
+      '/background/intro/background1.webp',
+      '/background/intro/background2.webp',
+      '/background/intro/background3.webp',
+    ],
+    sound: '',
+  },
+  {
+    id: 'investigation-shallowcoral',
+    navigation: 'tap-anywhere',
+    question: 'ยิ่งดำดิ่งลงไป แสงอาทิตย์ก็ยิ่งจางหาย ราวกับถูกกลืนกินโดยผืนน้ำอันกว้างใหญ่ความเย็นค่อย ๆ แทรกซึมเข้าสู่ร่างกาย',
+    background: '/background/quiz/shallowcoral/background.webp',
+    sound: '',
+    decorationFrames: [
+      '/background/quiz/shallowcoral/whale1.webp',
+      '/background/quiz/shallowcoral/whale2.webp',
+    ],
+    decorationMotion: 'glide',
   },
   {
     id: 'q1',
@@ -221,7 +246,7 @@ export const quizQuestions: QuizPageData[] = [
     question:
       'คุณค่อย ๆ ว่ายน้ำออกจากชายฝั่งที่คุ้นเคย ทิ้งผืนทรายและเสียงคลื่นไว้เบื้องหลัง ยิ่งดำดิ่งลงไป แสงอาทิตย์ก็ยิ่งจางหาย ราวกับถูกกลืนกินโดยผืนน้ำอันกว้างใหญ่ ความเย็นค่อย ๆ แทรกซึมเข้าสู่ร่างกาย ท่ามกลางความมืดที่กำลังโอบล้อมนั้น คุณรู้สึกได้ว่าพลังในตัวเองกำลังร่อยหรอลงไป คุณจึงเลือกเติมพลังให้ตัวเองผ่านการ...',
     backgroundColor: '#184b5c',
-    background:[
+    background: [
       '/background/intro/background1.webp',
       '/background/intro/background2.webp',
       '/background/intro/background3.webp',
@@ -240,7 +265,7 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-3',
     navigation: 'tap-anywhere',
-    question: 'mflv[4kr',
+    question: 'จู่ ๆ กระแสน้ำก็เปลี่ยนทิศ เสียงคำรามของคลื่นใต้น้ำกึกก้องไปทั่ว',
     background: [
       '/background/quiz/hurricane/1.webp',
       '/background/quiz/hurricane/2.webp',
@@ -251,15 +276,36 @@ export const quizQuestions: QuizPageData[] = [
     sound: '',
   },
   {
+    id: 'investigation-hurricane',
+    navigation: 'tap-anywhere',
+    question: ' ความสงบถูกแทนที่ด้วยความปั่นป่วน เพื่อนร่วมทางของคุณเริ่มปะทะกันด้วยถ้อยคำและอารมณ์',
+    background: [
+      '/background/quiz/hurricane/1.webp',
+      '/background/quiz/hurricane/2.webp',
+      '/background/quiz/hurricane/3.webp',
+      '/background/quiz/hurricane/4.webp',
+
+    ],
+    sound: '',
+  },
+  {
+    id: 'investigation-deepcoral',
+    navigation: 'tap-anywhere',
+    question: 'กระแสน้ำพัดพาคุณไปไกลเกินกว่าที่เคยรู้จัก เมื่อคุณลืมตาขึ้นอีกครั้ง โลกที่อยู่ตรงหน้ากลับไม่ใช่ที่เดิมอีกต่อไป',
+    background: '/background/quiz/deepcoral/background.webp',
+    sound: '',
+    decorationFrames: [
+      '/background/quiz/deepcoral/whale1.webp',
+      '/background/quiz/deepcoral/whale2.webp',
+    ],
+    decorationMotion: 'bob',
+  },
+  {
     id: 'q3',
     question:
-      'จู่ ๆ กระแสน้ำก็เปลี่ยนทิศ เสียงคำรามของคลื่นใต้น้ำกึกก้องไปทั่ว ความสงบถูกแทนที่ด้วยความปั่นป่วน เพื่อนร่วมทางของคุณเริ่มปะทะกันด้วยถ้อยคำและอารมณ์ ท่ามกลางเกลียวคลื่นที่หมุนวนอย่างบ้าคลั่งนั้น ปฏิกิริยาแรกของคุณคือ...',
+      'ท่ามกลางเกลียวคลื่นที่หมุนวนอย่างบ้าคลั่งนั้น ปฏิกิรยาแรกของคุณคือ',
     backgroundColor: '#164252',
-    background: [
-      '/background/intro/background1.webp',
-      '/background/intro/background2.webp',
-      '/background/intro/background3.webp',
-    ],
+    background: '/background/quiz/deepcoral/background.webp',
     sound: '',
     options: [
       { letter: 'A', label: 'กระโดดข้ามคลื่น - ใช้อารมณ์ขันหรือเสียงหัวเราะ เปลี่ยนบรรยากาศให้กลับมาผ่อนคลายโดยเร็ว' },
@@ -273,13 +319,9 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'q4',
     question:
-      'กระแสน้ำพัดพาคุณไปไกลเกินกว่าที่เคยรู้จัก เมื่อคุณลืมตาขึ้นอีกครั้ง โลกที่อยู่ตรงหน้ากลับไม่ใช่ที่เดิมอีกต่อไป ทุกอย่างดูแปลกตา เงียบงัน และเต็มไปด้วยความไม่แน่นอน หัวใจของคุณจะรู้สึก...',
+      ' ทุกอย่างดูแปลกตา เงียบงัน และเต็มไปด้วยความไม่แน่นอน หัวใจของคุณจะรู้สึก...',
     backgroundColor: '#133948',
-    background: [
-      '/background/intro/background1.webp',
-      '/background/intro/background2.webp',
-      '/background/intro/background3.webp',
-    ],
+    background: '/background/quiz/deepcoral/background.webp',
     sound: '',
     options: [
       { letter: 'A', label: 'ตื่นเต้นกระปรี้กระเปร่า - รักความไม่แน่นอนนี้ โลกใหม่หมายถึงโอกาสและการผจญภัย' },
@@ -293,23 +335,23 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-4',
     navigation: 'tap-anywhere',
-    question: 'บทที่ 1: การสืบสวน',
+    question: 'คุณว่ายเข้าสู่ถ้ำใต้ทะเลที่เงียบงัน มีเพียงเสียงลมหายใจของตัวเอง',
     background: [
-      '/background/intro/background1.webp',
-      '/background/intro/background2.webp',
-      '/background/intro/background3.webp',
+      '/background/quiz/cave/1.webp',
+      '/background/quiz/cave/2.webp',
     ],
     sound: '',
+    flashTransition: 'black',
   },
+
   {
     id: 'q5',
     question:
       'คุณว่ายเข้าสู่ถ้ำใต้ทะเลที่เงียบงัน มีเพียงเสียงลมหายใจของตัวเอง ในความนิ่งเงียบนั้น ความคิดของคุณค่อย ๆ ลอยขึ้นมาจากก้นบึ้งของจิตใจ วนเวียนอยู่กับ...',
     backgroundColor: '#10303e',
     background: [
-      '/background/intro/background1.webp',
-      '/background/intro/background2.webp',
-      '/background/intro/background3.webp',
+      '/background/quiz/cave/1.webp',
+      '/background/quiz/cave/2.webp',
     ],
     sound: '',
     options: [
@@ -327,9 +369,8 @@ export const quizQuestions: QuizPageData[] = [
       'ที่ก้นถ้ำลึกลงไป คุณพบหีบสมบัติใบใหญ่ เมื่อเปิดมันออก สิ่งที่อยู่ภายในไม่ใช่ทองคำหรืออัญมณี แต่มันเก็บสิ่งล้ำค่าที่สุดในชีวิตคุณ ที่คุณจะปกป้องไว้ไม่ว่าอะไรจะเกิดขึ้น สิ่งนั้นคือ...',
     backgroundColor: '#0c2734',
     background: [
-      '/background/intro/background1.webp',
-      '/background/intro/background2.webp',
-      '/background/intro/background3.webp',
+      '/background/quiz/cave/1.webp',
+      '/background/quiz/cave/2.webp',
     ],
     sound: '',
     options: [
@@ -344,7 +385,7 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-5',
     navigation: 'tap-anywhere',
-    question: 'flashblack testqqq',
+    question: 'ที่ก้นถ้ำลึกลงไป คุณพบหีบสมบัติใบใหญ่',
     background: [
       '/background/intro/background1.webp',
       '/background/intro/background2.webp',
@@ -356,9 +397,10 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-6',
     navigation: 'tap-anywhere',
-    question: 'เป็นของสำคัญที่คุณต้องการหรือไม่',
+    question: 'เมื่อเปิดมันออก สิ่งที่อยู่ภายในไม่ใช่ทองคำหรืออัญมณี-แต่มันเก็บสิ่งล้ำค่าที่สุดในชีวิตคุณ ที่คุณจะปกป้องไว้ไม่ว่าอะไรจะเกิดขึ้น',
     background: '/background/investigation/01.PNG',
     sound: '',
+    flashTransition: 'white',
   }
 ]
 

@@ -188,8 +188,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-bai-jamjuree), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-bai-jamjuree), ui-sans-serif, system-ui, sans-serif;
   --animate-breathe: breathe 5s ease-in-out infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-rise-slow: rise-slow 1.2s ease-out both;
@@ -290,6 +290,37 @@
   animation: animal-float 4s ease-in-out infinite;
 }
 
+
+@keyframes animal-glide {
+  0% {
+    transform: translate(40vw, -10%);
+  }
+
+  100% {
+    transform: translate(5vw, 25%);
+  }
+}
+
 .animate-animal-glide {
-  animation: animal-glide 5s ease-in-out infinite;
+  animation: animal-glide 5s ease-in-out infinite alternate;
+}
+
+.animate-animal-gliding {
+  animation: animal-glide 10s ease-in-out 1 forwards;
+}
+
+@keyframes animal-bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-animal-bob {
+  animation: animal-bob 3s ease-in-out infinite;
 }

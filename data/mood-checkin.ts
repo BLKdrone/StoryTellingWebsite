@@ -22,6 +22,7 @@ export interface MoodTapPage {
   placeholder?: string
   buttonLabel?: string
   flashTransition?: 'black' | 'white'
+  decorationFrames?: string
 }
 
 export interface MoodChoice {
@@ -37,6 +38,7 @@ export interface MoodChoicePage {
   sound: string
   flashTransition?: 'black' | 'white'
   choices: MoodChoice[]
+  decorationFrames?: string
 }
 
 // A branch page can be either a tap-anywhere page or a button/choice page.
@@ -157,6 +159,38 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         sound: '',
         placeholder: 'Type it out',
         buttonLabel: 'Let it drift',
+      },
+      {
+        id: 'sad-paperplane',
+        navigation: 'tap-anywhere',
+        text: '{text-sad-2}',
+        background: '/background/mood-checkin/sad1.webp',
+        sound: '',
+        decorationFrames: '/background/mood-checkin/paperplane1.webp',
+      },
+      {
+        id: 'sad-paperplane',
+        navigation: 'tap-anywhere',
+        text: '',
+        background: '/background/mood-checkin/sad1.webp',
+        sound: '',
+        decorationFrames: '/background/mood-checkin/paperplane2.webp',
+      },
+      {
+        id: 'sad-paperplane',
+        navigation: 'tap-anywhere',
+        text: '',
+        background: '/background/mood-checkin/sad1.webp',
+        sound: '',
+        decorationFrames: '/background/mood-checkin/paperplane3.webp',
+      },
+      {
+        id: 'sad-paperplane',
+        navigation: 'tap-anywhere',
+        text: '',
+        background: '/background/mood-checkin/sad1.webp',
+        sound: '',
+        decorationFrames: '/background/mood-checkin/paperplane4.webp',
       },
       {
         id: 'sad-3',
