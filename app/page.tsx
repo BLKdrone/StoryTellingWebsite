@@ -40,7 +40,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <p className="rounded-2xl border border-white/40 bg-black/20 px-4 py-3 text-pretty font-body text-sm leading-relaxed text-muted-foreground backdrop-blur-sm">
+          <p className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-sm leading-relaxed text-gray-900 backdrop-blur-sm float-up">
             คำชี้แจง: นี่เป็นแบบทดสอบเพื่อพาคุณสำรวจความรู้สึกในช่วงนี้
             ไม่ใช่แบบทดสอบเพื่อการวินิจฉัยโรค หากทำแบบทดสอบแล้วเกิด
             ความรู้สึกไม่สบายใจ สามารถหยุดทำได้ทันที และหากต้องการความ

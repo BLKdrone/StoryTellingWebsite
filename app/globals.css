@@ -324,3 +324,18 @@
 .animate-animal-bob {
   animation: animal-bob 3s ease-in-out infinite;
 }
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-12px);
+    opacity: 1;
+  }
+}
+
+.float-up {
+  animation: floatUp 1.8s ease-out forwards;
+}

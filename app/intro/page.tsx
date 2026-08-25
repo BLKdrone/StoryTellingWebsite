@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { MobileFrame } from '@/components/mobile-frame'
 import { introPages, type IntroPage } from '@/data/intro'
+import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 
 const NAME_TOKEN = '{{name}}'
 
@@ -39,13 +40,15 @@ export default function IntroPage() {
     const resolvedText = page.text.includes(NAME_TOKEN)
         ? page.text.replace(NAME_TOKEN, name)
         : page.text
-    const bg = Array.isArray(page.background) ? page.background[0] : page.background
 
     return (
         <MobileFrame>
             <div className="relative flex flex-col flex-1 min-h-dvh w-full">
-                {/* Background sits first in the DOM, no z-index tricks needed */}
-                <Image src={bg} alt="" fill className="object-cover" priority />
+                <BackgroundSlideshow
+                    images={page.background}
+                    intervalMs={2500}
+                    key={page.id}
+                />
 
                 {currentIndex > 0 && (
                     <button

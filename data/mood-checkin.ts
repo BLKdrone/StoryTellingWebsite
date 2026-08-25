@@ -57,7 +57,7 @@ export interface MoodBranch {
 export const moodIntro: MoodTapPage = {
   id: 'mood-intro',
   navigation: 'tap-anywhere',
-  text: 'ถ้าตอนนี้ท้งฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ ท้องฟ้าของคุณในตอนนี้เป็นยังไงกันหรอ',
+  text: 'ถ้าตอนนี้ท้งฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ ท้องฟ้าของคุณในตอนนี้เป็นยังไงกันเหรอ',
   background: '/background/intro/02.PNG',
   sound: '',
 }
@@ -75,7 +75,8 @@ export const moodQuestion: MoodChoicePage = {
   text: 'เลือกท้องฟ้าที่ตรงกับความรู้สึกของคุณตอนนี้ดูสิ',
   background: '/background/intro/02.PNG',
   sound: '',
-  choices: [], // options are rendered separately via moodOptions in the UI
+  choices: [],
+  flashTransition: 'black', 
 }
 
 // Value used by the "question" screen(s) in page.tsx — an ordered list of
