@@ -12,6 +12,7 @@ import {
     type SelfWorthLetter,
 } from '@/data/self-worth'
 import { supabase } from '@/lib/supabase'
+import { usePageAudio } from '@/components/page-audio'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -23,6 +24,7 @@ export default function SelfWorthPage() {
 
     const total = selfWorthPages.length
     const page = selfWorthPages[index]
+    usePageAudio(page.sound)
     const text = resolveSelfWorthText(page.text, answers)
 
     const finish = async (finalAnswers: Record<string, string> = answers) => {

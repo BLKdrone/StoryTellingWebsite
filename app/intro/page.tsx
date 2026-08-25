@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { MobileFrame } from '@/components/mobile-frame'
 import { introPages, type IntroPage } from '@/data/intro'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
+import { usePageAudio } from '@/components/page-audio'
+import { AnimatePresence, motion } from 'motion/react'
 
 const NAME_TOKEN = '{{name}}'
 
@@ -37,6 +39,7 @@ export default function IntroPage() {
     }
 
     const page: IntroPage = introPages[currentIndex]
+    usePageAudio(page.sound)
     const resolvedText = page.text.includes(NAME_TOKEN)
         ? page.text.replace(NAME_TOKEN, name)
         : page.text
@@ -97,6 +100,20 @@ export default function IntroPage() {
                         </p>
                     </div>
                 )}
+
+                <AnimatePresence>
+                    {page.transition && (
+                        <motion.div
+                            key={page.id}
+                            aria-hidden
+                            className="pointer-events-none absolute inset-0 z-20"
+                            style={{ backgroundColor: page.transition === 'dive' ? 'black' : 'white' }}
+                            initial={{ opacity: 1 }}
+                            animate={{ opacity: 0 }}
+                            transition={{ duration: page.transition === 'dive' ? 1.2 : 0.8, ease: 'easeOut' }}
+                        />
+                    )}
+                </AnimatePresence>
             </div>
         </MobileFrame>
     )

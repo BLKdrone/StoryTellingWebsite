@@ -10,6 +10,7 @@ import { outroPages } from '@/data/outro'
 import { Button } from '@/components/ui/button'
 import { animals } from '@/data/quiz'
 import { getQuizResult, clearQuizResult } from '@/lib/quiz-result'
+import { usePageAudio } from '@/components/page-audio'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -21,6 +22,7 @@ export default function OutroPage() {
   const total = outroPages.length
   const page = outroPages[index]
   const result = getQuizResult()
+  usePageAudio(showResult ? '' : page.sound)
 
   const finish = () => {
     router.push('/chapter-checkpoint?from=outro')

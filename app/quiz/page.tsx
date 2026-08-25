@@ -14,6 +14,7 @@ import { BackgroundSlideshow } from '@/components/animations/background-slidesho
 import { motion, AnimatePresence } from 'motion/react'
 import { saveQuizResult } from '@/lib/quiz-result'
 import { WhaleGlide } from '@/components/whale-guilde'
+import { usePageAudio } from '@/components/page-audio'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -25,6 +26,7 @@ export default function QuizPage() {
 
   const total = quizQuestions.length
   const page = quizQuestions[index]
+  usePageAudio(page.sound)
 
   const finish = (finalAnswers: QuizOption['letter'][]) => {
     const scored = scoreQuiz(finalAnswers)

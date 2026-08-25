@@ -127,10 +127,10 @@ export const selfWorthPages: SelfWorthPage[] = [
     background: oceanBackground,
     sound: '',
     options: [
-      { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ' },
-      { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา' },
-      { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ' },
-      { letter: 'D', label: 'ทำเพราะเป็นสิ่งที่คนส่วนใหญ่บอกว่าดี' },
+      { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ', background: '/background/mood-checkin/happy.webp'},
+      { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา', background: '/background/mood-checkin/happy.webp'},
+      { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ', background: '/background/mood-checkin/happy.webp'},
+      { letter: 'D', label: 'ทำเพราะเป็นสิ่งที่คนส่วนใหญ่บอกว่าดี', background: '/background/mood-checkin/happy.webp' },
     ],
   },
   {

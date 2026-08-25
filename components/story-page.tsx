@@ -258,7 +258,7 @@ function CollectAnswerVariant({
   }
 
   if (sealing) {
-    return <BottleFold answer={answer} onComplete={() => onAdvance(answer)} />
+    return <BottleFold answer={answer} onComplete={() => onAdvance(answer)}  backgroundImage="/background/mood-checkin/happy.webp"  />
   }
 
   return (

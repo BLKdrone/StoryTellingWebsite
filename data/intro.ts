@@ -36,7 +36,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale3.webp',
       '/background/intro/whale4.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     transition: 'fade',
   },
   {
@@ -44,13 +44,13 @@ export const introPages: IntroPage[] = [
     navigation: 'tap-anywhere',
     speaker: 'whale',
     text: 'ฉันเอง ปลาวาฬ! ยินดีต้อนรับสู่ทะเลแห่งนี้',
-   background: [
+    background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
       '/background/intro/whale3.webp',
       '/background/intro/whale4.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     transition: 'fade', // storyboard note: whale "zooms" in on this transition
   },
   {
@@ -58,13 +58,13 @@ export const introPages: IntroPage[] = [
     navigation: 'tap-anywhere',
     speaker: 'whale',
     text: 'ฉันดีใจนะที่เธอแวะมาฉันที่ทะเลแห่งนี้',
-   background: [
+    background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
       '/background/intro/whale3.webp',
       '/background/intro/whale4.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     transition: 'fade',
   },
   {
@@ -72,13 +72,13 @@ export const introPages: IntroPage[] = [
     navigation: 'tap-anywhere',
     speaker: 'whale',
     text: 'จากนี้ฉันจะพาเธอเดินทางในทะเลไปด้วยกัน',
-   background: [
+    background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
       '/background/intro/whale3.webp',
       '/background/intro/whale4.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     transition: 'fade',
   },
   {
@@ -86,13 +86,13 @@ export const introPages: IntroPage[] = [
     navigation: 'text-input',
     speaker: 'whale',
     text: 'ก่อนอื่น เธออยากให้ฉันเรียกเธอว่ายังไงเหรอ',
-   background: [
+    background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
       '/background/intro/whale3.webp',
       '/background/intro/whale4.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     placeholder: 'ชื่อของเธอ',
     buttonLabel: 'ต่อไป',
     transition: 'fade',
@@ -108,7 +108,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale3.webp',
       '/background/intro/whale4.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     transition: 'fade',
   },
   {
@@ -116,13 +116,13 @@ export const introPages: IntroPage[] = [
     navigation: 'tap-anywhere',
     speaker: 'whale',
     text: 'ในระหว่างการเดินทางนี้ ฉันจะทำให้เธอได้ลองตอบคำถามต่อไปนี้ เพื่อฉันจะได้รู้จักเธอมากขึ้น',
-   background: [
+    background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
       '/background/intro/whale3.webp',
       '/background/intro/whale4.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     transition: 'fade',
   },
   {
@@ -136,7 +136,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale3.webp',
       '/background/intro/whale4.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     transition: 'dive',
   },
 ]

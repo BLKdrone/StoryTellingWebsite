@@ -14,10 +14,12 @@ export function BottleFold({
   answer,
   onComplete,
   skipFold = false,
+  backgroundImage,
 }: {
   answer: string
   onComplete: () => void
   skipFold?: boolean
+  backgroundImage?: string
 }) {
   const [phase, setPhase] = useState<Phase>(skipFold ? 'toss' : 'fold')
 
@@ -36,13 +38,13 @@ export function BottleFold({
               ? { scaleX: [1, 0.55, 0.14], rotate: [0, -4, 3] }
               : phase === 'toss'
                 ? {
-                    // Arc: up and over, then down into the bottle neck below.
-                    x: [0, 20, 0],
-                    y: [0, -90, 150],
-                    scale: [1, 0.9, 0.35],
-                    rotate: [3, 24, 70],
-                    opacity: [1, 1, 0],
-                  }
+                  // Arc: up and over, then down into the bottle neck below.
+                  x: [0, 20, 0],
+                  y: [0, -90, 150],
+                  scale: [1, 0.9, 0.35],
+                  rotate: [3, 24, 70],
+                  opacity: [1, 1, 0],
+                }
                 : { opacity: 0 }
           }
           transition={
@@ -54,10 +56,18 @@ export function BottleFold({
             if (phase === 'fold') setPhase('toss')
             else if (phase === 'toss') setPhase('settle')
           }}
-          style={{ transformOrigin: 'center' }}
+          style={{
+            transformOrigin: 'center',
+            backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
           className="flex h-16 w-64 items-center justify-center rounded-md  bg-card px-4 shadow-lg"
         >
-          <span className="line-clamp-2 text-center text-sm text-foreground/80">
+          {backgroundImage && (
+            <div className="absolute inset-0 rounded-md bg-black/30" />
+          )}
+          <span className="relative z-10 line-clamp-2 text-center text-sm font-medium text-white drop-shadow-md">
             {answer || 'your words'}
           </span>
         </motion.div>

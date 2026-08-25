@@ -7,6 +7,7 @@ import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 import { motion, AnimatePresence } from 'motion/react'
 import { burnoutPages, type BurnoutLetter } from '@/data/burnout'
+import { usePageAudio } from '@/components/page-audio'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -17,6 +18,7 @@ export default function BurnoutPage() {
 
     const total = burnoutPages.length
     const page = burnoutPages[index]
+    usePageAudio(page.sound)
 
     const finish = () => {
         router.push('/chapter-checkpoint?from=burnout')

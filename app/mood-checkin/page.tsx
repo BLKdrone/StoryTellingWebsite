@@ -7,6 +7,7 @@ import { MobileFrame } from '@/components/mobile-frame'
 import { moodIntro, moodQuestion, moodBranches, moodOptions } from '@/data/mood-checkin'
 import type { MoodKey, MoodPage } from '@/data/mood-checkin'
 import { supabase } from '@/lib/supabase'
+import { usePageAudio } from '@/components/page-audio'
 
 type PageState = 'question' | 'options' | 'branch' | 'complete'
 
@@ -28,6 +29,15 @@ export default function MoodCheckinPage() {
   // Input state for pages with placeholder
   const [answer, setAnswer] = useState('')
   const [answers, setAnswers] = useState<Record<string, string>>({})
+
+  const currentSound = inConverge
+    ? moodBranches[selectedMood!]?.convergePages?.[convergeIndex]?.sound
+    : subPages
+      ? subPages[subIndex]?.sound
+      : selectedMood
+        ? moodBranches[selectedMood].pages[branchIndex]?.sound
+        : moodIntro.sound
+  usePageAudio(currentSound ?? '')
 
   const resetBranchState = () => {
     setBranchIndex(0)
