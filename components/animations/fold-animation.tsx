@@ -99,7 +99,16 @@ export function FoldAnimation({
       style={{ perspective: 1600 }}
     >
       <div className="relative" style={{ width, height, transformStyle: 'preserve-3d' }}>
-        <div className={`absolute left-0 top-0 ${paperClasses}`} style={{ width: visW, height: visH }}>
+        <div
+          className={`absolute left-0 top-0 ${paperClasses}`}
+          style={{
+            width: visW,
+            height: visH,
+            backgroundImage: `url(/background/mood-checkin/bottle/paper.webp)`,  // ← Hardcoded
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
           <div className="flex items-center justify-center" style={{ width, height }}>
             {children}
           </div>
@@ -116,6 +125,9 @@ export function FoldAnimation({
               height: flapRect.h,
               transformOrigin: flapRect.axis === 'vertical' ? 'top center' : 'left center',
               transformStyle: 'preserve-3d',
+              backgroundImage: `url(/background/mood-checkin/bottle/paper.webp)`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
               ...(flapRect.axis === 'vertical'
                 ? { borderTop: '1.5px solid #8b5a2b' }
                 : { borderLeft: '1.5px solid #8b5a2b' }),

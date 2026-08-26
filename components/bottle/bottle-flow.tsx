@@ -12,12 +12,12 @@ export function BottleFlow() {
   const [step, setStep] = useState(1) // 1: Intro, 2: Questions, 3: FoldAnimation, 4: Bottle Toss, 5: Outro
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [zooming, setZooming] = useState(false)
-  const [randomOutro, setRandomOutro] = useState('')
+const [randomOutro, setRandomOutro] = useState<(typeof bottleOutros)[number] | null>(null)
 
   const handleSelect = (id: string) => {
     setSelectedId(id)
     setZooming(true)
-    
+
     // Allow time for the other choices to fade and the selected choice to zoom slightly
     setTimeout(() => {
       setStep(3)
@@ -53,7 +53,7 @@ export function BottleFlow() {
 
       {/* Step 1: Intro Text */}
       {step === 1 && (
-        <div 
+        <div
           className="relative z-10 flex flex-1 flex-col items-center justify-center p-8 cursor-pointer"
           onClick={() => setStep(2)}
         >
@@ -69,15 +69,15 @@ export function BottleFlow() {
       {/* Step 2: Questions */}
       {step === 2 && (
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center p-6 gap-10">
-          <motion.h1 
-            initial={{ opacity: 0, y: -20 }} 
-            animate={{ opacity: zooming ? 0 : 1, y: zooming ? -20 : 0 }} 
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: zooming ? 0 : 1, y: zooming ? -20 : 0 }}
             transition={{ duration: 0.8 }}
             className="text-2xl font-serif text-center text-balance"
           >
             {bottleQuestion.question}
           </motion.h1>
-          
+
           <div className="grid grid-cols-2 gap-4 w-full max-w-md">
             {bottleQuestion.options.map((option) => {
               const isSelected = selectedId === option.id
@@ -91,13 +91,12 @@ export function BottleFlow() {
                     zooming && isSelected
                       ? { scale: 1.15, opacity: 0 } // Slight zoom then fade out, handing over to BottleFold
                       : zooming && isOther
-                      ? { opacity: 0, scale: 0.95 }
-                      : { scale: 1, opacity: 1 }
+                        ? { opacity: 0, scale: 0.95 }
+                        : { scale: 1, opacity: 1 }
                   }
                   transition={{ duration: 0.8, ease: "easeInOut" }}
-                  className={`p-4 rounded-xl text-sm font-medium border transition-colors ${
-                    isSelected ? 'bg-white/20 border-white/40' : 'bg-white/5 border-white/10 hover:bg-white/10'
-                  }`}
+                  className={`p-4 rounded-xl text-sm font-medium border transition-colors ${isSelected ? 'bg-white/20 border-white/40' : 'bg-white/5 border-white/10 hover:bg-white/10'
+                    }`}
                   disabled={!!selectedId}
                 >
                   {option.label}
@@ -110,14 +109,14 @@ export function BottleFlow() {
 
       {/* Step 3: Paper Fold Animation */}
       {step === 3 && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="relative z-10 flex flex-1 flex-col items-center justify-center"
         >
-          <FoldAnimation 
-            width={280} 
-            height={400} 
+          <FoldAnimation
+            width={280}
+            height={400}
             onComplete={(foldStep) => {
               if (foldStep === 3) {
                 // When folding is fully complete, transition to the bottle toss
@@ -129,7 +128,7 @@ export function BottleFlow() {
               {selectedText}
             </div>
           </FoldAnimation>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
@@ -142,24 +141,32 @@ export function BottleFlow() {
 
       {/* Step 4: Bottle Toss (skips the CSS fold phase) */}
       {step === 4 && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="relative z-10 flex flex-1 flex-col items-center justify-center"
         >
-          <BottleFold answer={selectedText} skipFold={true} onComplete={handleBottleComplete} />
+          <BottleFold answer={selectedText} skipFold={true} onComplete={handleBottleComplete} backgroundImage='background/moodcheckin/bottle/star.webp' />
         </motion.div>
       )}
 
       {/* Step 5: Outro Text (Random) */}
-      {step === 5 && (
-        <div 
-          className="relative z-10 flex flex-1 flex-col items-center justify-center p-8 cursor-pointer"
+      {step === 5 && randomOutro && (
+        <div
+          className="relative z-10 flex flex-1 flex-col items-center justify-center p-8 cursor-pointer bg-cover bg-center"
+          style={{ backgroundImage: `url(/${randomOutro.background})` }}
           onClick={() => router.push('/chapter-checkpoint?from=bottle')}
         >
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          {/* optional dark overlay so text stays readable over the image */}
+          <div aria-hidden className="absolute inset-0 bg-black/40" />
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="relative z-10"
+          >
             <p className="text-2xl text-center font-serif leading-relaxed text-balance">
-              {randomOutro}
+              {randomOutro.text}
             </p>
             <p className="text-xs text-white/50 text-center mt-12">Tap anywhere to finish</p>
           </motion.div>

@@ -186,6 +186,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/intro/background3.webp',
     ],
     sound: '',
+    flashTransition: 'black',
   },
   {
     id: 'investigation-2',
@@ -274,6 +275,7 @@ export const quizQuestions: QuizPageData[] = [
 
     ],
     sound: '',
+    flashTransition: 'black',
   },
   {
     id: 'investigation-hurricane',
@@ -387,9 +389,8 @@ export const quizQuestions: QuizPageData[] = [
     navigation: 'tap-anywhere',
     question: 'ที่ก้นถ้ำลึกลงไป คุณพบหีบสมบัติใบใหญ่',
     background: [
-      '/background/intro/background1.webp',
-      '/background/intro/background2.webp',
-      '/background/intro/background3.webp',
+      '/background/quiz/cave/1.webp',
+      '/background/quiz/cave/2.webp',
     ],
     sound: '',
     flashTransition: 'black',
@@ -398,7 +399,10 @@ export const quizQuestions: QuizPageData[] = [
     id: 'investigation-6',
     navigation: 'tap-anywhere',
     question: 'เมื่อเปิดมันออก สิ่งที่อยู่ภายในไม่ใช่ทองคำหรืออัญมณี-แต่มันเก็บสิ่งล้ำค่าที่สุดในชีวิตคุณ ที่คุณจะปกป้องไว้ไม่ว่าอะไรจะเกิดขึ้น',
-    background: '/background/investigation/01.PNG',
+    background: [
+      '/background/quiz/cave/1.webp',
+      '/background/quiz/cave/2.webp',
+    ],
     sound: '',
     flashTransition: 'white',
   }

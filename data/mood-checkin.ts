@@ -15,11 +15,20 @@ export interface MoodTapPage {
   navigation: 'tap-anywhere'
   text: string
   id: string
-  /** Real background image, supplied later. */
   background: string
-  /** Sound file, supplied later. */
   sound: string
-  placeholder?: string
+  flashTransition?: 'black' | 'white'
+  decorationFrames?: string
+}
+
+// Text-input page: shows an input + an explicit "continue" button
+export interface MoodInputPage {
+  navigation: 'button'
+  text: string
+  id: string
+  background: string
+  sound: string
+  placeholder: string
   buttonLabel?: string
   flashTransition?: 'black' | 'white'
   decorationFrames?: string
@@ -27,9 +36,10 @@ export interface MoodTapPage {
 
 export interface MoodChoice {
   label: string
-  nextPages: MoodTapPage[]
+  nextPages: MoodPage[]
 }
 
+// Choice page: shows option buttons
 export interface MoodChoicePage {
   navigation: 'button'
   text: string
@@ -41,17 +51,12 @@ export interface MoodChoicePage {
   decorationFrames?: string
 }
 
-// A branch page can be either a tap-anywhere page or a button/choice page.
-export type MoodPage = MoodTapPage | MoodChoicePage
+export type MoodPage = MoodTapPage | MoodInputPage | MoodChoicePage
 
 export interface MoodBranch {
   key: MoodKey
   pages: MoodPage[]
-  /**
-   * Shared ending pages played after a choice's nextPages finish.
-   * Only used by branches that contain a choice page (currently: sad).
-   */
-  convergePages?: MoodTapPage[]
+  convergePages?: MoodPage[]
 }
 
 export const moodIntro: MoodTapPage = {
@@ -76,7 +81,7 @@ export const moodQuestion: MoodChoicePage = {
   background: '/background/intro/02.PNG',
   sound: '/audio/interactive-project.mp3',
   choices: [],
-  flashTransition: 'black', 
+  flashTransition: 'black',
 }
 
 // Value used by the "question" screen(s) in page.tsx — an ordered list of
@@ -105,7 +110,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       },
       {
         id: 'happy-3',
-        navigation: 'tap-anywhere',
+        navigation: 'button',
         text: 'ลองเล่าให้ฟังหน่อยได้ไหมว่าอะไรทำให้ท้องฟ้าของคุณสดใส\nอยากจดจำความรู้สึกดีๆ แบบนี้ไว้นะ',
         background: '/background/mood-checkin/happy.webp',
         sound: '/audio/interactive-project.mp3',
@@ -126,7 +131,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       },
       {
         id: 'neutral-2',
-        navigation: 'tap-anywhere',
+        navigation: 'button',
         text: 'สงสัยจังเลยว่าชีวิตในช่วงสัปดาห์ที่ผ่านมาเป็นยังไงบ้าง\nลองเล่าให้ฟังหน่อยสิ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/interactive-project.mp3',
@@ -135,10 +140,12 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       },
       {
         id: 'neutral-3',
-        navigation: 'tap-anywhere',
+        navigation: 'button',
         text: 'ในวันที่โลกหมุนไวเกินไป อยากให้คุณลองก้าวให้ช้าลงหน่อย แล้วค่อยๆ จดจำ ซึมซับความสุขที่เกิดกับคุณ\nไหนคุณลองเล่าให้เราฟังหน่อย ช่วงนี้ความสุขของคุณมาจากอะไรบ้างนะ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/interactive-project.mp3',
+        placeholder: 'Type it out',
+        buttonLabel: 'Let it drift',
       },
     ],
   },
@@ -147,14 +154,16 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     pages: [
       {
         id: 'sad-1',
-        navigation: 'tap-anywhere',
+        navigation: 'button',
         text: 'ท่ามกลางบรรยากาศที่เงียบงัน สัมผัสได้ถึงกลิ่นอายของความเศร้า คล้ายกับว่าตอนนี้พยากรณ์อากาศในใจของคุณกำลังมีฝนตกหนักอยู่ใช่ไหม\nลองเล่าให้เราฟังหน่อยได้ไหม',
         background: '/background/mood-checkin/sad1.webp',
         sound: '/audio/interactive-project.mp3',
+        placeholder: 'Type it out',
+        buttonLabel: 'Let it drift',
       },
       {
         id: 'sad-2',
-        navigation: 'tap-anywhere',
+        navigation: 'button',
         text: 'อะไรเป็นสาเหตุของปรากฏการณ์ที่เกิดขึ้นในครั้งนี้หรอ\nลองเล่าให้ฟังหน่อยนะ',
         background: '/background/mood-checkin/sad1.webp',
         sound: '/audio/interactive-project.mp3',
@@ -162,7 +171,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         buttonLabel: 'Let it drift',
       },
       {
-        id: 'sad-paperplane',
+        id: 'sad-paperplane-1',
         navigation: 'tap-anywhere',
         text: '{text-sad-2}',
         background: '/background/mood-checkin/sad1.webp',
@@ -170,7 +179,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         decorationFrames: '/background/mood-checkin/paperplane1.webp',
       },
       {
-        id: 'sad-paperplane',
+        id: 'sad-paperplane-2',
         navigation: 'tap-anywhere',
         text: '',
         background: '/background/mood-checkin/sad1.webp',
@@ -178,7 +187,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         decorationFrames: '/background/mood-checkin/paperplane2.webp',
       },
       {
-        id: 'sad-paperplane',
+        id: 'sad-paperplane-3',
         navigation: 'tap-anywhere',
         text: '',
         background: '/background/mood-checkin/sad1.webp',
@@ -186,7 +195,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         decorationFrames: '/background/mood-checkin/paperplane3.webp',
       },
       {
-        id: 'sad-paperplane',
+        id: 'sad-paperplane-4',
         navigation: 'tap-anywhere',
         text: '',
         background: '/background/mood-checkin/sad1.webp',
@@ -230,7 +239,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
     convergePages: [
       {
         id: 'sad-converge-1',
-        navigation: 'tap-anywhere',
+        navigation: 'button',
         text: 'คุณยังจำเรื่องราวที่ทำให้ท้องฟ้าของคุณสดใสได้ไหม เล่าให้ฟังหน่อยสิ',
         background: '/background/mood-checkin/sad2.webp',
         sound: '/audio/interactive-project.mp3',
@@ -258,7 +267,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       },
       {
         id: 'overwhelmed-2',
-        navigation: 'tap-anywhere',
+        navigation: 'button',
         text: 'ตอนนี้มีเรื่องอะไรที่ทำให้คุณไม่สบายใจ ที่ทำให้ท้องฟ้าของคุณเป็นแบบนี้หรอ\nลองเล่าให้ฟังหน่อย',
         background: '/background/mood-checkin/anger1.webp',
         sound: '/audio/interactive-project.mp3',
@@ -281,7 +290,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       },
       {
         id: 'overwhelmed-4',
-        navigation: 'tap-anywhere',
+        navigation: 'button',
         text: 'แล้วถ้าพายุผ่านไปแล้ว คุณอยากจะทำอะไรต่อไป',
         background: '/background/mood-checkin/anger2.webp',
         sound: '/audio/interactive-project.mp3',

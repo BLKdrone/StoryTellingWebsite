@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
-import { motion, AnimatePresence } from 'motion/react'
 import { burnoutPages, type BurnoutLetter } from '@/data/burnout'
 import { usePageAudio } from '@/components/page-audio'
+import { SlideNext } from '@/components/flash-transition'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -49,29 +49,14 @@ export default function BurnoutPage() {
                 e.stopPropagation()
                 handleBack()
             }}
-            className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm font-medium text-black backdrop-blur-md transition-colors hover:bg-white/90"
+            className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm text-black backdrop-blur-md transition-colors hover:bg-white/90"
             aria-label="Go back"
         >
             ← Back
         </button>
     )
 
-    const flashOverlay = page.flashTransition && (
-        <AnimatePresence>
-            <motion.div
-                key={page.id}
-                aria-hidden
-                className={cn(
-                    'pointer-events-none absolute inset-0 z-50',
-                    page.flashTransition === 'black' ? 'bg-black' : 'bg-white',
-                )}
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 5, ease: 'easeInOut' }}
-            />
-        </AnimatePresence>
-    )
+    const flashOverlay = <SlideNext pageKey={page.id} color={page.flashTransition} />
 
     // Choice page: A–D buttons, every option converges into the same next page
     if (page.navigation === 'button') {

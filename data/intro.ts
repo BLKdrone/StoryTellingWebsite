@@ -51,7 +51,6 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    transition: 'fade', // storyboard note: whale "zooms" in on this transition
   },
   {
     id: 'intro-glad-you-came',
@@ -65,7 +64,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    transition: 'fade',
+    
   },
   {
     id: 'intro-welcome',
@@ -79,7 +78,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    transition: 'fade',
+    
   },
   {
     id: 'intro-ask-name',
@@ -95,7 +94,7 @@ export const introPages: IntroPage[] = [
     sound: '/audio/score for interactive project.mp3',
     placeholder: 'ชื่อของเธอ',
     buttonLabel: 'ต่อไป',
-    transition: 'fade',
+    
   },
   {
     id: 'intro-nice-to-meet-you',
@@ -109,7 +108,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    transition: 'fade',
+    
   },
   {
     id: 'intro-explain-journey',
@@ -123,7 +122,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    transition: 'fade',
+    
   },
   {
     id: 'intro-follow-me',

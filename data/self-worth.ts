@@ -3,6 +3,7 @@ export type SelfWorthLetter = 'A' | 'B' | 'C' | 'D'
 export interface SelfWorthOption {
   letter: SelfWorthLetter
   label: string
+  background?: string
 }
 
 export interface SelfWorthTapPage {
@@ -40,16 +41,15 @@ export interface SelfWorthQuestionPage {
 export type SelfWorthPage = SelfWorthTapPage | SelfWorthInputPage | SelfWorthQuestionPage
 
 const oceanBackground = [
-  '/background/intro/background1.PNG',
-  '/background/intro/background2.PNG',
-  '/background/intro/background3.PNG',
+  '/background/selfworth/manywhales1.webp',
+  '/background/selfworth/manywhales2.webp',
 ]
 
 export const selfWorthPages: SelfWorthPage[] = [
   {
     id: 'sw-1',
     navigation: 'tap-anywhere',
-    text: 'คุณกำลังดำดิ่งลงในมหาสมุทร กระแสน้ำรอบตัวทำให้คุณสับสนทิศทาง',
+    text: 'กระแสน้ำรอบตัวทำให้คุณสับสนทิศทาง คุณกำลังดำดิ่งลงในมหาสมุทร',
     background: oceanBackground,
     sound: '',
   },
@@ -127,9 +127,9 @@ export const selfWorthPages: SelfWorthPage[] = [
     background: oceanBackground,
     sound: '',
     options: [
-      { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ', background: '/background/mood-checkin/happy.webp'},
-      { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา', background: '/background/mood-checkin/happy.webp'},
-      { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ', background: '/background/mood-checkin/happy.webp'},
+      { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ', background: '/background/mood-checkin/happy.webp' },
+      { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา', background: '/background/mood-checkin/happy.webp' },
+      { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ', background: '/background/mood-checkin/happy.webp' },
       { letter: 'D', label: 'ทำเพราะเป็นสิ่งที่คนส่วนใหญ่บอกว่าดี', background: '/background/mood-checkin/happy.webp' },
     ],
   },

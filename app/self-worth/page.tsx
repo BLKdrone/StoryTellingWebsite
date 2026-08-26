@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
-import { motion, AnimatePresence } from 'motion/react'
 import {
     selfWorthPages,
     resolveSelfWorthText,
@@ -13,6 +12,8 @@ import {
 } from '@/data/self-worth'
 import { supabase } from '@/lib/supabase'
 import { usePageAudio } from '@/components/page-audio'
+import { SlideNext } from '@/components/flash-transition'
+import Image from 'next/image'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -76,22 +77,7 @@ export default function SelfWorthPage() {
         </button>
     )
 
-    const flashOverlay = page.flashTransition && (
-        <AnimatePresence>
-            <motion.div
-                key={page.id}
-                aria-hidden
-                className={cn(
-                    'pointer-events-none absolute inset-0 z-50',
-                    page.flashTransition === 'black' ? 'bg-black' : 'bg-white',
-                )}
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 5, ease: 'easeInOut' }}
-            />
-        </AnimatePresence>
-    )
+    const flashOverlay = <SlideNext pageKey={page.id} color={page.flashTransition} />
 
     // Both choice pages and text-input pages use navigation: 'button' —
     // tell them apart by whether the page has `options` or a `placeholder`.
@@ -110,14 +96,32 @@ export default function SelfWorthPage() {
                             </h1>
 
                             {isQuestion ? (
-                                <div className="flex flex-col gap-3">
+                                <div className="grid grid-cols-2 gap-4">
                                     {page.options.map((option) => (
                                         <button
                                             key={option.letter}
                                             onClick={() => handleSelectLetter(option.letter)}
-                                            className="h-auto min-h-14 w-full rounded-[5px] bg-white px-4 py-3 text-left text-base text-black whitespace-normal hover:bg-white/90"
+                                            className="relative min-h-[200px] overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
                                         >
-                                            {option.label}
+                                            {option.background ? (
+                                                <>
+                                                    <div className="absolute inset-0">
+                                                        <Image src={option.background} alt="" fill className="object-cover" />
+                                                    </div>
+                                                    <div className="absolute inset-0 bg-black/30" />
+                                                </>
+                                            ) : (
+                                                <div className="absolute inset-0 bg-white" />
+                                            )}
+
+                                            <span
+                                                className={cn(
+                                                    'relative z-10 inline-block h-full w-full p-4 text-center font-medium leading-relaxed whitespace-normal',
+                                                    option.background ? 'flex items-center justify-center text-white' : 'text-black'
+                                                )}
+                                            >
+                                                {option.label}
+                                            </span>
                                         </button>
                                     ))}
                                 </div>

@@ -11,10 +11,10 @@ import {
   type QuizOption,
 } from '@/data/quiz'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
-import { motion, AnimatePresence } from 'motion/react'
 import { saveQuizResult } from '@/lib/quiz-result'
 import { WhaleGlide } from '@/components/whale-guilde'
 import { usePageAudio } from '@/components/page-audio'
+import { SlideNext } from '@/components/flash-transition'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -216,22 +216,7 @@ export default function QuizPage() {
               </h1>
             </div>
           </div>
-          <AnimatePresence>
-            {page.flashTransition && (
-              <motion.div
-                key={page.id}
-                aria-hidden
-                className={cn(
-                  'pointer-events-none absolute inset-0 z-50',
-                  page.flashTransition === 'black' ? 'bg-black' : 'bg-white',
-                )}
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 5, ease: 'easeInOut' }}
-              />
-            )}
-          </AnimatePresence>
+          <SlideNext pageKey={page.id} color={page.flashTransition} />
         </div>
       </MobileFrame>
     )
@@ -287,22 +272,7 @@ export default function QuizPage() {
               ))}
             </div>
           </div>
-          <AnimatePresence>
-            {page.flashTransition && (
-              <motion.div
-                key={page.id}
-                aria-hidden
-                className={cn(
-                  'pointer-events-none absolute inset-0 z-50',
-                  page.flashTransition === 'black' ? 'bg-black' : 'bg-white',
-                )}
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 5, ease: 'easeInOut' }}
-              />
-            )}
-          </AnimatePresence>
+          <SlideNext pageKey={page.id} color={page.flashTransition} />
         </div>
       </div>
     </MobileFrame>

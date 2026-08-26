@@ -7,9 +7,13 @@ import { MobileFrame } from '@/components/mobile-frame'
 import { introPages, type IntroPage } from '@/data/intro'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 import { usePageAudio } from '@/components/page-audio'
-import { AnimatePresence, motion } from 'motion/react'
+import { SlideNext } from '@/components/flash-transition'
+import { cn } from '@/lib/utils'
 
 const NAME_TOKEN = '{{name}}'
+
+// Matches the quiz page's chip style: white rounded background behind the text
+const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
 export default function IntroPage() {
     const router = useRouter()
@@ -49,7 +53,7 @@ export default function IntroPage() {
             <div className="relative flex flex-col flex-1 min-h-dvh w-full">
                 <BackgroundSlideshow
                     images={page.background}
-                    intervalMs={2500}
+                    intervalMs={500}
                     key={page.id}
                 />
 
@@ -59,7 +63,7 @@ export default function IntroPage() {
                             e.stopPropagation()
                             handleBack()
                         }}
-                        className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+                        className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
                         aria-label="Go back"
                     >
                         ← Back
@@ -68,8 +72,8 @@ export default function IntroPage() {
 
                 {page.navigation === 'text-input' ? (
                     <div className="relative z-10 flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
-                        <p className="text-center text-lg font-medium text-black [text-shadow:0_1px_4px_rgba(255,255,255,0.6)]">
-                            {resolvedText}
+                        <p className="text-center text-lg leading-relaxed">
+                            <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
                         </p>
                         <input
                             type="text"
@@ -92,28 +96,19 @@ export default function IntroPage() {
                     </div>
                 ) : (
                     <div
-                        className="relative z-10 flex flex-1 flex-col items-end justify-end p-6 pb-16 cursor-pointer"
+                        className="relative z-10 flex flex-1 flex-col items-center justify-end p-6 pb-16 cursor-pointer"
                         onClick={handleAdvance}
                     >
-                        <p className="text-center text-lg font-medium text-black [text-shadow:0_1px_4px_rgba(255,255,255,0.6)]">
-                            {resolvedText}
+                        <p className="text-center text-lg leading-relaxed">
+                            <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
                         </p>
                     </div>
                 )}
 
-                <AnimatePresence>
-                    {page.transition && (
-                        <motion.div
-                            key={page.id}
-                            aria-hidden
-                            className="pointer-events-none absolute inset-0 z-20"
-                            style={{ backgroundColor: page.transition === 'dive' ? 'black' : 'white' }}
-                            initial={{ opacity: 1 }}
-                            animate={{ opacity: 0 }}
-                            transition={{ duration: page.transition === 'dive' ? 1.2 : 0.8, ease: 'easeOut' }}
-                        />
-                    )}
-                </AnimatePresence>
+                <SlideNext
+                    pageKey={page.id}
+                    color={page.transition === 'dive' ? 'black' : page.transition ? 'white' : undefined}
+                />
             </div>
         </MobileFrame>
     )
