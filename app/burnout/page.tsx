@@ -134,12 +134,17 @@ export default function BurnoutPage() {
                                             '/background/quiz/shallowcoral/whale2.webp',
                                         ]}
                                         motion="bob"
-                                        className="h-[250px] w-[250px] object-contain"
+                                        className="h-[500px] w-[500px] object-contain"
                                     />
                                 </div>
                             </div>
                         )}
-                        <p className="text-balance whitespace-pre-line text-base leading-relaxed">
+                        <p
+                            className={cn(
+                                'text-balance whitespace-pre-line text-base leading-relaxed',
+                                isHelpWhalePage && 'mt-48'
+                            )}
+                        >
                             <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
                         </p>
                         {page.interactionLabel && (

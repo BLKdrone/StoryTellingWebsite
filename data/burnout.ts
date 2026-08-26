@@ -39,13 +39,12 @@ export type BurnoutPage = BurnoutTapPage | BurnoutQuestion
 // Real illustrated backgrounds aren't ready yet — every page cycles through
 // the same placeholder slideshow until actual art is supplied.
 const deepOceanBackground = [
-    '/background/intro/background1.PNG',
-    '/background/intro/background2.PNG',
-    '/background/intro/background3.PNG',
+    '/background/burnout/oceans1.webp',
+    '/background/burnout/oceans2.webp',
 ]
 const ManyWhaleBackground = [
-    '/background/burnout/manywhale1.webp',
-   '/background/burnout/manywhale2.webp',
+    '/background/burnout/manywhales1.webp',
+   '/background/burnout/manywhales2.webp',
 ]
 
 export const burnoutPages: BurnoutPage[] = [

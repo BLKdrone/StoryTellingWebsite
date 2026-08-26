@@ -127,10 +127,10 @@ export const selfWorthPages: SelfWorthPage[] = [
     background: oceanBackground,
     sound: '',
     options: [
-      { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ', background: '/background/selfworth/1.webp' },
-      { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา', background: '/background/selfworth/2.webp' },
-      { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ', background: '/background/selfworth/3.webp' },
-      { letter: 'D', label: 'ทำเพราะเป็นสิ่งที่คนส่วนใหญ่บอกว่าดี', background: '/background/selfworth/4.webp' },
+      { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ', background: '/background/selfworth/4path/1.webp' },
+      { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา', background: '/background/selfworth/4path/2.webp' },
+      { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ', background: '/background/selfworth/4path/3.webp' },
+      { letter: 'D', label: 'ทำเพราะเป็นสิ่งที่คนส่วนใหญ่บอกว่าดี', background: '/background/selfworth/4path/4.webp' },
     ],
   },
   {
