@@ -8,6 +8,7 @@ import { BackgroundSlideshow } from '@/components/animations/background-slidesho
 import { burnoutPages, type BurnoutLetter } from '@/data/burnout'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
+import { WhaleGlide } from '@/components/whale-guilde'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -15,6 +16,7 @@ export default function BurnoutPage() {
     const router = useRouter()
     const [index, setIndex] = useState(0)
     const [answers, setAnswers] = useState<Record<string, string>>({})
+    const [whalePosition, setWhalePosition] = useState(0)
 
     const total = burnoutPages.length
     const page = burnoutPages[index]
@@ -40,7 +42,15 @@ export default function BurnoutPage() {
     const handleBack = () => {
         if (index > 0) {
             setIndex((i) => i - 1)
+            setWhalePosition(0)
         }
+    }
+
+    const helpWhale = () => {
+        if (whalePosition >= 4) return
+        const nextPosition = whalePosition + 1
+        setWhalePosition(nextPosition)
+        if (nextPosition === 4) setIndex((i) => i + 1)
     }
 
     const backButton = index > 0 && (
@@ -90,15 +100,19 @@ export default function BurnoutPage() {
     }
 
     // Tap-anywhere narrative / interaction page
+    const isHelpWhalePage = page.id === 'burnout-5'
+
     return (
         <MobileFrame>
             <div
                 key={page.id}
                 role="button"
                 tabIndex={0}
-                onClick={advance}
+                onClick={isHelpWhalePage ? undefined : advance}
                 onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') advance()
+                    if (isHelpWhalePage) {
+                        if (e.key === 'Enter' || e.key === ' ') helpWhale()
+                    } else if (e.key === 'Enter' || e.key === ' ') advance()
                 }}
                 className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
             >
@@ -106,13 +120,40 @@ export default function BurnoutPage() {
                 <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                     {backButton}
                     <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
+                        {isHelpWhalePage && (
+                            <div className="pointer-events-none absolute inset-x-0 top-1/4 h-40 overflow-hidden">
+                                <div
+                                    className="absolute left-1/2 w-48 transition-transform duration-500 ease-out"
+                                    style={{
+                                        transform: `translateX(calc(-50% - ${whalePosition * 60}px))`,
+                                    }}
+                                >
+                                    <WhaleGlide
+                                        frames={[
+                                            '/background/quiz/shallowcoral/whale1.webp',
+                                            '/background/quiz/shallowcoral/whale2.webp',
+                                        ]}
+                                        motion="bob"
+                                        className="h-[250px] w-[250px] object-contain"
+                                    />
+                                </div>
+                            </div>
+                        )}
                         <p className="text-balance whitespace-pre-line text-base leading-relaxed">
                             <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
                         </p>
                         {page.interactionLabel && (
-                            <p className="text-sm">
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    if (isHelpWhalePage) helpWhale()
+                                }}
+                                onKeyDown={(e) => e.stopPropagation()}
+                                className="relative z-10 text-sm"
+                            >
                                 <span className={textChip}>{page.interactionLabel}</span>
-                            </p>
+                            </button>
                         )}
                     </div>
                 </div>

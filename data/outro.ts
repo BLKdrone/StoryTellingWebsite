@@ -6,17 +6,17 @@ export interface OutroTapPage {
   id: string
   navigation: 'tap-anywhere'
   text: string
-  background: string[]
+  background: string[] | string
   sound: string
   flashTransition?: 'black' | 'white'
 }
 
 // Real illustrated backgrounds aren't ready yet — every page cycles through
 // the same placeholder slideshow until actual art is supplied.
-const shoreBackground = [
-  '/background/intro/background1.webp',
-  '/background/intro/background2.webp',
-  '/background/intro/background3.webp',
+const shoreBackground1 = [
+  '/background/outro/whale1.webp',
+  '/background/outro/whale2.webp',
+  '/background/outro/whale4.webp',
 ]
 
 export const outroPages: OutroTapPage[] = [
@@ -24,70 +24,77 @@ export const outroPages: OutroTapPage[] = [
     id: 'outro-1',
     navigation: 'tap-anywhere',
     text: 'ปลาวาฬได้พาคุณว่ายน้ำขึ้นฝั่ง คุณเห็นท้องทะเลที่ไกลสุดลูกหูลูกตา กับดวงอาทิตย์ที่กำลังจะลับขอบฟ้า',
-    background: shoreBackground,
+    background: shoreBackground1,
     sound: '',
   },
   {
     id: 'outro-2',
     navigation: 'tap-anywhere',
     text: 'ปลาวาฬปรากฏตัว แต่ไม่มีน้ำกระเซ็นเหมือนตอนเปิด\n\n"การเดินทางของเราได้สิ้นสุดลงแล้วนะ ... "',
-    background: shoreBackground,
+    background: shoreBackground1,
     sound: '',
   },
   {
     id: 'outro-3',
     navigation: 'tap-anywhere',
     text: 'แต่ประสบการณ์ที่เธอได้รับในวันนี้ หวังว่าจะทำให้เธอได้รู้จักตัวเองมากขึ้น ไม่มากก็น้อยนะ',
-    background: shoreBackground,
+    background: shoreBackground1,
     sound: '',
   },
   {
     id: 'outro-4',
     navigation: 'tap-anywhere',
     text: 'ถึงแม้การเดินทางของเรา ณ ตอนนี้จะสิ้นสุด แต่ชีวิตของเธอยังต้องไปต่อ',
-    background: shoreBackground,
+    background: shoreBackground1,
     sound: '',
   },
   {
     id: 'outro-5',
     navigation: 'tap-anywhere',
     text: 'เมื่อใดที่เธอเจอปัญหา ท้อแท้ รู้สึกหมดหวัง หรือโดดเดี่ยว ขอให้นึกไว้เสมอว่าในโลกนี้ก็ยังมีตัวเธออยู่',
-    background: shoreBackground,
+    background: shoreBackground1,
     sound: '',
   },
   {
     id: 'outro-6',
     navigation: 'tap-anywhere',
     text: 'ขอให้นึกไว้เสมอว่า การที่เธอได้ใช้ชีวิตอยู่ทุกวัน ก็เป็นของขวัญที่ดีที่สุดของเธอแล้ว',
-    background: shoreBackground,
+    background: shoreBackground1,
     sound: '',
   },
   {
     id: 'outro-7',
     navigation: 'tap-anywhere',
     text: 'ถ้าเธออยากเจอฉันอีกเมื่อไหร่ เธอสามารถมาได้เสมอ ฉันจะรอเธออยู่ และพร้อมที่จะพาเธอออกเดินทางอีกครั้งนะ',
-    background: shoreBackground,
+    background: shoreBackground1,
     sound: '',
   },
   {
     id: 'outro-8',
     navigation: 'tap-anywhere',
     text: 'ตอนนี้เราคงต้องลาจากกันแล้ว ฉันจะขอมอบถุงเครื่องรางแห่งโชคให้กับเธอไว้ เป็นเครื่องเตือนใจให้เธอใช้ชีวิตอย่างมีความสุขนะ',
-    background: shoreBackground,
+    background: '/background/outro/whale3.webp',
+    sound: '',
+  },
+  {
+    id: 'outro-8.5',
+    navigation: 'tap-anywhere',
+    text: 'เธอก้มลงมองถุงเครื่องรางก่อนที่จะแกะออกมาเผยให้เห็นสัตว์ประจพตัวของเธอ',
+    background: '/background/outro/bag1.webp',
     sound: '',
   },
   {
     id: 'outro-9',
     navigation: 'tap-anywhere',
-    text: 'ฉันชอบคุณเธอมากจริง ๆ ไว้เจอกันอีกในภายหน้านะ :)',
-    background: shoreBackground,
+    text: 'ฉันขอบคุณเธอมากจริง ๆ ไว้เจอกันอีกในภายหน้านะ :)',
+    background: shoreBackground1,
     sound: '',
   },
   {
     id: 'outro-10',
     navigation: 'tap-anywhere',
     text: 'ปลาวาฬยิ้มให้เธอ ก่อนจะมอบเครื่องรางไว้ในมือ แล้วโบกมือลาพร้อมว่ายจากไป',
-    background: shoreBackground,
+    background: shoreBackground1,
     sound: '',
     flashTransition: 'white',
   },
@@ -95,14 +102,14 @@ export const outroPages: OutroTapPage[] = [
     id: 'outro-11',
     navigation: 'tap-anywhere',
     text: 'ถุงเครื่องรางค่อย ๆ เผยสิ่งที่ซ่อนอยู่ข้างในให้เธอเห็น',
-    background: shoreBackground,
+    background: '/background/outro/bag2.webp',
     sound: '',
   },
   {
     id: 'outro-12',
     navigation: 'tap-anywhere',
     text: 'เครื่องรางแห่งนี้จะอยู่เคียงข้างเธอเสมอ ไม่ว่าเธอจะไปที่ไหนก็ตาม',
-    background: shoreBackground,
+    background: '/background/outro/bag2.webp',
     sound: '',
     flashTransition: 'black',
   },

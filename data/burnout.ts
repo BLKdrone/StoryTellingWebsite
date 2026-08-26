@@ -43,6 +43,10 @@ const deepOceanBackground = [
     '/background/intro/background2.PNG',
     '/background/intro/background3.PNG',
 ]
+const ManyWhaleBackground = [
+    '/background/burnout/manywhale1.webp',
+   '/background/burnout/manywhale2.webp',
+]
 
 export const burnoutPages: BurnoutPage[] = [
     {
@@ -104,7 +108,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-7',
         navigation: 'tap-anywhere',
         text: 'ตรงหน้ามีฝูงวาฬตัวอื่นว่ายไปในทิศทางเดียวกัน เร็วกว่า นิ่งกว่า ดูเหมือนไม่เหนื่อยเลย',
-        background: deepOceanBackground,
+        background: ManyWhaleBackground,
 
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     },
@@ -112,7 +116,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-tolerance',
         navigation: 'button',
         text: 'ช่วงนี้คุณรู้สึกว่าตัวเอง "ทนไม่ไหว" ประมาณไหน',
-        background: deepOceanBackground,
+        background: ManyWhaleBackground,
 
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
         options: [
@@ -126,7 +130,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-9',
         navigation: 'tap-anywhere',
         text: 'วาฬพยายามเร่งตาม ยิ่งเร่ง น้ำยิ่งหนัก ยิ่งเร่ง ยิ่งเหนื่อย วาฬตัวนี้เร่งจนสุดแรงจนภาพเริ่มเบลอ',
-        background: deepOceanBackground,
+        background: ManyWhaleBackground,
 
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
         interactionLabel: 'บังคับให้กด "ลองหยุดสักนิด"',
@@ -135,25 +139,50 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-10',
         navigation: 'tap-anywhere',
         text: 'ไม่มีวาฬตัวไหนหันมามองคุณ มองจริง ๆ แล้ว ทุกตัวก็กำลังว่ายของตัวเองอยู่ แถมวาฬบางตัวยังว่ายช้ากว่าคุณอีก วาฬตัวนั้นเริ่มไม่แน่ใจว่าที่ผ่านมา เราว่ายตามกระแสน้ำ หรือว่ายตามอะไรกันแน่',
-        background: deepOceanBackground,
+        background: ManyWhaleBackground,
 
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     },
     {
         id: 'burnout-11',
         navigation: 'tap-anywhere',
-        text: 'วาฬตัวนั้นชะลอการเคลื่อนไหวลงเล็กน้อย รอบตัวเงียบกว่าที่คิด ตอนแรกวาฬตัวนี้รู้สึกแปลกเหมือนกำลังทำอะไรผิด กระแสน้ำยังคงพามันไปช้า ๆ แต่ครั้งแรกในรอบนาน วาฬตัวนี้กลับรู้สึกเหมือนได้หายใจ',
-        background: deepOceanBackground,
+        text: 'วาฬตัวนั้นชะลอการเคลื่อนไหวลงเล็กน้อย รอบตัวเงียบกว่าที่คิด',
+        background: ManyWhaleBackground,
+
+        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    },
+    {
+        id: 'burnout-11.5',
+        navigation: 'tap-anywhere',
+        text: 'ตอนแรกวาฬตัวนี้รู้สึกแปลกเหมือนกำลังทำอะไรผิด กระแสน้ำยังคงพามันไปช้า ๆ แต่ครั้งแรกในรอบนาน วาฬตัวนี้กลับรู้สึกเหมือนได้หายใจ',
+        background: ManyWhaleBackground,
 
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     },
     {
         id: 'burnout-12',
         navigation: 'tap-anywhere',
-        text: 'น้องวาฬเดินทางมาไกลมากเลยนะ ก็เหมือนกับเธอ\nถ้าวันไหนเหนื่อยมากจริง ๆ การหยุดไม่ได้แปลว่าอ่อนแอ บางทีมันอาจจะเป็นแค่การหยุดหายใจก่อนจะไปต่อได้\nค่อย ๆ ว่ายในจังหวะของตัวเองไปนะ',
+        text: 'น้องวาฬเดินทางมาไกลมากเลยนะ ก็เหมือนกับเธอ',
+        background: deepOceanBackground,
+
+        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    },
+      {
+        id: 'burnout-12',
+        navigation: 'tap-anywhere',
+        text: 'ถ้าวันไหนเหนื่อยมากจริง ๆ การหยุดไม่ได้แปลว่าอ่อนแอ บางทีมันอาจจะเป็นแค่การหยุดหายใจก่อนจะไปต่อได้',
+        background: deepOceanBackground,
+
+        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    },
+      {
+        id: 'burnout-12',
+        navigation: 'tap-anywhere',
+        text: 'ค่อย ๆ ว่ายในจังหวะของตัวเองไปนะ',
         background: deepOceanBackground,
 
         sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     },
 ]
+
 

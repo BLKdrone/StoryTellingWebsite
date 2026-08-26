@@ -159,7 +159,7 @@ export default function MoodCheckinPage() {
           <Image src={moodIntro.background} alt="" fill className="object-cover -z-10" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
-            <p className="text-base text-white whitespace-pre-line">{moodIntro.text}</p>
+            <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">{moodIntro.text}</h1>
           </div>
           <SlideNext pageKey="mood-intro" color={moodIntro.flashTransition} />
         </div>
@@ -190,8 +190,8 @@ export default function MoodCheckinPage() {
 
             <div className="relative z-10 space-y-6 w-full">
               <div className="space-y-2 transition-opacity duration-300" style={{ opacity: exitingMood ? 0 : 1 }}>
-                <h1 className="text-xl font-bold text-white">{moodQuestion.text}</h1>
-                <p className="text-sm text-white/70">Tap anywhere or select a mood</p>
+                <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">{moodQuestion.text}</h1>
+                <p className="text-sm text-black/70">Tap anywhere or select a mood</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -215,7 +215,7 @@ export default function MoodCheckinPage() {
                       </div>
                       <div className="absolute inset-0 bg-black/30" />
                       <span
-                        className="relative z-10 inline-block p-4 font-medium text-white transition-opacity"
+                        className="relative z-10 inline-block p-4 font-medium text-black transition-opacity"
                         style={isSelected ? { transitionDuration: '500ms', transitionDelay: '350ms', opacity: 0 } : undefined}
                       >
                         {option.label}
@@ -225,7 +225,7 @@ export default function MoodCheckinPage() {
                 })}
               </div>
 
-              <p className="text-xs text-white/60 pt-4 transition-opacity duration-300" style={{ opacity: exitingMood ? 0 : 1 }}>
+              <p className="text-xs text-black/60 pt-4 transition-opacity duration-300" style={{ opacity: exitingMood ? 0 : 1 }}>
                 Tap anywhere to continue →
               </p>
             </div>
@@ -243,7 +243,7 @@ export default function MoodCheckinPage() {
     const backButton = (
       <button
         onClick={(e) => { e.stopPropagation(); handleBack() }}
-        className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+        className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-black/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-black"
         aria-label="Go back"
       >
         ← Back
@@ -275,7 +275,7 @@ export default function MoodCheckinPage() {
               <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 -z-10" />
 
               <div className="relative z-10 space-y-6 w-full">
-                <p className="text-sm text-white/90 whitespace-pre-line">{interpolateText(page.text)}</p>
+                <p className="text-sm text-black/90 whitespace-pre-line">{interpolateText(page.text)}</p>
 
                 {isChoice ? (
                   <div className="flex flex-col gap-3 items-center">

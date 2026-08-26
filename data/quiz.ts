@@ -150,7 +150,6 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     iconColor: '#c9a24b',
     background: '/background/quiz/character/pufferfish/background.webp',
     animal: '/background/quiz/character/pufferfish/animal.webp',
-    decoration: '/background/quiz/character/pufferfish/decoration.webp',
     animationType: 'float',
   },
   'sea-turtle': {

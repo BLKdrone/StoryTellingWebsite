@@ -41,8 +41,8 @@ export interface SelfWorthQuestionPage {
 export type SelfWorthPage = SelfWorthTapPage | SelfWorthInputPage | SelfWorthQuestionPage
 
 const oceanBackground = [
-  '/background/selfworth/manywhales1.webp',
-  '/background/selfworth/manywhales2.webp',
+  '/background/selfworth/oceans1.webp',
+  '/background/selfworth/oceans2.webp',
 ]
 
 export const selfWorthPages: SelfWorthPage[] = [
@@ -127,10 +127,10 @@ export const selfWorthPages: SelfWorthPage[] = [
     background: oceanBackground,
     sound: '',
     options: [
-      { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ', background: '/background/mood-checkin/happy.webp' },
-      { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา', background: '/background/mood-checkin/happy.webp' },
-      { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ', background: '/background/mood-checkin/happy.webp' },
-      { letter: 'D', label: 'ทำเพราะเป็นสิ่งที่คนส่วนใหญ่บอกว่าดี', background: '/background/mood-checkin/happy.webp' },
+      { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ', background: '/background/selfworth/1.webp' },
+      { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา', background: '/background/selfworth/2.webp' },
+      { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ', background: '/background/selfworth/3.webp' },
+      { letter: 'D', label: 'ทำเพราะเป็นสิ่งที่คนส่วนใหญ่บอกว่าดี', background: '/background/selfworth/4.webp' },
     ],
   },
   {

@@ -21,6 +21,7 @@ export default function OutroPage() {
 
   const total = outroPages.length
   const page = outroPages[index]
+  const background = Array.isArray(page.background) ? page.background : [page.background]
   const result = getQuizResult()
   usePageAudio(showResult ? '' : page.sound)
 
@@ -104,7 +105,7 @@ export default function OutroPage() {
                   src={typeof animal.animal === 'string' ? animal.animal : animal.animal[0]}
                   alt={animal.name}
                   className={cn(
-                    'relative z-10 h-56 w-56 object-contain drop-shadow-[0_6px_0px_rgba(0,0,0,0.35)]',
+                    'relative z-10 h-[500px] w-[500px] object-contain drop-shadow-[0_6px_0px_rgba(0,0,0,0.35)]',
                     animal.animationType === 'zoom' && 'animate-animal-zoom',
                     animal.animationType === 'float' && 'animate-animal-float',
                     animal.animationType === 'glide' && 'animate-animal-glide'
@@ -229,7 +230,7 @@ export default function OutroPage() {
         }}
         className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
       >
-        <BackgroundSlideshow images={page.background} intervalMs={1200} />
+        <BackgroundSlideshow images={background} intervalMs={1200} />
 
         <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
           {index > 0 && (
