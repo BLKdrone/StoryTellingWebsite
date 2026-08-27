@@ -68,6 +68,7 @@ export interface AnimalResult {
   animal: string | string[]
   decoration?: string
   animationType: 'zoom' | 'float' | 'glide'
+  link: string
 }
 
 export const animals: Record<AnimalKey, AnimalResult> = {
@@ -89,6 +90,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     background: '/background/quiz/character/dolphin/background.webp',
     animal: '/background/quiz/character/dolphin/animal.webp',
     animationType: 'zoom',
+    link: "https://www.instagram.com/stories/goose.3533321/3972855821932823957?utm_source=ig_story_item_share&igsi=aXJidTU2eW9tNjRr",
   },
   seal: {
     key: 'seal',
@@ -110,6 +112,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/seal/animal.webp',
     decoration: '/background/quiz/character/seal/decoration.webp',
     animationType: 'float',
+    link: "https://www.instagram.com/stories/goose.3533321/3972854483486579899?utm_source=ig_story_item_share&igsi=bHI4ejVwanY4bmVp"
   },
   octopus: {
     key: 'octopus',
@@ -131,6 +134,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/octopus/animal.webp',
     decoration: '/background/quiz/character/octopus/decoration.webp',
     animationType: 'float',
+    link: "https://www.instagram.com/stories/goose.3533321/3972855360408509006?utm_source=ig_story_item_share&igsi=cnVrd3p1cDY0aHYy",
   },
   pufferfish: {
     key: 'pufferfish',
@@ -151,6 +155,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     background: '/background/quiz/character/pufferfish/background.webp',
     animal: '/background/quiz/character/pufferfish/animal.webp',
     animationType: 'float',
+    link: "https://www.instagram.com/stories/goose.3533321/3972855360408509006?utm_source=ig_story_item_share&igsi=cnVrd3p1cDY0aHYy",
   },
   'sea-turtle': {
     key: 'sea-turtle',
@@ -171,6 +176,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/turtle/animal.webp',
     decoration: '/background/quiz/character/turtle/decoration.webp',
     animationType: 'glide',
+    link: "https://www.instagram.com/stories/goose.3533321/3972839636432484625?utm_source=ig_story_item_share&igsi=MWVydzllejVxZ3N5aQ==",
   },
 }
 

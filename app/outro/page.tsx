@@ -6,11 +6,12 @@ import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 import { outroPages } from '@/data/outro'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { animals } from '@/data/quiz'
 import { getQuizResult, clearQuizResult } from '@/lib/quiz-result'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
+import Link from 'next/link'
 
 const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
 
@@ -196,7 +197,17 @@ export default function OutroPage() {
               </div>
             ))}
           </div>
-
+          <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
+            <Link
+              href={animal.link}
+              className={cn(
+                buttonVariants({ variant: 'default', size: 'lg' }),
+                'h-14 w-full max-w-sm rounded-2xl text-base',
+              )}
+            >
+              Link to share in  Instagram
+            </Link>
+          </div>
           {/* Buttons — chunky sticker style */}
           <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
             <Button
@@ -216,7 +227,7 @@ export default function OutroPage() {
             </Button>
           </div>
         </div>
-      </MobileFrame>
+      </MobileFrame >
     )
   }
   return (

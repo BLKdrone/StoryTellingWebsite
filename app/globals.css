@@ -290,6 +290,15 @@
   animation: animal-float 4s ease-in-out infinite;
 }
 
+@keyframes animal-glides {
+  0% {
+    transform: translate(0vw, -10%);
+  }
+
+  100% {
+    transform: translate(-5vw, 25%);
+  }
+}
 
 @keyframes animal-glide {
   0% {
@@ -301,8 +310,9 @@
   }
 }
 
+
 .animate-animal-glide {
-  animation: animal-glide 5s ease-in-out infinite alternate;
+  animation: animal-glides 5s ease-in-out infinite alternate;
 }
 
 .animate-animal-gliding {
