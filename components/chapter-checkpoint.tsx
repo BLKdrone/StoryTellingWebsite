@@ -157,7 +157,7 @@ export function ChapterCheckpoint({
                         )
                     })}
                 </div>
-
+                console.log('progress:', progress, 'canGoToOutro:', canGoToOutro)
                 {canGoToOutro ? (
                     <Link
                         href="/outro"
