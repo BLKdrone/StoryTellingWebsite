@@ -246,7 +246,7 @@ export default function OutroPage() {
             </button>
           )}
 
-          <div className="flex flex-1 flex-col items-center justify-center text-center">
+          <div className="flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16 text-center">
             <p className="text-balance whitespace-pre-line text-base leading-relaxed">
               <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
             </p>

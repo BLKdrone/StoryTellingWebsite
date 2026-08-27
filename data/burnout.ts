@@ -54,7 +54,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'มหาสมุทรอันมืดมิด ตอนนี้กลับดูเศร้าหมองยิ่งกว่าเดิม วาฬเริ่มรู้สึกไม่ค่อยดีเท่าไหร่นัก',
         background: deepOceanBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
     {
         id: 'burnout-2',
@@ -62,7 +62,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'กระแสน้ำเริ่มแรงขึ้นอีกครั้ง ร่างกายของวาฬเริ่มหนักกว่าที่เคย แต่วาฬตัวนั้นก็ยังว่ายต่อไป โดยที่ไม่มีใครสั่งและไม่มีใครบอกให้หยุด',
         background: deepOceanBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
     {
         id: 'burnout-3',
@@ -70,7 +70,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ตรงหน้าคือมหาสมุทรอันกว้างใหญ่ เป็นเส้นทางที่ยาวไกลเหมือนเดิม เหมือนทุกวัน วาฬตัวนี้ก็ว่ายตามกระแสน้ำมาตลอดตั้งแต่จำความได้ มีทั้งวันที่นิ่งและวันที่คลื่นแรง แต่ไม่ว่ายังไง ปลาวาฬตัวนี้ก็ว่ายไปต่ออยู่ดี',
         background: deepOceanBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
     {
         // NOTE: options here are a best-effort transcription — the storyboard
@@ -80,7 +80,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'แล้วตอนนี้ ช่วงนี้ทำให้คุณรู้สึกอยู่แบบไหน',
         background: deepOceanBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
         options: [
             { letter: 'A', label: 'ว่ายไปเรื่อย ๆ แบบไม่รู้สึกอะไรแล้ว' },
             { letter: 'B', label: 'ว่ายทั้ง ๆ ที่เหนื่อยมาก' },
@@ -93,7 +93,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'tap-anywhere',
         text: 'ตอนนี้กระแสน้ำแรงขึ้นอีก วาฬตัวนี้พยายามว่ายต่อไป',
         background: deepOceanBackground,
-        sound: '',
+        sound: '/audio/score for interactive project.mp3',
         interactionLabel: 'กดเพื่อช่วยวาฬว่าย',
     },
     {
@@ -101,7 +101,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'tap-anywhere',
         text: 'วาฬตัวนี้ขยับครีบแรงขึ้นอีกครั้ง กล้ามเนื้อเริ่มล้าแต่ชินแล้ว',
         background: deepOceanBackground,
-        sound: '',
+        sound: '/audio/score for interactive project.mp3',
     },
     {
         id: 'burnout-7',
@@ -109,7 +109,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ตรงหน้ามีฝูงวาฬตัวอื่นว่ายไปในทิศทางเดียวกัน เร็วกว่า นิ่งกว่า ดูเหมือนไม่เหนื่อยเลย',
         background: ManyWhaleBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
     {
         id: 'burnout-tolerance',
@@ -117,7 +117,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ช่วงนี้คุณรู้สึกว่าตัวเอง "ทนไม่ไหว" ประมาณไหน',
         background: ManyWhaleBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
         options: [
             { letter: 'A', label: 'แทบไม่เคย' },
             { letter: 'B', label: 'บางวัน' },
@@ -131,7 +131,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'วาฬพยายามเร่งตาม ยิ่งเร่ง น้ำยิ่งหนัก ยิ่งเร่ง ยิ่งเหนื่อย วาฬตัวนี้เร่งจนสุดแรงจนภาพเริ่มเบลอ',
         background: ManyWhaleBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
         interactionLabel: 'บังคับให้กด "ลองหยุดสักนิด"',
     },
     {
@@ -140,7 +140,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ไม่มีวาฬตัวไหนหันมามองคุณ มองจริง ๆ แล้ว ทุกตัวก็กำลังว่ายของตัวเองอยู่ แถมวาฬบางตัวยังว่ายช้ากว่าคุณอีก วาฬตัวนั้นเริ่มไม่แน่ใจว่าที่ผ่านมา เราว่ายตามกระแสน้ำ หรือว่ายตามอะไรกันแน่',
         background: ManyWhaleBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
     {
         id: 'burnout-11',
@@ -148,7 +148,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'วาฬตัวนั้นชะลอการเคลื่อนไหวลงเล็กน้อย รอบตัวเงียบกว่าที่คิด',
         background: ManyWhaleBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
     {
         id: 'burnout-11.5',
@@ -156,7 +156,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ตอนแรกวาฬตัวนี้รู้สึกแปลกเหมือนกำลังทำอะไรผิด กระแสน้ำยังคงพามันไปช้า ๆ แต่ครั้งแรกในรอบนาน วาฬตัวนี้กลับรู้สึกเหมือนได้หายใจ',
         background: ManyWhaleBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
     {
         id: 'burnout-12',
@@ -164,7 +164,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'น้องวาฬเดินทางมาไกลมากเลยนะ ก็เหมือนกับเธอ',
         background: deepOceanBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
       {
         id: 'burnout-12',
@@ -172,7 +172,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ถ้าวันไหนเหนื่อยมากจริง ๆ การหยุดไม่ได้แปลว่าอ่อนแอ บางทีมันอาจจะเป็นแค่การหยุดหายใจก่อนจะไปต่อได้',
         background: deepOceanBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
       {
         id: 'burnout-12',
@@ -180,7 +180,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ค่อย ๆ ว่ายในจังหวะของตัวเองไปนะ',
         background: deepOceanBackground,
 
-        sound: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        sound: '/audio/score for interactive project.mp3',
     },
 ]
 

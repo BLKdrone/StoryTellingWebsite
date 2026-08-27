@@ -184,7 +184,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/intro/background2.webp',
       '/background/intro/background3.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     flashTransition: 'black',
   },
   {
@@ -196,7 +196,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/intro/background2.webp',
       '/background/intro/background3.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
   },
   {
     id: 'investigation-2',
@@ -207,14 +207,14 @@ export const quizQuestions: QuizPageData[] = [
       '/background/intro/background2.webp',
       '/background/intro/background3.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
   },
   {
     id: 'investigation-shallowcoral',
     navigation: 'tap-anywhere',
     question: 'ยิ่งดำดิ่งลงไป แสงอาทิตย์ก็ยิ่งจางหาย ราวกับถูกกลืนกินโดยผืนน้ำอันกว้างใหญ่ความเย็นค่อย ๆ แทรกซึมเข้าสู่ร่างกาย',
     background: '/background/quiz/shallowcoral/background.webp',
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     decorationFrames: [
       '/background/quiz/shallowcoral/whale1.webp',
       '/background/quiz/shallowcoral/whale2.webp',
@@ -231,7 +231,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/intro/background2.webp',
       '/background/intro/background3.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     options: [
       { letter: 'A', label: 'ผู้เชื่อมความสัมพันธ์ - เต็มเปี่ยมด้วยพลังงาน สร้างความสดใส ความร่าเริง' },
       { letter: 'B', label: 'ผู้สร้างความกลมเกลียว - ให้ความอบอุ่น ความเห็นอกเห็นใจ' },
@@ -251,7 +251,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/intro/background2.webp',
       '/background/intro/background3.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     options: [
       { letter: 'A', label: 'ว่ายหาแสงสว่าง - มองหาเพื่อนร่วมทาง พูดคุยระบายความรู้สึก และเติมพลังจากการได้อยู่กับผู้คนรอบตัว' },
       { letter: 'B', label: 'ว่ายหาความอบอุ่น - ปลอบโยนตัวเองผ่านการดูแลใครสักคน หรือซึมซับความอ่อนโยนจากคนที่รัก' },
@@ -273,7 +273,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/hurricane/4.webp',
 
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     flashTransition: 'black',
   },
   {
@@ -287,14 +287,14 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/hurricane/4.webp',
 
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
   },
   {
     id: 'investigation-deepcoral',
     navigation: 'tap-anywhere',
     question: 'กระแสน้ำพัดพาคุณไปไกลเกินกว่าที่เคยรู้จัก เมื่อคุณลืมตาขึ้นอีกครั้ง โลกที่อยู่ตรงหน้ากลับไม่ใช่ที่เดิมอีกต่อไป',
     background: '/background/quiz/deepcoral/background.webp',
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     decorationFrames: [
       '/background/quiz/deepcoral/whale1.webp',
       '/background/quiz/deepcoral/whale2.webp',
@@ -307,7 +307,7 @@ export const quizQuestions: QuizPageData[] = [
       'ท่ามกลางเกลียวคลื่นที่หมุนวนอย่างบ้าคลั่งนั้น ปฏิกิรยาแรกของคุณคือ',
     backgroundColor: '#164252',
     background: '/background/quiz/deepcoral/background.webp',
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     options: [
       { letter: 'A', label: 'กระโดดข้ามคลื่น - ใช้อารมณ์ขันหรือเสียงหัวเราะ เปลี่ยนบรรยากาศให้กลับมาผ่อนคลายโดยเร็ว' },
       { letter: 'B', label: 'ยอมไปตามกระแสน้ำ - รับแรงกระแทกไว้เอง หรือเลือกเงียบเพื่อหลีกเลี่ยงไม่ให้ใครต้องเจ็บปวด' },
@@ -323,7 +323,7 @@ export const quizQuestions: QuizPageData[] = [
       ' ทุกอย่างดูแปลกตา เงียบงัน และเต็มไปด้วยความไม่แน่นอน หัวใจของคุณจะรู้สึก...',
     backgroundColor: '#133948',
     background: '/background/quiz/deepcoral/background.webp',
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     options: [
       { letter: 'A', label: 'ตื่นเต้นกระปรี้กระเปร่า - รักความไม่แน่นอนนี้ โลกใหม่หมายถึงโอกาสและการผจญภัย' },
       { letter: 'B', label: 'สงบนิ่งยอมรับ - แค่มีคนที่รักอยู่ข้าง ๆ ก็พร้อมจะไปทุกที่' },
@@ -341,7 +341,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/cave/1.webp',
       '/background/quiz/cave/2.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     flashTransition: 'black',
   },
 
@@ -354,7 +354,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/cave/1.webp',
       '/background/quiz/cave/2.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     options: [
       { letter: 'A', label: 'ภาพแห่งความสุข - "พรุ่งนี้จะทำอะไรดี" "จะชวนใครไปไหม" และภาพจำเสียงหัวเราะ' },
       { letter: 'B', label: 'ความห่วงใยผู้อื่น - "คนอื่นจะเป็นยังไงบ้างนะ" "เราจะดูแลพวกเขาได้ดีขึ้นไหม"' },
@@ -373,7 +373,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/cave/1.webp',
       '/background/quiz/cave/2.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     options: [
       { letter: 'A', label: 'มิตรภาพ - การได้เป็นส่วนหนึ่ง และเชื่อมโยงกับผู้อื่น' },
       { letter: 'B', label: 'ความเมตตา - โลกที่อ่อนโยน ปราศจากความโหดร้าย' },
@@ -391,7 +391,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/cave/1.webp',
       '/background/quiz/cave/2.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     flashTransition: 'black',
   },
   {
@@ -402,7 +402,7 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/cave/1.webp',
       '/background/quiz/cave/2.webp',
     ],
-    sound: '',
+    sound: '/audio/score for interactive project.mp3',
     flashTransition: 'white',
   }
 ]
