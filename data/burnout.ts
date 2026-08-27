@@ -44,7 +44,7 @@ const deepOceanBackground = [
 ]
 const ManyWhaleBackground = [
     '/background/burnout/manywhales1.webp',
-   '/background/burnout/manywhales2.webp',
+    '/background/burnout/manywhales2.webp',
 ]
 
 export const burnoutPages: BurnoutPage[] = [
@@ -166,7 +166,7 @@ export const burnoutPages: BurnoutPage[] = [
 
         sound: '/audio/score for interactive project.mp3',
     },
-      {
+    {
         id: 'burnout-12',
         navigation: 'tap-anywhere',
         text: 'ถ้าวันไหนเหนื่อยมากจริง ๆ การหยุดไม่ได้แปลว่าอ่อนแอ บางทีมันอาจจะเป็นแค่การหยุดหายใจก่อนจะไปต่อได้',
@@ -174,7 +174,7 @@ export const burnoutPages: BurnoutPage[] = [
 
         sound: '/audio/score for interactive project.mp3',
     },
-      {
+    {
         id: 'burnout-12',
         navigation: 'tap-anywhere',
         text: 'ค่อย ๆ ว่ายในจังหวะของตัวเองไปนะ',
