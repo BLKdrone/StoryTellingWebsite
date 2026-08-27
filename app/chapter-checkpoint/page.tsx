@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useEffect, useMemo, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -124,10 +124,7 @@ function ChapterCheckpoint({
         setProgress(nextProgress)
     }, [currentChapter])
 
-    const allComplete = useMemo(
-        () => chapterOptions.every((chapter) => progress[chapter.id]),
-        [progress],
-    )
+    const canGoToOutro = progress['mood-checkin'] || progress['self-worth'] || progress.burnout
     const checkpointMessage = getCheckpointMessage(currentChapter, progress)
 
     return (
@@ -162,7 +159,7 @@ function ChapterCheckpoint({
                     })}
                 </div>
 
-                {allComplete ? (
+                {canGoToOutro ? (
                     <Link
                         href="/outro"
                         className={cn(
