@@ -144,7 +144,8 @@ export default function BottlePage() {
             animate={{ opacity: 1 }}
             className="relative z-10 flex flex-1 flex-col items-center justify-center"
           >
-            <BottleFold answer={selectedText} skipFold={true} onComplete={handleBottleComplete} backgroundImage='background/moodcheckin/bottle/star.webp' />
+            {/* <BottleFold answer={selectedText} skipFold={true} onComplete={handleBottleComplete} backgroundImage='/background/mood-checkin/bottle/star.webp'  bottleImage="/background/mood-checkin/bottle/bottle.webp"/> */}
+            <BottleFold answer={selectedText} skipFold={true} onComplete={handleBottleComplete} bottleImage="/background/mood-checkin/bottle/bottle.webp" />
           </motion.div>
         )}
 
@@ -153,7 +154,7 @@ export default function BottlePage() {
           <div
             className="relative z-10 flex flex-1 flex-col items-center justify-center p-8 cursor-pointer bg-cover bg-center"
             style={{ backgroundImage: `url(/${randomOutro.background})` }}
-            onClick={() => router.push('/chapter-checkpoint?from=bottle')}
+            onClick={() => router.push('/chapter-checkpoint?from=mood-checkin')}
           >
             {/* optional dark overlay so text stays readable over the image */}
             <div aria-hidden className="absolute inset-0 bg-black/40" />

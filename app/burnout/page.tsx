@@ -111,8 +111,14 @@ export default function BurnoutPage() {
                 onClick={isHelpWhalePage ? undefined : advance}
                 onKeyDown={(e) => {
                     if (isHelpWhalePage) {
-                        if (e.key === 'Enter' || e.key === ' ') helpWhale()
-                    } else if (e.key === 'Enter' || e.key === ' ') advance()
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault()
+                            helpWhale()
+                        }
+                    } else if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        advance()
+                    }
                 }}
                 className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
             >
@@ -121,11 +127,25 @@ export default function BurnoutPage() {
                     {backButton}
                     <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
                         {isHelpWhalePage && (
-                            <div className="pointer-events-none absolute inset-x-0 top-1/4 h-40 overflow-hidden">
+                            <div className="absolute inset-x-0 top-[22%] h-[28rem] overflow-visible">
                                 <div
-                                    className="absolute left-1/2 w-48 transition-transform duration-500 ease-out"
+                                    role="button"
+                                    tabIndex={0}
+                                    aria-label="ช่วยวาฬว่าย"
+                                    className="absolute left-1/2 w-[28rem] cursor-pointer transition-transform duration-500 ease-out focus:outline-none"
                                     style={{
                                         transform: `translateX(calc(-50% - ${whalePosition * 60}px))`,
+                                    }}
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        helpWhale()
+                                    }}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault()
+                                            e.stopPropagation()
+                                            helpWhale()
+                                        }
                                     }}
                                 >
                                     <WhaleGlide
@@ -134,7 +154,7 @@ export default function BurnoutPage() {
                                             '/background/quiz/shallowcoral/whale2.webp',
                                         ]}
                                         motion="bob"
-                                        className="h-[500px] w-[500px] object-contain"
+                                        className="h-[28rem] w-[28rem] object-contain"
                                     />
                                 </div>
                             </div>

@@ -31,7 +31,7 @@ export default function QuizPage() {
   const finish = (finalAnswers: QuizOption['letter'][]) => {
     const scored = scoreQuiz(finalAnswers)
     saveQuizResult(scored)
-    router.push('/chapter-checkpoint?from=burnout')
+    router.push('/chapter-checkpoint?from=quiz')
   }
 
   const handleSelect = (letter: QuizOption['letter']) => {
@@ -192,7 +192,12 @@ export default function QuizPage() {
             <WhaleGlide
               frames={page.decorationFrames}
               motion={page.decorationMotion ?? 'glide'}
-              className="absolute top-0 left-0 -translate-x-1/2 w-[800px] h-auto z-10"
+              className={cn(
+                'w-[800px] h-auto z-10',
+                page.decorationMotion === 'bob'
+                  ? 'absolute top-0 left-[15vw] -translate-x-1/2'
+                  : 'absolute top-0 left-0 -translate-x-1/2'  
+              )}
             />
           )}
 
@@ -211,9 +216,9 @@ export default function QuizPage() {
             )}
 
             <div className="flex flex-1 flex-col items-center justify-end pb-16">
-              <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">
+              <pre className="text-balance text-center font-serif text-2xl leading-relaxed">
                 <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
-              </h1>
+              </pre>
             </div>
           </div>
           <SlideNext pageKey={page.id} color={page.flashTransition} />

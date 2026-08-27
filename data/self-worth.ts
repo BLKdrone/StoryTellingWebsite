@@ -132,6 +132,7 @@ export const selfWorthPages: SelfWorthPage[] = [
       { letter: 'C', label: 'ทำเพราะสิ่งนั้นตรงกับความเชื่อและคุณค่าที่เราให้ความสำคัญ', background: '/background/selfworth/4path/3.webp' },
       { letter: 'D', label: 'ทำเพราะเป็นสิ่งที่คนส่วนใหญ่บอกว่าดี', background: '/background/selfworth/4path/4.webp' },
     ],
+    flashTransition: 'black',
   },
   {
     id: 'sw-9',

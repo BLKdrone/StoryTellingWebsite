@@ -33,7 +33,7 @@ export default function SelfWorthPage() {
             answers: finalAnswers, // includes sw-want
         })
         if (error) console.error('Failed to save self-worth response:', error)
-        router.push('/chapter-checkpoint?from=selfworth')
+        router.push('/chapter-checkpoint?from=self-worth')
     }
 
     const advance = (finalAnswers: Record<string, string> = answers) => {

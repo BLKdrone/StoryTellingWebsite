@@ -15,11 +15,13 @@ export function BottleFold({
   onComplete,
   skipFold = false,
   backgroundImage,
+  bottleImage,
 }: {
   answer: string
   onComplete: () => void
   skipFold?: boolean
   backgroundImage?: string
+  bottleImage?: string
 }) {
   const [phase, setPhase] = useState<Phase>(skipFold ? 'toss' : 'fold')
 
@@ -75,21 +77,36 @@ export function BottleFold({
 
       {/* Simple SVG bottle outline (stroke only, no illustration/fill art) */}
       <motion.div
-        animate={
-          phase === 'settle'
-            ? { scale: [1, 1.08, 1] }
-            : { scale: 1 }
-        }
+        style={{ position: 'relative' }}
+        animate={phase === 'settle' ? { scale: [1, 1.08, 1] } : { scale: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         onAnimationComplete={() => {
           if (phase === 'settle') {
-            // brief pause so the "settle" pop reads, then advance
             setTimeout(onComplete, 500)
           }
         }}
       >
-        <BottleOutline sealed={phase === 'settle'} />
+        {bottleImage ? (
+          <>
+            <img
+              src={bottleImage}
+              alt=""
+              width={150}
+              height={250}
+              className="h-[250px] w-[150px] object-contain"
+            />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: phase === 'settle' ? 0.45 : 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute bottom-[12%] left-1/2 h-4 w-6 -translate-x-1/2 rounded-sm bg-black"
+            />
+          </>
+        ) : (
+          <BottleOutline sealed={phase === 'settle'} />
+        )}
       </motion.div>
+
     </div>
   )
 }

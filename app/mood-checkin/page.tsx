@@ -161,9 +161,9 @@ export default function MoodCheckinPage() {
           <Image src={moodIntro.background} alt="" fill className="object-cover -z-10" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
-            <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
-              <span className={cn(textChip, 'leading-relaxed')}>{moodIntro.text}</span>
-            </h1>
+             <pre className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-sm leading-relaxed text-white backdrop-blur-sm float-up">
+              <span>{moodIntro.text}</span>
+            </pre>
           </div>
           <SlideNext pageKey="mood-intro" color={moodIntro.flashTransition} />
         </div>

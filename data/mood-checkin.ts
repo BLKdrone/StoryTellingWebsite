@@ -62,7 +62,7 @@ export interface MoodBranch {
 export const moodIntro: MoodTapPage = {
   id: 'mood-intro',
   navigation: 'tap-anywhere',
-  text: 'ถ้าตอนนี้ท้งฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ ท้องฟ้าของคุณในตอนนี้เป็นยังไงกันเหรอ',
+  text: `ถ้าตอนนี้ท้องฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ\n ท้องฟ้าของคุณในตอนนี้เป็นยังไงกันเหรอ`,
   background: '/background/intro/02.PNG',
   sound: '/audio/interactive-project.mp3',
 }

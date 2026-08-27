@@ -201,7 +201,7 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-2',
     navigation: 'tap-anywhere',
-    question: '  คุณนังมองไปทีชายหาดที่เต็มไปด้วยผู้คนมากมายที่ต่างก็ประสบการณ์ชีวิตและบุคลกภาพ',
+    question: '  คุณนั่งมองไปที่ชายหาดที่เต็มไปด้วยผู้คนมากมายที่ต่างก็ประสบการณ์ชีวิตและบุคลิกภาพ',
     background: [
       '/background/intro/background1.webp',
       '/background/intro/background2.webp',
@@ -265,7 +265,7 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'investigation-3',
     navigation: 'tap-anywhere',
-    question: 'จู่ ๆ กระแสน้ำก็เปลี่ยนทิศ เสียงคำรามของคลื่นใต้น้ำกึกก้องไปทั่ว',
+    question: 'จู่ ๆ กระแสน้ำก็เปลี่ยนทิศ\n เสียงคำรามของคลื่นใต้น้ำกึกก้องไปทั่ว',
     background: [
       '/background/quiz/hurricane/1.webp',
       '/background/quiz/hurricane/2.webp',
