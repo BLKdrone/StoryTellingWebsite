@@ -164,7 +164,7 @@ function ChapterCheckpoint({
 
                 {allComplete ? (
                     <Link
-                        href="/conclusion"
+                        href="/outro"
                         className={cn(
                             buttonVariants({ variant: 'default', size: 'lg' }),
                             'h-14 w-full max-w-sm rounded-2xl text-base',
