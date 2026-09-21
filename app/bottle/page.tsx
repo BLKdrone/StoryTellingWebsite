@@ -56,10 +56,10 @@ export default function BottlePage() {
             onClick={() => setStep(2)}
           >
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <p className="text-2xl text-center font-serif leading-relaxed text-balance">
+              <p className="text-lg text-center font-serif leading-relaxed text-balance">
                 {bottleIntro.text}
               </p>
-              <p className="text-xs text-white/50 text-center mt-12">Tap anywhere to continue</p>
+              <p className="text-base font-serif text-white/50 text-center mt-12">Tap anywhere to continue</p>
             </motion.div>
           </div>
         )}
@@ -93,7 +93,7 @@ export default function BottlePage() {
                           : { scale: 1, opacity: 1 }
                     }
                     transition={{ duration: 0.8, ease: "easeInOut" }}
-                    className={`p-4 rounded-xl text-sm font-medium border transition-colors ${isSelected ? 'bg-white/20 border-white/40' : 'bg-white/5 border-white/10 hover:bg-white/10'
+                    className={`p-4 rounded-xl text-base font-serif font-medium border transition-colors ${isSelected ? 'bg-white/20 border-white/40' : 'bg-white/5 border-white/10 hover:bg-white/10'
                       }`}
                     disabled={!!selectedId}
                   >
@@ -130,7 +130,7 @@ export default function BottlePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              className="text-xs text-white/50 text-center mt-12"
+              className="text-base font-serif text-white/50 text-center mt-12"
             >
               Tap the paper to fold it
             </motion.p>
@@ -164,10 +164,10 @@ export default function BottlePage() {
               animate={{ opacity: 1 }}
               className="relative z-10"
             >
-              <p className="text-2xl text-center font-serif leading-relaxed text-balance">
+              <p className="text-lg text-center font-serif leading-relaxed text-balance">
                 {randomOutro.text}
               </p>
-              <p className="text-xs text-white/50 text-center mt-12">Tap anywhere to finish</p>
+              <p className="text-base font-serif text-white/50 text-center mt-12">Tap anywhere to finish</p>
             </motion.div>
           </div>
         )}

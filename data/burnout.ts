@@ -15,7 +15,7 @@ export interface BurnoutTapPage {
     id: string
     navigation: 'tap-anywhere'
     text: string
-    background: string[]
+    background: string[] | string
     sound: string
     /** Label shown for pages that represent a special interaction beat
      *  (e.g. "press to help the whale swim") — currently rendered as plain
@@ -28,7 +28,7 @@ export interface BurnoutQuestion {
     id: string
     navigation: 'button'
     text: string
-    background: string[]
+    background: string[] | string
     sound: string
     options: BurnoutOption[]
     flashTransition?: 'black' | 'white'
@@ -52,7 +52,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-1',
         navigation: 'tap-anywhere',
         text: 'มหาสมุทรอันมืดมิด ตอนนี้กลับดูเศร้าหมองยิ่งกว่าเดิม วาฬเริ่มรู้สึกไม่ค่อยดีเท่าไหร่นัก',
-        background: deepOceanBackground,
+        background: '/background/quiz/deepcoral/background.webp',
 
         sound: '/audio/score for interactive project.mp3',
     },

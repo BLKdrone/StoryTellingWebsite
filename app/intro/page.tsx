@@ -12,8 +12,8 @@ import { cn } from '@/lib/utils'
 
 const NAME_TOKEN = '{{name}}'
 
-// Matches the quiz page's chip style: white rounded background behind the text
-const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
+// Shared chapter typography: serif storytelling text with a consistent chip style
+const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black font-serif text-lg leading-relaxed'
 
 export default function IntroPage() {
     const router = useRouter()
@@ -72,7 +72,7 @@ export default function IntroPage() {
 
                 {page.navigation === 'text-input' ? (
                     <div className="relative z-10 flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
-                        <p className="text-center text-lg leading-relaxed">
+                        <p className="text-center text-lg font-serif leading-relaxed">
                             <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
                         </p>
                         <input
@@ -83,13 +83,13 @@ export default function IntroPage() {
                                 if (e.key === 'Enter') handleNameSubmit()
                             }}
                             placeholder={page.placeholder}
-                            className="w-full max-w-xs rounded-full bg-white/90 px-5 py-3 text-center text-base text-black outline-none placeholder:text-black/40"
+                            className="w-full max-w-xs rounded-full bg-white/90 px-5 py-3 text-center text-base font-serif text-black outline-none placeholder:text-black/40"
                             autoFocus
                         />
                         <button
                             onClick={handleNameSubmit}
                             disabled={!inputValue.trim()}
-                            className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-black transition-opacity disabled:opacity-40"
+                            className="rounded-full bg-white px-8 py-3 text-base font-serif font-semibold text-black transition-opacity disabled:opacity-40"
                         >
                             {page.buttonLabel ?? 'ต่อไป'}
                         </button>
@@ -99,7 +99,7 @@ export default function IntroPage() {
                         className="relative z-10 flex flex-1 flex-col items-center justify-end p-6 pb-16 cursor-pointer"
                         onClick={handleAdvance}
                     >
-                        <p className="text-center text-lg leading-relaxed">
+                        <p className="text-center text-lg font-serif leading-relaxed">
                             <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
                         </p>
                     </div>

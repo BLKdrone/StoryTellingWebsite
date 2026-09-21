@@ -10,7 +10,7 @@ import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import { WhaleGlide } from '@/components/whale-guilde'
 
-const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
+const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black font-serif text-lg leading-relaxed'
 
 export default function BurnoutPage() {
     const router = useRouter()
@@ -85,7 +85,7 @@ export default function BurnoutPage() {
                                     <button
                                         key={option.letter}
                                         onClick={() => handleSelectLetter(option.letter)}
-                                        className="h-auto min-h-14 w-full rounded-[5px] bg-white px-4 py-3 text-left text-base text-black whitespace-normal hover:bg-white/90"
+                                        className="h-auto min-h-14 w-full rounded-[5px] bg-white px-4 py-3 text-left text-base font-serif text-black whitespace-normal hover:bg-white/90"
                                     >
                                         {option.label}
                                     </button>
@@ -161,7 +161,7 @@ export default function BurnoutPage() {
                         )}
                         <p
                             className={cn(
-                                'text-balance whitespace-pre-line text-base leading-relaxed',
+                                'text-balance whitespace-pre-line text-lg font-serif leading-relaxed',
                                 isHelpWhalePage && 'mt-48'
                             )}
                         >
@@ -175,7 +175,7 @@ export default function BurnoutPage() {
                                     if (isHelpWhalePage) helpWhale()
                                 }}
                                 onKeyDown={(e) => e.stopPropagation()}
-                                className="relative z-10 text-sm"
+                                className="relative z-10 text-sm font-serif"
                             >
                                 <span className={textChip}>{page.interactionLabel}</span>
                             </button>

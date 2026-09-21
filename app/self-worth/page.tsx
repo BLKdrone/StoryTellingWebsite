@@ -15,7 +15,7 @@ import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import Image from 'next/image'
 
-const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
+const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black font-serif text-lg leading-relaxed'
 
 export default function SelfWorthPage() {
     const router = useRouter()
@@ -133,12 +133,12 @@ export default function SelfWorthPage() {
                                         value={answer}
                                         onChange={(e) => setAnswer(e.target.value)}
                                         placeholder={page.placeholder}
-                                        className="w-full max-w-sm rounded-2xl border border-border bg-input/40 px-4 py-4 text-base text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                                        className="w-full max-w-sm rounded-2xl border border-border bg-input/40 px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
                                     />
                                     <button
                                         onClick={handleSubmit}
                                         disabled={!answer.trim()}
-                                        className="h-12 w-full max-w-sm rounded-[5px] bg-white text-base font-medium text-black hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-50"
+                                        className="h-12 w-full max-w-sm rounded-[5px] bg-white text-base font-serif font-medium text-black hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-50"
                                     >
                                         {page.buttonLabel || 'ไปต่อ'}
                                     </button>
@@ -165,7 +165,7 @@ export default function SelfWorthPage() {
                 <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                     {backButton}
                     <div className="flex flex-1 flex-col items-center justify-center text-center">
-                        <p className="text-balance whitespace-pre-line text-base leading-relaxed">
+                        <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">
                             <span className={cn(textChip, 'leading-relaxed')}>{text}</span>
                         </p>
                     </div>

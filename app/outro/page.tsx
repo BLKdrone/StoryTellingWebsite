@@ -13,7 +13,7 @@ import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import Link from 'next/link'
 
-const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
+const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black font-serif text-lg leading-relaxed'
 
 export default function OutroPage() {
   const router = useRouter()
@@ -258,7 +258,7 @@ export default function OutroPage() {
           )}
 
           <div className="flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16 text-center">
-            <p className="text-balance whitespace-pre-line text-base leading-relaxed">
+            <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">
               <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
             </p>
           </div>

@@ -16,7 +16,7 @@ import { WhaleGlide } from '@/components/whale-guilde'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 
-const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
+const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black font-serif text-lg leading-relaxed'
 
 export default function QuizPage() {
   const router = useRouter()
@@ -196,7 +196,7 @@ export default function QuizPage() {
                 'w-[800px] h-auto z-10',
                 page.decorationMotion === 'bob'
                   ? 'absolute top-0 left-[20vw] -translate-x-1/2'
-                  : 'absolute top-0 left-0 -translate-x-1/2'  
+                  : 'absolute top-0 left-0 -translate-x-1/2'
               )}
             />
           )}
@@ -269,7 +269,7 @@ export default function QuizPage() {
                   key={option.letter}
                   variant="secondary"
                   size="lg"
-                  className="h-auto min-h-14 w-full whitespace-normal rounded-[5px] bg-white py-3 text-left text-base text-black hover:bg-white/90"
+                  className="h-auto min-h-14 w-full whitespace-normal rounded-[5px] bg-white py-3 text-left text-base font-serif text-black hover:bg-white/90"
                   onClick={() => handleSelect(option.letter)}
                 >
                   {option.label}

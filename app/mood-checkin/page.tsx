@@ -10,7 +10,7 @@ import { supabase } from '@/lib/supabase'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import { cn } from '@/lib/utils'
-const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black'
+const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black font-serif text-lg leading-relaxed'
 
 type PageState = 'question' | 'options' | 'branch' | 'complete'
 
@@ -161,7 +161,7 @@ export default function MoodCheckinPage() {
           <Image src={moodIntro.background} alt="" fill className="object-cover -z-10" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
-             <pre className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-sm leading-relaxed text-white backdrop-blur-sm float-up">
+            <pre className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-serif text-lg leading-relaxed text-white backdrop-blur-sm float-up">
               <span>{moodIntro.text}</span>
             </pre>
           </div>
@@ -197,7 +197,7 @@ export default function MoodCheckinPage() {
                 <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
                   <span className={cn(textChip, 'leading-relaxed')}>{moodQuestion.text}</span>
                 </h1>
-                <p className="text-sm text-white/70">Tap anywhere or select a mood</p>
+                <p className="text-sm font-serif text-white/70">Tap anywhere or select a mood</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -221,7 +221,7 @@ export default function MoodCheckinPage() {
                       </div>
                       <div className="absolute inset-0 bg-black/30" />
                       <span
-                        className="relative z-10 inline-block p-4 font-medium text-black transition-opacity"
+                        className="relative z-10 inline-block p-4 font-serif font-medium text-black transition-opacity"
                         style={isSelected ? { transitionDuration: '500ms', transitionDelay: '350ms', opacity: 0 } : undefined}
                       >
                         {option.label}
@@ -231,7 +231,7 @@ export default function MoodCheckinPage() {
                 })}
               </div>
 
-              <p className="text-xs text-black/60 pt-4 transition-opacity duration-300" style={{ opacity: exitingMood ? 0 : 1 }}>
+              <p className="text-xs font-serif text-black/60 pt-4 transition-opacity duration-300" style={{ opacity: exitingMood ? 0 : 1 }}>
                 Tap anywhere to continue →
               </p>
             </div>
@@ -304,7 +304,7 @@ export default function MoodCheckinPage() {
                       value={answer}
                       onChange={(e) => setAnswer(e.target.value)}
                       placeholder={page.placeholder}
-                      className="w-full max-w-sm rounded-2xl border border-border bg-input/40 px-4 py-4 text-base text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                      className="w-full max-w-sm rounded-2xl border border-border bg-input/40 px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
                           handleSubmit()
@@ -314,7 +314,7 @@ export default function MoodCheckinPage() {
                     <button
                       onClick={handleSubmit}
                       disabled={!answer.trim()}
-                      className="h-12 w-full max-w-sm rounded-lg bg-white/20 text-base font-medium text-white backdrop-blur-md hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="h-12 w-full max-w-sm rounded-lg bg-white/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {page.buttonLabel || 'Let it drift'}
                     </button>
@@ -351,7 +351,7 @@ export default function MoodCheckinPage() {
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 -z-10" />
             <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
-              <p className="text-balance whitespace-pre-line text-base leading-relaxed">
+              <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">
                 <span className={cn(textChip, 'leading-relaxed')}>{interpolateText(page.text)}</span>
               </p>
             </div>
