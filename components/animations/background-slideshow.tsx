@@ -5,7 +5,7 @@ import { motion } from 'motion/react'
 import Image from 'next/image'
 
 interface BackgroundSlideshowProps {
-  images: string[]
+  images: string | string[]
   intervalMs?: number
   fill?: boolean
   imageClassName?: string
@@ -18,8 +18,8 @@ export function BackgroundSlideshow({
   imageClassName = 'object-cover',
 }: BackgroundSlideshowProps) {
   // Strip out any falsy/empty entries up front — this is the root fix
-  const safeImages = images.filter((src): src is string => Boolean(src))
-
+  const imageList = Array.isArray(images) ? images : [images]
+  const safeImages = imageList.filter((src): src is string => Boolean(src))
   const [index, setIndex] = useState(0)
   const prevIndex = useRef(0)
 

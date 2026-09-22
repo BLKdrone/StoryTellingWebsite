@@ -47,10 +47,9 @@ export default function BurnoutPage() {
     }
 
     const helpWhale = () => {
-        if (whalePosition >= 4) return
+        if (whalePosition >= 3) return
         const nextPosition = whalePosition + 1
         setWhalePosition(nextPosition)
-        if (nextPosition === 4) setIndex((i) => i + 1)
     }
 
     const backButton = index > 0 && (
@@ -167,17 +166,17 @@ export default function BurnoutPage() {
                         >
                             <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
                         </p>
-                        {page.interactionLabel && (
+                        {page.interactionLabel && (!isHelpWhalePage || whalePosition >= 3) && (
                             <button
                                 type="button"
                                 onClick={(e) => {
                                     e.stopPropagation()
-                                    if (isHelpWhalePage) helpWhale()
+                                    if (isHelpWhalePage) advance()
                                 }}
                                 onKeyDown={(e) => e.stopPropagation()}
-                                className="relative z-10 text-sm font-serif"
+                                className="relative z-10 rounded-[5px] bg-white px-4 py-3 text-base font-serif text-black transition-colors hover:bg-white/90"
                             >
-                                <span className={textChip}>{page.interactionLabel}</span>
+                                {isHelpWhalePage ? 'ไปต่อ' : page.interactionLabel}
                             </button>
                         )}
                     </div>

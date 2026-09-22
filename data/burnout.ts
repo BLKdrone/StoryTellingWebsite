@@ -60,7 +60,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-2',
         navigation: 'tap-anywhere',
         text: 'กระแสน้ำเริ่มแรงขึ้นอีกครั้ง ร่างกายของวาฬเริ่มหนักกว่าที่เคย แต่วาฬตัวนั้นก็ยังว่ายต่อไป โดยที่ไม่มีใครสั่งและไม่มีใครบอกให้หยุด',
-        background: deepOceanBackground,
+        background: '/background/quiz/deepcoral/background.webp',
 
         sound: '/audio/score for interactive project.mp3',
     },

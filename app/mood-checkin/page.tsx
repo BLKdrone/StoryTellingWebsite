@@ -127,14 +127,18 @@ export default function MoodCheckinPage() {
   }
 
   const finishBranch = async (finalAnswers: Record<string, string> = answers) => {
-    const { error } = await supabase.from('mood_checkin_responses').insert({
-      mood: selectedMood,
-      answers: finalAnswers,
-    })
-    if (error) {
-      console.error('Failed to save mood check-in:', {
-        message: error.message, details: error.details, hint: error.hint, code: error.code,
+    if (finalAnswers['overwhelmed-4']) {
+      const dbAnswers = { 'overwhelmed-4': finalAnswers['overwhelmed-4'] }
+
+      const { error } = await supabase.from('mood_checkin_responses').insert({
+        mood: selectedMood,
+        answers: dbAnswers,
       })
+      if (error) {
+        console.error('Failed to save mood check-in:', {
+          message: error.message, details: error.details, hint: error.hint, code: error.code,
+        })
+      }
     }
     router.push('/bottle')
   }
