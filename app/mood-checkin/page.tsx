@@ -253,7 +253,7 @@ export default function MoodCheckinPage() {
     const backButton = (
       <button
         onClick={(e) => { e.stopPropagation(); handleBack() }}
-        className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-black/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-black"
+        className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
         aria-label="Go back"
       >
         ← Back
@@ -308,7 +308,7 @@ export default function MoodCheckinPage() {
                       value={answer}
                       onChange={(e) => setAnswer(e.target.value)}
                       placeholder={page.placeholder}
-                      className="w-full max-w-sm rounded-2xl border border-border bg-input/40 px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                     className="w-full max-w-sm rounded-2xl border border-border bg-black/20  px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
                           handleSubmit()
@@ -318,7 +318,7 @@ export default function MoodCheckinPage() {
                     <button
                       onClick={handleSubmit}
                       disabled={!answer.trim()}
-                      className="h-12 w-full max-w-sm rounded-lg bg-white/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="h-12 w-full max-w-sm rounded-lg bg-black/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {page.buttonLabel || 'Let it drift'}
                     </button>
@@ -344,6 +344,17 @@ export default function MoodCheckinPage() {
           {page.decorationFrames && (
             <div key={`decoration-${page.id}`} className="absolute inset-0 z-[5] pointer-events-none">
               <Image src={page.decorationFrames} alt="" fill className="object-contain" priority />
+            </div>
+          )}
+          {page.id === 'happy-4' && (
+            <div className="absolute inset-0 z-[8] overflow-hidden pointer-events-none flex items-center justify-center">
+              <Image
+                src="/background/mood-checkin/whalejump/whale2.webp"
+                alt="skipping whale"
+                width={250}
+                height={150}
+                className="animate-stone-skip object-contain opacity-80"
+              />
             </div>
           )}
           <div

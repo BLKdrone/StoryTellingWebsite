@@ -145,7 +145,13 @@ export default function BottlePage() {
             className="relative z-10 flex flex-1 flex-col items-center justify-center"
           >
             {/* <BottleFold answer={selectedText} skipFold={true} onComplete={handleBottleComplete} backgroundImage='/background/mood-checkin/bottle/star.webp'  bottleImage="/background/mood-checkin/bottle/bottle.webp"/> */}
-            <BottleFold answer={selectedText} skipFold={true} onComplete={handleBottleComplete} bottleImage="/background/mood-checkin/bottle/bottle.webp" />
+            <BottleFold
+              answer={selectedText}
+              skipFold={true}
+              onComplete={handleBottleComplete}
+              backgroundImage="/background/mood-checkin/bottle/star.webp"
+              bottleImage="/background/mood-checkin/bottle/bottle.webp"
+            />
           </motion.div>
         )}
 

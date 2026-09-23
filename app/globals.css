@@ -340,6 +340,7 @@
     transform: translateY(0);
     opacity: 0;
   }
+
   to {
     transform: translateY(-12px);
     opacity: 1;
@@ -348,4 +349,33 @@
 
 .float-up {
   animation: floatUp 1.8s ease-out forwards;
+}
+
+@keyframes stone-skip {
+  /* --- Approach --- */
+  0%   { transform: translate(-100px, -40px) scale(1, 1) rotate(-8deg); opacity: 0; }
+  8%   { transform: translate(-85px, -55px) scale(1, 1) rotate(-6deg); opacity: 1; }
+
+  /* --- Skip 1 (highest, longest) --- */
+  14%  { transform: translate(-75px, -40px) scale(1.12, 0.82) rotate(-4deg); }
+  25%  { transform: translate(-45px, -130px) scale(1, 1) rotate(0deg); }
+  36%  { transform: translate(-15px, -40px) scale(1.12, 0.82) rotate(5deg); }
+
+  /* --- Skip 2 (lower/shorter) --- */
+  42%  { transform: translate(-8px, -40px) scale(1.08, 0.88) rotate(6deg); }
+  50%  { transform: translate(15px, -102px) scale(1, 1) rotate(10deg); }
+  58%  { transform: translate(38px, -40px) scale(1.08, 0.88) rotate(14deg); }
+
+  /* --- Skip 3 (quick, small) --- */
+  63%  { transform: translate(43px, -40px) scale(1.05, 0.92) rotate(15deg); }
+  70%  { transform: translate(58px, -82px) scale(1, 1) rotate(18deg); }
+  77%  { transform: translate(73px, -40px) scale(1.05, 0.92) rotate(20deg); }
+
+  /* --- Skims, then sinks --- */
+  88%  { transform: translate(85px, -38px) scale(1, 1) rotate(21deg); opacity: 1; }
+  100% { transform: translate(100px, -28px) scale(0.9, 0.9) rotate(22deg); opacity: 0; }
+}
+
+.animate-stone-skip {
+  animation: stone-skip 2.6s cubic-bezier(0.33, 0, 0.2, 1) 1 forwards;
 }

@@ -66,12 +66,17 @@ export function BottleFold({
           }}
           className="flex h-16 w-64 items-center justify-center rounded-md  bg-card px-4 shadow-lg"
         >
-          {backgroundImage && (
-            <div className="absolute inset-0 rounded-md bg-black/30" />
+          {backgroundImage ? (
+            <img
+              src={backgroundImage}
+              alt=""
+              className="relative z-10 max-h-full max-w-full object-contain"
+            />
+          ) : (
+            <span className="relative z-10 line-clamp-2 text-center text-sm font-medium text-white drop-shadow-md">
+              {answer || 'your words'}
+            </span>
           )}
-          <span className="relative z-10 line-clamp-2 text-center text-sm font-medium text-white drop-shadow-md">
-            {answer || 'your words'}
-          </span>
         </motion.div>
       </div>
 
@@ -93,13 +98,15 @@ export function BottleFold({
               alt=""
               width={150}
               height={250}
-              className="h-[250px] w-[150px] object-contain"
+              className="h-[250px] w-[150px] "
             />
-            <motion.div
+            <motion.img
+              src="/background/mood-checkin/bottle/star.webp"
+              alt=""
               initial={{ opacity: 0 }}
               animate={{ opacity: phase === 'settle' ? 0.45 : 0 }}
               transition={{ duration: 0.5 }}
-              className="absolute bottom-[12%] left-1/2 h-4 w-6 -translate-x-1/2 rounded-sm bg-black"
+              className="absolute bottom-[12%] left-1/2 h-8 w-8 -translate-x-1/2 object-contain"
             />
           </>
         ) : (

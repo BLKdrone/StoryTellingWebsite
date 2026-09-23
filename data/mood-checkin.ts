@@ -117,6 +117,20 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         placeholder: 'พิมพ์คำตอบ',
         buttonLabel: 'ไปต่อ',
       },
+      {
+        id: 'happy-4',
+        navigation: 'tap-anywhere',
+        text: 'อยากให้คุณจดจำช่วงเวลาดี ๆ ของตัวเองไว้ในใจเสมอนะ วันไหนที่เหนื่อยหรือรู้สึกแย่ลองนึกถึงมันดู ให้ความทรงจำนี้ช่วยโอบกอดและเป็นรอยยิ้มเล็ก ๆ ให้คุณเอง',
+        background: '/background/mood-checkin/happy.webp',
+        sound: '/audio/score for interactive project.mp3',
+      },
+      {
+        id: 'happy-5',
+        navigation: 'tap-anywhere',
+        text: 'ถ้าวาพีนี้คือระดับความสุขของเธอวาฬตัวนี้จะตัวใหญ่แค่ไหนกันนะ',
+        background: '/background/mood-checkin/happy.webp',
+        sound: '/audio/score for interactive project.mp3',
+      },
     ],
   },
   neutral: {
