@@ -16,7 +16,7 @@ import { WhaleGlide } from '@/components/whale-guilde'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 
-const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-sm float-up'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 
 const RESUME_KEY = 'quiz-resume'
 
@@ -199,7 +199,7 @@ function QuizPageInner() {
             ← Back
           </button>
 
-          <div className="flex items-center gap-2 pt-2" aria-hidden>
+          {/* <div className="flex items-center gap-2 pt-2" aria-hidden>
             {quizQuestions.map((q, i) => (
               <span
                 key={q.id}
@@ -209,7 +209,7 @@ function QuizPageInner() {
                 )}
               />
             ))}
-          </div>
+          </div> */}
 
           <div className="flex flex-1 flex-col justify-center gap-8 py-8">
             <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">
@@ -217,15 +217,13 @@ function QuizPageInner() {
             </h1>
             <div className="flex flex-col gap-3">
               {page.options.map((option) => (
-                <Button
+                <button
                   key={option.letter}
-                  variant="secondary"
-                  size="lg"
-                  className="h-auto min-h-14 w-full whitespace-normal rounded-[5px] bg-white py-3 text-left text-base font-serif text-black hover:bg-white/90"
+                  className={cn(textChip, 'leading-relaxed')}
                   onClick={() => handleSelect(option.letter)}
                 >
                   {option.label}
-                </Button>
+                </button>
               ))}
             </div>
           </div>
