@@ -14,7 +14,7 @@ export interface BurnoutOption {
 export interface BurnoutTapPage {
     id: string
     navigation: 'tap-anywhere'
-    text: string
+    text?: string
     background: string[] | string
     sound: string
     /** Label shown for pages that represent a special interaction beat
@@ -27,7 +27,7 @@ export interface BurnoutTapPage {
 export interface BurnoutQuestion {
     id: string
     navigation: 'button'
-    text: string
+    text?: string
     background: string[] | string
     sound: string
     options: BurnoutOption[]
@@ -65,6 +65,22 @@ export const burnoutPages: BurnoutPage[] = [
         sound: '/audio/score for interactive project.mp3',
     },
     {
+        id: 'burnout-3',
+        navigation: 'tap-anywhere',
+        text: 'ตรงหน้าคือมหาสมุทรอันกว้างใหญ่ เป็นเส้นทางที่ยาวไกลเหมือนเดิม เหมือนทุกวัน',
+        background: deepOceanBackground,
+
+        sound: '/audio/score for interactive project.mp3',
+    },
+     {
+        id: 'burnout-3',
+        navigation: 'tap-anywhere',
+        text: 'วาฬตัวนี้ก็ว่ายตามกระแสน้ำมาตลอดตั้งแต่จำความได้',
+        background: deepOceanBackground,
+
+        sound: '/audio/score for interactive project.mp3',
+    },
+     {
         id: 'burnout-3',
         navigation: 'tap-anywhere',
         text: 'ตรงหน้าคือมหาสมุทรอันกว้างใหญ่ เป็นเส้นทางที่ยาวไกลเหมือนเดิม เหมือนทุกวัน วาฬตัวนี้ก็ว่ายตามกระแสน้ำมาตลอดตั้งแต่จำความได้ มีทั้งวันที่นิ่งและวันที่คลื่นแรง แต่ไม่ว่ายังไง ปลาวาฬตัวนี้ก็ว่ายไปต่ออยู่ดี',
@@ -132,7 +148,16 @@ export const burnoutPages: BurnoutPage[] = [
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',
-        interactionLabel: 'บังคับให้กด "ลองหยุดสักนิด"',
+        interactionLabel: 'ลองหยุดสักนิด',
+    },
+    {
+        id: 'stop-whale',
+        navigation: 'tap-anywhere',
+        text: '',
+        background: ManyWhaleBackground,
+
+        sound: '/audio/score for interactive project.mp3',
+        interactionLabel: 'ลองหยุดสักนิด',
     },
     {
         id: 'burnout-10',

@@ -1,9 +1,24 @@
-export const bottleIntro = {
+interface BottleIntro {
+  text?: string
+  sound: string
+}
+
+interface BottleQuestion {
+  question?: string
+  options: { id: string; label: string }[]
+}
+
+interface BottleOutro {
+  text?: string
+  background: string
+}
+
+export const bottleIntro: BottleIntro = {
   text: "คุณรู้ไหม ไม่ว่าคุณจะไปเจออะไรมา หรือตอนนี้กำลังรู้สึกอะไรอยู่ คุณไม่ได้อยู่โลกใบนี้เพียงคนเดียวนะ ทุกคนกำลังเผชิญเรื่องราวในแบบของตัวเอง",
   sound: "/audio/score for interactive project.mp3",
 }
 
-export const bottleQuestion = {
+export const bottleQuestion: BottleQuestion = {
   question: "คุณมีเรื่องอะไรที่อยากระบายออกมาไหม",
   options: [
     { id: '1', label: 'การเขียน/การทำงาน' },
@@ -17,7 +32,7 @@ export const bottleQuestion = {
   ],
 }
 
-export const bottleOutros = [
+export const bottleOutros: BottleOutro[] = [
   {
     text: "คุณไม่จำเป็นต้องมีคำตอบสำหรับทุกอย่างในวันนี้ก็ได้ แค่ผ่านวันนี้ไปให้ได้ ก็ถือว่าคุณชนะแล้ว ค่อย ๆ ก้าวไปด้วยกันนะ",
     background: '/background/mood-checkin/happy.webp',

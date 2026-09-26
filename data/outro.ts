@@ -5,7 +5,7 @@
 export interface OutroTapPage {
   id: string
   navigation: 'tap-anywhere'
-  text: string
+  text?: string
   background: string[] | string
   sound: string
   flashTransition?: 'black' | 'white'

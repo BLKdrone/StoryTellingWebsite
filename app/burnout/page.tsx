@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
@@ -46,10 +46,25 @@ function BurnoutPageInner() {
     const [index, setIndex] = useState(resumed?.index ?? 0)
     const [answers, setAnswers] = useState<Record<string, string>>(resumed?.answers ?? {})
     const [whalePosition, setWhalePosition] = useState(0)
+    const [blurClearedPageId, setBlurClearedPageId] = useState<string | null>(null)
+    const [showBlurStopButton, setShowBlurStopButton] = useState(false)
 
     const total = burnoutPages.length
     const page = burnoutPages[index]
+    const isBlurPage = page.id === 'stop-whale'
+    const isBlurCleared = blurClearedPageId === page.id
     usePageAudio(page.sound)
+
+    useEffect(() => {
+        if (!isBlurPage) {
+            setShowBlurStopButton(false)
+            return
+        }
+
+        setShowBlurStopButton(false)
+        const timeoutId = window.setTimeout(() => setShowBlurStopButton(true), 700)
+        return () => window.clearTimeout(timeoutId)
+    }, [isBlurPage, page.id])
 
     const finish = () => {
         // No data is collected/saved for burnout — this chapter is
@@ -60,6 +75,9 @@ function BurnoutPageInner() {
 
     const advance = (finalAnswers: Record<string, string> = answers) => {
         if (index + 1 < total) {
+            if (burnoutPages[index + 1].id === 'stop-whale') {
+                setBlurClearedPageId(null)
+            }
             setIndex((i) => i + 1)
         } else {
             finish()
@@ -74,6 +92,9 @@ function BurnoutPageInner() {
 
     const handleBack = () => {
         if (index > 0) {
+            if (burnoutPages[index - 1].id === 'stop-whale') {
+                setBlurClearedPageId(null)
+            }
             setIndex((i) => i - 1)
             setWhalePosition(0)
         }
@@ -112,9 +133,11 @@ function BurnoutPageInner() {
                     <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col justify-center gap-8">
-                            <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
-                                <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
-                            </h1>
+                            {page.text?.trim() && (
+                                <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
+                                    <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
+                                </h1>
+                            )}
                             <div className="flex flex-col gap-3">
                                 {page.options.map((option) => (
                                     <button
@@ -135,7 +158,7 @@ function BurnoutPageInner() {
     }
 
     // Tap-anywhere narrative / interaction page
-    const isHelpWhalePage = page.id === 'burnout-5'
+    const isHelpWhalePage = page.id === 'helpwhale'
 
     return (
         <MobileFrame>
@@ -143,80 +166,103 @@ function BurnoutPageInner() {
                 key={page.id}
                 role="button"
                 tabIndex={0}
-                onClick={isHelpWhalePage ? undefined : () => advance()}
+                aria-disabled={isBlurPage && !isBlurCleared}
+                onClick={isHelpWhalePage ? undefined : () => {
+                    if (!isBlurPage || isBlurCleared) advance()
+                }}
                 onKeyDown={(e) => {
                     if (isHelpWhalePage) {
                         if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault()
                             helpWhale()
                         }
-                    } else if (e.key === 'Enter' || e.key === ' ') {
+                    } else if ((e.key === 'Enter' || e.key === ' ') && (!isBlurPage || isBlurCleared)) {
                         e.preventDefault()
                         advance()
                     }
                 }}
                 className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
             >
-                <BackgroundSlideshow images={page.background} intervalMs={1200} />
-                <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
-                    {backButton}
-                    <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-                        {isHelpWhalePage && (
-                            <div className="absolute inset-x-0 top-[22%] h-[28rem] overflow-visible">
-                                <div
-                                    role="button"
-                                    tabIndex={0}
-                                    aria-label="ช่วยวาฬว่าย"
-                                    className="absolute left-1/2 w-[28rem] cursor-pointer transition-transform duration-500 ease-out focus:outline-none"
-                                    style={{
-                                        transform: `translateX(calc(-50% - ${whalePosition * 60}px))`,
-                                    }}
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        helpWhale()
-                                    }}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            e.preventDefault()
+                <div className={cn(
+                    'absolute inset-0 transition-[filter] duration-700',
+                    isBlurPage && !isBlurCleared && 'blur-[7px]'
+                )}>
+                    <BackgroundSlideshow images={page.background} intervalMs={1200} />
+                    <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+                        {backButton}
+                        <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
+                            {isHelpWhalePage && (
+                                <div className="absolute inset-x-0 top-[22%] h-[28rem] overflow-visible">
+                                    <div
+                                        role="button"
+                                        tabIndex={0}
+                                        aria-label="ช่วยวาฬว่าย"
+                                        className="absolute left-1/2 w-[28rem] cursor-pointer transition-transform duration-500 ease-out focus:outline-none"
+                                        style={{
+                                            transform: `translateX(calc(-50% - ${whalePosition * 60}px))`,
+                                        }}
+                                        onClick={(e) => {
                                             e.stopPropagation()
                                             helpWhale()
-                                        }
-                                    }}
-                                >
-                                    <WhaleGlide
-                                        frames={[
-                                            '/background/quiz/shallowcoral/whale1.webp',
-                                            '/background/quiz/shallowcoral/whale2.webp',
-                                        ]}
-                                        motion="bob"
-                                        className="h-[28rem] w-[28rem] object-contain"
-                                    />
+                                        }}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                helpWhale()
+                                            }
+                                        }}
+                                    >
+                                        <WhaleGlide
+                                            frames={[
+                                                '/background/quiz/shallowcoral/whale1.webp',
+                                                '/background/quiz/shallowcoral/whale2.webp',
+                                            ]}
+                                            motion="bob"
+                                            className="h-[28rem] w-[28rem] object-contain"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                        <p
-                            className={cn(
-                                'text-balance whitespace-pre-line text-lg font-serif leading-relaxed',
-                                isHelpWhalePage && 'mt-48'
                             )}
-                        >
-                            <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
-                        </p>
-                        {page.interactionLabel && (!isHelpWhalePage || whalePosition >= 3) && (
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                    if (isHelpWhalePage) advance()
-                                }}
-                                onKeyDown={(e) => e.stopPropagation()}
-                                className="relative z-10 rounded-[5px] bg-white px-4 py-3 text-base font-serif text-black transition-colors hover:bg-white/90"
-                            >
-                                {isHelpWhalePage ? 'ไปต่อ' : page.interactionLabel}
-                            </button>
-                        )}
+                            {page.text?.trim() && (
+                                <p
+                                    className={cn(
+                                        'text-balance whitespace-pre-line text-lg font-serif leading-relaxed',
+                                        isHelpWhalePage && 'mt-48'
+                                    )}
+                                >
+                                    <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
+                                </p>
+                            )}
+                            {page.interactionLabel && !isBlurPage && (!isHelpWhalePage || whalePosition >= 3) && (
+                                <button
+                                    type="button"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        if (isHelpWhalePage) advance()
+                                    }}
+                                    onKeyDown={(e) => e.stopPropagation()}
+                                    className="relative z-10 rounded-[5px] bg-white px-4 py-3 text-base font-serif text-black transition-colors hover:bg-white/90"
+                                >
+                                    {isHelpWhalePage ? 'ไปต่อ' : page.interactionLabel}
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
+                {isBlurPage && !isBlurCleared && showBlurStopButton && (
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            setBlurClearedPageId(page.id)
+                        }}
+                        onKeyDown={(e) => e.stopPropagation()}
+                        className="absolute bottom-16 left-1/2 z-30 -translate-x-1/2 rounded-[5px] bg-white px-5 py-3 text-base font-serif text-black shadow-lg transition-colors hover:bg-white/90"
+                    >
+                        {page.interactionLabel || 'ลองหยุดสักนิด'}
+                    </button>
+                )}
                 {flashOverlay}
             </div>
         </MobileFrame>

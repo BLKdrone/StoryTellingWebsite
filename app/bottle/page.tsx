@@ -122,9 +122,11 @@ function BottlePageInner() {
             onClick={() => setStep(2)}
           >
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <p className="text-lg text-center font-serif leading-relaxed text-balance">
-                {bottleIntro.text}
-              </p>
+              {bottleIntro.text?.trim() && (
+                <p className="text-lg text-center font-serif leading-relaxed text-balance">
+                  {bottleIntro.text}
+                </p>
+              )}
               <p className="text-base font-serif text-white/50 text-center mt-12">Tap anywhere to continue</p>
             </motion.div>
           </div>
@@ -133,14 +135,16 @@ function BottlePageInner() {
         {/* Step 2: Questions */}
         {step === 2 && (
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center p-6 gap-10">
-            <motion.h1
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: zooming ? 0 : 1, y: zooming ? -20 : 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-2xl font-serif text-center text-balance"
-            >
-              {bottleQuestion.question}
-            </motion.h1>
+            {bottleQuestion.question?.trim() && (
+              <motion.h1
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: zooming ? 0 : 1, y: zooming ? -20 : 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-2xl font-serif text-center text-balance"
+              >
+                {bottleQuestion.question}
+              </motion.h1>
+            )}
 
             <div className="grid grid-cols-2 gap-4 w-full max-w-md">
               {bottleQuestion.options.map((option) => {
@@ -235,9 +239,11 @@ function BottlePageInner() {
               animate={{ opacity: 1 }}
               className="relative z-10"
             >
-              <p className="text-lg text-center font-serif leading-relaxed text-balance">
-                {randomOutro.text}
-              </p>
+              {randomOutro.text?.trim() && (
+                <p className="text-lg text-center font-serif leading-relaxed text-balance">
+                  {randomOutro.text}
+                </p>
+              )}
               <p className="text-base font-serif text-white/50 text-center mt-12">Tap anywhere to finish</p>
             </motion.div>
           </div>

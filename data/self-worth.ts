@@ -9,7 +9,7 @@ export interface SelfWorthOption {
 export interface SelfWorthTapPage {
   id: string
   navigation: 'tap-anywhere'
-  text: string
+  text?: string
   background: string[]
   sound: string
   flashTransition?: 'black' | 'white'
@@ -19,7 +19,7 @@ export interface SelfWorthTapPage {
 export interface SelfWorthInputPage {
   id: string
   navigation: 'button'
-  text: string
+  text?: string
   background: string[]
   sound: string
   placeholder: string
@@ -31,7 +31,7 @@ export interface SelfWorthInputPage {
 export interface SelfWorthQuestionPage {
   id: string
   navigation: 'button'
-  text: string
+  text?: string
   background: string[]
   sound: string
   options: SelfWorthOption[]

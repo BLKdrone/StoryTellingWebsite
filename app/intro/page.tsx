@@ -77,9 +77,10 @@ function IntroPageInner() {
 
     const page: IntroPage = introPages[currentIndex]
     usePageAudio(page.sound)
-    const resolvedText = page.text.includes(NAME_TOKEN)
-        ? page.text.replace(NAME_TOKEN, name)
-        : page.text
+    const pageText = page.text ?? ''
+    const resolvedText = pageText.includes(NAME_TOKEN)
+        ? pageText.replace(NAME_TOKEN, name)
+        : pageText
 
     return (
         <MobileFrame>
@@ -102,17 +103,44 @@ function IntroPageInner() {
                 </button>
 
                 {page.navigation === 'text-input' ? (
+                    // <div className="relative z-10 flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
+                    //     <p className="text-center text-lg font-serif leading-relaxed">
+                    //         <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
+                    //     </p>
+                    //     <input
+                    //         autoFocus
+                    //         type="text"
+                    //         value={inputValue}
+                    //         onChange={(e) => setInputValue(e.target.value)}
+                    //         placeholder={page.placeholder}
+                    //         className="w-full max-w-sm rounded-2xl border border-border bg-black/20 px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                    //         onKeyDown={(e) => {
+                    //             if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
+                    //                 handleNameSubmit()
+                    //             }
+                    //         }}
+                    //     />
+                    //     <button
+                    //         onClick={handleNameSubmit}
+                    //         disabled={!inputValue.trim()}
+                    //         className="rounded-full bg-white px-8 py-3 text-base font-serif font-semibold text-black transition-opacity disabled:opacity-40"
+                    //     >
+                    //         {page.buttonLabel ?? 'ต่อไป'}
+                    //     </button>
+                    // </div>
                     <div className="relative z-10 flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
-                        <p className="text-center text-lg font-serif leading-relaxed">
-                            <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
-                        </p>
+                        {resolvedText.trim() && (
+                            <p className="text-center text-lg font-serif leading-relaxed">
+                                <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
+                            </p>
+                        )}
                         <input
                             autoFocus
                             type="text"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             placeholder={page.placeholder}
-                            className="w-full max-w-sm rounded-2xl border border-border bg-black/20 px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                            className="w-full max-w-sm rounded-2xl border border-border bg-black/20  px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
                                     handleNameSubmit()
@@ -122,9 +150,9 @@ function IntroPageInner() {
                         <button
                             onClick={handleNameSubmit}
                             disabled={!inputValue.trim()}
-                            className="rounded-full bg-white px-8 py-3 text-base font-serif font-semibold text-black transition-opacity disabled:opacity-40"
+                            className="h-12 w-full max-w-sm rounded-lg bg-black/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                            {page.buttonLabel ?? 'ต่อไป'}
+                            {page.buttonLabel || 'Let it drift'}
                         </button>
                     </div>
                 ) : (
@@ -132,9 +160,11 @@ function IntroPageInner() {
                         className="relative z-10 flex flex-1 flex-col items-center justify-end p-6 pb-16 cursor-pointer"
                         onClick={handleAdvance}
                     >
-                        <p className="text-center text-lg font-serif leading-relaxed">
-                            <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
-                        </p>
+                        {resolvedText.trim() && (
+                            <p className="text-center text-lg font-serif leading-relaxed">
+                                <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
+                            </p>
+                        )}
                     </div>
                 )}
 

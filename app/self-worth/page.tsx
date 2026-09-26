@@ -58,7 +58,7 @@ function SelfWorthPageInner() {
     const total = selfWorthPages.length
     const page = selfWorthPages[index]
     usePageAudio(page.sound)
-    const text = resolveSelfWorthText(page.text, answers)
+    const text = page.text ? resolveSelfWorthText(page.text, answers) : ''
 
     const finish = async (finalAnswers: Record<string, string> = answers) => {
         const { error } = await supabase.from('self_worth_responses').insert({
@@ -130,9 +130,11 @@ function SelfWorthPageInner() {
                     <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col justify-center gap-8">
-                            <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
-                                <span className={cn(textChip, 'leading-relaxed')}>{text}</span>
-                            </h1>
+                            {text.trim() && (
+                                <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
+                                    <span className={cn(textChip, 'leading-relaxed')}>{text}</span>
+                                </h1>
+                            )}
 
                             {isQuestion ? (
                                 <div className="grid grid-cols-2 gap-4">
@@ -202,9 +204,11 @@ function SelfWorthPageInner() {
                 <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                     {backButton}
                     <div className="flex flex-1 flex-col items-center justify-center text-center">
-                        <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">
-                            <span className={cn(textChip, 'leading-relaxed')}>{text}</span>
-                        </p>
+                        {text.trim() && (
+                            <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">
+                                <span className={cn(textChip, 'leading-relaxed')}>{text}</span>
+                            </p>
+                        )}
                     </div>
                 </div>
                 {flashOverlay}

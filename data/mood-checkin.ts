@@ -13,7 +13,7 @@ export interface MoodOption {
 
 export interface MoodTapPage {
   navigation: 'tap-anywhere'
-  text: string
+  text?: string
   id: string
   background: string
   sound: string
@@ -24,7 +24,7 @@ export interface MoodTapPage {
 // Text-input page: shows an input + an explicit "continue" button
 export interface MoodInputPage {
   navigation: 'button'
-  text: string
+  text?: string
   id: string
   background: string
   sound: string
@@ -42,7 +42,7 @@ export interface MoodChoice {
 // Choice page: shows option buttons
 export interface MoodChoicePage {
   navigation: 'button'
-  text: string
+  text?: string
   id: string
   background: string
   sound: string

@@ -40,16 +40,16 @@ export default function OutroPage() {
   }
 
   const handleBack = () => {
-  if (showResult) {
-    setShowResult(false)
-    return
+    if (showResult) {
+      setShowResult(false)
+      return
+    }
+    if (index > 0) {
+      setIndex((i) => i - 1)
+    } else {
+      router.push('/chapter-checkpoint')
+    }
   }
-  if (index > 0) {
-    setIndex((i) => i - 1)
-  } else {
-    router.push('/chapter-checkpoint')
-  }
-}
 
   const restart = () => {
     clearQuizResult()
@@ -247,22 +247,24 @@ export default function OutroPage() {
         <BackgroundSlideshow images={background} intervalMs={1200} />
 
         <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
-  
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                handleBack()
-              }}
-              className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
-              aria-label="Go back"
-            >
-              ← Back
-            </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              handleBack()
+            }}
+            className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+            aria-label="Go back"
+          >
+            ← Back
+          </button>
 
           <div className="flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16 text-center">
-            <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">
-              <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
-            </p>
+            {page.text?.trim() && (
+              <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">
+                <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
+              </p>
+            )}
           </div>
         </div>
 

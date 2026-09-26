@@ -335,6 +335,26 @@
   animation: animal-bob 3s ease-in-out infinite;
 }
 
+@keyframes whale-click-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  35% {
+    transform: translateY(-28px) scale(1.08);
+  }
+
+  65% {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+.animate-whale-click {
+  animation: whale-click-bounce 500ms ease-out;
+}
+
 @keyframes floatUp {
   from {
     transform: translateY(0);
@@ -352,30 +372,63 @@
 }
 
 @keyframes stone-skip {
-  /* --- Approach --- */
-  0%   { transform: translate(-100px, -40px) scale(1, 1) rotate(-8deg); opacity: 0; }
-  8%   { transform: translate(-85px, -55px) scale(1, 1) rotate(-6deg); opacity: 1; }
+  /* --- Entrance (Farther start to the left) --- */
+  0% {
+    transform: translate(-220px, -40px) scale(1, 1);
+    opacity: 1;
+  }
 
-  /* --- Skip 1 (highest, longest) --- */
-  14%  { transform: translate(-75px, -40px) scale(1.12, 0.82) rotate(-4deg); }
-  25%  { transform: translate(-45px, -130px) scale(1, 1) rotate(0deg); }
-  36%  { transform: translate(-15px, -40px) scale(1.12, 0.82) rotate(5deg); }
+  8% {
+    transform: translate(-180px, -55px) scale(1, 1);
+    opacity: 1;
+  }
 
-  /* --- Skip 2 (lower/shorter) --- */
-  42%  { transform: translate(-8px, -40px) scale(1.08, 0.88) rotate(6deg); }
-  50%  { transform: translate(15px, -102px) scale(1, 1) rotate(10deg); }
-  58%  { transform: translate(38px, -40px) scale(1.08, 0.88) rotate(14deg); }
+  /* --- Jump 1 (Highest & Longest Arc) --- */
+  15% {
+    transform: translate(-150px, -40px) scale(1.15, 0.82);
+  }
 
-  /* --- Skip 3 (quick, small) --- */
-  63%  { transform: translate(43px, -40px) scale(1.05, 0.92) rotate(15deg); }
-  70%  { transform: translate(58px, -82px) scale(1, 1) rotate(18deg); }
-  77%  { transform: translate(73px, -40px) scale(1.05, 0.92) rotate(20deg); }
+  28% {
+    transform: translate(-80px, -180px) scale(1, 1); /* Apex: Peak height */
+  }
 
-  /* --- Skims, then sinks --- */
-  88%  { transform: translate(85px, -38px) scale(1, 1) rotate(21deg); opacity: 1; }
-  100% { transform: translate(100px, -28px) scale(0.9, 0.9) rotate(22deg); opacity: 0; }
+  40% {
+    transform: translate(-10px, -40px) scale(1.15, 0.82);
+  }
+
+  /* --- Jump 2 (Medium Arc) --- */
+  46% {
+    transform: translate(0px, -40px) scale(1.1, 0.86);
+  }
+
+  56% {
+    transform: translate(50px, -120px) scale(1, 1); /* Apex: Medium height */
+  }
+
+  66% {
+    transform: translate(100px, -40px) scale(1.1, 0.86);
+  }
+
+  /* --- Jump 3 (Smallest Arc) --- */
+  72% {
+    transform: translate(110px, -40px) scale(1.05, 0.92);
+  }
+
+  80% {
+    transform: translate(140px, -75px) scale(1, 1); /* Apex: Small height */
+  }
+
+  88% {
+    transform: translate(170px, -40px) scale(1.05, 0.92);
+  }
+
+  /* --- Exit (Farther end to the right, fully visible) --- */
+  100% {
+    transform: translate(220px, -30px) scale(0.9, 0.9);
+    opacity: 1; /* Removed fade out */
+  }
 }
 
 .animate-stone-skip {
-  animation: stone-skip 2.6s cubic-bezier(0.33, 0, 0.2, 1) 1 forwards;
+  animation: stone-skip 2.8s cubic-bezier(0.33, 0, 0.2, 1) 1 forwards;
 }

@@ -16,7 +16,7 @@ import { WhaleGlide } from '@/components/whale-guilde'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 
-const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up break-keep'
 
 const RESUME_KEY = 'quiz-resume'
 
@@ -170,9 +170,11 @@ function QuizPageInner() {
             </button>
 
             <div className="flex flex-1 flex-col items-center justify-end pb-16">
-              <pre className="text-balance text-center font-serif text-2xl leading-relaxed">
-                <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
-              </pre>
+              {page.question?.trim() && (
+                <pre className="text-balance text-center font-serif leading-relaxed">
+                  <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
+                </pre>
+              )}
             </div>
           </div>
           <SlideNext pageKey={page.id} color={page.flashTransition} />
@@ -212,9 +214,11 @@ function QuizPageInner() {
           </div> */}
 
           <div className="flex flex-1 flex-col justify-center gap-8 py-8">
-            <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">
-              <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
-            </h1>
+            {page.question?.trim() && (
+              <h1 className="text-balance text-center font-serif text-2xl leading-relaxed">
+                <span className={cn(textChip, 'leading-relaxed')}>{page.question}</span>
+              </h1>
+            )}
             <div className="flex flex-col gap-3">
               {page.options.map((option) => (
                 <button
@@ -222,7 +226,14 @@ function QuizPageInner() {
                   className={cn(textChip, 'leading-relaxed')}
                   onClick={() => handleSelect(option.letter)}
                 >
-                  {option.label}
+                  {/* Render prefix in bold, then the rest of the label */}
+                  {option.prefix ? (
+                    <>
+                      <strong>{option.prefix}</strong> - {option.label}
+                    </>
+                  ) : (
+                    option.label
+                  )}
                 </button>
               ))}
             </div>

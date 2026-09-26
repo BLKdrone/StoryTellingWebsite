@@ -4,7 +4,7 @@ export interface IntroTapPage {
   navigation: 'tap-anywhere'
   id: string
   speaker: IntroSpeaker
-  text: string
+  text?: string
   background: string[]
   sound: string
   transition?: 'fade' | 'dive'
@@ -14,7 +14,7 @@ export interface IntroInputPage {
   navigation: 'text-input'
   id: string
   speaker: IntroSpeaker
-  text: string
+  text?: string
   background: string[]
   sound: string
   placeholder?: string
@@ -64,7 +64,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    
+
   },
   {
     id: 'intro-welcome',
@@ -78,7 +78,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    
+
   },
   {
     id: 'intro-ask-name',
@@ -94,7 +94,7 @@ export const introPages: IntroPage[] = [
     sound: '/audio/score for interactive project.mp3',
     placeholder: 'ชื่อของเธอ',
     buttonLabel: 'ต่อไป',
-    
+
   },
   {
     id: 'intro-nice-to-meet-you',
@@ -108,7 +108,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    
+
   },
   {
     id: 'intro-explain-journey',
@@ -122,7 +122,7 @@ export const introPages: IntroPage[] = [
       '/background/intro/whale4.webp',
     ],
     sound: '/audio/score for interactive project.mp3',
-    
+
   },
   {
     id: 'intro-follow-me',

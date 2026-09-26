@@ -9,9 +9,14 @@ import type { MoodKey, MoodPage } from '@/data/mood-checkin'
 import { supabase } from '@/lib/supabase'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
+import { WhaleGlide } from '@/components/whale-guilde'
 import { cn } from '@/lib/utils'
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
+const HAPPY_WHALE_FRAMES = [
+  '/background/mood-checkin/whalejump/whale1.webp',
+  '/background/mood-checkin/whalejump/whale2.webp',
+]
 
 type PageState = 'question' | 'options' | 'branch' | 'complete'
 
@@ -64,6 +69,8 @@ function MoodCheckinPageInner() {
 
   const [answer, setAnswer] = useState('')
   const [answers, setAnswers] = useState<Record<string, string>>(resumed?.answers ?? {})
+  const [happyClickCount, setHappyClickCount] = useState(0)
+  const [happyClickEffect, setHappyClickEffect] = useState(0)
 
   // Single source of truth for "what page is on screen right now" —
   // mirrors self-worth's `page = selfWorthPages[index]`, just resolved
@@ -89,6 +96,10 @@ function MoodCheckinPageInner() {
 
   const handleBack = () => {
     if (pageState === 'branch') {
+      if (getCurrentPage()?.id === 'happy-5') {
+        setHappyClickCount(0)
+        setHappyClickEffect(0)
+      }
       if (inConverge) {
         if (convergeIndex > 0) {
           setConvergeIndex((i) => i - 1)
@@ -109,7 +120,7 @@ function MoodCheckinPageInner() {
     } else if (pageState === 'options') {
       setPageState('question')
     } else if (pageState === 'question') {
-      router.push('/chapter-checkpoint') 
+      router.push('/chapter-checkpoint')
     }
   }
 
@@ -141,6 +152,10 @@ function MoodCheckinPageInner() {
 
   const handleAdvanceBranch = (snapshot: Record<string, string> = answers) => {
     if (!selectedMood) return
+    if (getCurrentPage()?.id === 'happy-4') {
+      setHappyClickCount(0)
+      setHappyClickEffect(0)
+    }
     const branch = moodBranches[selectedMood]
 
     if (inConverge && branch.convergePages) {
@@ -199,7 +214,7 @@ function MoodCheckinPageInner() {
     setSubIndex(0)
   }
 
-  const interpolateText = (text: string) =>
+  const interpolateText = (text = '') =>
     text.replace(/\{text-([\w-]+)\}/g, (_, id) => answers[id] ?? '')
 
   // Page 1: Intro
@@ -223,9 +238,11 @@ function MoodCheckinPageInner() {
           <Image src={moodIntro.background} alt="" fill className="object-cover -z-10" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
-            <pre className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-serif text-lg leading-relaxed text-white backdrop-blur-sm float-up">
-              <span>{moodIntro.text}</span>
-            </pre>
+            {moodIntro.text?.trim() && (
+              <pre className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-serif text-lg leading-relaxed text-white backdrop-blur-sm float-up">
+                <span>{moodIntro.text}</span>
+              </pre>
+            )}
           </div>
           <SlideNext pageKey="mood-intro" color={moodIntro.flashTransition} />
         </div>
@@ -256,9 +273,11 @@ function MoodCheckinPageInner() {
 
             <div className="relative z-10 space-y-6 w-full">
               <div className="space-y-2 transition-opacity duration-300" style={{ opacity: exitingMood ? 0 : 1 }}>
-                <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
-                  <span className={cn(textChip, 'leading-relaxed')}>{moodQuestion.text}</span>
-                </h1>
+                {moodQuestion.text?.trim() && (
+                  <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
+                    <span className={cn(textChip, 'leading-relaxed')}>{moodQuestion.text}</span>
+                  </h1>
+                )}
                 <p className="text-sm font-serif text-white/70">Tap anywhere or select a mood</p>
               </div>
 
@@ -343,9 +362,11 @@ function MoodCheckinPageInner() {
               <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 -z-10" />
 
               <div className="relative z-10 space-y-6 w-full">
-                <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
-                  <span className={cn(textChip, 'leading-relaxed')}>{interpolateText(page.text)}</span>
-                </h1>
+                {interpolateText(page.text).trim() && (
+                  <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
+                    <span className={cn(textChip, 'leading-relaxed')}>{interpolateText(page.text)}</span>
+                  </h1>
+                )}
                 {isChoice ? (
                   <div className="flex flex-col gap-3 items-center">
                     {page.choices.map((choice, i) => (
@@ -411,7 +432,7 @@ function MoodCheckinPageInner() {
                 alt="skipping whale"
                 width={250}
                 height={150}
-                className="animate-stone-skip object-contain opacity-80"
+                className="animate-stone-skip object-contain"
               />
             </div>
           )}
@@ -419,15 +440,49 @@ function MoodCheckinPageInner() {
             key={page.id}
             role="button"
             tabIndex={0}
-            onClick={() => handleAdvanceBranch()}
+            onClick={() => {
+              if (page.id === 'happy-5') {
+                setHappyClickCount((count) => Math.min(count + 1, 5))
+                setHappyClickEffect((effect) => effect + 1)
+              } else {
+                handleAdvanceBranch()
+              }
+            }}
             className="relative z-10 flex min-h-dvh w-full flex-1 flex-col cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 -z-10" />
+            {page.id === 'happy-5' && (
+              <div
+                className="pointer-events-none absolute inset-x-0 top-[18%] z-10 flex justify-center transition-transform duration-500 ease-out"
+                style={{ transform: `scale(${1 + happyClickCount * 0.2})` }}
+              >
+                <WhaleGlide
+                  frames={HAPPY_WHALE_FRAMES}
+                  frameIntervalMs={500}
+                  motion="still"
+                  bounceKey={happyClickEffect}
+                  className="h-[500px] w-[500px] object-contain"
+                />
+              </div>
+            )}
             <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
-              <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">
-                <span className={cn(textChip, 'leading-relaxed')}>{interpolateText(page.text)}</span>
-              </p>
+              {interpolateText(page.text).trim() && (
+                <p className="text-balance mt-64 whitespace-pre-line text-lg font-serif leading-relaxed">
+                  <span className={cn(textChip, 'leading-relaxed')}>{interpolateText(page.text)}</span>
+                </p>
+              )}
             </div>
+            {page.id === 'happy-5' && happyClickCount === 5 && (
+              <button
+                onClick={(event) => {
+                  event.stopPropagation()
+                  handleAdvanceBranch()
+                }}
+                className="absolute bottom-16 left-1/2 z-20 h-12 w-full max-w-sm -translate-x-1/2 rounded-lg bg-black/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30"
+              >
+                ไปต่อ
+              </button>
+            )}
             <SlideNext pageKey={page.id} color={page.flashTransition} />
           </div>
         </div>
