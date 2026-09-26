@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
+import { Suspense, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { MobileFrame } from '@/components/mobile-frame'
 import { introPages, type IntroPage } from '@/data/intro'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
@@ -15,15 +14,46 @@ const NAME_TOKEN = '{{name}}'
 // Shared chapter typography: serif storytelling text with a consistent chip style
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-sm float-up'
 
-export default function IntroPage() {
+const RESUME_KEY = 'intro-resume'
+
+interface IntroResumeState {
+    currentIndex: number
+    name: string
+}
+
+function loadResumeState(): IntroResumeState | null {
+    if (typeof window === 'undefined') return null
+    try {
+        const raw = sessionStorage.getItem(RESUME_KEY)
+        return raw ? (JSON.parse(raw) as IntroResumeState) : null
+    } catch {
+        return null
+    }
+}
+
+function saveResumeState(state: IntroResumeState) {
+    if (typeof window === 'undefined') return
+    try {
+        sessionStorage.setItem(RESUME_KEY, JSON.stringify(state))
+    } catch {
+        // ignore storage errors (private browsing, quota, etc.)
+    }
+}
+
+function IntroPageInner() {
     const router = useRouter()
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [name, setName] = useState('')
+    const searchParams = useSearchParams()
+    const resumed = searchParams.get('resume') === '1' ? loadResumeState() : null
+
+    const [currentIndex, setCurrentIndex] = useState(resumed?.currentIndex ?? 0)
+    const [name, setName] = useState(resumed?.name ?? '')
     const [inputValue, setInputValue] = useState('')
 
     const handleBack = () => {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1)
+        } else {
+            router.push('/')
         }
     }
 
@@ -31,7 +61,10 @@ export default function IntroPage() {
         if (currentIndex < introPages.length - 1) {
             setCurrentIndex(currentIndex + 1)
         } else {
-            router.push('/quiz')
+            // Snapshot exactly where we are so the quiz's back button
+            // can bring the user right back here instead of restarting.
+            saveResumeState({ currentIndex, name })
+            router.push('/quiz?from=intro')
         }
     }
 
@@ -57,18 +90,16 @@ export default function IntroPage() {
                     key={page.id}
                 />
 
-                {currentIndex > 0 && (
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            handleBack()
-                        }}
-                        className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
-                        aria-label="Go back"
-                    >
-                        ← Back
-                    </button>
-                )}
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        handleBack()
+                    }}
+                    className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+                    aria-label="Go back"
+                >
+                    ← Back
+                </button>
 
                 {page.navigation === 'text-input' ? (
                     <div className="relative z-10 flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16">
@@ -113,5 +144,13 @@ export default function IntroPage() {
                 />
             </div>
         </MobileFrame>
+    )
+}
+
+export default function IntroPage() {
+    return (
+        <Suspense fallback={null}>
+            <IntroPageInner />
+        </Suspense>
     )
 }

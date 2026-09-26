@@ -1,21 +1,53 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { motion } from 'motion/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BottleFold } from '@/components/bottle-fold'
 import { FoldAnimation } from '@/components/animations/fold-animation'
 import { bottleIntro, bottleQuestion, bottleOutros } from '@/data/bottle'
 import { usePageAudio } from '@/components/page-audio'
 
-export default function BottlePage() {
+const RESUME_KEY = 'bottle-resume'
+
+interface BottleResumeState {
+  step: number
+  selectedId: string | null
+  outroIndex: number | null
+}
+
+function loadResumeState(): BottleResumeState | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const raw = sessionStorage.getItem(RESUME_KEY)
+    return raw ? (JSON.parse(raw) as BottleResumeState) : null
+  } catch {
+    return null
+  }
+}
+
+function saveResumeState(state: BottleResumeState) {
+  if (typeof window === 'undefined') return
+  try {
+    sessionStorage.setItem(RESUME_KEY, JSON.stringify(state))
+  } catch {
+    // ignore storage errors (private browsing, quota, etc.)
+  }
+}
+
+function BottlePageInner() {
   usePageAudio(bottleIntro.sound)
   const router = useRouter()
-  const [step, setStep] = useState(1)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const searchParams = useSearchParams()
+  const resumed = searchParams.get('resume') === '1' ? loadResumeState() : null
+
+  const [step, setStep] = useState(resumed?.step ?? 1)
+  const [selectedId, setSelectedId] = useState<string | null>(resumed?.selectedId ?? null)
   const [zooming, setZooming] = useState(false)
-  const [randomOutro, setRandomOutro] = useState<(typeof bottleOutros)[number] | null>(null)
+  const [randomOutro, setRandomOutro] = useState<(typeof bottleOutros)[number] | null>(
+    resumed?.outroIndex != null ? bottleOutros[resumed.outroIndex] : null
+  )
 
   const handleSelect = (id: string) => {
     setSelectedId(id)
@@ -24,12 +56,44 @@ export default function BottlePage() {
   }
 
   const handleBottleComplete = () => {
-    const outro = bottleOutros[Math.floor(Math.random() * bottleOutros.length)]
-    setRandomOutro(outro)
+    const outroIndex = Math.floor(Math.random() * bottleOutros.length)
+    setRandomOutro(bottleOutros[outroIndex])
     setStep(5)
   }
 
   const selectedText = bottleQuestion.options.find((o) => o.id === selectedId)?.label || ''
+
+  // Single back handler for every step, so the button never disappears
+  // partway through the flow.
+  const handleBack = () => {
+    if (step === 5) {
+      setRandomOutro(null)
+      setStep(4)
+    } else if (step === 4) {
+      setStep(3)
+    } else if (step === 3) {
+      setSelectedId(null)
+      setZooming(false)
+      setStep(2)
+    } else if (step === 2) {
+      setStep(1)
+    } else if (step === 1) {
+      if (new URLSearchParams(window.location.search).get('from') === 'mood-checkin') {
+        // Return to the exact mood-checkin page the user left, not the intro.
+        router.push('/mood-checkin?resume=1')
+      } else {
+        router.push('/mood-checkin')
+      }
+    }
+  }
+
+  const goToCheckpoint = () => {
+    // Snapshot exactly where we are so the checkpoint's back button
+    // can bring the user right back here instead of restarting.
+    const outroIndex = randomOutro ? bottleOutros.indexOf(randomOutro) : null
+    saveResumeState({ step, selectedId, outroIndex })
+    router.push('/chapter-checkpoint?from=mood-checkin')
+  }
 
   return (
     <MobileFrame>
@@ -37,12 +101,12 @@ export default function BottlePage() {
         {/* Background layer */}
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
 
-        {/* Go Back Button (only active if we haven't committed to a choice yet) */}
-        {step === 2 && !zooming && (
+        {/* Back button — visible on every step, hidden only mid-zoom transition so it can't be tapped during the animation. */}
+        {!(step === 2 && zooming) && (
           <button
             onClick={(e) => {
               e.stopPropagation()
-              setStep(1) // Go back to intro text
+              handleBack()
             }}
             className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
             aria-label="Go back"
@@ -146,7 +210,6 @@ export default function BottlePage() {
             animate={{ opacity: 1 }}
             className="relative z-10 flex flex-1 flex-col items-center justify-center"
           >
-            {/* <BottleFold answer={selectedText} skipFold={true} onComplete={handleBottleComplete} backgroundImage='/background/mood-checkin/bottle/star.webp'  bottleImage="/background/mood-checkin/bottle/bottle.webp"/> */}
             <BottleFold
               answer={selectedText}
               skipFold={true}
@@ -162,7 +225,7 @@ export default function BottlePage() {
           <div
             className="relative z-10 flex flex-1 flex-col items-center justify-center p-8 cursor-pointer bg-cover bg-center"
             style={{ backgroundImage: `url(/${randomOutro.background})` }}
-            onClick={() => router.push('/chapter-checkpoint?from=mood-checkin')}
+            onClick={goToCheckpoint}
           >
             {/* optional dark overlay so text stays readable over the image */}
             <div aria-hidden className="absolute inset-0 bg-black/40" />
@@ -181,5 +244,13 @@ export default function BottlePage() {
         )}
       </div>
     </MobileFrame>
+  )
+}
+
+export default function BottlePage() {
+  return (
+    <Suspense fallback={null}>
+      <BottlePageInner />
+    </Suspense>
   )
 }

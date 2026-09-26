@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
@@ -18,10 +18,39 @@ import { SlideNext } from '@/components/flash-transition'
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-sm float-up'
 
-export default function QuizPage() {
+const RESUME_KEY = 'quiz-resume'
+
+interface QuizResumeState {
+  index: number
+  answers: QuizOption['letter'][]
+}
+
+function loadResumeState(): QuizResumeState | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const raw = sessionStorage.getItem(RESUME_KEY)
+    return raw ? (JSON.parse(raw) as QuizResumeState) : null
+  } catch {
+    return null
+  }
+}
+
+function saveResumeState(state: QuizResumeState) {
+  if (typeof window === 'undefined') return
+  try {
+    sessionStorage.setItem(RESUME_KEY, JSON.stringify(state))
+  } catch {
+    // ignore storage errors (private browsing, quota, etc.)
+  }
+}
+
+function QuizPageInner() {
   const router = useRouter()
-  const [index, setIndex] = useState(0)
-  const [answers, setAnswers] = useState<QuizOption['letter'][]>([])
+  const searchParams = useSearchParams()
+  const resumed = searchParams.get('resume') === '1' ? loadResumeState() : null
+
+  const [index, setIndex] = useState(resumed?.index ?? 0)
+  const [answers, setAnswers] = useState<QuizOption['letter'][]>(resumed?.answers ?? [])
   // const [result, setResult] = useState<AnimalKey | null>(null)
 
   const total = quizQuestions.length
@@ -31,6 +60,14 @@ export default function QuizPage() {
   const finish = (finalAnswers: QuizOption['letter'][]) => {
     const scored = scoreQuiz(finalAnswers)
     saveQuizResult(scored)
+
+    // Snapshot the last question (with its answer un-applied) so that
+    // "back" from the checkpoint returns here instead of restarting.
+    saveResumeState({
+      index: total - 1,
+      answers: finalAnswers.slice(0, -1),
+    })
+
     router.push('/chapter-checkpoint?from=quiz')
   }
 
@@ -59,7 +96,26 @@ export default function QuizPage() {
         setAnswers((prev) => prev.slice(0, -1))
       }
       setIndex((i) => i - 1)
+      return
     }
+
+    // At the very first question — leave the quiz and return to wherever
+    // the user came from.
+    if (typeof window !== 'undefined') {
+      const from = new URLSearchParams(window.location.search).get('from')
+
+      if (from === 'intro') {
+        router.push('/intro?resume=1')
+        return
+      }
+
+      if (from === 'chapter-checkpoint') {
+        router.push('/chapter-checkpoint')
+        return
+      }
+    }
+
+    router.push('/intro')
   }
 
   {
@@ -71,106 +127,6 @@ export default function QuizPage() {
       />
     )
   }
-
-  // if (result) {
-  //   const animal = animals[result]
-
-  //   return (
-  //     <MobileFrame>
-  //       <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
-  //         <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#0a2230' }} />
-  //         <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 p-6 text-center">
-  //           <p className="text-sm uppercase tracking-widest">
-  //             <span className={textChip}>เมื่อเปิดออกเป็นสิ่งที่ใช่หรือไม่</span>
-  //           </p>
-
-  //           <div
-  //             className="animate-float flex h-32 w-32 items-center justify-center rounded-full"
-  //             style={{ backgroundColor: animal.iconColor }}
-  //             aria-hidden
-  //           >
-  //             <span className="font-serif text-4xl text-background">
-  //               {animal.name.charAt(0)}
-  //             </span>
-  //           </div>
-
-  //           <div className="flex flex-col items-center gap-2">
-  //             <h1 className="font-serif text-4xl">
-  //               <span className={textChip}>{animal.name}</span>
-  //             </h1>
-  //             <p className="text-lg">
-  //               <span className={textChip}>{animal.tagline}</span>
-  //             </p>
-  //           </div>
-
-  //           <p className="max-w-sm text-balance text-base italic leading-relaxed">
-  //             <span className={cn(textChip, 'py-2 leading-relaxed')}>&ldquo;{animal.quote}&rdquo;</span>
-  //           </p>
-
-  //           <p className="max-w-sm text-balance text-base leading-relaxed">
-  //             <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.description}</span>
-  //           </p>
-
-  //           <div className="flex w-full max-w-sm flex-col gap-3 text-left">
-  //             <div>
-  //               <p className="mb-1 text-xs uppercase tracking-widest">
-  //                 <span className={textChip}>Vibes</span>
-  //               </p>
-  //               <p className="text-sm leading-relaxed">
-  //                 <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.vibes}</span>
-  //               </p>
-  //             </div>
-
-  //             <div>
-  //               <p className="mb-1 text-xs uppercase tracking-widest">
-  //                 <span className={textChip}>Behavior & Habitat</span>
-  //               </p>
-  //               <p className="text-sm leading-relaxed">
-  //                 <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.behaviorHabitat}</span>
-  //               </p>
-  //             </div>
-
-  //             <div>
-  //               <p className="mb-1 text-xs uppercase tracking-widest">
-  //                 <span className={textChip}>Strength</span>
-  //               </p>
-  //               <p className="text-sm leading-relaxed">
-  //                 <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.strength}</span>
-  //               </p>
-  //             </div>
-
-  //             <div>
-  //               <p className="mb-1 text-xs uppercase tracking-widest">
-  //                 <span className={textChip}>Weakness</span>
-  //               </p>
-  //               <p className="text-sm leading-relaxed">
-  //                 <span className={cn(textChip, 'py-2 leading-relaxed')}>{animal.weakness}</span>
-  //               </p>
-  //             </div>
-  //           </div>
-
-  //           <div className="mt-4 flex w-full max-w-xs flex-col gap-3">
-  //             <Button
-  //               size="lg"
-  //               className="h-14 w-full rounded-[5px] bg-white text-base text-black hover:bg-white/90"
-  //               onClick={restart}
-  //             >
-  //               Take it again
-  //             </Button>
-  //             <Button
-  //               variant="ghost"
-  //               size="lg"
-  //               className="h-12 w-full rounded-[5px] bg-white text-base text-black hover:bg-white/90"
-  //               onClick={() => router.push('/chapter-checkpoint?from=quiz')}
-  //             >
-  //               Continue to checkpoint
-  //             </Button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </MobileFrame>
-  //   )
-  // }
 
   // Chapter-break page: full-screen tap target, no options, no progress bar
   if (page.navigation === 'tap-anywhere') {
@@ -202,18 +158,16 @@ export default function QuizPage() {
           )}
 
           <div key={page.id} className="relative z-10 flex flex-1 flex-col p-6">
-            {index > 0 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleBack()
-                }}
-                className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm font-medium text-black backdrop-blur-md transition-colors hover:bg-white/90"
-                aria-label="Go back"
-              >
-                ← Back
-              </button>
-            )}
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                handleBack()
+              }}
+              className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+              aria-label="Go back"
+            >
+              ← Back
+            </button>
 
             <div className="flex flex-1 flex-col items-center justify-end pb-16">
               <pre className="text-balance text-center font-serif text-2xl leading-relaxed">
@@ -234,18 +188,16 @@ export default function QuizPage() {
         <BackgroundSlideshow images={background} intervalMs={1200} />
 
         <div key={page.id} className="relative z-10 flex flex-1 flex-col p-6">
-          {index > 0 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                handleBack()
-              }}
-              className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm font-medium text-black backdrop-blur-md transition-colors hover:bg-white/90"
-              aria-label="Go back"
-            >
-              ← Back
-            </button>
-          )}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              handleBack()
+            }}
+            className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+            aria-label="Go back"
+          >
+            ← Back
+          </button>
 
           <div className="flex items-center gap-2 pt-2" aria-hidden>
             {quizQuestions.map((q, i) => (
@@ -281,5 +233,13 @@ export default function QuizPage() {
         </div>
       </div>
     </MobileFrame>
+  )
+}
+
+export default function QuizPage() {
+  return (
+    <Suspense fallback={null}>
+      <QuizPageInner />
+    </Suspense>
   )
 }

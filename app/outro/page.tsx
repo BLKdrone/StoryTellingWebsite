@@ -39,14 +39,16 @@ export default function OutroPage() {
   }
 
   const handleBack = () => {
-    if (showResult) {
-      setShowResult(false)
-      return
-    }
-    if (index > 0) {
-      setIndex((i) => i - 1)
-    }
+  if (showResult) {
+    setShowResult(false)
+    return
   }
+  if (index > 0) {
+    setIndex((i) => i - 1)
+  } else {
+    router.push('/chapter-checkpoint')
+  }
+}
 
   const restart = () => {
     clearQuizResult()
@@ -65,7 +67,7 @@ export default function OutroPage() {
     return (
       <MobileFrame>
         <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col overflow-hidden bg-[#0a2230]">
-          {/* Scattered doodle bubbles floating around the page */}
+          {/* Scattered doodle bubble-s floating around the page */}
           <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute left-6 top-10 h-6 w-6 rounded-full border-[3px] border-white/70" />
             <div className="absolute right-10 top-24 h-3 w-3 rounded-full bg-white/60" />
@@ -244,18 +246,17 @@ export default function OutroPage() {
         <BackgroundSlideshow images={background} intervalMs={1200} />
 
         <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
-          {index > 0 && (
+  
             <button
               onClick={(e) => {
                 e.stopPropagation()
                 handleBack()
               }}
-              className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm font-medium text-black backdrop-blur-md transition-colors hover:bg-white/90"
+              className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
               aria-label="Go back"
             >
               ← Back
             </button>
-          )}
 
           <div className="flex flex-1 flex-col items-center justify-end gap-4 p-6 pb-16 text-center">
             <p className="text-balance whitespace-pre-line text-lg font-serif leading-relaxed">

@@ -348,7 +348,7 @@
 }
 
 .float-up {
-  animation: floatUp 1.8s ease-out forwards;
+  animation: floatUp 2.5s ease-out forwards;
 }
 
 @keyframes stone-skip {

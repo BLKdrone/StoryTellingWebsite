@@ -21,6 +21,23 @@ const chapterOptions: Array<{ id: ChapterKey; label: string; href: string }> = [
     { id: 'burnout', label: 'Burnout', href: '/burnout' },
 ]
 
+// Chapters that know how to resume mid-flow via `?resume=1`.
+// Others just get their plain entry href.
+function resumeHrefFor(chapter: ChapterKey): string {
+    switch (chapter) {
+        case 'quiz':
+            return '/quiz?resume=1'
+        case 'mood-checkin':
+            return '/bottle?resume=1'
+        case 'self-worth':
+            return '/self-worth?resume=1'
+        case 'burnout':
+            return '/burnout?resume=1'
+        default:
+            return chapterOptions.find((c) => c.id === chapter)?.href ?? '/'
+    }
+}
+
 function readProgress(): Record<ChapterKey, boolean> {
     if (typeof window === 'undefined') {
         return {
@@ -133,6 +150,15 @@ function ChapterCheckpoint({
     return (
         <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
             <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#0a2230' }} />
+
+            <Link
+                href={resumeHrefFor(currentChapter)}
+                className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+                aria-label="Go back"
+            >
+                ← Back
+            </Link>
+
             <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 p-6 text-center">
                 <div className="space-y-2">
                     <p className="max-w-sm text-balance text-base leading-relaxed text-muted-foreground">

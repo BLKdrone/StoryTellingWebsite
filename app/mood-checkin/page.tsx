@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { MobileFrame } from '@/components/mobile-frame'
 import { moodIntro, moodQuestion, moodBranches, moodOptions } from '@/data/mood-checkin'
@@ -10,26 +10,60 @@ import { supabase } from '@/lib/supabase'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import { cn } from '@/lib/utils'
+
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-sm float-up'
 
 type PageState = 'question' | 'options' | 'branch' | 'complete'
 
 const MOOD_EXIT_DURATION_MS = 900
+const RESUME_KEY = 'mood-checkin-resume'
 
-export default function MoodCheckinPage() {
+interface ResumeState {
+  selectedMood: MoodKey
+  branchIndex: number
+  subPages: MoodPage[] | null
+  subIndex: number
+  inConverge: boolean
+  convergeIndex: number
+  answers: Record<string, string>
+}
+
+function loadResumeState(): ResumeState | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const raw = sessionStorage.getItem(RESUME_KEY)
+    return raw ? (JSON.parse(raw) as ResumeState) : null
+  } catch {
+    return null
+  }
+}
+
+function saveResumeState(state: ResumeState) {
+  if (typeof window === 'undefined') return
+  try {
+    sessionStorage.setItem(RESUME_KEY, JSON.stringify(state))
+  } catch {
+    // ignore storage errors (private browsing, quota, etc.)
+  }
+}
+
+function MoodCheckinPageInner() {
   const router = useRouter()
-  const [pageState, setPageState] = useState<PageState>('question')
-  const [selectedMood, setSelectedMood] = useState<MoodKey | null>(null)
+  const searchParams = useSearchParams()
+  const resumed = searchParams.get('resume') === '1' ? loadResumeState() : null
+
+  const [pageState, setPageState] = useState<PageState>(resumed ? 'branch' : 'question')
+  const [selectedMood, setSelectedMood] = useState<MoodKey | null>(resumed?.selectedMood ?? null)
   const [exitingMood, setExitingMood] = useState<MoodKey | null>(null)
 
-  const [branchIndex, setBranchIndex] = useState(0)
-  const [subPages, setSubPages] = useState<MoodPage[] | null>(null)
-  const [subIndex, setSubIndex] = useState(0)
-  const [inConverge, setInConverge] = useState(false)
-  const [convergeIndex, setConvergeIndex] = useState(0)
+  const [branchIndex, setBranchIndex] = useState(resumed?.branchIndex ?? 0)
+  const [subPages, setSubPages] = useState<MoodPage[] | null>(resumed?.subPages ?? null)
+  const [subIndex, setSubIndex] = useState(resumed?.subIndex ?? 0)
+  const [inConverge, setInConverge] = useState(resumed?.inConverge ?? false)
+  const [convergeIndex, setConvergeIndex] = useState(resumed?.convergeIndex ?? 0)
 
   const [answer, setAnswer] = useState('')
-  const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [answers, setAnswers] = useState<Record<string, string>>(resumed?.answers ?? {})
 
   // Single source of truth for "what page is on screen right now" —
   // mirrors self-worth's `page = selfWorthPages[index]`, just resolved
@@ -74,6 +108,8 @@ export default function MoodCheckinPage() {
       }
     } else if (pageState === 'options') {
       setPageState('question')
+    } else if (pageState === 'question') {
+      router.push('/chapter-checkpoint') 
     }
   }
 
@@ -140,7 +176,22 @@ export default function MoodCheckinPage() {
         })
       }
     }
-    router.push('/bottle')
+
+    // Snapshot exactly where we are so the bottle page's back button
+    // can bring the user right back here instead of restarting.
+    if (selectedMood) {
+      saveResumeState({
+        selectedMood,
+        branchIndex,
+        subPages,
+        subIndex,
+        inConverge,
+        convergeIndex,
+        answers: finalAnswers,
+      })
+    }
+
+    router.push('/bottle?from=mood-checkin')
   }
 
   const handleSelectChoice = (nextPages: MoodPage[]) => {
@@ -162,6 +213,13 @@ export default function MoodCheckinPage() {
           onClick={handleAdvanceQuestion}
           className="relative flex min-h-dvh w-full flex-1 flex-col cursor-pointer"
         >
+          <button
+            onClick={(e) => { e.stopPropagation(); handleBack() }}
+            className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+            aria-label="Go back"
+          >
+            ← Back
+          </button>
           <Image src={moodIntro.background} alt="" fill className="object-cover -z-10" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
@@ -308,7 +366,7 @@ export default function MoodCheckinPage() {
                       value={answer}
                       onChange={(e) => setAnswer(e.target.value)}
                       placeholder={page.placeholder}
-                     className="w-full max-w-sm rounded-2xl border border-border bg-black/20  px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                      className="w-full max-w-sm rounded-2xl border border-border bg-black/20  px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
                           handleSubmit()
@@ -378,4 +436,12 @@ export default function MoodCheckinPage() {
   }
 
   return null
+}
+
+export default function MoodCheckinPage() {
+  return (
+    <Suspense fallback={null}>
+      <MoodCheckinPageInner />
+    </Suspense>
+  )
 }

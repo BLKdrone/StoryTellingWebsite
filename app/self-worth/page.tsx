@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
@@ -17,14 +17,43 @@ import Image from 'next/image'
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-sm float-up'
 
-export default function SelfWorthPage() {
+const RESUME_KEY = 'self-worth-resume'
+
+interface SelfWorthResumeState {
+    index: number
+    answers: Record<string, string>
+}
+
+function loadResumeState(): SelfWorthResumeState | null {
+    if (typeof window === 'undefined') return null
+    try {
+        const raw = sessionStorage.getItem(RESUME_KEY)
+        return raw ? (JSON.parse(raw) as SelfWorthResumeState) : null
+    } catch {
+        return null
+    }
+}
+
+function saveResumeState(state: SelfWorthResumeState) {
+    if (typeof window === 'undefined') return
+    try {
+        sessionStorage.setItem(RESUME_KEY, JSON.stringify(state))
+    } catch {
+        // ignore storage errors (private browsing, quota, etc.)
+    }
+}
+
+function SelfWorthPageInner() {
     const router = useRouter()
-    const [index, setIndex] = useState(0)
-    const [answers, setAnswers] = useState<Record<string, string>>({})
+    const searchParams = useSearchParams()
+    const resumed = searchParams.get('resume') === '1' ? loadResumeState() : null
+
+    const [index, setIndex] = useState(resumed?.index ?? 0)
+    const [answers, setAnswers] = useState<Record<string, string>>(resumed?.answers ?? {})
     const [answer, setAnswer] = useState('')
 
     const total = selfWorthPages.length
-    const page = selfWorthPages[index]%
+    const page = selfWorthPages[index]
     usePageAudio(page.sound)
     const text = resolveSelfWorthText(page.text, answers)
 
@@ -33,6 +62,11 @@ export default function SelfWorthPage() {
             answers: finalAnswers, // includes sw-want
         })
         if (error) console.error('Failed to save self-worth response:', error)
+
+        // Snapshot the state *before* this final answer, so "back" from
+        // the checkpoint returns to a live last question.
+        saveResumeState({ index, answers })
+
         router.push('/chapter-checkpoint?from=self-worth')
     }
 
@@ -61,16 +95,18 @@ export default function SelfWorthPage() {
         if (index > 0) {
             setAnswer('')
             setIndex((i) => i - 1)
+        } else {
+            router.push('/chapter-checkpoint?from=self-worth')
         }
     }
 
-    const backButton = index > 0 && (
+    const backButton = (
         <button
             onClick={(e) => {
                 e.stopPropagation()
                 handleBack()
             }}
-            className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm font-medium text-black backdrop-blur-md transition-colors hover:bg-white/90"
+            className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
             aria-label="Go back"
         >
             ← Back
@@ -178,5 +214,13 @@ export default function SelfWorthPage() {
                 {flashOverlay}
             </div>
         </MobileFrame>
+    )
+}
+
+export default function SelfWorthPage() {
+    return (
+        <Suspense fallback={null}>
+            <SelfWorthPageInner />
+        </Suspense>
     )
 }

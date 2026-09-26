@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
@@ -12,10 +12,39 @@ import { WhaleGlide } from '@/components/whale-guilde'
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-sm float-up'
 
-export default function BurnoutPage() {
+const RESUME_KEY = 'burnout-resume'
+
+interface BurnoutResumeState {
+    index: number
+    answers: Record<string, string>
+}
+
+function loadResumeState(): BurnoutResumeState | null {
+    if (typeof window === 'undefined') return null
+    try {
+        const raw = sessionStorage.getItem(RESUME_KEY)
+        return raw ? (JSON.parse(raw) as BurnoutResumeState) : null
+    } catch {
+        return null
+    }
+}
+
+function saveResumeState(state: BurnoutResumeState) {
+    if (typeof window === 'undefined') return
+    try {
+        sessionStorage.setItem(RESUME_KEY, JSON.stringify(state))
+    } catch {
+        // ignore storage errors (private browsing, quota, etc.)
+    }
+}
+
+function BurnoutPageInner() {
     const router = useRouter()
-    const [index, setIndex] = useState(0)
-    const [answers, setAnswers] = useState<Record<string, string>>({})
+    const searchParams = useSearchParams()
+    const resumed = searchParams.get('resume') === '1' ? loadResumeState() : null
+
+    const [index, setIndex] = useState(resumed?.index ?? 0)
+    const [answers, setAnswers] = useState<Record<string, string>>(resumed?.answers ?? {})
     const [whalePosition, setWhalePosition] = useState(0)
 
     const total = burnoutPages.length
@@ -23,10 +52,13 @@ export default function BurnoutPage() {
     usePageAudio(page.sound)
 
     const finish = () => {
+        // No data is collected/saved for burnout — this chapter is
+        // navigation-only. Just snapshot position for the back button.
+        saveResumeState({ index, answers })
         router.push('/chapter-checkpoint?from=burnout')
     }
 
-    const advance = () => {
+    const advance = (finalAnswers: Record<string, string> = answers) => {
         if (index + 1 < total) {
             setIndex((i) => i + 1)
         } else {
@@ -35,8 +67,9 @@ export default function BurnoutPage() {
     }
 
     const handleSelectLetter = (letter: BurnoutLetter) => {
-        setAnswers((prev) => ({ ...prev, [page.id]: letter }))
-        advance()
+        const updated = { ...answers, [page.id]: letter }
+        setAnswers(updated)
+        advance(updated)
     }
 
     const handleBack = () => {
@@ -44,26 +77,29 @@ export default function BurnoutPage() {
             setIndex((i) => i - 1)
             setWhalePosition(0)
         }
+        else {
+            router.push('/chapter-checkpoint?from=burnout')
+        }
     }
+
+    const backButton = (
+        <button
+            onClick={(e) => {
+                e.stopPropagation()
+                handleBack()
+            }}
+            className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+            aria-label="Go back"
+        >
+            ← Back
+        </button>
+    )
 
     const helpWhale = () => {
         if (whalePosition >= 3) return
         const nextPosition = whalePosition + 1
         setWhalePosition(nextPosition)
     }
-
-    const backButton = index > 0 && (
-        <button
-            onClick={(e) => {
-                e.stopPropagation()
-                handleBack()
-            }}
-            className="absolute top-6 left-6 z-50 rounded-[5px] bg-white px-3 py-2 text-sm text-black backdrop-blur-md transition-colors hover:bg-white/90"
-            aria-label="Go back"
-        >
-            ← Back
-        </button>
-    )
 
     const flashOverlay = <SlideNext pageKey={page.id} color={page.flashTransition} />
 
@@ -107,7 +143,7 @@ export default function BurnoutPage() {
                 key={page.id}
                 role="button"
                 tabIndex={0}
-                onClick={isHelpWhalePage ? undefined : advance}
+                onClick={isHelpWhalePage ? undefined : () => advance()}
                 onKeyDown={(e) => {
                     if (isHelpWhalePage) {
                         if (e.key === 'Enter' || e.key === ' ') {
@@ -184,5 +220,13 @@ export default function BurnoutPage() {
                 {flashOverlay}
             </div>
         </MobileFrame>
+    )
+}
+
+export default function BurnoutPage() {
+    return (
+        <Suspense fallback={null}>
+            <BurnoutPageInner />
+        </Suspense>
     )
 }
