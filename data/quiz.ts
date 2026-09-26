@@ -216,21 +216,9 @@ export const quizQuestions: QuizPageData[] = [
     sound: '/audio/score for interactive project.mp3',
   },
   {
-    id: 'investigation-shallowcoral',
-    navigation: 'tap-anywhere',
-    question: 'ยิ่งดำดิ่งลงไป แสงอาทิตย์ก็ยิ่งจางหาย ราวกับถูกกลืนกินโดยผืนน้ำอันกว้างใหญ่ความเย็นค่อย ๆ แทรกซึมเข้าสู่ร่างกาย',
-    background: '/background/quiz/shallowcoral/background.webp',
-    sound: '/audio/score for interactive project.mp3',
-    decorationFrames: [
-      '/background/quiz/shallowcoral/whale1.webp',
-      '/background/quiz/shallowcoral/whale2.webp',
-    ],
-    decorationMotion: 'glide',
-  },
-  {
     id: 'q1',
     question:
-      'ณ ชายฝั่งที่เต็มไปด้วยเม็ดทรายสีเหลืองนวล ทะเลเป็นประกายจากแสงแดด เสียงคลื่นกระทบฝั่งเป็นจังหวะ คุณนั่งมองไปที่ชายหาดที่เต็มไปด้วยผู้คนมากมายที่ต่างก็มีประสบการณ์ชีวิตและบุคลิกภาพ เมื่อคุณมองมาที่ตัวคุณ คนอื่นมักมองคุณเป็น...',
+      'เมื่อคุณมองมาที่ตัวคุณ คนอื่นมักมองคุณเป็น...',
     backgroundColor: '#1a5566',
     background: [
       '/background/intro/background1.webp',
@@ -248,9 +236,21 @@ export const quizQuestions: QuizPageData[] = [
     navigation: 'button',
   },
   {
+    id: 'investigation-shallowcoral',
+    navigation: 'tap-anywhere',
+    question: 'ยิ่งดำดิ่งลงไป แสงอาทิตย์ก็ยิ่งจางหาย ราวกับถูกกลืนกินโดยผืนน้ำอันกว้างใหญ่ความเย็นค่อย ๆ แทรกซึมเข้าสู่ร่างกาย',
+    background: '/background/quiz/shallowcoral/background.webp',
+    sound: '/audio/score for interactive project.mp3',
+    decorationFrames: [
+      '/background/quiz/shallowcoral/whale1.webp',
+      '/background/quiz/shallowcoral/whale2.webp',
+    ],
+    decorationMotion: 'glide',
+  },
+  {
     id: 'q2',
     question:
-      'คุณค่อย ๆ ว่ายน้ำออกจากชายฝั่งที่คุ้นเคย ทิ้งผืนทรายและเสียงคลื่นไว้เบื้องหลัง ยิ่งดำดิ่งลงไป แสงอาทิตย์ก็ยิ่งจางหาย ราวกับถูกกลืนกินโดยผืนน้ำอันกว้างใหญ่ ความเย็นค่อย ๆ แทรกซึมเข้าสู่ร่างกาย ท่ามกลางความมืดที่กำลังโอบล้อมนั้น คุณรู้สึกได้ว่าพลังในตัวเองกำลังร่อยหรอลงไป คุณจึงเลือกเติมพลังให้ตัวเองผ่านการ...',
+      'ท่ามกลางความมืดที่กำลังโอบล้อมนั้น คุณรู้สึกได้ว่าพลังในตัวเองกำลังร่อยหรอลงไป คุณจึงเลือกเติมพลังให้ตัวเองผ่านการ...',
     backgroundColor: '#184b5c',
     background: [
       '/background/intro/background1.webp',
@@ -296,21 +296,9 @@ export const quizQuestions: QuizPageData[] = [
     sound: '/audio/score for interactive project.mp3',
   },
   {
-    id: 'investigation-deepcoral',
-    navigation: 'tap-anywhere',
-    question: 'กระแสน้ำพัดพาคุณไปไกลเกินกว่าที่เคยรู้จัก เมื่อคุณลืมตาขึ้นอีกครั้ง โลกที่อยู่ตรงหน้ากลับไม่ใช่ที่เดิมอีกต่อไป',
-    background: '/background/quiz/deepcoral/background.webp',
-    sound: '/audio/score for interactive project.mp3',
-    decorationFrames: [
-      '/background/quiz/deepcoral/whale1.webp',
-      '/background/quiz/deepcoral/whale2.webp',
-    ],
-    decorationMotion: 'bob',
-  },
-  {
     id: 'q3',
     question:
-      'ท่ามกลางเกลียวคลื่นที่หมุนวนอย่างบ้าคลั่งนั้น ปฏิกิรยาแรกของคุณคือ',
+      'ท่ามกลางเกลียวคลื่นที่หมุนวนอย่างบ้าคลั่งนั้น\n ปฏิกิรยาแรกของคุณคือ',
     backgroundColor: '#164252',
     background: '/background/quiz/deepcoral/background.webp',
     sound: '/audio/score for interactive project.mp3',
@@ -322,6 +310,18 @@ export const quizQuestions: QuizPageData[] = [
       { letter: 'E', label: 'ยึดหลักถ่วงสมอ - ยึดมั่นในหลักการและสิ่งที่ถูกต้อง เพื่อพาทุกคนกลับเข้าสู่เส้นทางที่ควรเป็น' },
     ],
     navigation: 'button',
+  },
+  {
+    id: 'investigation-deepcoral',
+    navigation: 'tap-anywhere',
+    question: 'กระแสน้ำพัดพาคุณไปไกลเกินกว่าที่เคยรู้จัก เมื่อคุณลืมตาขึ้นอีกครั้ง โลกที่อยู่ตรงหน้ากลับไม่ใช่ที่เดิมอีกต่อไป',
+    background: '/background/quiz/deepcoral/background.webp',
+    sound: '/audio/score for interactive project.mp3',
+    decorationFrames: [
+      '/background/quiz/deepcoral/whale1.webp',
+      '/background/quiz/deepcoral/whale2.webp',
+    ],
+    decorationMotion: 'bob',
   },
   {
     id: 'q4',
@@ -354,7 +354,7 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'q5',
     question:
-      'คุณว่ายเข้าสู่ถ้ำใต้ทะเลที่เงียบงัน มีเพียงเสียงลมหายใจของตัวเอง ในความนิ่งเงียบนั้น ความคิดของคุณค่อย ๆ ลอยขึ้นมาจากก้นบึ้งของจิตใจ วนเวียนอยู่กับ...',
+      'ในความนิ่งเงียบนั้น ความคิดของคุณค่อย ๆ ลอยขึ้นมาจากก้นบึ้งของจิตใจ วนเวียนอยู่กับ...',
     backgroundColor: '#10303e',
     background: [
       '/background/quiz/cave/1.webp',
@@ -371,9 +371,20 @@ export const quizQuestions: QuizPageData[] = [
     navigation: 'button',
   },
   {
+    id: 'investigation-5',
+    navigation: 'tap-anywhere',
+    question: 'ที่ก้นถ้ำลึกลงไป คุณพบหีบสมบัติใบใหญ่',
+    background: [
+      '/background/quiz/cave/1.webp',
+      '/background/quiz/cave/2.webp',
+    ],
+    sound: '/audio/score for interactive project.mp3',
+    flashTransition: 'black',
+  },
+  {
     id: 'q6',
     question:
-      'ที่ก้นถ้ำลึกลงไป คุณพบหีบสมบัติใบใหญ่ เมื่อเปิดมันออก สิ่งที่อยู่ภายในไม่ใช่ทองคำหรืออัญมณี แต่มันเก็บสิ่งล้ำค่าที่สุดในชีวิตคุณ ที่คุณจะปกป้องไว้ไม่ว่าอะไรจะเกิดขึ้น สิ่งนั้นคือ...',
+      'เมื่อเปิดมันออก สิ่งที่อยู่ภายในไม่ใช่ทองคำหรืออัญมณี แต่มันเก็บสิ่งล้ำค่าที่สุดในชีวิตคุณ ที่คุณจะปกป้องไว้ไม่ว่าอะไรจะเกิดขึ้น สิ่งนั้นคือ...',
     backgroundColor: '#0c2734',
     background: [
       '/background/quiz/cave/1.webp',
@@ -389,28 +400,6 @@ export const quizQuestions: QuizPageData[] = [
     ],
     navigation: 'button',
   },
-  {
-    id: 'investigation-5',
-    navigation: 'tap-anywhere',
-    question: 'ที่ก้นถ้ำลึกลงไป คุณพบหีบสมบัติใบใหญ่',
-    background: [
-      '/background/quiz/cave/1.webp',
-      '/background/quiz/cave/2.webp',
-    ],
-    sound: '/audio/score for interactive project.mp3',
-    flashTransition: 'black',
-  },
-  {
-    id: 'investigation-6',
-    navigation: 'tap-anywhere',
-    question: 'เมื่อเปิดมันออก สิ่งที่อยู่ภายในไม่ใช่ทองคำหรืออัญมณี-แต่มันเก็บสิ่งล้ำค่าที่สุดในชีวิตคุณ ที่คุณจะปกป้องไว้ไม่ว่าอะไรจะเกิดขึ้น',
-    background: [
-      '/background/quiz/cave/1.webp',
-      '/background/quiz/cave/2.webp',
-    ],
-    sound: '/audio/score for interactive project.mp3',
-    flashTransition: 'white',
-  }
 ]
 
 /** นับตัวอักษรคำตอบ แล้วคืนค่าสัตว์ที่ถูกเลือกบ่อยที่สุด (กรณีเสมอกันให้ยึดตัวอักษรที่มาก่อน) */

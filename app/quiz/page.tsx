@@ -16,7 +16,7 @@ import { WhaleGlide } from '@/components/whale-guilde'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 
-const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black font-serif text-lg leading-relaxed'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-sm float-up'
 
 export default function QuizPage() {
   const router = useRouter()

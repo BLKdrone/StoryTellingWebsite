@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils'
 const NAME_TOKEN = '{{name}}'
 
 // Shared chapter typography: serif storytelling text with a consistent chip style
-const textChip = 'inline-block rounded-[5px] bg-white px-3 py-1 text-black font-serif text-lg leading-relaxed'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-sm float-up'
 
 export default function IntroPage() {
     const router = useRouter()
