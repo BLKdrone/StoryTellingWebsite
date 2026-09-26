@@ -133,7 +133,12 @@ export default function SelfWorthPage() {
                                         value={answer}
                                         onChange={(e) => setAnswer(e.target.value)}
                                         placeholder={page.placeholder}
-                                        className="w-full max-w-sm rounded-2xl border border-border bg-input/40 px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                                        className="w-full max-w-sm rounded-2xl border border-border bg-black/20 px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
+                                                handleSubmit()
+                                            }
+                                        }}
                                     />
                                     <button
                                         onClick={handleSubmit}

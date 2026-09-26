@@ -76,15 +76,17 @@ export default function IntroPage() {
                             <span className={cn(textChip, 'leading-relaxed')}>{resolvedText}</span>
                         </p>
                         <input
+                            autoFocus
                             type="text"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') handleNameSubmit()
-                            }}
                             placeholder={page.placeholder}
-                            className="w-full max-w-xs rounded-full bg-white/90 px-5 py-3 text-center text-base font-serif text-black outline-none placeholder:text-black/40"
-                            autoFocus
+                            className="w-full max-w-sm rounded-2xl border border-border bg-black/20 px-4 py-4 text-base font-serif text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
+                                    handleNameSubmit()
+                                }
+                            }}
                         />
                         <button
                             onClick={handleNameSubmit}

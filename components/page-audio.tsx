@@ -1,25 +1,44 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
+
+const globalAudioState: {
+    audio: HTMLAudioElement | null
+    currentSound: string | null
+} = {
+    audio: null,
+    currentSound: null,
+}
 
 export function usePageAudio(sound: string) {
-    const audioRef = useRef<HTMLAudioElement | null>(null)
-
     useEffect(() => {
         if (!sound) {
-            audioRef.current?.pause()
-            audioRef.current = null
+            if (globalAudioState.audio) {
+                globalAudioState.audio.pause()
+                globalAudioState.audio = null
+                globalAudioState.currentSound = null
+            }
             return
         }
 
-        const audio = new Audio(sound)
-        audio.loop = true
-        audioRef.current = audio
+        if (globalAudioState.currentSound !== sound) {
+            if (globalAudioState.audio) {
+                globalAudioState.audio.pause()
+            }
+            const audio = new Audio(sound)
+            audio.loop = true
+            globalAudioState.audio = audio
+            globalAudioState.currentSound = sound
+        }
+
+        const audio = globalAudioState.audio!
 
         const tryPlay = () => {
-            void audio.play().catch(() => {
-                // Browsers may block autoplay until the user interacts.
-            })
+            if (audio.paused) {
+                void audio.play().catch(() => {
+                    // Browsers may block autoplay until the user interacts.
+                })
+            }
         }
 
         tryPlay()
@@ -34,9 +53,8 @@ export function usePageAudio(sound: string) {
         return () => {
             window.removeEventListener('pointerdown', resumeOnInteraction)
             window.removeEventListener('keydown', resumeOnInteraction)
-            audio.pause()
-            audio.currentTime = 0
-            if (audioRef.current === audio) audioRef.current = null
+            // We intentionally do not pause the audio here so it continues playing
+            // seamlessly when navigating between pages with the same sound.
         }
     }, [sound])
 }

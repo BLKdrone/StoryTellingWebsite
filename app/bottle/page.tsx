@@ -7,8 +7,10 @@ import { MobileFrame } from '@/components/mobile-frame'
 import { BottleFold } from '@/components/bottle-fold'
 import { FoldAnimation } from '@/components/animations/fold-animation'
 import { bottleIntro, bottleQuestion, bottleOutros } from '@/data/bottle'
+import { usePageAudio } from '@/components/page-audio'
 
 export default function BottlePage() {
+  usePageAudio(bottleIntro.sound)
   const router = useRouter()
   const [step, setStep] = useState(1)
   const [selectedId, setSelectedId] = useState<string | null>(null)

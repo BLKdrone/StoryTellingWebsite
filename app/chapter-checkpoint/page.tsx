@@ -5,6 +5,8 @@ import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { chapterCheckpointData } from '@/data/chapter-checkpoint'
+import { usePageAudio } from '@/components/page-audio'
 
 type ChapterKey = 'quiz' | 'mood-checkin' | 'self-worth' | 'burnout'
 
@@ -110,6 +112,7 @@ function ChapterCheckpoint({
     currentChapter: ChapterKey
     onRestart?: () => void
 }) {
+    usePageAudio(chapterCheckpointData.sound)
     const [progress, setProgress] = useState<Record<ChapterKey, boolean>>({
         quiz: false,
         'mood-checkin': false,

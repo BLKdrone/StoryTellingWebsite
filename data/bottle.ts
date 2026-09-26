@@ -1,5 +1,6 @@
 export const bottleIntro = {
   text: "คุณรู้ไหม ไม่ว่าคุณจะไปเจออะไรมา หรือตอนนี้กำลังรู้สึกอะไรอยู่ คุณไม่ได้อยู่โลกใบนี้เพียงคนเดียวนะ ทุกคนกำลังเผชิญเรื่องราวในแบบของตัวเอง",
+  sound: "/audio/score for interactive project.mp3",
 }
 
 export const bottleQuestion = {
