@@ -244,6 +244,20 @@
   }
 }
 
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.scroll-up {
+  animation: scrollUp 2s linear infinite;
+}
+
 /* Animal-specific animations */
 @keyframes animal-zoom {
 
@@ -372,6 +386,7 @@
 }
 
 @keyframes stone-skip {
+
   /* --- Entrance (Farther start to the left) --- */
   0% {
     transform: translate(-220px, -40px) scale(1, 1);
@@ -389,7 +404,8 @@
   }
 
   28% {
-    transform: translate(-80px, -180px) scale(1, 1); /* Apex: Peak height */
+    transform: translate(-80px, -180px) scale(1, 1);
+    /* Apex: Peak height */
   }
 
   40% {
@@ -402,7 +418,8 @@
   }
 
   56% {
-    transform: translate(50px, -120px) scale(1, 1); /* Apex: Medium height */
+    transform: translate(50px, -120px) scale(1, 1);
+    /* Apex: Medium height */
   }
 
   66% {
@@ -415,7 +432,8 @@
   }
 
   80% {
-    transform: translate(140px, -75px) scale(1, 1); /* Apex: Small height */
+    transform: translate(140px, -75px) scale(1, 1);
+    /* Apex: Small height */
   }
 
   88% {
@@ -425,7 +443,8 @@
   /* --- Exit (Farther end to the right, fully visible) --- */
   100% {
     transform: translate(220px, -30px) scale(0.9, 0.9);
-    opacity: 1; /* Removed fade out */
+    opacity: 1;
+    /* Removed fade out */
   }
 }
 

@@ -43,7 +43,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-whale-appears',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: 'ฉันเอง ปลาวาฬ! ยินดีต้อนรับสู่ทะเลแห่งนี้',
+    text: '"ฉันเอง ปลาวาฬ! ยินดีต้อนรับสู่ทะเลแห่งนี้"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
@@ -56,7 +56,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-glad-you-came',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: 'ฉันดีใจนะที่เธอแวะมาฉันที่ทะเลแห่งนี้',
+    text: '"ฉันดีใจนะที่เธอแวะมาฉันที่ทะเลแห่งนี้"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
@@ -70,7 +70,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-welcome',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: 'จากนี้ฉันจะพาเธอเดินทางในทะเลไปด้วยกัน',
+    text: '"จากนี้ฉันจะพาเธอเดินทางในทะเลไปด้วยกัน"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
@@ -84,7 +84,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-ask-name',
     navigation: 'text-input',
     speaker: 'whale',
-    text: 'ก่อนอื่น เธออยากให้ฉันเรียกเธอว่ายังไงเหรอ',
+    text: '"ก่อนอื่น เธออยากให้ฉันเรียกเธอว่ายังไงเหรอ"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
@@ -100,7 +100,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-nice-to-meet-you',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: 'ยินดีที่ได้รู้จักนะ {{name}}',
+    text: '"ยินดีที่ได้รู้จักนะ {{name}}"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
@@ -114,7 +114,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-explain-journey',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: 'ในระหว่างการเดินทางนี้ ฉันจะทำให้เธอได้ลองตอบคำถามต่อไปนี้ เพื่อฉันจะได้รู้จักเธอมากขึ้น',
+    text: '"ในระหว่างการเดินทางนี้ ฉันจะทำให้เธอได้ลองตอบคำถามต่อไปนี้ เพื่อฉันจะได้รู้จักเธอมากขึ้น"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
@@ -128,7 +128,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-follow-me',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: 'ถ้าเธอพร้อมแล้ว ก็ตามฉันลงมาในทะเลเลย!',
+    text: '"ถ้าเธอพร้อมแล้ว ก็ตามฉันลงมาในทะเลเลย!"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',

@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
-import { BubbleAnimation } from '@/components/bubble-animation'
+import { DecorationBubble } from '@/components/decoration-bubble'
 import {
     selfWorthPages,
     resolveSelfWorthText,
@@ -58,6 +58,7 @@ function SelfWorthPageInner() {
 
     const total = selfWorthPages.length
     const page = selfWorthPages[index]
+    const hasDecoration = Boolean(page.decorationFrames || page.decorationBubble)
     usePageAudio(page.sound)
     const text = page.text ? resolveSelfWorthText(page.text, answers) : ''
 
@@ -128,7 +129,7 @@ function SelfWorthPageInner() {
             <MobileFrame>
                 <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
                     <BackgroundSlideshow images={page.background} intervalMs={1200} />
-                    {page.decorationFrames && <BubbleAnimation />}
+                    {hasDecoration && <DecorationBubble type={page.decorationBubble} />}
                     <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col justify-center gap-8">
@@ -203,7 +204,7 @@ function SelfWorthPageInner() {
                 className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
             >
                 <BackgroundSlideshow images={page.background} intervalMs={1200} />
-                {page.decorationFrames && <BubbleAnimation />}
+                {hasDecoration && <DecorationBubble type={page.decorationBubble} />}
                 <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                     {backButton}
                     <div className="flex flex-1 flex-col items-center justify-center text-center">

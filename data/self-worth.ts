@@ -12,6 +12,7 @@ export interface SelfWorthTapPage {
   text?: string
   background: string[]
   decorationFrames?: string[] | string
+  decorationBubble?: 'one' | 'many'
   sound: string
   flashTransition?: 'black' | 'white'
 }
@@ -23,6 +24,7 @@ export interface SelfWorthInputPage {
   text?: string
   background: string[]
   decorationFrames?: string[] | string
+  decorationBubble?: 'one' | 'many'
   sound: string
   placeholder: string
   buttonLabel?: string
@@ -36,6 +38,7 @@ export interface SelfWorthQuestionPage {
   text?: string
   background: string[]
   decorationFrames?: string[] | string
+  decorationBubble?: 'one' | 'many'
   sound: string
   options: SelfWorthOption[]
   flashTransition?: 'black' | 'white'
@@ -79,6 +82,8 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     navigation: 'tap-anywhere',
     text: 'ตอนนี้ปลาวาฬพาคุณว่ายน้ำต่อ ทันใดนั้น คุณไปชนวัตถุประหลาดอย่างแรง คุณพลัดหลงลงไปในความลึกของมหาสมุทรที่ไม่มีอะไรให้ยึดติดเป็นหลัก นอกจากการดำดิ่งลงไปใต้พื้นน้ำ',
     background: oceanBackground,
+    decorationFrames: '/background/burnout/manybubble.PNG',
+    decorationBubble: 'many',
     sound: '/audio/score for interactive project.mp3',
   },
   {

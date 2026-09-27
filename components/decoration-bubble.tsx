@@ -12,12 +12,41 @@ const bubbles = [
     { left: '92%', size: 36, duration: 8, delay: -3, opacity: 0.4 },
 ]
 
-export function BubbleAnimation() {
+type DecorationBubbleType = 'one' | 'many'
+
+export function DecorationBubble({ type = 'many' }: { type?: DecorationBubbleType }) {
+    if (type === 'many') {
+        return (
+            <div aria-hidden className="pointer-events-none absolute inset-0 z-[8] overflow-hidden">
+                <div className="scroll-up absolute inset-0">
+                    <div className="absolute inset-0">
+                        <Image
+                            src="/background/burnout/manybubble.PNG"
+                            alt=""
+                            fill
+                            sizes="(max-width: 480px) 100vw, 480px"
+                            className="object-cover"
+                        />
+                    </div>
+                    <div className="absolute inset-0 translate-y-full">
+                        <Image
+                            src="/background/burnout/manybubble.PNG"
+                            alt=""
+                            fill
+                            sizes="(max-width: 480px) 100vw, 480px"
+                            className="object-cover"
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div aria-hidden className="pointer-events-none absolute inset-0 z-[8] overflow-hidden">
-            {bubbles.map((bubble, index) => (
+            {bubbles.map((bubble) => (
                 <motion.div
-                    key={index}
+                    key={bubble.left}
                     className="absolute top-0"
                     style={{ left: bubble.left, width: bubble.size, height: bubble.size }}
                     initial={{ y: '110vh', opacity: 0 }}

@@ -46,7 +46,7 @@ export function DecorationBackground({
     safeImages.length > 1 ? safeImages[(safeIndex + 1) % safeImages.length] : null
 
   return (
-    <div aria-hidden className="absolute inset-0 overflow-hidden z-10">
+    <div aria-hidden className="absolute inset-0 overflow-hidden z-9">
       {/* Current image - instant swap, no transition */}
       <Image
         key={safeIndex}

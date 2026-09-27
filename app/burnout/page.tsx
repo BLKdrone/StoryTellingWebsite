@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
-import { BubbleAnimation } from '@/components/bubble-animation'
+import { DecorationBubble } from '@/components/decoration-bubble'
 import { ZoomAnimation } from '@/components/animations/zoom-animation'
 import { burnoutPages, type BurnoutLetter } from '@/data/burnout'
 import { usePageAudio } from '@/components/page-audio'
@@ -56,11 +56,15 @@ function BurnoutPageInner() {
 
     const total = burnoutPages.length
     const page = burnoutPages[index]
+    const hasDecoration = Boolean(page.decorationFrames || page.decorationBubble)
     // const decorationFrames = 'decorationFrames' in page ? page.decorationFrames : undefined
     // const backgroundImage = Array.isArray(page.background) ? page.background[0] : page.background
     // const [decorationFrameIndex, setDecorationFrameIndex] = useState(0)
     const isBlurPage = page.id === 'stop-whale'
     const isBlurCleared = blurClearedPageId === page.id
+    const decorationBubble = page.decorationBubble
+        ? <DecorationBubble type={page.decorationBubble} />
+        : null
     usePageAudio(page.sound)
 
     // useEffect(() => {
@@ -148,6 +152,10 @@ function BurnoutPageInner() {
             <MobileFrame>
                 <div key={page.id} className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
                     <BackgroundSlideshow images={page.background} intervalMs={1200} />
+                    {page.decorationFrames && (
+                        <DecorationBackground images={page.decorationFrames} intervalMs={1200} />
+                    )}
+                    {decorationBubble}
                     <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col justify-center gap-8">
@@ -193,7 +201,7 @@ function BurnoutPageInner() {
                     if (isHelpWhalePage) {
                         if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault()
-
+                            helpWhale()
                         }
                     } else if ((e.key === 'Enter' || e.key === ' ') && (!isBlurPage || isBlurCleared)) {
                         e.preventDefault()
@@ -242,7 +250,7 @@ function BurnoutPageInner() {
                             )}
                         </>
                     )}
-                    {page.decorationFrames && <BubbleAnimation />}
+                    {decorationBubble}
                     <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">

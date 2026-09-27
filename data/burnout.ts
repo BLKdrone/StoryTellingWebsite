@@ -17,6 +17,7 @@ export interface BurnoutTapPage {
     text?: string
     background: string
     decorationFrames?: string[] | string
+    decorationBubble?: 'one' | 'many'
     sound: string
     /** Label shown for pages that represent a special interaction beat
      *  (e.g. "press to help the whale swim") — currently rendered as plain
@@ -30,6 +31,8 @@ export interface BurnoutQuestion {
     navigation: 'button'
     text?: string
     background: string[] | string
+    decorationFrames?: string[] | string
+    decorationBubble?: 'one' | 'many'
     sound: string
     options: BurnoutOption[]
     flashTransition?: 'black' | 'white'
@@ -63,7 +66,7 @@ export const burnoutPages: BurnoutPage[] = [
             '/background/burnout/wind1.PNG',
             '/background/burnout/wind2.PNG',
         ],
-
+        decorationBubble: 'one',
         sound: '/audio/score for interactive project.mp3',
     },
     {
@@ -71,7 +74,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'tap-anywhere',
         text: 'ตรงหน้าคือมหาสมุทรอันกว้างใหญ่ เป็นเส้นทางที่ยาวไกลเหมือนเดิม เหมือนทุกวัน',
         background: deepOceanBackground,
-
+        decorationBubble: 'many',
         sound: '/audio/score for interactive project.mp3',
     },
     {
@@ -123,6 +126,7 @@ export const burnoutPages: BurnoutPage[] = [
             '/background/burnout/wind1.PNG',
             '/background/burnout/wind2.PNG',
         ],
+        decorationBubble: 'one',
         sound: '/audio/score for interactive project.mp3',
         interactionLabel: 'กดเพื่อช่วยวาฬว่าย',
     },
@@ -130,7 +134,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'zoom-whale',
         navigation: 'tap-anywhere',
         text: 'วาฬตัวนี้ขยับครีบแรงขึ้นอีกครั้ง กล้ามเนื้อเริ่มล้าแต่ชินแล้ว',
-         background: '/background/quiz/deepcoral/background.webp',
+        background: '/background/quiz/deepcoral/background.webp',
         decorationFrames: [
             '/background/burnout/wind1.PNG',
             '/background/burnout/wind2.PNG',
@@ -142,7 +146,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'tap-anywhere',
         text: 'ตรงหน้ามีฝูงวาฬตัวอื่นว่ายไปในทิศทางเดียวกัน เร็วกว่า นิ่งกว่า ดูเหมือนไม่เหนื่อยเลย',
         background: ManyWhaleBackground,
-
+        decorationBubble: 'many',
         sound: '/audio/score for interactive project.mp3',
     },
     {
@@ -150,6 +154,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'button',
         text: 'ช่วงนี้คุณรู้สึกว่าตัวเอง "ทนไม่ไหว" ประมาณไหน',
         background: ManyWhaleBackground,
+        decorationBubble: 'many',
 
         sound: '/audio/score for interactive project.mp3',
         options: [
@@ -162,11 +167,11 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-9',
         navigation: 'tap-anywhere',
+        decorationBubble: 'many',
         text: 'วาฬพยายามเร่งตาม ยิ่งเร่ง น้ำยิ่งหนัก ยิ่งเร่ง ยิ่งเหนื่อย วาฬตัวนี้เร่งจนสุดแรงจนภาพเริ่มเบลอ',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',
-        interactionLabel: 'ลองหยุดสักนิด',
     },
     {
         id: 'stop-whale',
