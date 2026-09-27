@@ -30,7 +30,7 @@ export const outroPages: OutroTapPage[] = [
   {
     id: 'outro-2',
     navigation: 'tap-anywhere',
-    text: 'ปลาวาฬปรากฏตัว แต่ไม่มีน้ำกระเซ็นเหมือนตอนเปิด\n\n"การเดินทางของเราได้สิ้นสุดลงแล้วนะ ... "',
+    text: 'ปลาวาฬปรากฏตัว แล้วกล่าวกับเธอ\n"การเดินทางของเราได้สิ้นสุดลงแล้วนะ ... "',
     background: shoreBackground1,
     sound: '/audio/score for interactive project.mp3',
   },
@@ -79,7 +79,7 @@ export const outroPages: OutroTapPage[] = [
   {
     id: 'outro-8.5',
     navigation: 'tap-anywhere',
-    text: 'เธอก้มลงมองถุงเครื่องรางก่อนที่จะแกะออกมาเผยให้เห็นสัตว์ประจพตัวของเธอ',
+    text: 'เธอก้มลงมองถุงเครื่องรางก่อนที่จะแกะออกมาเผยให้เห็นสัตว์ประจำตัวของเธอ',
     background: '/background/outro/bag1.webp',
     sound: '/audio/score for interactive project.mp3',
   },

@@ -2,13 +2,18 @@
 
 import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
+import { BubbleAnimation } from '@/components/bubble-animation'
+import { ZoomAnimation } from '@/components/animations/zoom-animation'
 import { burnoutPages, type BurnoutLetter } from '@/data/burnout'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import { WhaleGlide } from '@/components/whale-guilde'
+import { DecorationBackground } from '@/components/decoration-background'
+
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 
@@ -51,9 +56,22 @@ function BurnoutPageInner() {
 
     const total = burnoutPages.length
     const page = burnoutPages[index]
+    // const decorationFrames = 'decorationFrames' in page ? page.decorationFrames : undefined
+    // const backgroundImage = Array.isArray(page.background) ? page.background[0] : page.background
+    // const [decorationFrameIndex, setDecorationFrameIndex] = useState(0)
     const isBlurPage = page.id === 'stop-whale'
     const isBlurCleared = blurClearedPageId === page.id
     usePageAudio(page.sound)
+
+    // useEffect(() => {
+    //     setDecorationFrameIndex(0)
+    //     if (!decorationFrames || decorationFrames.length < 2) return
+
+    //     const intervalId = window.setInterval(() => {
+    //         setDecorationFrameIndex((frameIndex) => (frameIndex + 1) % decorationFrames.length)
+    //     }, 900)
+    //     return () => window.clearInterval(intervalId)
+    // }, [page.id, decorationFrames])
 
     useEffect(() => {
         if (!isBlurPage) {
@@ -159,6 +177,7 @@ function BurnoutPageInner() {
 
     // Tap-anywhere narrative / interaction page
     const isHelpWhalePage = page.id === 'helpwhale'
+    const isZoomWhalePage = page.id === 'zoom-whale'
 
     return (
         <MobileFrame>
@@ -174,7 +193,7 @@ function BurnoutPageInner() {
                     if (isHelpWhalePage) {
                         if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault()
-                            helpWhale()
+
                         }
                     } else if ((e.key === 'Enter' || e.key === ' ') && (!isBlurPage || isBlurCleared)) {
                         e.preventDefault()
@@ -187,7 +206,43 @@ function BurnoutPageInner() {
                     'absolute inset-0 transition-[filter] duration-700',
                     isBlurPage && !isBlurCleared && 'blur-[7px]'
                 )}>
-                    <BackgroundSlideshow images={page.background} intervalMs={1200} />
+                    {/* Main background image */}
+                    {isZoomWhalePage ? (
+                        <ZoomAnimation
+                            key={page.id}
+                            focalPoint="58% 29%"
+                            peakScale={10}
+                            duration={2.5}
+                            className="absolute inset-0"
+                        >
+                            <Image src={page.background} alt="" fill className="object-cover" priority />
+                            {page.decorationFrames && (
+                                <DecorationBackground
+                                    images={page.decorationFrames}
+                                    intervalMs={1200}
+                                />
+                            )}
+                            <WhaleGlide
+                                frames={[
+                                    '/background/burnout/whale1.webp',
+                                    '/background/burnout/whale2.webp',
+                                ]}
+                                motion="still"
+                                className="pointer-events-none absolute left-1/2 top-[11%] z-[5] h-[28rem] w-[28rem] -translate-x-1/2 object-contain"
+                            />
+                        </ZoomAnimation>
+                    ) : (
+                        <>
+                            <Image src={page.background} alt="" fill className="object-cover" priority />
+                            {page.decorationFrames && (
+                                <DecorationBackground
+                                    images={page.decorationFrames}
+                                    intervalMs={1200}
+                                />
+                            )}
+                        </>
+                    )}
+                    {page.decorationFrames && <BubbleAnimation />}
                     <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
@@ -228,7 +283,7 @@ function BurnoutPageInner() {
                                 <p
                                     className={cn(
                                         'text-balance whitespace-pre-line text-lg font-serif leading-relaxed',
-                                        isHelpWhalePage && 'mt-48'
+                                        isHelpWhalePage && 'mt-48', isZoomWhalePage && 'mt-48'
                                     )}
                                 >
                                     <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>

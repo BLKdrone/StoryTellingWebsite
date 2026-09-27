@@ -11,6 +11,7 @@ export interface SelfWorthTapPage {
   navigation: 'tap-anywhere'
   text?: string
   background: string[]
+  decorationFrames?: string[] | string
   sound: string
   flashTransition?: 'black' | 'white'
 }
@@ -21,6 +22,7 @@ export interface SelfWorthInputPage {
   navigation: 'button'
   text?: string
   background: string[]
+  decorationFrames?: string[] | string
   sound: string
   placeholder: string
   buttonLabel?: string
@@ -33,6 +35,7 @@ export interface SelfWorthQuestionPage {
   navigation: 'button'
   text?: string
   background: string[]
+  decorationFrames?: string[] | string
   sound: string
   options: SelfWorthOption[]
   flashTransition?: 'black' | 'white'
@@ -45,7 +48,7 @@ const oceanBackground = [
   '/background/selfworth/oceans2.webp',
 ]
 
-export const selfWorthPages: SelfWorthPage[] = [
+const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-1',
     navigation: 'tap-anywhere',
@@ -165,6 +168,11 @@ export const selfWorthPages: SelfWorthPage[] = [
     sound: '/audio/score for interactive project.mp3',
   },
 ]
+
+export const selfWorthPages: SelfWorthPage[] = selfWorthPageDefinitions.map((page) => ({
+  ...page,
+  decorationFrames: page.decorationFrames ?? '',
+}))
 
 export function resolveSelfWorthText(text: string, answers: Record<string, string>): string {
   return text.replace(/{{(.*?)}}/g, (_match, key: string) => answers[key.trim()] ?? '')

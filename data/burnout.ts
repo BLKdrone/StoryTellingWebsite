@@ -15,7 +15,8 @@ export interface BurnoutTapPage {
     id: string
     navigation: 'tap-anywhere'
     text?: string
-    background: string[] | string
+    background: string
+    decorationFrames?: string[] | string
     sound: string
     /** Label shown for pages that represent a special interaction beat
      *  (e.g. "press to help the whale swim") — currently rendered as plain
@@ -38,14 +39,11 @@ export type BurnoutPage = BurnoutTapPage | BurnoutQuestion
 
 // Real illustrated backgrounds aren't ready yet — every page cycles through
 // the same placeholder slideshow until actual art is supplied.
-const deepOceanBackground = [
-    '/background/burnout/oceans1.webp',
-    '/background/burnout/oceans2.webp',
-]
-const ManyWhaleBackground = [
-    '/background/burnout/manywhales1.webp',
-    '/background/burnout/manywhales2.webp',
-]
+const deepOceanBackground =
+    '/background/burnout/oceans1.webp'
+
+const ManyWhaleBackground =
+    '/background/burnout/manywhales2.webp'
 
 export const burnoutPages: BurnoutPage[] = [
     {
@@ -61,6 +59,10 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'tap-anywhere',
         text: 'กระแสน้ำเริ่มแรงขึ้นอีกครั้ง ร่างกายของวาฬเริ่มหนักกว่าที่เคย แต่วาฬตัวนั้นก็ยังว่ายต่อไป โดยที่ไม่มีใครสั่งและไม่มีใครบอกให้หยุด',
         background: '/background/quiz/deepcoral/background.webp',
+        decorationFrames: [
+            '/background/burnout/wind1.PNG',
+            '/background/burnout/wind2.PNG',
+        ],
 
         sound: '/audio/score for interactive project.mp3',
     },
@@ -72,18 +74,26 @@ export const burnoutPages: BurnoutPage[] = [
 
         sound: '/audio/score for interactive project.mp3',
     },
-     {
-        id: 'burnout-3',
+    {
+        id: 'burnout-4',
         navigation: 'tap-anywhere',
         text: 'วาฬตัวนี้ก็ว่ายตามกระแสน้ำมาตลอดตั้งแต่จำความได้',
         background: deepOceanBackground,
 
         sound: '/audio/score for interactive project.mp3',
     },
-     {
-        id: 'burnout-3',
+    {
+        id: 'burnout-5',
         navigation: 'tap-anywhere',
-        text: 'ตรงหน้าคือมหาสมุทรอันกว้างใหญ่ เป็นเส้นทางที่ยาวไกลเหมือนเดิม เหมือนทุกวัน วาฬตัวนี้ก็ว่ายตามกระแสน้ำมาตลอดตั้งแต่จำความได้ มีทั้งวันที่นิ่งและวันที่คลื่นแรง แต่ไม่ว่ายังไง ปลาวาฬตัวนี้ก็ว่ายไปต่ออยู่ดี',
+        text: 'มีทั้งวันที่นิ่งและวันที่คลื่นแรง',
+        background: deepOceanBackground,
+
+        sound: '/audio/score for interactive project.mp3',
+    },
+    {
+        id: 'burnout-6',
+        navigation: 'tap-anywhere',
+        text: 'แต่ไม่ว่ายังไง ปลาวาฬตัวนี้ก็ว่ายไปต่ออยู่ดี',
         background: deepOceanBackground,
 
         sound: '/audio/score for interactive project.mp3',
@@ -105,18 +115,26 @@ export const burnoutPages: BurnoutPage[] = [
         ],
     },
     {
-        id: 'burnout-5',
+        id: 'helpwhale',
         navigation: 'tap-anywhere',
         text: 'ตอนนี้กระแสน้ำแรงขึ้นอีก วาฬตัวนี้พยายามว่ายต่อไป',
-        background: deepOceanBackground,
+        background: '/background/quiz/deepcoral/background.webp',
+        decorationFrames: [
+            '/background/burnout/wind1.PNG',
+            '/background/burnout/wind2.PNG',
+        ],
         sound: '/audio/score for interactive project.mp3',
         interactionLabel: 'กดเพื่อช่วยวาฬว่าย',
     },
     {
-        id: 'burnout-6',
+        id: 'zoom-whale',
         navigation: 'tap-anywhere',
         text: 'วาฬตัวนี้ขยับครีบแรงขึ้นอีกครั้ง กล้ามเนื้อเริ่มล้าแต่ชินแล้ว',
-        background: deepOceanBackground,
+         background: '/background/quiz/deepcoral/background.webp',
+        decorationFrames: [
+            '/background/burnout/wind1.PNG',
+            '/background/burnout/wind2.PNG',
+        ],
         sound: '/audio/score for interactive project.mp3',
     },
     {
@@ -162,7 +180,15 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-10',
         navigation: 'tap-anywhere',
-        text: 'ไม่มีวาฬตัวไหนหันมามองคุณ มองจริง ๆ แล้ว ทุกตัวก็กำลังว่ายของตัวเองอยู่ แถมวาฬบางตัวยังว่ายช้ากว่าคุณอีก วาฬตัวนั้นเริ่มไม่แน่ใจว่าที่ผ่านมา เราว่ายตามกระแสน้ำ หรือว่ายตามอะไรกันแน่',
+        text: 'ไม่มีวาฬตัวไหนหันมามองคุณ มองจริง ๆ แล้ว ทุกตัวก็กำลังว่ายของตัวเองอยู่ แถมวาฬบางตัวยังว่ายช้ากว่าคุณอีก',
+        background: ManyWhaleBackground,
+
+        sound: '/audio/score for interactive project.mp3',
+    },
+    {
+        id: 'burnout-10-reflection',
+        navigation: 'tap-anywhere',
+        text: 'วาฬตัวนั้นเริ่มไม่แน่ใจว่าที่ผ่านมา เราว่ายตามกระแสน้ำ หรือว่ายตามอะไรกันแน่',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',
@@ -192,7 +218,7 @@ export const burnoutPages: BurnoutPage[] = [
         sound: '/audio/score for interactive project.mp3',
     },
     {
-        id: 'burnout-12',
+        id: 'burnout-13',
         navigation: 'tap-anywhere',
         text: 'ถ้าวันไหนเหนื่อยมากจริง ๆ การหยุดไม่ได้แปลว่าอ่อนแอ บางทีมันอาจจะเป็นแค่การหยุดหายใจก่อนจะไปต่อได้',
         background: deepOceanBackground,
@@ -200,7 +226,7 @@ export const burnoutPages: BurnoutPage[] = [
         sound: '/audio/score for interactive project.mp3',
     },
     {
-        id: 'burnout-12',
+        id: 'burnout-14',
         navigation: 'tap-anywhere',
         text: 'ค่อย ๆ ว่ายในจังหวะของตัวเองไปนะ',
         background: deepOceanBackground,

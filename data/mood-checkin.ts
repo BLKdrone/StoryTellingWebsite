@@ -62,7 +62,7 @@ export interface MoodBranch {
 export const moodIntro: MoodTapPage = {
   id: 'mood-intro',
   navigation: 'tap-anywhere',
-  text: `ถ้าตอนนี้ท้องฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ\n ท้องฟ้าของคุณในตอนนี้เป็นยังไงกันเหรอ`,
+  text: `ถ้าตอนนี้ท้องฟ้ากำลังสะท้อนอารมณ์ในจิตใจของคุณ`,
   background: '/background/intro/02.PNG',
   sound: '/audio/score for interactive project.mp3',
 }
@@ -97,14 +97,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'happy-1',
         navigation: 'tap-anywhere',
-        text: 'ท้องฟ้าที่คุณเลือกมามีความอบอุ่นมากเลยนะ\nให้ความอบอุ่นนี้อยู่กับคุณไปตลอดวันนะ',
-        background: '/background/mood-checkin/happy.webp',
-        sound: '/audio/score for interactive project.mp3',
-      },
-      {
-        id: 'happy-2',
-        navigation: 'tap-anywhere',
-        text: 'ท้องฟ้าที่คุณเลือกมาช่างดูอบอุ่นมากเลยนะ\nลองนึกถึงสิ่งเล็กๆ ที่ทำให้คุณมีความสุขวันนี้ดูสิ',
+        text: 'ท้องฟ้าที่คุณเลือกมามีความอบอุ่นมากเลยนะ',
         background: '/background/mood-checkin/happy.webp',
         sound: '/audio/score for interactive project.mp3',
       },
@@ -120,7 +113,21 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'happy-4',
         navigation: 'tap-anywhere',
-        text: 'อยากให้คุณจดจำช่วงเวลาดี ๆ ของตัวเองไว้ในใจเสมอนะ วันไหนที่เหนื่อยหรือรู้สึกแย่ลองนึกถึงมันดู ให้ความทรงจำนี้ช่วยโอบกอดและเป็นรอยยิ้มเล็ก ๆ ให้คุณเอง',
+        text: 'อยากให้คุณจดจำช่วงเวลาดี ๆ ของตัวเองไว้ในใจเสมอนะ',
+        background: '/background/mood-checkin/happy.webp',
+        sound: '/audio/score for interactive project.mp3',
+      },
+      {
+        id: 'happy-4',
+        navigation: 'tap-anywhere',
+        text: 'ให้ความทรงจำนี้ช่วยโอบกอดและเป็นรอยยิ้มเล็ก ๆ ให้คุณเอง',
+        background: '/background/mood-checkin/happy.webp',
+        sound: '/audio/score for interactive project.mp3',
+      },
+       {
+        id: 'happy-4',
+        navigation: 'tap-anywhere',
+        text: 'วันไหนที่เหนื่อยหรือรู้สึกแย่ลองนึกถึงมันดู-',
         background: '/background/mood-checkin/happy.webp',
         sound: '/audio/score for interactive project.mp3',
       },

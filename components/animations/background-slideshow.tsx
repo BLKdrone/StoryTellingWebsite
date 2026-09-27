@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
+import { cn } from '@/lib/utils'
 
 interface BackgroundSlideshowProps {
-  images: string | string[]
+  images?: string | string[]
   intervalMs?: number
   fill?: boolean
   imageClassName?: string
@@ -18,7 +19,7 @@ export function BackgroundSlideshow({
   imageClassName = 'object-cover',
 }: BackgroundSlideshowProps) {
   // Strip out any falsy/empty entries up front — this is the root fix
-  const imageList = Array.isArray(images) ? images : [images]
+  const imageList = images == null ? [] : Array.isArray(images) ? images : [images]
   const safeImages = imageList.filter((src): src is string => Boolean(src))
   const [index, setIndex] = useState(0)
   const prevIndex = useRef(0)
@@ -40,28 +41,16 @@ export function BackgroundSlideshow({
     prevIndex.current = 0
   }, [imagesKey])
 
-  if (!safeImages.length) {
-    return (
-      <div
-        aria-hidden
-        className="absolute inset-0 overflow-hidden"
-        style={{
-          backgroundImage:
-            'linear-gradient(135deg, rgba(10, 24, 36, 0.95) 0%, rgba(37, 74, 95, 0.92) 50%, rgba(8, 18, 27, 0.95) 100%)',
-          backgroundColor: '#0f1b26',
-        }}
-      />
-    )
-  }
-
+//   6
   // Clamp so a mid-transition array-length change can never point out of bounds
   const safeIndex = index % safeImages.length
   const safePrevIndex = prevIndex.current % safeImages.length
   const nextSrc =
     safeImages.length > 1 ? safeImages[(safeIndex + 1) % safeImages.length] : null
 
-  return (
-    <div aria-hidden className="absolute inset-0 overflow-hidden bg-[#0f1b26]">
+   return (
+    <div aria-hidden className="absolute inset-0 overflow-hidden">
+
       <div className="absolute inset-0">
         <Image
           src={safeImages[safePrevIndex]}
