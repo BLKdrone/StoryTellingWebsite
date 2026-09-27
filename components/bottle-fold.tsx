@@ -47,12 +47,12 @@ export function BottleFold({
                   rotate: [3, 24, 70],
                   opacity: [1, 1, 0],
                 }
-                : { opacity: 0 }
+                : { opacity: 1 }
           }
           transition={
             phase === 'fold'
-              ? { duration: 0.9, ease: 'easeInOut' }
-              : { duration: 1.1, ease: 'easeIn', times: [0, 0.45, 1] }
+              ? { duration: 2.5, ease: 'easeInOut' }
+              : { duration: 2.5, ease: 'easeIn', times: [0, 0.45, 1] }
           }
           onAnimationComplete={() => {
             if (phase === 'fold') setPhase('toss')
@@ -64,18 +64,14 @@ export function BottleFold({
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
-          className="flex h-16 w-64 items-center justify-center rounded-md  bg-card px-4 shadow-lg"
+          className="flex h-16 w-64 items-center justify-center px-4"
         >
-          {backgroundImage ? (
+          {backgroundImage && (
             <img
               src={backgroundImage}
               alt=""
               className="relative z-10 max-h-full max-w-full object-contain"
             />
-          ) : (
-            <span className="relative z-10 line-clamp-2 text-center text-sm font-medium text-white drop-shadow-md">
-              {answer || 'your words'}
-            </span>
           )}
         </motion.div>
       </div>
@@ -103,10 +99,10 @@ export function BottleFold({
             <motion.img
               src="/background/mood-checkin/bottle/star.webp"
               alt=""
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 5 }}
               animate={{ opacity: phase === 'settle' ? 0.45 : 0 }}
               transition={{ duration: 0.5 }}
-              className="absolute bottom-[12%] left-1/2 h-8 w-8 -translate-x-1/2 object-contain"
+              className="relative z-14 bottom-[12%] left-1/2 h-8 w-8 -translate-x-1/2 object-contain"
             />
           </>
         ) : (

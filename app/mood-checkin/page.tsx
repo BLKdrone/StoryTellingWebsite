@@ -237,11 +237,11 @@ function MoodCheckinPageInner() {
           </button>
           <Image src={moodIntro.background} alt="" fill className="object-cover -z-10" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
-          <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
-            {moodIntro.text?.trim() && (
-              <pre className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-serif text-lg leading-relaxed text-white backdrop-blur-sm float-up">
-                <span>{moodIntro.text}</span>
-              </pre>
+          <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center text-center">
+            {moodQuestion.text?.trim() && (
+              <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
+                <span className={cn(textChip, 'leading-relaxed')}>{moodIntro.text}</span>
+              </h1>
             )}
           </div>
           <SlideNext pageKey="mood-intro" color={moodIntro.flashTransition} />
@@ -421,9 +421,17 @@ function MoodCheckinPageInner() {
             <Image src={page.background} alt="" fill className="object-cover" priority />
           </div>
           {page.decorationFrames && (
-            <div key={`decoration-${page.id}`} className="absolute inset-0 z-[5] pointer-events-none">
-              <Image src={page.decorationFrames} alt="" fill className="object-contain" priority />
-            </div>
+            page.id === 'sad-throw-1' ? (
+              <div key={`decoration-${page.id}`} className="absolute inset-0 z-[5] overflow-hidden pointer-events-none">
+                <div className="sad-plane-flight absolute left-1/2 top-[42%] h-36 w-36 sm:h-44 sm:w-44">
+                  <Image src={page.decorationFrames} alt="" fill className="object-contain" priority />
+                </div>
+              </div>
+            ) : (
+              <div key={`decoration-${page.id}`} className="absolute inset-0 z-[5] pointer-events-none">
+                <Image src={page.decorationFrames} alt="" fill className="object-contain" priority />
+              </div>
+            )
           )}
           {page.id === 'happy-4' && (
             <div className="absolute inset-0 z-[8] overflow-hidden pointer-events-none flex items-center justify-center">

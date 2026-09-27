@@ -365,8 +365,24 @@
   }
 }
 
-.animate-whale-click {
-  animation: whale-click-bounce 500ms ease-out;
+@keyframes sad-plane-flight {
+  0% {
+    transform: translate(-50%, -50%) translate(120vw, 0dvh) rotate(-40deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) translate(-20vw, 0dvh) rotate(-40deg);
+  }
+}
+
+.sad-plane-flight {
+  animation: sad-plane-flight 7s linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sad-plane-flight {
+    animation-duration: 1ms;
+  }
 }
 
 @keyframes floatUp {

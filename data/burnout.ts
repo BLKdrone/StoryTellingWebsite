@@ -82,6 +82,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'tap-anywhere',
         text: 'วาฬตัวนี้ก็ว่ายตามกระแสน้ำมาตลอดตั้งแต่จำความได้',
         background: deepOceanBackground,
+        decorationBubble: 'many',
 
         sound: '/audio/score for interactive project.mp3',
     },
@@ -90,6 +91,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'tap-anywhere',
         text: 'มีทั้งวันที่นิ่งและวันที่คลื่นแรง',
         background: deepOceanBackground,
+        decorationBubble: 'many',
 
         sound: '/audio/score for interactive project.mp3',
     },
@@ -98,6 +100,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'tap-anywhere',
         text: 'แต่ไม่ว่ายังไง ปลาวาฬตัวนี้ก็ว่ายไปต่ออยู่ดี',
         background: deepOceanBackground,
+        decorationBubble: 'many',
 
         sound: '/audio/score for interactive project.mp3',
     },
@@ -108,7 +111,7 @@ export const burnoutPages: BurnoutPage[] = [
         navigation: 'button',
         text: 'แล้วตอนนี้ ช่วงนี้ทำให้คุณรู้สึกอยู่แบบไหน',
         background: deepOceanBackground,
-
+        decorationBubble: 'many',
         sound: '/audio/score for interactive project.mp3',
         options: [
             { letter: 'A', label: 'ว่ายไปเรื่อย ๆ แบบไม่รู้สึกอะไรแล้ว' },

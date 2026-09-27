@@ -150,7 +150,7 @@ function BurnoutPageInner() {
     if (page.navigation === 'button') {
         return (
             <MobileFrame>
-                <div key={page.id} className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
+                <div key={page.id} className="relative flex min-h-dvh flex-1 flex-col">
                     <BackgroundSlideshow images={page.background} intervalMs={1200} />
                     {page.decorationFrames && (
                         <DecorationBackground images={page.decorationFrames} intervalMs={1200} />
@@ -208,7 +208,7 @@ function BurnoutPageInner() {
                         advance()
                     }
                 }}
-                className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
+                className="relative flex min-h-dvh flex-1 cursor-pointer flex-col"
             >
                 <div className={cn(
                     'absolute inset-0 transition-[filter] duration-700',

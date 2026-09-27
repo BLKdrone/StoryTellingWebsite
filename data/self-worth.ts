@@ -58,6 +58,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'กระแสน้ำรอบตัวทำให้คุณสับสนทิศทาง คุณกำลังดำดิ่งลงในมหาสมุทร',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
   },
   {
     id: 'sw-pride',
@@ -65,6 +66,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'อะไรในตัวคุณที่ทำให้คุณรู้สึก \'ภูมิใจ\' ที่สุด?\n"ความ ____ ของฉัน"',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
     placeholder: 'พิมพ์คำตอบ',
     buttonLabel: 'ไปต่อ',
   },
@@ -74,6 +76,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'เป้าหมายในชีวิตของคุณคืออะไร',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
     placeholder: 'พิมพ์คำตอบ',
     buttonLabel: 'ไปต่อ',
   },
@@ -83,7 +86,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'ตอนนี้ปลาวาฬพาคุณว่ายน้ำต่อ ทันใดนั้น คุณไปชนวัตถุประหลาดอย่างแรง คุณพลัดหลงลงไปในความลึกของมหาสมุทรที่ไม่มีอะไรให้ยึดติดเป็นหลัก นอกจากการดำดิ่งลงไปใต้พื้นน้ำ',
     background: oceanBackground,
     decorationFrames: '/background/burnout/manybubble.PNG',
-    decorationBubble: 'many',
+    decorationBubble: 'one',
     sound: '/audio/score for interactive project.mp3',
   },
   {
@@ -92,6 +95,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'ในวินาทีที่เกิดความผิดพลาด เสียงสะท้อนในหัวคุณพูดกับคุณเหมือนเป็น...',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
     options: [
       {
         letter: 'A',
@@ -118,6 +122,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     id: 'sw-6',
     navigation: 'tap-anywhere',
     text: 'ไม่ว่าเสียงนั้นจะเป็นยังไง จำไว้นะว่าคุณคือ \'เพื่อนคนสำคัญที่สุด\' ของตัวเอง คนที่จะพาคุณก้าวผ่านความผิดพลาด ก็คือคุณเอง\n\nดังนั้น ดูแลคนสำคัญให้ดีล่ะ',
+    decorationBubble: 'one',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
   },
@@ -125,6 +130,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     id: 'sw-7',
     navigation: 'tap-anywhere',
     text: 'หลังจากที่คุณตั้งหลักได้แล้ว รอบตัวมีเส้นทางน้ำหลายสายไหลผ่านไปซ้าๆ บางสายพาวาฬไปสู่แสงสว่างที่ไกลออกไป บางสายมืดและเงียบจนมองไม่เห็นจุดจบ… แต่วาฬตัวนี้กำลังรอให้คุณบอกว่า \'เราจะไปทางไหนกันดี?\'',
+    decorationBubble: 'one',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
   },
@@ -134,6 +140,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'หากต้องเลือกทำกิจกรรมหรือตัดสินใจเรื่องสำคัญสักเรื่องหนึ่ง \'เหตุผล\' แบบไหนที่ให้คุณรู้สึกสบายใจที่สุด?',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
     options: [
       { letter: 'A', label: 'ทำเพราะผลลัพธ์นั้นจะทำให้คนรอบข้างยอมรับ', background: '/background/selfworth/4path/1.webp' },
       { letter: 'B', label: 'ทำเพราะไม่อยากให้ใครต้องผิดหวังในตัวเรา', background: '/background/selfworth/4path/2.webp' },
@@ -148,6 +155,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'ไม่ว่าเหตุผลของคุณคืออะไร มันไม่มีผิดมีถูกหรอก แต่อยากให้คุณระลึกไว้เสมอ ว่าเป้าหมายของคุณคือ "{{sw-goal}}"',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
   },
   {
     id: 'sw-10',
@@ -155,6 +163,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'กลางมหาสมุทรลึก—ตอนนี้คุณยังคงเดินทางต่อไปในเส้นทางของตัวเองเพื่อไปให้ถึงเป้าหมาย ไม่ว่ากระแสน้ำจะซัดไปทางไหน',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
   },
   {
     id: 'sw-want',
@@ -162,6 +171,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'คุณอยากเป็นคนแบบไหน',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
     placeholder: 'พิมพ์คำตอบ',
     buttonLabel: 'ไปต่อ',
   },
@@ -171,6 +181,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     text: 'งั้นเหรอ ก็ดีนะ ถ้าคุณอยากละก็ สักวันต้องเป็นคนแบบนั้นได้แน่\n\nแต่ถ้าเหนื่อย ก็ไม่ต้องเป็นคนแบบนั้นก็ได้นะ ยังไง ความ "{{sw-pride}}" ของคุณ ก็ดีมากพอแล้วจริง ๆ',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
+    decorationBubble: 'one',
   },
 ]
 
