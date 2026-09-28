@@ -55,7 +55,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'มหาสมุทรอันมืดมิด ตอนนี้กลับดูเศร้าหมองยิ่งกว่าเดิม วาฬเริ่มรู้สึกไม่ค่อยดีเท่าไหร่นัก',
         background: '/background/quiz/deepcoral/background.webp',
 
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
     },
     {
         id: 'burnout-2',
@@ -67,7 +67,7 @@ export const burnoutPages: BurnoutPage[] = [
             '/background/burnout/wind2.PNG',
         ],
         decorationBubble: 'one',
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
     },
     {
         id: 'burnout-3',
@@ -75,7 +75,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ตรงหน้าคือมหาสมุทรอันกว้างใหญ่ เป็นเส้นทางที่ยาวไกลเหมือนเดิม เหมือนทุกวัน',
         background: deepOceanBackground,
         decorationBubble: 'many',
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
     },
     {
         id: 'burnout-4',
@@ -84,7 +84,7 @@ export const burnoutPages: BurnoutPage[] = [
         background: deepOceanBackground,
         decorationBubble: 'many',
 
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
     },
     {
         id: 'burnout-5',
@@ -93,7 +93,7 @@ export const burnoutPages: BurnoutPage[] = [
         background: deepOceanBackground,
         decorationBubble: 'many',
 
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
     },
     {
         id: 'burnout-6',
@@ -102,7 +102,7 @@ export const burnoutPages: BurnoutPage[] = [
         background: deepOceanBackground,
         decorationBubble: 'many',
 
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
     },
     {
         // NOTE: options here are a best-effort transcription — the storyboard
@@ -112,7 +112,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'แล้วตอนนี้ ช่วงนี้ทำให้คุณรู้สึกอยู่แบบไหน',
         background: deepOceanBackground,
         decorationBubble: 'many',
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
         options: [
             { letter: 'A', label: 'ว่ายไปเรื่อย ๆ แบบไม่รู้สึกอะไรแล้ว' },
             { letter: 'B', label: 'ว่ายทั้ง ๆ ที่เหนื่อยมาก' },
@@ -130,7 +130,7 @@ export const burnoutPages: BurnoutPage[] = [
             '/background/burnout/wind2.PNG',
         ],
         decorationBubble: 'one',
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/HotTub.mp3',
         interactionLabel: 'กดเพื่อช่วยวาฬว่าย',
     },
     {
@@ -142,7 +142,7 @@ export const burnoutPages: BurnoutPage[] = [
             '/background/burnout/wind1.PNG',
             '/background/burnout/wind2.PNG',
         ],
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/HotTub.mp3',
     },
     {
         id: 'burnout-7',
@@ -150,7 +150,7 @@ export const burnoutPages: BurnoutPage[] = [
         text: 'ตรงหน้ามีฝูงวาฬตัวอื่นว่ายไปในทิศทางเดียวกัน เร็วกว่า นิ่งกว่า ดูเหมือนไม่เหนื่อยเลย',
         background: ManyWhaleBackground,
         decorationBubble: 'many',
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
     },
     {
         id: 'burnout-tolerance',
@@ -159,7 +159,7 @@ export const burnoutPages: BurnoutPage[] = [
         background: ManyWhaleBackground,
         decorationBubble: 'many',
 
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/deepOcean.mp3',
         options: [
             { letter: 'A', label: 'แทบไม่เคย' },
             { letter: 'B', label: 'บางวัน' },

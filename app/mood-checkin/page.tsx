@@ -96,7 +96,7 @@ function MoodCheckinPageInner() {
 
   const handleBack = () => {
     if (pageState === 'branch') {
-      if (getCurrentPage()?.id === 'happy-5') {
+      if (getCurrentPage()?.id === 'happybig') {
         setHappyClickCount(0)
         setHappyClickEffect(0)
       }
@@ -152,7 +152,7 @@ function MoodCheckinPageInner() {
 
   const handleAdvanceBranch = (snapshot: Record<string, string> = answers) => {
     if (!selectedMood) return
-    if (getCurrentPage()?.id === 'happy-4') {
+    if (getCurrentPage()?.id === 'happyjump') {
       setHappyClickCount(0)
       setHappyClickEffect(0)
     }
@@ -178,8 +178,8 @@ function MoodCheckinPageInner() {
   }
 
   const finishBranch = async (finalAnswers: Record<string, string> = answers) => {
-    if (finalAnswers['overwhelmed-4']) {
-      const dbAnswers = { 'overwhelmed-4': finalAnswers['overwhelmed-4'] }
+    if (finalAnswers['overwhelmedstorm']) {
+      const dbAnswers = { 'overwhelmedstorm': finalAnswers['overwhelmedstorm'] }
 
       const { error } = await supabase.from('mood_checkin_responses').insert({
         mood: selectedMood,
@@ -430,7 +430,7 @@ function MoodCheckinPageInner() {
               </div>
             )
           )}
-          {page.id === 'happy-4' && (
+          {page.id === 'happyjump' && (
             <div className="absolute inset-0 z-[8] overflow-hidden pointer-events-none flex items-center justify-center">
               <Image
                 src="/background/mood-checkin/whalejump/whale2.webp"
@@ -446,7 +446,7 @@ function MoodCheckinPageInner() {
             role="button"
             tabIndex={0}
             onClick={() => {
-              if (page.id === 'happy-5') {
+              if (page.id === 'happybig') {
                 setHappyClickCount((count) => Math.min(count + 1, 5))
                 setHappyClickEffect((effect) => effect + 1)
               } else {
@@ -456,7 +456,7 @@ function MoodCheckinPageInner() {
             className="relative z-10 flex min-h-dvh w-full flex-1 flex-col cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 -z-10" />
-            {page.id === 'happy-5' && (
+            {page.id === 'happybig' && (
               <div
                 className="pointer-events-none absolute inset-x-0 top-[18%] z-10 flex justify-center transition-transform duration-500 ease-out"
                 style={{ transform: `scale(${1 + happyClickCount * 0.2})` }}
@@ -477,7 +477,7 @@ function MoodCheckinPageInner() {
                 </p>
               )}
             </div>
-            {page.id === 'happy-5' && happyClickCount === 5 && (
+            {page.id === 'happybig' && happyClickCount === 5 && (
               <button
                 onClick={(event) => {
                   event.stopPropagation()

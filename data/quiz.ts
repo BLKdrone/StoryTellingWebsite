@@ -67,6 +67,7 @@ export interface AnimalResult {
   iconColor: string
   background: string | string[]
   animal: string | string[]
+  downloadImage: string
   decoration?: string
   animationType: 'zoom' | 'float' | 'glide'
   link: string
@@ -90,6 +91,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     iconColor: '#4bb3c9',
     background: '/background/quiz/character/dolphin/background.webp',
     animal: '/background/quiz/character/dolphin/animal.webp',
+    downloadImage: '/background/quiz/character/dolphin/dolphin.PNG',
     animationType: 'zoom',
     link: "https://www.instagram.com/stories/goose.3533321/3972855821932823957?utm_source=ig_story_item_share&igsi=aXJidTU2eW9tNjRr",
   },
@@ -111,6 +113,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     iconColor: '#7a9a7e',
     background: '/background/quiz/character/seal/background.webp',
     animal: '/background/quiz/character/seal/animal.webp',
+    downloadImage: '/background/quiz/character/seal/seal.PNG',
     decoration: '/background/quiz/character/seal/decoration.webp',
     animationType: 'float',
     link: "https://www.instagram.com/stories/goose.3533321/3972854483486579899?utm_source=ig_story_item_share&igsi=bHI4ejVwanY4bmVp"
@@ -133,6 +136,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     iconColor: '#b06a8f',
     background: '/background/quiz/character/octopus/background.webp',
     animal: '/background/quiz/character/octopus/animal.webp',
+    downloadImage: '/background/quiz/character/octopus/octopus.PNG',
     decoration: '/background/quiz/character/octopus/decoration.webp',
     animationType: 'float',
     link: "https://www.instagram.com/stories/goose.3533321/3972855360408509006?utm_source=ig_story_item_share&igsi=cnVrd3p1cDY0aHYy",
@@ -155,6 +159,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     iconColor: '#c9a24b',
     background: '/background/quiz/character/pufferfish/background.webp',
     animal: '/background/quiz/character/pufferfish/animal.webp',
+    downloadImage: '/background/quiz/character/pufferfish/pufferfish.PNG',
     animationType: 'float',
     link: "https://www.instagram.com/stories/goose.3533321/3972855360408509006?utm_source=ig_story_item_share&igsi=cnVrd3p1cDY0aHYy",
   },
@@ -175,6 +180,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     iconColor: '#5b8f74',
     background: '/background/quiz/character/turtle/background.webp',
     animal: '/background/quiz/character/turtle/animal.webp',
+    downloadImage: '/background/quiz/character/turtle/turtle.PNG',
     decoration: '/background/quiz/character/turtle/decoration.webp',
     animationType: 'glide',
     link: "https://www.instagram.com/stories/goose.3533321/3972839636432484625?utm_source=ig_story_item_share&igsi=MWVydzllejVxZ3N5aQ==",

@@ -12,6 +12,7 @@ import { getQuizResult, clearQuizResult } from '@/lib/quiz-result'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import Link from 'next/link'
+import { Download } from 'lucide-react'
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 
@@ -210,6 +211,17 @@ export default function OutroPage() {
             >
               Link to share in  Instagram
             </Link>
+            <a
+              href={animal.downloadImage}
+              download
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'lg' }),
+                'h-14 w-full max-w-sm rounded-2xl border-white text-base text-white hover:bg-white/10',
+              )}
+            >
+              <Download aria-hidden="true" className="mr-2 size-4" />
+              Download picture
+            </a>
           </div>
           {/* Buttons — chunky sticker style */}
           <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
