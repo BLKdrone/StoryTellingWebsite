@@ -4,13 +4,22 @@ import Link from 'next/link'
 import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Button, buttonVariants } from '@/components/ui/button'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { chapterCheckpointData } from '@/data/chapter-checkpoint'
 import { usePageAudio } from '@/components/page-audio'
+import { MobileFrame } from '@/components/mobile-frame'
 
 type ChapterKey = 'quiz' | 'mood-checkin' | 'self-worth' | 'burnout'
 
 const validChapters: ChapterKey[] = ['quiz', 'mood-checkin', 'self-worth', 'burnout']
+
+const chapterBackgrounds: Record<ChapterKey, string> = {
+    quiz: '/background/quiz/cave/1.webp',
+    'mood-checkin': '/background/mood-checkin/normal.webp',
+    'self-worth': '/background/selfworth/oceans1.webp',
+    burnout: '/background/burnout/oceans1.webp',
+}
 
 const STORAGE_KEY = 'quiet-journey-progress'
 
@@ -148,74 +157,83 @@ function ChapterCheckpoint({
     const checkpointMessage = getCheckpointMessage(currentChapter, progress)
 
     return (
-        <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
-            <div aria-hidden className="absolute inset-0" style={{ backgroundColor: '#0a2230' }} />
+        <MobileFrame>
+            <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
+                <Image
+                    src={chapterBackgrounds[currentChapter]}
+                    alt=""
+                    fill
+                    priority
+                    className="object-cover"
+                />
+                <div aria-hidden className="absolute inset-0 bg-black/45" />
 
-            <Link
-                href={resumeHrefFor(currentChapter)}
-                className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
-                aria-label="Go back"
-            >
-                ← Back
-            </Link>
+                <Link
+                    href={resumeHrefFor(currentChapter)}
+                    className="absolute top-6 left-6 z-50 rounded-full bg-black/20 p-2 text-sm font-medium text-white/80 backdrop-blur-md transition-colors hover:bg-black/40 hover:text-white"
+                    aria-label="Go back"
+                >
+                    ← Back
+                </Link>
 
-            <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 p-6 text-center">
-                <div className="space-y-2">
-                    <p className="max-w-sm text-balance text-base leading-relaxed text-muted-foreground">
-                        {checkpointMessage}
-                    </p>
+                <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 p-6 text-center">
+                    <div className="space-y-2">
+                        <p className="max-w-sm whitespace-pre-line text-balance text-base leading-relaxed text-white">
+                            {checkpointMessage}
+                        </p>
+                    </div>
+
+                    <div className="flex w-full max-w-sm flex-col gap-3">
+                        {chapterOptions.map((chapter) => {
+                            const isCurrent = chapter.id === currentChapter
+                            return (
+                                <Link
+                                    key={chapter.id}
+                                    href={chapter.href}
+                                    className={cn(
+                                        buttonVariants({
+                                            variant: isCurrent ? 'secondary' : 'outline',
+                                            size: 'lg',
+                                        }),
+                                        'h-14 w-full rounded-2xl text-base',
+                                        isCurrent && 'cursor-default opacity-80',
+                                    )}
+                                >
+                                    {isCurrent ? `${chapter.label} (current)` : chapter.label}
+                                </Link>
+                            )
+                        })}
+                    </div>
+
+                    {canGoToOutro ? (
+                        <Link
+                            href="/outro"
+                            className={cn(
+                                buttonVariants({ variant: 'default', size: 'lg' }),
+                                'h-14 w-full max-w-sm rounded-2xl text-base',
+                            )}
+                        >
+                            Continue
+                        </Link>
+                    ) : (
+                        <p className="text-sm text-white/80">
+                            เลือกบทที่อยากทำต่อได้เลย
+                        </p>
+                    )}
+
+                    {onRestart ? (
+                        <Button
+                            variant="ghost"
+                            size="lg"
+                            className="h-12 w-full max-w-sm rounded-2xl text-base"
+                            onClick={onRestart}
+                        >
+                            Try this chapter again
+                        </Button>
+                    ) : null}
                 </div>
-
-                <div className="flex w-full max-w-sm flex-col gap-3">
-                    {chapterOptions.map((chapter) => {
-                        const isCurrent = chapter.id === currentChapter
-                        return (
-                            <Link
-                                key={chapter.id}
-                                href={chapter.href}
-                                className={cn(
-                                    buttonVariants({
-                                        variant: isCurrent ? 'secondary' : 'outline',
-                                        size: 'lg',
-                                    }),
-                                    'h-14 w-full rounded-2xl text-base',
-                                    isCurrent && 'cursor-default opacity-80',
-                                )}
-                            >
-                                {isCurrent ? `${chapter.label} (current)` : chapter.label}
-                            </Link>
-                        )
-                    })}
-                </div>
-
-                {canGoToOutro ? (
-                    <Link
-                        href="/outro"
-                        className={cn(
-                            buttonVariants({ variant: 'default', size: 'lg' }),
-                            'h-14 w-full max-w-sm rounded-2xl text-base',
-                        )}
-                    >
-                        Continue
-                    </Link>
-                ) : (
-                    <p className="text-sm text-muted-foreground">
-                        เลือกบทที่อยากทำต่อได้เลย
-                    </p>
-                )}
-
-                {onRestart ? (
-                    <Button
-                        variant="ghost"
-                        size="lg"
-                        className="h-12 w-full max-w-sm rounded-2xl text-base"
-                        onClick={onRestart}
-                    >
-                        Try this chapter again
-                    </Button>
-                ) : null}
             </div>
-        </div>
+        </MobileFrame>
     )
 }
 

@@ -18,7 +18,7 @@ import Image from 'next/image'
 
 const imageLabel = 'relative z-10 inline-block h-full w-full p-4 text-center font-medium leading-relaxed whitespace-normal flex items-center justify-center text-white'
 
-const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 
 
 const RESUME_KEY = 'self-worth-resume'

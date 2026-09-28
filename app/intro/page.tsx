@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 const NAME_TOKEN = '{{name}}'
 
 // Shared chapter typography: serif storytelling text with a consistent chip style
-const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 
 const RESUME_KEY = 'intro-resume'
 

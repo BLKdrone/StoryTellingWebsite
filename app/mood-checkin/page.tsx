@@ -12,7 +12,7 @@ import { SlideNext } from '@/components/flash-transition'
 import { WhaleGlide } from '@/components/whale-guilde'
 import { cn } from '@/lib/utils'
 
-const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 const HAPPY_WHALE_FRAMES = [
   '/background/mood-checkin/whalejump/whale1.webp',
   '/background/mood-checkin/whalejump/whale2.webp',
@@ -278,7 +278,6 @@ function MoodCheckinPageInner() {
                     <span className={cn(textChip, 'leading-relaxed')}>{moodQuestion.text}</span>
                   </h1>
                 )}
-                <p className="text-sm font-serif text-white/70">Tap anywhere or select a mood</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -290,7 +289,7 @@ function MoodCheckinPageInner() {
                       key={option.key}
                       onClick={(e) => { e.stopPropagation(); handleSelectMood(option.key) }}
                       disabled={exitingMood !== null}
-                      className="relative min-h-[96px] overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                      className="relative min-h-[300px] overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
                       style={{
                         opacity: isFadingOut ? 0 : 1,
                         transform: isFadingOut ? 'scale(0.9)' : undefined,
@@ -312,9 +311,7 @@ function MoodCheckinPageInner() {
                 })}
               </div>
 
-              <p className="text-xs font-serif text-black/60 pt-4 transition-opacity duration-300" style={{ opacity: exitingMood ? 0 : 1 }}>
-                Tap anywhere to continue →
-              </p>
+
             </div>
             <SlideNext pageKey={moodQuestion.id} color={moodQuestion.flashTransition} />
           </div>

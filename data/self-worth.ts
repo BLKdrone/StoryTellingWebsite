@@ -67,7 +67,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',
-    placeholder: 'พิมพ์คำตอบ',
+    placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
     buttonLabel: 'ไปต่อ',
   },
   {
@@ -77,7 +77,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',
-    placeholder: 'พิมพ์คำตอบ',
+    placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
     buttonLabel: 'ไปต่อ',
   },
   {
@@ -172,7 +172,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',
-    placeholder: 'พิมพ์คำตอบ',
+    placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
     buttonLabel: 'ไปต่อ',
   },
   {

@@ -40,19 +40,21 @@ export function BottleFold({
               ? { scaleX: [1, 0.55, 0.14], rotate: [0, -4, 3] }
               : phase === 'toss'
                 ? {
-                  // Arc: up and over, then down into the bottle neck below.
-                  x: [0, 20, 0],
-                  y: [0, -90, 150],
-                  scale: [1, 0.9, 0.35],
-                  rotate: [3, 24, 70],
+                  // Straight drop into the bottle neck — no horizontal arc.
+                  x: 0,
+                  y: [0, -20, 230],
+                  scale: [1, 0.85, 0.2],
+                  rotate: [0, 0, 8],
                   opacity: [1, 1, 0],
                 }
-                : { opacity: 1 }
+                : { opacity: 0 }
           }
           transition={
             phase === 'fold'
               ? { duration: 2.5, ease: 'easeInOut' }
-              : { duration: 2.5, ease: 'easeIn', times: [0, 0.45, 1] }
+              : phase === 'toss'
+                ? { duration: 1.8, ease: 'easeIn', times: [0, 0.3, 1] }
+                : { duration: 0.5 }
           }
           onAnimationComplete={() => {
             if (phase === 'fold') setPhase('toss')
@@ -94,15 +96,19 @@ export function BottleFold({
               alt=""
               width={150}
               height={250}
-              className="h-[250px] w-[150px] "
+              className="relative z-10 h-[250px] w-[150px] "
             />
             <motion.img
               src="/background/mood-checkin/bottle/star.webp"
               alt=""
-              initial={{ opacity: 5 }}
-              animate={{ opacity: phase === 'settle' ? 0.45 : 0 }}
-              transition={{ duration: 0.5 }}
-              className="relative z-14 bottom-[12%] left-1/2 h-8 w-8 -translate-x-1/2 object-contain"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={
+                phase === 'settle'
+                  ? { opacity: 0.45, scale: [0.5, 1.15, 1] }
+                  : { opacity: 0, scale: 0.5 }
+              }
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="relative z-20 bottom-[12%] left-1/2 h-8 w-8 -translate-x-1/2 object-contain"
             />
           </>
         ) : (

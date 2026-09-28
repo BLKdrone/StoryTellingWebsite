@@ -8,6 +8,9 @@ import { BottleFold } from '@/components/bottle-fold'
 import { FoldAnimation } from '@/components/animations/fold-animation'
 import { bottleIntro, bottleQuestion, bottleOutros } from '@/data/bottle'
 import { usePageAudio } from '@/components/page-audio'
+import { Sparkles } from 'lucide-react'
+
+const textChip = 'inline-block max-w-sm rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)]'
 
 const RESUME_KEY = 'bottle-resume'
 
@@ -45,6 +48,7 @@ function BottlePageInner() {
   const [step, setStep] = useState(resumed?.step ?? 1)
   const [selectedId, setSelectedId] = useState<string | null>(resumed?.selectedId ?? null)
   const [zooming, setZooming] = useState(false)
+  const [foldsComplete, setFoldsComplete] = useState(false)
   const [randomOutro, setRandomOutro] = useState<(typeof bottleOutros)[number] | null>(
     resumed?.outroIndex != null ? bottleOutros[resumed.outroIndex] : null
   )
@@ -74,6 +78,7 @@ function BottlePageInner() {
     } else if (step === 3) {
       setSelectedId(null)
       setZooming(false)
+      setFoldsComplete(false)
       setStep(2)
     } else if (step === 2) {
       setStep(1)
@@ -101,7 +106,7 @@ function BottlePageInner() {
         {/* Background layer */}
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
 
-        {/* Back button — visible on every step, hidden only mid-zoom transition so it can't be tapped during the animation. */}
+        {/* Back button — visible on every step, hidden only mid-zoom transition so it can't be %ped during the animation. */}
         {!(step === 2 && zooming) && (
           <button
             onClick={(e) => {
@@ -123,11 +128,10 @@ function BottlePageInner() {
           >
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               {bottleIntro.text?.trim() && (
-                <p className="text-lg text-center font-serif leading-relaxed text-balance">
+                <p className={`${textChip} text-center`}>
                   {bottleIntro.text}
                 </p>
               )}
-              <p className="text-base font-serif text-white/50 text-center mt-12">Tap anywhere to continue</p>
             </motion.div>
           </div>
         )}
@@ -140,7 +144,7 @@ function BottlePageInner() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: zooming ? 0 : 1, y: zooming ? -20 : 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-2xl font-serif text-center text-balance"
+                className="whitespace-pre-line text-2xl font-serif text-center text-balance"
               >
                 {bottleQuestion.question}
               </motion.h1>
@@ -185,25 +189,22 @@ function BottlePageInner() {
             <FoldAnimation
               width={280}
               height={400}
-              onComplete={(foldStep) => {
+              finalImage="/background/mood-checkin/bottle/star.webp"
+              onCompleteAction={(foldStep) => {
                 if (foldStep === 3) {
-                  // When folding is fully complete, transition to the bottle toss
-                  setTimeout(() => setStep(4), 500)
+                  setFoldsComplete(true)
+                } else if (foldStep === 4) {
+                  setTimeout(() => setStep(4), 650)
                 }
               }}
             >
-              <div className="p-8 flex flex-col items-center justify-center text-center text-slate-800 font-serif text-2xl h-full w-full">
+              <div className="whitespace-pre-line p-8 flex flex-col items-center justify-center text-center text-slate-800 font-serif text-2xl h-full w-full">
                 {selectedText}
               </div>
             </FoldAnimation>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="text-base font-serif text-white/50 text-center mt-12"
-            >
-              Tap the paper to fold it
-            </motion.p>
+            {/* <p className="mt-3 text-center text-sm text-white/70">
+              {foldsComplete ? '% the paper to reveal the star' : '% the paper to fold it'}
+            </p> */}
           </motion.div>
         )}
 
@@ -212,7 +213,7 @@ function BottlePageInner() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="relative z-10 flex flex-1 flex-col items-center justify-center"
+            className="flex flex-1 flex-col items-center justify-center"
           >
             <BottleFold
               answer={selectedText}
@@ -240,11 +241,10 @@ function BottlePageInner() {
               className="relative z-10"
             >
               {randomOutro.text?.trim() && (
-                <p className="text-lg text-center font-serif leading-relaxed text-balance">
+                <p className={`${textChip} text-center`}>
                   {randomOutro.text}
                 </p>
               )}
-              <p className="text-base font-serif text-white/50 text-center mt-12">Tap anywhere to finish</p>
             </motion.div>
           </div>
         )}

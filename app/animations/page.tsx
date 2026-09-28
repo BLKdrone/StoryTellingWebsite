@@ -13,7 +13,7 @@ export default function AnimationsDemoPage() {
 
   return (
     <MobileFrame>
-      <main className="flex min-h-dvh flex-col gap-10 px-6 py-10">
+      <main className="whitespace-pre-line flex min-h-dvh flex-col gap-10 px-6 py-10">
         <header className="flex flex-col gap-1">
           <h1 className="font-serif text-2xl text-foreground">Animation studio</h1>
           <p className="text-sm text-muted-foreground">
@@ -24,7 +24,7 @@ export default function AnimationsDemoPage() {
         <section className="flex flex-col gap-3">
           <h2 className="text-sm font-medium text-foreground">Fold in half (tap)</h2>
           <p className="text-xs text-muted-foreground">
-            fold it 3 times, 
+            fold it 3 times,
           </p>
           <div className="flex justify-center py-4">
             <FoldAnimation >
@@ -50,7 +50,7 @@ export default function AnimationsDemoPage() {
         <section className="flex flex-col gap-3">
           <h2 className="text-sm font-medium text-foreground">Zoom (on enter)</h2>
           <p className="text-xs text-muted-foreground">
-            Zooms เข้า 30% 40% 
+            Zooms เข้า 30% 40%
           </p>
           <div className="flex flex-col items-center gap-4 py-4">
             <ZoomAnimation key={zoomKey} focalPoint="30% 40%">

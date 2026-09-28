@@ -21,19 +21,22 @@ export function FoldAnimation({
   width = 300,
   height = 420,
   className,
-  onComplete,
+  onCompleteAction,
+  finalImage,
 }: {
   children?: ReactNode
   foldDuration?: number
   width?: number
   height?: number
   className?: string
-  onComplete?: (step: number) => void
+  onCompleteAction?: (step: number) => void
+  finalImage?: string
 }) {
   const [visW, setVisW] = useState(width)
   const [visH, setVisH] = useState(height)
   const [step, setStep] = useState(0)
   const [running, setRunning] = useState(false)
+  const [showFinalImage, setShowFinalImage] = useState(false)
   const [flapRect, setFlapRect] = useState<FlapRect | null>(null)
   const flap = useAnimationControls()
 
@@ -70,12 +73,16 @@ export function FoldAnimation({
       setFlapRect(null)
       const next = step + 1
       setStep(next)
-      onComplete?.(next)
+      onCompleteAction?.(next)
+    } else if (finalImage && !showFinalImage) {
+      setShowFinalImage(true)
+      onCompleteAction?.(FOLD_SEQUENCE.length + 1)
     } else {
       setVisW(width)
       setVisH(height)
       setStep(0)
-      onComplete?.(0)
+      setShowFinalImage(false)
+      onCompleteAction?.(0)
     }
 
     setRunning(false)
@@ -87,7 +94,7 @@ export function FoldAnimation({
     <div
       role="button"
       tabIndex={0}
-      aria-label={isComplete ? 'Tap to unfold' : 'Tap to fold'}
+      aria-label={showFinalImage ? 'Star revealed' : finalImage && isComplete ? 'Tap to reveal the star' : isComplete ? 'Tap to unfold' : 'Tap to fold'}
       onClick={handleTap}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -99,22 +106,40 @@ export function FoldAnimation({
       style={{ perspective: 1600 }}
     >
       <div className="relative" style={{ width, height, transformStyle: 'preserve-3d' }}>
-        <div
-          className={`absolute left-0 top-0 ${paperClasses}`}
-          style={{
-            width: visW,
-            height: visH,
-            backgroundImage: `url(/background/mood-checkin/bottle/paper.webp)`,  // ← Hardcoded
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          <div className="flex items-center justify-center" style={{ width, height }}>
-            {children}
-          </div>
-        </div>
+        {showFinalImage && finalImage ? (
+          <motion.img
+            src={finalImage}
+            alt=""
+            initial={{ opacity: 0, scale: 0.45, rotate: -90 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="absolute object-contain"
+            style={{
+              width: visW * 5,
+              height: visH * 5,
+              left: -visW * 0.9,
+              top: -visH * 2,
 
-        {flapRect && (
+            }}
+          />
+        ) : (
+          <div
+            className={`absolute left-0 top-0 ${paperClasses}`}
+            style={{
+              width: visW,
+              height: visH,
+              backgroundImage: `url(/background/mood-checkin/bottle/paper.webp)`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            <div className="flex items-center justify-center" style={{ width, height }}>
+              {children}
+            </div>
+          </div>
+        )}
+
+        {flapRect && !showFinalImage && (
           <motion.div
             className={paperClasses}
             style={{

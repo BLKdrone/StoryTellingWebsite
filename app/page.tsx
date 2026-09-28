@@ -13,7 +13,7 @@ const heroImages = [
   '/background/intro/background2.webp',
   '/background/intro/background3.webp',
 ]
-const textChip = 'inline-block rounded-2xl border border-black/60 bg-black/40 px-4 py-3 text-pretty font-body text-2lg text-white leading-relaxed backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)]'
+const textChip = 'inline-block rounded-2xl border border-black/60 bg-black/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-2lg text-white leading-relaxed backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)]'
 export default function HomePage() {
   return (
     <MobileFrame>
@@ -40,11 +40,11 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <p className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 text-pretty font-body text-sm leading-relaxed text-gray-900 backdrop-blur-sm float-up">
+          <p className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 whitespace-pre-line text-pretty font-body text-sm leading-relaxed text-gray-900 backdrop-blur-sm float-up">
             คำชี้แจง: นี่เป็นแบบทดสอบเพื่อพาคุณสำรวจความรู้สึกในช่วงนี้ ไม่ใช่แบบทดสอบเพื่อการวินิจฉัยโรค หากทำแบบทดสอบแล้วเกิด ความรู้สึกไม่สบายใจ สามารถหยุดทำได้ทันที และหากต้องการความ ช่วยเหลือทันที ติดต่อ 1323 สายด่วนสุขภาพจิตได้ตลอด 24 ชม. หรือใช้บริการ MDCU Let’s talk ผ่าน Application MDCU wellness
 
           </p>
-          
+
           <p className={cn(textChip, 'leading-relaxed')}>
             visuals by khem mdcu78 @khemsra <br />
             web by blink mdcu80 sasisap

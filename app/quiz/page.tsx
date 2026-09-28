@@ -16,7 +16,7 @@ import { WhaleGlide } from '@/components/whale-guilde'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 
-const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up break-keep'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up break-keep'
 
 const RESUME_KEY = 'quiz-resume'
 

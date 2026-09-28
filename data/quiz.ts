@@ -299,7 +299,7 @@ export const quizQuestions: QuizPageData[] = [
   {
     id: 'q3',
     question:
-      'ท่ามกลาง​เกลียว​คลื่น​ที่​หมุน​วน​อย่าง​บ้า​คลั่ง​นั้น\n ปฏิ​กิร​ยา​แรก​ของ​คุณ​คือ',
+      'ท่ามกลาง​เกลียว​คลื่น​ที่​หมุน​วน​อย่าง​บ้า​คลั่ง​นั้น ปฏิกิริ​ยา​แรก​ของ​คุณ​คือ',
     backgroundColor: '#164252',
     background: '/background/quiz/deepcoral/background.webp',
     sound: '/audio/score for interactive project.mp3',
