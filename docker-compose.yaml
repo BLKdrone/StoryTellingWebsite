@@ -1,0 +1,43 @@
+services:
+  migrate:
+    build: .
+    command: [ "pnpm", "exec", "prisma", "migrate", "deploy" ]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in the environment or .env.local}
+    restart: "no"
+
+  nextjs:
+    build: .
+    command: [ "pnpm", "exec", "next", "start", "--hostname", "0.0.0.0" ]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in the environment or .env.local}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+
+  db-local:
+    image: mariadb:10.11
+    profiles: [ "local" ]
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?Set MARIADB_ROOT_PASSWORD in .env.local}
+      MARIADB_ROOT_HOST: "%"
+      MARIADB_DATABASE: tellstory
+    ports:
+      - "127.0.0.1:3600:3306"
+    volumes:
+      - tellstory-db-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  tellstory-db-data:

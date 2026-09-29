@@ -1,5 +1,41 @@
 # StoryTellingWebsite
 
+This is a Next.js App Router application using Prisma with MariaDB. Database access stays server-side in Next.js API routes.
+
+## Local Docker Test
+
+Docker and Docker Compose are required. To start MariaDB locally, run this from the repository root:
+
+```powershell
+docker compose --env-file .env.local --profile local up -d --wait db-local
+```
+
+Then build and start the migration job and Next.js app:
+
+```powershell
+docker compose --env-file .env.local --profile local up --build
+```
+
+Open http://localhost:3001. Next.js starts only after the migration service exits successfully. The local database is published on host port 3600 and persists in a Docker volume.
+
+In HeidiSQL, connect to host `127.0.0.1`, port `3600`, user `root`, database `tellstory`, and the password set in `.env.local` as `MARIADB_ROOT_PASSWORD`.
+
+To inspect startup failures:
+
+```powershell
+docker compose --env-file .env.local --profile local logs migrate
+docker compose --env-file .env.local --profile local logs nextjs
+docker compose --env-file .env.local --profile local ps -a
+```
+
+Stop the services while preserving local database data with `docker compose --env-file .env.local --profile local down`. Remove the local database volume as well with `docker compose --env-file .env.local --profile local down --volumes`.
+
+## Database URLs
+
+For the Docker test, set `MARIADB_ROOT_PASSWORD` and `DATABASE_URL` in `.env.local`. Use `mysql://root:<URL-encoded-password>@db-local:3306/tellstory` for `DATABASE_URL`; URL-encode any special characters in the password. If connecting from an app running directly on the host, use port `3600`. Keep the actual password private and do not use a `NEXT_PUBLIC_` prefix.
+
+For deployment, set the external MariaDB URL in the server-side `DATABASE_URL` environment variable; both `migrate` and `nextjs` receive that same value. Do not enable the local database profile in production.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
 
 ## Built with v0

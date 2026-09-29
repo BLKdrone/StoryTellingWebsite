@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { MobileFrame } from '@/components/mobile-frame'
 import { moodIntro, moodQuestion, moodBranches, moodOptions } from '@/data/mood-checkin'
 import type { MoodKey, MoodPage } from '@/data/mood-checkin'
-import { supabase } from '@/lib/supabase'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import { WhaleGlide } from '@/components/whale-guilde'
@@ -178,17 +177,19 @@ function MoodCheckinPageInner() {
   }
 
   const finishBranch = async (finalAnswers: Record<string, string> = answers) => {
-    if (finalAnswers['overwhelmedstorm']) {
-      const dbAnswers = { 'overwhelmedstorm': finalAnswers['overwhelmedstorm'] }
-
-      const { error } = await supabase.from('mood_checkin_responses').insert({
-        mood: selectedMood,
-        answers: dbAnswers,
-      })
-      if (error) {
-        console.error('Failed to save mood check-in:', {
-          message: error.message, details: error.details, hint: error.hint, code: error.code,
+    if (finalAnswers['overwhelmedstorm'] && selectedMood) {
+      try {
+        const response = await fetch('/api/mood-checkin-responses', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            mood: selectedMood,
+            answers: { overwhelmedstorm: finalAnswers['overwhelmedstorm'] },
+          }),
         })
+        if (!response.ok) console.error('Failed to save mood check-in:', await response.text())
+      } catch (error) {
+        console.error('Failed to save mood check-in:', error)
       }
     }
 

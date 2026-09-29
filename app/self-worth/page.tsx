@@ -11,7 +11,6 @@ import {
     resolveSelfWorthText,
     type SelfWorthLetter,
 } from '@/data/self-worth'
-import { supabase } from '@/lib/supabase'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import Image from 'next/image'
@@ -63,10 +62,19 @@ function SelfWorthPageInner() {
     const text = page.text ? resolveSelfWorthText(page.text, answers) : ''
 
     const finish = async (finalAnswers: Record<string, string> = answers) => {
-        const { error } = await supabase.from('self_worth_responses').insert({
-            answers: finalAnswers, // includes sw-want
-        })
-        if (error) console.error('Failed to save self-worth response:', error)
+        const wantedAnswer = finalAnswers['sw-want']
+        if (typeof wantedAnswer === 'string') {
+            try {
+                const response = await fetch('/api/self-worth-responses', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ answers: { 'sw-want': wantedAnswer } }),
+                })
+                if (!response.ok) console.error('Failed to save self-worth response:', await response.text())
+            } catch (error) {
+                console.error('Failed to save self-worth response:', error)
+            }
+        }
 
         // Snapshot the state *before* this final answer, so "back" from
         // the checkpoint returns to a live last question.
