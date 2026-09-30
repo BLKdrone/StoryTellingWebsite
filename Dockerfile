@@ -11,7 +11,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN DATABASE_URL=mysql://root:build-only@127.0.0.1:3306/tellstory pnpm exec prisma generate
+RUN pnpm exec prisma generate
 RUN pnpm build
 
 EXPOSE 3000

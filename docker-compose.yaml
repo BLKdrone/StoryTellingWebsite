@@ -1,43 +1,35 @@
 services:
   migrate:
     build: .
-    command: [ "pnpm", "exec", "prisma", "migrate", "deploy" ]
+    env_file:
+      - stack.env
     environment:
-      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in the environment or .env.local}
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in stack.env}
+    command: [ "pnpm", "exec", "prisma", "migrate", "deploy" ]
     restart: "no"
 
   nextjs:
     build: .
-    command: [ "pnpm", "exec", "next", "start", "--hostname", "0.0.0.0" ]
+    env_file:
+      - stack.env
     environment:
-      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in the environment or .env.local}
-      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
-      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-}
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in stack.env}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:?Set NEXTAUTH_URL in stack.env}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?Set NEXTAUTH_SECRET in stack.env}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
     depends_on:
       migrate:
         condition: service_completed_successfully
-    ports:
-      - "3001:3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.storytelling.rule=Host(`storybookmentalhealth.docchula.com`)"
+      - "traefik.http.routers.storytelling.entrypoints=websecure"
+      - "traefik.http.routers.storytelling.tls.certresolver=letsencrypt"
+      - "traefik.http.services.storytelling.loadbalancer.server.port=3000"
     restart: unless-stopped
-
-  db-local:
-    image: mariadb:10.11
-    profiles: [ "local" ]
-    environment:
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?Set MARIADB_ROOT_PASSWORD in .env.local}
-      MARIADB_ROOT_HOST: "%"
-      MARIADB_DATABASE: tellstory
-    ports:
-      - "127.0.0.1:3600:3306"
-    volumes:
-      - tellstory-db-data:/var/lib/mysql
     healthcheck:
-      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-
-volumes:
-  tellstory-db-data:
+      test: [ "CMD-SHELL", "curl -f http://localhost:3000 || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
