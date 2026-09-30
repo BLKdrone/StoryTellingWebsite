@@ -11,6 +11,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
+ENV DATABASE_URL="mysql://user:password@localhost:3306/dummy"
 RUN pnpm exec prisma generate
 RUN pnpm build
 
