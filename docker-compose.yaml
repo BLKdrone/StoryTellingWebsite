@@ -1,21 +1,17 @@
 services:
   migrate:
     build: .
-    env_file:
-      - stack.env
     environment:
-      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in stack.env}
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in Portainer env vars}
     command: [ "pnpm", "exec", "prisma", "migrate", "deploy" ]
     restart: "no"
 
   nextjs:
     build: .
-    env_file:
-      - stack.env
     environment:
-      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in stack.env}
-      NEXTAUTH_URL: ${NEXTAUTH_URL:?Set NEXTAUTH_URL in stack.env}
-      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?Set NEXTAUTH_SECRET in stack.env}
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in Portainer env vars}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:?Set NEXTAUTH_URL in Portainer env vars}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?Set NEXTAUTH_SECRET in Portainer env vars}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
     depends_on:
