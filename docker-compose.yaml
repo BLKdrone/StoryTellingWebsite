@@ -31,8 +31,3 @@ services:
       - "traefik.http.routers.storytelling-https.tls.certresolver=leresolver"
       - "traefik.http.services.storytelling-https.loadbalancer.server.port=3000"
     restart: unless-stopped
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -f http://localhost:3000 || exit 1" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
