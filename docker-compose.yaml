@@ -8,6 +8,8 @@ services:
 
   nextjs:
     build: .
+    image: storytelling-app
+    pull_policy: build
     environment:
       DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in Portainer env vars}
       NEXTAUTH_URL: ${NEXTAUTH_URL:?Set NEXTAUTH_URL in Portainer env vars}
@@ -17,12 +19,17 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.storytelling.rule=Host(`storybookmentalhealth.docchula.com`)"
-      - "traefik.http.routers.storytelling.entrypoints=websecure"
-      - "traefik.http.routers.storytelling.tls.certresolver=letsencrypt"
-      - "traefik.http.services.storytelling.loadbalancer.server.port=3000"
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.middlewares.storytelling-redirect.redirectscheme.scheme=https"
+          - "traefik.http.middlewares.storytelling-redirect.redirectscheme.permanent=true"
+          - "traefik.http.routers.storytelling-http.middlewares=storytelling-redirect"
+          - "traefik.http.routers.storytelling-http.rule=Host(`storybookmentalhealth.docchula.com`)"
+          - "traefik.http.routers.storytelling-http.entrypoints=web"
+          - "traefik.http.routers.storytelling-https.rule=Host(`storybookmentalhealth.docchula.com`)"
+          - "traefik.http.routers.storytelling-https.entrypoints=websecure"
+          - "traefik.http.routers.storytelling-https.tls.certresolver=leresolver"
+          - "traefik.http.services.storytelling-https.loadbalancer.server.port=3000"
     restart: unless-stopped
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:3000 || exit 1" ]
