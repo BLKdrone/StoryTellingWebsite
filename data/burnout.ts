@@ -188,7 +188,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-10',
         navigation: 'tap-anywhere',
-        text: 'ไม่มีวาฬตัวไหนหันมามองคุณ\nมองจริง ๆ แล้ว ทุกตัวก็กำลังว่ายของตัวเองอยู่\nแถมวาฬบางตัวยังว่ายช้ากว่าคุณอีก',
+        text: 'ไม่มีวาฬตัวไหนหันมามองคุณ จริงๆแล้ว\nวาฬทุกตัวก็แค่กำลังว่ายไปในเส้นทางของตัวเอง\nบางช่วงก็ว่ายเร็ว บางช่วงก็ว่ายช้า\nจนตามเธอไม่ทันด้วยซ้ำ',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',
@@ -196,7 +196,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-10-reflection',
         navigation: 'tap-anywhere',
-        text: 'วาฬตัวนั้นเริ่มไม่แน่ใจว่าที่ผ่านมา\nเราว่ายตามกระแสน้ำ หรือว่ายตามอะไรกันแน่',
+        text: 'วาฬเริ่มไม่แน่ใจว่าที่ผ่านมา\nเราว่ายตามกระแสน้ำ หรือว่ายตามอะไรกันแน่',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',
@@ -204,7 +204,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-11',
         navigation: 'tap-anywhere',
-        text: 'วาฬตัวนั้นชะลอการเคลื่อนไหวลงเล็กน้อย\nรอบตัวเงียบกว่าที่คิด',
+        text: 'วาฬชะลอการเคลื่อนไหวลงเล็กน้อย\nรอบตัวเงียบกว่าที่คิด',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',
@@ -212,7 +212,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-11.5',
         navigation: 'tap-anywhere',
-        text: 'ตอนแรกวาฬตัวนี้รู้สึกแปลกเหมือนกำลังทำอะไรผิด\nกระแสน้ำยังคงพามันไปช้า ๆ แต่ครั้งแรกในรอบนาน\nวาฬตัวนี้กลับรู้สึกเหมือนได้หายใจ',
+        text: 'ตอนแรกวาฬรู้สึกแปลกที่ไม่ได้ออกแรงว่ายจนสุดตัว\nเหมือนที่ผ่านมากระแสน้ำยังคงพาวาฬไปข้างหน้าช้าๆ\nถึงจะรู้สึกผิดแต่วาฬกลับรู้สึกเหมือนได้พักหายใจ',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',

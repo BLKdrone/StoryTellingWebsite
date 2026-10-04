@@ -87,11 +87,6 @@ export default function OutroPage() {
 
           <div className="relative z-10 flex flex-col items-center justify-center gap-6 p-6 pt-14 text-center text-white">
             {/* Wobbly sticker-style header chip */}
-            <p
-              className="-rotate-2 rounded-full border-[3px] border-black bg-white px-4 py-1.5 text-sm font-bold uppercase tracking-widest text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-            >
-              เมื่อเปิดออกเป็นสิ่งที่ใช่หรือไม่
-            </p>
 
             {/* Backdrop + animal, thick outline like a coloring-book panel */}
             <div className="relative flex h-72 w-72 items-center justify-center" aria-hidden>
@@ -154,20 +149,25 @@ export default function OutroPage() {
           </div>
 
           {/* Quote card, hand-drawn dashed border */}
-          <div className="relative z-10 mx-auto mt-8 w-full max-w-sm px-6">
-            <div className="relative rounded-3xl border-[3px] border-dashed border-white bg-white/10 p-5 backdrop-blur-sm">
+          <div className="relative z-10 mx-auto mt-3 w-full max-w-sm px-2 ">
+            <div className="relative rounded-3xl border-[3px] border-dashed border-white bg-white/10 p-2 backdrop-blur-sm">
               {/* <span
                 className="absolute -top-5 left-4 rounded-full border-[3px] border-black px-2 text-3xl font-black leading-none text-black"
                 style={{ backgroundColor: animal.iconColor }}
               >
                 &ldquo;
               </span> */}
-              <p className="text-balance pt-2 text-base italic leading-relaxed text-white">
+              <p className="text-center text-base italic leading-relaxed text-white">
                 {animal.quote}
               </p>
             </div>
           </div>
 
+            {/* <div className="relative z-10 mt-4 w-full mx-auto max-w-md ">
+            <div className="rounded-3xl border-[3px] border-black bg-white p-5 text-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
+              <p className="text-center text-base leading-relaxed">{animal.description}</p>
+            </div>
+          </div>         */}
           {/* Description card */}
           <div className="relative z-10 mx-auto mt-4 w-full max-w-sm px-6">
             <div className="rounded-3xl border-[3px] border-black bg-white p-5 text-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">

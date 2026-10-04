@@ -44,14 +44,14 @@ export const outroPages: OutroTapPage[] = [
   {
     id: 'outro-4',
     navigation: 'tap-anywhere',
-    text: '"ถึงแม้การเดินทางของเรา ณ ตอนนี้จะสิ้นสุด\nแต่ชีวิตของเธอยังต้องไปต่อ"',
+    text: '"ถึงแม้การเดินทางของเรา \nณ ตอนนี้จะสิ้นสุด\nแต่ชีวิตของเธอยังต้องไปต่อ"',
     background: shoreBackground1,
     sound: '/audio/score for interactive project.mp3',
   },
   {
     id: 'outro-5',
     navigation: 'tap-anywhere',
-    text: '"เมื่อใดที่เธอเจอปัญหา ท้อแท้\nรู้สึกหมดหวัง หรือโดดเดี่ยว\nขอให้นึกไว้เสมอว่าในโลกนี้ก็ยังมีตัวเธออยู่"',
+    text: '"เมื่อใดที่เธอเจอปัญหา ท้อแท้\nรู้สึกหมดหวัง หรือโดดเดี่ยว\nขอให้นึกไว้เสมอว่า\nในโลกนี้ก็ยังมีตัวเธออยู่"',
     background: shoreBackground1,
     sound: '/audio/score for interactive project.mp3',
   },
@@ -86,7 +86,7 @@ export const outroPages: OutroTapPage[] = [
   {
     id: 'outro-9',
     navigation: 'tap-anywhere',
-    text: '"ฉันขอบคุณเธอมากจริง ๆ\nไว้เจอกันอีกในภายหน้านะ :)"',
+    text: '"ฉันขอบคุณเธอมากจริง ๆ\nไว้เจอกันใหม่นะ :)"',
     background: shoreBackground1,
     sound: '/audio/score for interactive project.mp3',
   },

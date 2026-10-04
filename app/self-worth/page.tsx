@@ -57,6 +57,13 @@ function SelfWorthPageInner() {
 
     const total = selfWorthPages.length
     const page = selfWorthPages[index]
+    const reasonPage = selfWorthPages.find((candidate) => candidate.id === 'sw-reason')
+    const selectedReasonBackground = reasonPage && 'options' in reasonPage
+        ? reasonPage.options.find((option) => option.letter === answers['sw-reason'])?.background
+        : undefined
+    const pageBackground = page.id === 'sw-9' && selectedReasonBackground
+        ? [selectedReasonBackground]
+        : page.background
     const hasDecoration = Boolean(page.decorationFrames || page.decorationBubble)
     usePageAudio(page.sound)
     const text = page.text ? resolveSelfWorthText(page.text, answers) : ''
@@ -136,7 +143,7 @@ function SelfWorthPageInner() {
         return (
             <MobileFrame>
                 <div className="animate-fade-in relative flex min-h-dvh flex-1 flex-col">
-                    <BackgroundSlideshow images={page.background} intervalMs={1200} />
+                    <BackgroundSlideshow images={pageBackground} intervalMs={1200} />
                     {hasDecoration && <DecorationBubble type={page.decorationBubble} />}
                     <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
@@ -153,7 +160,7 @@ function SelfWorthPageInner() {
                                         <button
                                             key={option.letter}
                                             onClick={() => handleSelectLetter(option.letter)}
-                                            className="relative min-h-[200px] overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                                            className="relative min-h-[400px] overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
                                         >
                                             {option.background ? (
                                                 <>
@@ -211,7 +218,7 @@ function SelfWorthPageInner() {
                 onClick={() => advance()}
                 className="animate-fade-in relative flex min-h-dvh flex-1 cursor-pointer flex-col"
             >
-                <BackgroundSlideshow images={page.background} intervalMs={1200} />
+                <BackgroundSlideshow images={pageBackground} intervalMs={1200} />
                 {hasDecoration && <DecorationBubble type={page.decorationBubble} />}
                 <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                     {backButton}

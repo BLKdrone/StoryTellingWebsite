@@ -155,7 +155,7 @@ function BurnoutPageInner() {
                 <div key={page.id} className="relative flex min-h-dvh flex-1 flex-col">
                     <BackgroundSlideshow images={page.background} intervalMs={1200} />
                     {page.decorationFrames && (
-                        <DecorationBackground images={page.decorationFrames} intervalMs={1200} />
+                        <DecorationBackground images={page.decorationFrames} intervalMs={1500} />
                     )}
                     {decorationBubble}
                     <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
