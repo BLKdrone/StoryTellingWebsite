@@ -13,6 +13,8 @@ import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import { WhaleGlide } from '@/components/whale-guilde'
 import { DecorationBackground } from '@/components/decoration-background'
+import { StopWhale } from '@/components/stop-whale'
+import { motion } from 'motion/react'
 
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
@@ -190,7 +192,6 @@ function BurnoutPageInner() {
     return (
         <MobileFrame>
             <div
-                key={page.id}
                 role="button"
                 tabIndex={0}
                 aria-disabled={isBlurPage && !isBlurCleared}
@@ -217,19 +218,12 @@ function BurnoutPageInner() {
                     {/* Main background image */}
                     {isZoomWhalePage ? (
                         <ZoomAnimation
-                            key={page.id}
                             focalPoint="58% 29%"
                             peakScale={10}
                             duration={2.5}
                             className="absolute inset-0"
                         >
                             <Image src={page.background} alt="" fill className="object-cover" priority />
-                            {page.decorationFrames && (
-                                <DecorationBackground
-                                    images={page.decorationFrames}
-                                    intervalMs={1200}
-                                />
-                            )}
                             <WhaleGlide
                                 frames={[
                                     '/background/burnout/whale1.webp',
@@ -240,18 +234,24 @@ function BurnoutPageInner() {
                             />
                         </ZoomAnimation>
                     ) : (
-                        <>
-                            <Image src={page.background} alt="" fill className="object-cover" priority />
-                            {page.decorationFrames && (
-                                <DecorationBackground
-                                    images={page.decorationFrames}
-                                    intervalMs={1200}
-                                />
-                            )}
-                        </>
+                        <Image src={page.background} alt="" fill className="object-cover" priority />
+                    )}
+                    {page.decorationFrames && (
+                        <motion.div
+                            className="absolute inset-0"
+                            style={{ transformOrigin: '58% 29%' }}
+                            initial={{ scale: 1 }}
+                            animate={{ scale: isZoomWhalePage ? 10 : 1 }}
+                            transition={{ duration: 2.5, ease: 'easeInOut' }}
+                        >
+                            <DecorationBackground
+                                images={page.decorationFrames}
+                                intervalMs={1200}
+                            />
+                        </motion.div>
                     )}
                     {decorationBubble}
-                    <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
+                    <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
                             {isHelpWhalePage && (
@@ -314,17 +314,10 @@ function BurnoutPageInner() {
                     </div>
                 </div>
                 {isBlurPage && !isBlurCleared && showBlurStopButton && (
-                    <button
-                        type="button"
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setBlurClearedPageId(page.id)
-                        }}
-                        onKeyDown={(e) => e.stopPropagation()}
-                        className="absolute bottom-16 left-1/2 z-30 -translate-x-1/2 rounded-[5px] bg-white px-5 py-3 text-base font-serif text-black shadow-lg transition-colors hover:bg-white/90"
-                    >
-                        {page.interactionLabel || 'ลองหยุดสักนิด'}
-                    </button>
+                    <StopWhale
+                        label={page.interactionLabel || 'ลองหยุดสักนิด'}
+                        onComplete={() => setBlurClearedPageId(page.id)}
+                    />
                 )}
                 {flashOverlay}
             </div>

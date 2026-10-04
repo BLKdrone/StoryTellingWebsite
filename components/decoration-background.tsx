@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 
@@ -9,12 +9,23 @@ interface DecorationBackgroundProps {
   intervalMs?: number
 }
 
-export function DecorationBackground({
+function normalizeImages(images?: string | string[]) {
+  const imageList = images == null ? [] : Array.isArray(images) ? images : [images]
+  return imageList.filter((src): src is string => Boolean(src))
+}
+
+function haveSameImages(previous?: string | string[], next?: string | string[]) {
+  const previousImages = normalizeImages(previous)
+  const nextImages = normalizeImages(next)
+  return previousImages.length === nextImages.length
+    && previousImages.every((image, index) => image === nextImages[index])
+}
+
+export const DecorationBackground = memo(function DecorationBackground({
   images,
   intervalMs = 1200,
 }: DecorationBackgroundProps) {
-  const imageList = images == null ? [] : Array.isArray(images) ? images : [images]
-  const safeImages = imageList.filter((src): src is string => Boolean(src))
+  const safeImages = normalizeImages(images)
   const [index, setIndex] = useState(0)
   const prevIndex = useRef(0)
 
@@ -65,4 +76,4 @@ export function DecorationBackground({
       )}
     </div>
   )
-}
+}, (previous, next) => previous.intervalMs === next.intervalMs && haveSameImages(previous.images, next.images))

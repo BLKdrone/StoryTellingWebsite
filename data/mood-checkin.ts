@@ -199,7 +199,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
         navigation: 'tap-anywhere',
         text: 'ท่ามกลางบรรยากาศที่เงียบงัน สัมผัสได้ถึงกลิ่นอายของความเศร้า',
         background: '/background/mood-checkin/sad1.webp',
-        sound: '/audio/score for interactive project.mp3',
+        sound: '/audio/rain.mp3',
       },
       {
         id: 'sad-2',

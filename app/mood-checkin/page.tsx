@@ -324,6 +324,7 @@ function MoodCheckinPageInner() {
   // Page 3: Mood branch
   if (pageState === 'branch' && selectedMood) {
     const page = getCurrentPage()!
+    const isSadPaperplanePage = page.id === 'sad-paperplane-1'
 
     const backButton = (
       <button
@@ -473,8 +474,16 @@ function MoodCheckinPageInner() {
             )}
             <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
               {interpolateText(page.text).trim() && (
-                <p className="text-balance mt-64 whitespace-pre-line text-lg font-serif leading-relaxed">
-                  <span className={cn(textChip, 'leading-relaxed')}>{interpolateText(page.text)}</span>
+                <p className={cn(
+                  'text-balance whitespace-pre-line text-lg font-serif leading-relaxed',
+                  isSadPaperplanePage ? 'mt-0 max-w-lg' : 'mt-64'
+                )}>
+                  <span className={isSadPaperplanePage
+                    ? 'text-black'
+                    : cn(textChip, 'leading-relaxed')}
+                  >
+                    {interpolateText(page.text)}
+                  </span>
                 </p>
               )}
             </div>
