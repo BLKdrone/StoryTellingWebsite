@@ -55,7 +55,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-1',
     navigation: 'tap-anywhere',
-    text: 'กระแสน้ำรอบตัวทำให้คุณสับสนทิศทาง คุณกำลังดำดิ่งลงในมหาสมุทร',
+    text: 'กระแสน้ำรอบตัวทำให้คุณสับสนทิศทาง\nคุณกำลังดำดิ่งลงในมหาสมุทร',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',
@@ -83,7 +83,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-4',
     navigation: 'tap-anywhere',
-    text: 'ตอนนี้ปลาวาฬพาคุณว่ายน้ำต่อ ทันใดนั้น คุณไปชนวัตถุประหลาดอย่างแรง คุณพลัดหลงลงไปในความลึกของมหาสมุทรที่ไม่มีอะไรให้ยึดติดเป็นหลัก นอกจากการดำดิ่งลงไปใต้พื้นน้ำ',
+    text: 'ตอนนี้ปลาวาฬพาคุณว่ายน้ำต่อ ทันใดนั้น\nคุณไปชนวัตถุประหลาดอย่างแรง คุณพลัดหลงลงไปใน\nความลึกของมหาสมุทรที่ไม่มีอะไรให้ยึดติดเป็นหลัก\nนอกจากการดำดิ่งลงไปใต้พื้นน้ำ',
     background: oceanBackground,
     decorationFrames: '/background/burnout/manybubble.PNG',
     decorationBubble: 'one',
@@ -92,7 +92,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-inner-voice',
     navigation: 'button',
-    text: 'ในวินาทีที่เกิดความผิดพลาด เสียงสะท้อนในหัวคุณพูดกับคุณเหมือนเป็น...',
+    text: 'ในวินาทีที่เกิดความผิดพลาด\nเสียงสะท้อนในหัวคุณพูดกับคุณเหมือนเป็น...',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',
@@ -121,7 +121,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-6',
     navigation: 'tap-anywhere',
-    text: 'ไม่ว่าเสียงนั้นจะเป็นยังไง จำไว้นะว่าคุณคือ \'เพื่อนคนสำคัญที่สุด\' ของตัวเอง คนที่จะพาคุณก้าวผ่านความผิดพลาด ก็คือคุณเอง\n\nดังนั้น ดูแลคนสำคัญให้ดีล่ะ',
+    text: 'ไม่ว่าเสียงนั้นจะเป็นยังไง จำไว้นะว่าคุณคือ\n\'เพื่อนคนสำคัญที่สุด\' ของตัวเอง\nคนที่จะพาคุณก้าวผ่านความผิดพลาด ก็คือคุณเอง\n\nดังนั้น ดูแลคนสำคัญให้ดีล่ะ',
     decorationBubble: 'one',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
@@ -129,7 +129,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-7',
     navigation: 'tap-anywhere',
-    text: 'หลังจากที่คุณตั้งหลักได้แล้ว รอบตัวมีเส้นทางน้ำหลายสายไหลผ่านไปซ้าๆ บางสายพาวาฬไปสู่แสงสว่างที่ไกลออกไป บางสายมืดและเงียบจนมองไม่เห็นจุดจบ… แต่วาฬตัวนี้กำลังรอให้คุณบอกว่า \'เราจะไปทางไหนกันดี?\'',
+    text: 'หลังจากที่คุณตั้งหลักได้แล้ว\nรอบตัวมีเส้นทางน้ำหลายสายไหลผ่านไปซ้ำ ๆ\nบางสายพาวาฬไปสู่แสงสว่างที่ไกลออกไป\nบางสายมืดและเงียบจนมองไม่เห็นจุดจบ…\nแต่วาฬตัวนี้กำลังรอให้คุณบอกว่า\n\'เราจะไปทางไหนกันดี?\'',
     decorationBubble: 'one',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
@@ -137,7 +137,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-reason',
     navigation: 'button',
-    text: 'หากต้องเลือกทำกิจกรรมหรือตัดสินใจเรื่องสำคัญสักเรื่องหนึ่ง \'เหตุผล\' แบบไหนที่ให้คุณรู้สึกสบายใจที่สุด?',
+    text: 'หากต้องเลือกทำกิจกรรมหรือตัดสินใจ\nเรื่องสำคัญสักเรื่องหนึ่ง \'เหตุผล\'\nแบบไหนที่ให้คุณรู้สึกสบายใจที่สุด?',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',
@@ -152,7 +152,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-9',
     navigation: 'tap-anywhere',
-    text: 'ไม่ว่าเหตุผลของคุณคืออะไร มันไม่มีผิดมีถูกหรอก แต่อยากให้คุณระลึกไว้เสมอ ว่าเป้าหมายของคุณคือ "{{sw-goal}}"',
+    text: 'ไม่ว่าเหตุผลของคุณคืออะไร มันไม่มีผิดมีถูกหรอก\nแต่อยากให้คุณระลึกไว้เสมอ\nว่าเป้าหมายของคุณคือ "{{sw-goal}}"',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',
@@ -160,7 +160,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-10',
     navigation: 'tap-anywhere',
-    text: 'กลางมหาสมุทรลึก—ตอนนี้คุณยังคงเดินทางต่อไปในเส้นทางของตัวเองเพื่อไปให้ถึงเป้าหมาย ไม่ว่ากระแสน้ำจะซัดไปทางไหน',
+    text: 'กลางมหาสมุทรลึก—ตอนนี้คุณยังคงเดินทาง\nต่อไปในเส้นทางของตัวเองเพื่อไปให้ถึงเป้าหมาย\nไม่ว่ากระแสน้ำจะซัดไปทางไหน',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',
@@ -178,7 +178,7 @@ const selfWorthPageDefinitions: SelfWorthPage[] = [
   {
     id: 'sw-12',
     navigation: 'tap-anywhere',
-    text: 'งั้นเหรอ ก็ดีนะ ถ้าคุณอยากละก็ สักวันต้องเป็นคนแบบนั้นได้แน่\n\nแต่ถ้าเหนื่อย ก็ไม่ต้องเป็นคนแบบนั้นก็ได้นะ ยังไง ความ "{{sw-pride}}" ของคุณ ก็ดีมากพอแล้วจริง ๆ',
+    text: 'งั้นเหรอ ก็ดีนะ ถ้าคุณอยากล่ะก็\nสักวันต้องเป็นคนแบบนั้นได้แน่\n\nแต่ถ้าเหนื่อย ก็ไม่ต้องเป็นคนแบบนั้นก็ได้นะ\nยังไง ความ "{{sw-pride}}" ของคุณ\nก็ดีมากพอแล้วจริง ๆ',
     background: oceanBackground,
     sound: '/audio/score for interactive project.mp3',
     decorationBubble: 'one',

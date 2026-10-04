@@ -146,14 +146,14 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'neutral-1',
         navigation: 'tap-anywhere',
-        text: 'โอ้ ท้องฟ้าของคุณช่างดูสงบเงียบจริงๆ เห็นแล้วรู้สึกสงบดีจัง',
+        text: 'โอ้ ท้องฟ้าของคุณช่างดูสงบเงียบจริงๆ\nเห็นแล้วรู้สึกสงบดีจัง',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
       },
       {
         id: 'neutral-2',
         navigation: 'button',
-        text: 'สงสัยจังเลยว่าชีวิตในช่วงสัปดาห์ที่ผ่านมาเป็นยังไงบ้าง',
+        text: 'สงสัยจังเลยว่าชีวิตในช่วงสัปดาห์\nที่ผ่านมาเป็นยังไงบ้าง',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
         placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
@@ -162,14 +162,14 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'neutral-3',
         navigation: 'tap-anywhere',
-        text: 'ในวันที่โลกหมุนไวเกินไป อยากให้คุณลองก้าวให้ช้าลงหน่อย แล้วค่อยๆ จดจำ ซึมซับความสุขที่เกิดกับคุณ',
+        text: 'ในวันที่โลกหมุนไวเกินไป\nอยากให้คุณลองก้าวให้ช้าลงหน่อย แล้วค่อยๆ\nจดจำ ซึมซับความสุขที่เกิดกับคุณ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
       },
       {
         id: 'neutral-4',
         navigation: 'button',
-        text: 'ไหนคุณลองเล่าให้เราฟังหน่อย ช่วงนี้ความสุขของคุณมาจากอะไรบ้างนะ',
+        text: 'ไหนคุณลองเล่าให้เราฟังหน่อย\nช่วงนี้ความสุขของคุณมาจากอะไรบ้างนะ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
         placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
@@ -178,7 +178,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'neutral-5',
         navigation: 'tap-anywhere',
-        text: 'ในวันที่เรารู้สึกสงบ หรือเฉยชากับทุกสิ่ง อย่าปล่อยให้ความทรงจำดีๆ ความสุขหล่นหายไปตามทางนะ',
+        text: 'ในวันที่เรารู้สึกสงบ หรือเฉยชากับทุกสิ่ง\nอย่าปล่อยให้ความทรงจำดีๆ\nความสุขหล่นหายไปตามทางนะ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
       },
@@ -197,14 +197,14 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'sad-1',
         navigation: 'tap-anywhere',
-        text: 'ท่ามกลางบรรยากาศที่เงียบงัน สัมผัสได้ถึงกลิ่นอายของความเศร้า',
+        text: 'ท่ามกลางบรรยากาศที่เงียบงัน\nสัมผัสได้ถึงกลิ่นอายของความเศร้า',
         background: '/background/mood-checkin/sad1.webp',
         sound: '/audio/rain.mp3',
       },
       {
         id: 'sad-2',
         navigation: 'button',
-        text: 'คล้ายกับว่าตอนนี้พยากรณ์อากาศในใจของคุณกำลังมีฝนตกหนักอยู่ใช่ไหม\nลองเล่าให้เราฟังหน่อยได้ไหม',
+        text: 'คล้ายกับว่าตอนนี้พยากรณ์อากาศในใจของคุณ\nกำลังมีฝนตกหนักอยู่ใช่ไหม\nลองเล่าให้เราฟังหน่อยได้ไหม',
         background: '/background/mood-checkin/sad1.webp',
         sound: '/audio/rain.mp3',
         placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
@@ -213,7 +213,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'sad-3',
         navigation: 'button',
-        text: 'อะไรเป็นสาเหตุของปรากฏการณ์ที่เกิดขึ้นในครั้งนี้หรอ\nลองเล่าให้ฟังหน่อยนะ',
+        text: 'อะไรเป็นสาเหตุของปรากฏการณ์\nที่เกิดขึ้นในครั้งนี้เหรอ\nลองเล่าให้ฟังหน่อยนะ',
         background: '/background/mood-checkin/sad1.webp',
         sound: '/audio/rain.mp3',
         placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
@@ -254,7 +254,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'sad-4',
         navigation: 'button',
-        text: 'คุณเก่งมากนะ ที่ผ่านเรื่องราวนี้มาได้ คุณอยากโยนเหตุการณ์นี้ทิ้งไปไหม',
+        text: 'คุณเก่งมากนะ ที่ผ่านเรื่องราวนี้มาได้\nคุณอยากโยนเหตุการณ์นี้ทิ้งไปไหม',
         background: '/background/mood-checkin/sad1.webp',
         sound: '/audio/score for interactive project.mp3',
         choices: [
@@ -264,7 +264,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
               {
                 id: 'sad-throw-1',
                 navigation: 'tap-anywhere',
-                text: 'ตอนนี้ความทุกข์ของคุณได้โยนบินไปไกลเกินกว่าจะมองเห็นแล้วนะ',
+                text: 'ตอนนี้ความทุกข์ของคุณได้โยนบินไปไกล\nเกินกว่าจะมองเห็นแล้วนะ',
                 background: '/background/mood-checkin/sad2.webp',
                 sound: '/audio/score for interactive project.mp3',
                 decorationFrames: '/background/mood-checkin/paperplane4.webp',
@@ -277,7 +277,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
               {
                 id: 'sad-keep-1',
                 navigation: 'tap-anywhere',
-                text: 'ไม่เป็นไรนะที่จะเสียใจ แต่อย่าให้ความเศร้ากลบแสงสว่างในตัวคุณ ให้เรื่องนี้เป็นประสบการณ์ที่จะทำให้คุณเติบโตขึ้นนะ',
+                text: 'ไม่เป็นไรนะที่จะเสียใจ\nแต่อย่าให้ความเศร้ากลบแสงสว่างในตัวคุณ\nให้เรื่องนี้เป็นประสบการณ์ที่จะ\nทำให้คุณเติบโตขึ้นนะ',
                 background: '/background/mood-checkin/sad1.webp',
                 sound: '/audio/score for interactive project.mp3',
               },
@@ -298,7 +298,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'sad-converge-2',
         navigation: 'button',
-        text: 'คุณยังจำเรื่องราวที่ทำให้ท้องฟ้าของคุณสดใสได้ไหม เล่าให้ฟังหน่อยสิ',
+        text: 'คุณยังจำเรื่องราวที่ทำให้ท้องฟ้าของคุณ\nสดใสได้ไหม เล่าให้ฟังหน่อยสิ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
         placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
@@ -307,14 +307,14 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'sad-converge-3',
         navigation: 'tap-anywhere',
-        text: 'ความสุขเหล่านั้นมันไม่ได้หายไปไหนนะ ในวันที่เธอเศร้าเสียใจ',
+        text: 'ความสุขเหล่านั้นมันไม่ได้หายไปไหนนะ\nในวันที่เธอเศร้าเสียใจ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
       },
       {
         id: 'sad-converge-4',
         navigation: 'tap-anywhere',
-        text: 'อย่าลืมโอบกอดตัวเองไว้ในวันที่มีแค่ตัวเอง แล้วก็ให้รู้ว่ารอยแผลในวันนี้คือวิชาที่ทำให้คุณเติบโตขึ้น',
+        text: 'อย่าลืมโอบกอดตัวเองไว้ในวันที่มีแค่ตัวเอง\nแล้วก็ให้รู้ว่ารอยแผลในวันนี้คือ\nวิชาที่ทำให้คุณเติบโตขึ้น',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
       },
@@ -333,7 +333,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'overwhelmed-2',
         navigation: 'button',
-        text: 'ตอนนี้มีเรื่องอะไรที่ทำให้คุณไม่สบายใจ ที่ทำให้ท้องฟ้าของคุณเป็นแบบนี้หรอ\nลองเล่าให้ฟังหน่อย',
+        text: 'ตอนนี้มีเรื่องอะไรที่ทำให้คุณไม่สบายใจ\nที่ทำให้ท้องฟ้าของคุณเป็นแบบนี้เหรอ\nลองเล่าให้ฟังหน่อย',
         background: '/background/mood-checkin/anger1.webp',
         sound: '/audio/storm.mp3',
         placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',
@@ -342,14 +342,14 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'overwhelmed-3',
         navigation: 'tap-anywhere',
-        text: 'คุณคงจะรู้สึกอารมณ์ไม่ดีกับเหตุการณ์ที่เกิดขึ้นมากๆ เลยสินะ',
+        text: 'คุณคงจะรู้สึกอารมณ์ไม่ดีกับเหตุการณ์\nที่เกิดขึ้นมากๆ เลยสินะ',
         background: '/background/mood-checkin/anger1.webp',
         sound: '/audio/storm.mp3',
       },
       {
         id: 'overwhelmed-4',
         navigation: 'tap-anywhere',
-        text: 'ไม่เป็นไรนะถ้าวันนี้จะไม่ได้ตั้งใจ เพราะในความไม่สมบูรณ์แบบนั้น คุณก็ได้เติบโตขึ้นอีกขั้นหนึ่งแล้ว',
+        text: 'ไม่เป็นไรนะถ้าวันนี้จะไม่ได้ตั้งใจ\nเพราะในความไม่สมบูรณ์แบบนั้น\nคุณก็ได้เติบโตขึ้นอีกขั้นหนึ่งแล้ว',
         background: '/background/mood-checkin/anger1.webp',
         sound: '/audio/storm.mp3',
       },
@@ -365,7 +365,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'overwhelmed-5',
         navigation: 'tap-anywhere',
-        text: 'ไม่ว่าตอนนี้จะเป็นยังไง ยังมีแสงแดดของวันที่สดใสรออยู่ข้างหน้านะ',
+        text: 'ไม่ว่าตอนนี้จะเป็นยังไง\nยังมีแสงแดดของวันที่สดใสรออยู่ข้างหน้านะ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
       },

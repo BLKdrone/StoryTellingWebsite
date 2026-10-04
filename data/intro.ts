@@ -29,7 +29,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-beach',
     navigation: 'tap-anywhere',
     speaker: 'narration',
-    text: 'เธออยู่บนชายหาดที่เธอไม่รู้จัก ผืนน้ำตรงหน้าทอประกายสะท้อนแสงแดด เธอสูดหายใจเข้า และได้กลิ่นทะเล',
+    text: 'เธออยู่บนชายหาดที่เธอไม่รู้จัก\nผืนน้ำตรงหน้าทอประกายสะท้อนแสงแดด\nเธอสูดหายใจเข้า และได้กลิ่นทะเล',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
@@ -56,7 +56,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-glad-you-came',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: '"ฉันดีใจนะที่เธอแวะมาฉันที่ทะเลแห่งนี้"',
+   text: '"ฉันดีใจนะที่เธอแวะมาหาฉันที่ทะเลแห่งนี้"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
@@ -114,7 +114,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-explain-journey',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: '"ในระหว่างการเดินทางนี้ ฉันจะทำให้เธอได้ลองตอบคำถามต่อไปนี้ เพื่อฉันจะได้รู้จักเธอมากขึ้น"',
+    text: '"ในระหว่างการเดินทางนี้ ฉันจะทำให้เธอได้ลองตอบ\nคำถามต่อไปนี้ เพื่อฉันจะได้รู้จักเธอมากขึ้น"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',
