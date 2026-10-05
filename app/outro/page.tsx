@@ -202,6 +202,7 @@ export default function OutroPage() {
             ))}
           </div>
           <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
+            <p className="text-sm leading-relaxed text-center font-semibold text-white ">ทำในโทรศัพท์ได้เท่านั้น</p>
             <Link
               href={animal.link}
               className={cn(
