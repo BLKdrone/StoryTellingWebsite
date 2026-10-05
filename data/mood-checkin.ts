@@ -162,7 +162,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'neutral-3',
         navigation: 'tap-anywhere',
-        text: 'ในวันที่โลกหมุนไวเกินไป\nอยากให้คุณลองก้าวให้ช้าลงหน่อย แล้วค่อยๆ\nจดจำ ซึมซับความสุขที่เกิดกับคุณ',
+        text: 'ในวันที่โลกหมุนไวเกินไป\nอยากให้คุณลองก้าวให้ช้าลงหน่อย\nแล้วค่อยๆจดจำ\nซึมซับความสุขที่เกิดกับคุณ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
       },
@@ -204,7 +204,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'sad-2',
         navigation: 'button',
-        text: 'คล้ายกับว่าตอนนี้พยากรณ์อากาศในใจของคุณ\nกำลังมีฝนตกหนักอยู่ใช่ไหม\nลองเล่าให้เราฟังหน่อยได้ไหม',
+        text: 'คล้ายกับว่าตอนนี้พยากรณ์อากาศในใจ\nของคุณกำลังมีฝนตกหนักอยู่ใช่ไหม\nลองเล่าให้เราฟังหน่อยได้ไหม',
         background: '/background/mood-checkin/sad1.webp',
         sound: '/audio/rain.mp3',
         placeholder: 'เธอลองใช้เวลาค่อย ๆ คิดสิ',

@@ -188,7 +188,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-10',
         navigation: 'tap-anywhere',
-        text: 'ไม่มีวาฬตัวไหนหันมามองคุณ จริงๆแล้ว\nวาฬทุกตัวก็แค่กำลังว่ายไปในเส้นทางของตัวเอง\nบางช่วงก็ว่ายเร็ว บางช่วงก็ว่ายช้า\nจนตามเธอไม่ทันด้วยซ้ำ',
+        text: 'ไม่มีวาฬตัวไหนหันมามองคุณ จริงๆแล้ว\nวาฬทุกตัวก็แค่กำลังว่ายไป\nในเส้นทางของตัวเอง\nบางช่วงก็ว่ายเร็ว บางช่วงก็ว่ายช้า\nจนตามเธอไม่ทันด้วยซ้ำ',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',
@@ -212,7 +212,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-11.5',
         navigation: 'tap-anywhere',
-        text: 'ตอนแรกวาฬรู้สึกแปลกที่ไม่ได้ออกแรงว่ายจนสุดตัว\nเหมือนที่ผ่านมากระแสน้ำยังคงพาวาฬไปข้างหน้าช้าๆ\nถึงจะรู้สึกผิดแต่วาฬกลับรู้สึกเหมือนได้พักหายใจ',
+        text: 'ตอนแรกวาฬรู้สึกแปลกที่ไม่ได้ออกแรงว่าย\nจนสุดตัวเหมือนที่ผ่านมา\nกระแสน้ำยังคงพาวาฬไปข้างหน้าช้าๆ\nถึงจะรู้สึกผิดแต่\nวาฬกลับรู้สึกเหมือนได้พักหายใจ',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',

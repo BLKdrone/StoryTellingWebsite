@@ -494,7 +494,7 @@ function MoodCheckinPageInner() {
                   event.stopPropagation()
                   handleAdvanceBranch()
                 }}
-                className="absolute bottom-16 left-1/2 z-20 h-12 w-full max-w-sm -translate-x-1/2 rounded-lg bg-black/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30"
+                className="absolute bottom-[180px] left-1/2 z-20 h-12 w-full max-w-sm -translate-x-1/2 rounded-lg bg-black/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30"
               >
                 ไปต่อ
               </button>
