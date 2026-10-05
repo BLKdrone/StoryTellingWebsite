@@ -387,12 +387,12 @@
 
 @keyframes sad-plane-flight-reduced {
   0% {
-    left: 56%;
+    left: 95%;
     transform: translate(-50%, -50%) rotate(-40deg);
   }
 
   100% {
-    left: 44%;
+    left:  5%;
     transform: translate(-50%, -50%) rotate(-40deg);
   }
 }
@@ -400,7 +400,7 @@
 @media (prefers-reduced-motion: reduce) {
   .sad-plane-flight {
     animation-name: sad-plane-flight-reduced;
-    animation-duration: 3s;
+    animation-duration: 5s;
     animation-timing-function: ease-out;
   }
 }
