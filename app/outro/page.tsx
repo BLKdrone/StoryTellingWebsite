@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { MobileFrame } from '@/components/mobile-frame'
@@ -11,7 +11,6 @@ import { animals } from '@/data/quiz'
 import { getQuizResult, clearQuizResult } from '@/lib/quiz-result'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
-import Link from 'next/link'
 import { Download } from 'lucide-react'
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
@@ -26,7 +25,15 @@ export default function OutroPage() {
   const page = outroPages[index]
   const background = Array.isArray(page.background) ? page.background : [page.background]
   const result = getQuizResult()
+  const hasValidResult = !!result && !!animals[result]
   usePageAudio(showResult ? '/audio/score for interactive project.mp3' : page.sound)
+
+  // Redirect in an effect, never during render
+  useEffect(() => {
+    if (showResult && !hasValidResult) {
+      router.push('/quiz')
+    }
+  }, [showResult, hasValidResult, router])
 
   const finish = () => {
     router.push('/chapter-checkpoint?from=outro')
@@ -59,7 +66,6 @@ export default function OutroPage() {
 
   if (showResult) {
     if (!result || !animals[result]) {
-      router.push('/quiz')
       return null
     }
 
@@ -86,8 +92,6 @@ export default function OutroPage() {
           </div>
 
           <div className="relative z-10 flex flex-col items-center justify-center gap-6 p-6 pt-14 text-center text-white">
-            {/* Wobbly sticker-style header chip */}
-
             {/* Backdrop + animal, thick outline like a coloring-book panel */}
             <div className="relative flex h-72 w-72 items-center justify-center" aria-hidden>
               {/* dashed halo ring */}
@@ -151,23 +155,12 @@ export default function OutroPage() {
           {/* Quote card, hand-drawn dashed border */}
           <div className="relative z-10 mx-auto mt-3 w-full max-w-sm px-2 ">
             <div className="relative rounded-3xl border-[3px] border-dashed border-white bg-white/10 p-2 backdrop-blur-sm">
-              {/* <span
-                className="absolute -top-5 left-4 rounded-full border-[3px] border-black px-2 text-3xl font-black leading-none text-black"
-                style={{ backgroundColor: animal.iconColor }}
-              >
-                &ldquo;
-              </span> */}
               <p className="text-center text-base italic leading-relaxed text-white">
                 {animal.quote}
               </p>
             </div>
           </div>
 
-          {/* <div className="relative z-10 mt-4 w-full mx-auto max-w-md ">
-            <div className="rounded-3xl border-[3px] border-black bg-white p-5 text-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
-              <p className="text-center text-base leading-relaxed">{animal.description}</p>
-            </div>
-          </div>         */}
           {/* Description card */}
           <div className="relative z-10 mx-auto mt-4 w-full max-w-sm px-6">
             <div className="rounded-3xl border-[3px] border-black bg-white p-5 text-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
@@ -201,17 +194,24 @@ export default function OutroPage() {
               </div>
             ))}
           </div>
+
+          {/* Instagram highlight: plain <a> opening in a new tab/app (next/link is for internal routes) */}
           <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
-            <p className="text-sm leading-relaxed text-center font-semibold text-white ">ทำในโทรศัพท์ได้เท่านั้น</p>
-            <Link
+            <a
               href={animal.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: 'default', size: 'lg' }),
                 'h-14 w-full max-w-sm rounded-2xl text-base',
               )}
             >
-              Link to share in  Instagram
-            </Link>
+              Link to share in Instagram
+            </a>
+            <p className="text-xs leading-relaxed text-center font-semibold text-white ">ทำในโทรศัพท์ได้เท่านั้น</p>
+          </div>
+
+          <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
             <a
               href={animal.downloadImage}
               download
@@ -224,6 +224,7 @@ export default function OutroPage() {
               Download picture
             </a>
           </div>
+
           {/* Buttons — chunky sticker style */}
           <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
             <Button
@@ -243,7 +244,7 @@ export default function OutroPage() {
             </Button>
           </div>
         </div>
-      </MobileFrame >
+      </MobileFrame>
     )
   }
   return (

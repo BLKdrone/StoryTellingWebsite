@@ -1,6 +1,6 @@
 // แบบทดสอบเชิงข้อมูล "คุณคือสัตว์ทะเลชนิดใด"
 // แต่ละตัวเลือกจะมีตัวอักษรกำกับสัตว์ ผลลัพธ์คือตัวอักษรที่ถูกเลือกบ่อยที่สุด
-import type { StoryPageData } from '@/lib/story'
+
 export type AnimalKey = 'dolphin' | 'seal' | 'octopus' | 'pufferfish' | 'sea-turtle'
 
 export interface QuizOption {
@@ -40,24 +40,6 @@ export interface AnimalResult {
   name: string
   tagline: string
   description: string
-  /** สีไอคอนชั่วคราว (ยังไม่มีภาพประกอบ) */
-  iconColor: string
-}
-
-
-export const letterToAnimal: Record<QuizOption['letter'], AnimalKey> = {
-  A: 'dolphin',
-  B: 'seal',
-  C: 'octopus',
-  D: 'pufferfish',
-  E: 'sea-turtle',
-}
-
-export interface AnimalResult {
-  key: AnimalKey
-  name: string
-  tagline: string
-  description: string
   quote: string
   vibes: string
   behaviorHabitat: string
@@ -70,7 +52,16 @@ export interface AnimalResult {
   downloadImage: string
   decoration?: string
   animationType: 'zoom' | 'float' | 'glide'
+  /** ลิงก์ Instagram Highlight (เปิดในแท็บใหม่/แอป ห้ามใช้ iframe) */
   link: string
+}
+
+export const letterToAnimal: Record<QuizOption['letter'], AnimalKey> = {
+  A: 'dolphin',
+  B: 'seal',
+  C: 'octopus',
+  D: 'pufferfish',
+  E: 'sea-turtle',
 }
 
 export const animals: Record<AnimalKey, AnimalResult> = {
@@ -93,7 +84,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/dolphin/animal.webp',
     downloadImage: '/background/quiz/character/dolphin/cutedolphin.png',
     animationType: 'zoom',
-    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTA3MDQxOTEwNTk0NjY1?story_media_id=4001051543203092508_78111083071&stkn=MWk0aWRqdm81YWMxMw==",
+    link: 'https://www.instagram.com/stories/highlights/18107041910594665/',
   },
   seal: {
     key: 'seal',
@@ -115,7 +106,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/seal/animal.webp',
     downloadImage: '/background/quiz/character/seal/cuteseal.png',
     animationType: 'float',
-    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4Mjg0NDY4NDgyMjkxMDkz?story_media_id=4001050608636593673_78111083071&stkn=M2Yxb2ZiOGx4NmRp"
+    link: 'https://www.instagram.com/stories/highlights/18284468482291093/',
   },
   octopus: {
     key: 'octopus',
@@ -138,7 +129,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     downloadImage: '/background/quiz/character/octopus/cuteoctopus.png',
     decoration: '/background/quiz/character/octopus/decoration.webp',
     animationType: 'float',
-    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM4NDQxMDEzNjI3MjA0?story_media_id=4001051937442390984_78111083071&stkn=MTNsazJtc21vYnh1Zg==",
+    link: 'https://www.instagram.com/stories/highlights/18138441013627204/',
   },
   pufferfish: {
     key: 'pufferfish',
@@ -160,7 +151,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/pufferfish/animal.webp',
     downloadImage: '/background/quiz/character/pufferfish/cutepufferfish.png',
     animationType: 'float',
-    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMwNDQ3NjY1ODg0NDQ5?story_media_id=4001050121501822146_78111083071&stkn=emVwc3RvOWZ3a2ht",
+    link: 'https://www.instagram.com/stories/highlights/18030447665884449/',
   },
   'sea-turtle': {
     key: 'sea-turtle',
@@ -182,7 +173,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     downloadImage: '/background/quiz/character/turtle/cuteturtle.png',
     decoration: '/background/quiz/character/turtle/decoration.webp',
     animationType: 'glide',
-    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTA3NDIyNzUxMzQxNzQ2?story_media_id=4001051039291052192_78111083071&stkn=aWhoaGtuN2Rpbzhv",
+    link: 'https://www.instagram.com/stories/highlights/18107422751341746/',
   },
 }
 
@@ -223,8 +214,7 @@ export const quizQuestions: QuizPageData[] = [
   },
   {
     id: 'q1',
-    question:
-      'เมื่อคุณมองมาที่ตัวคุณ คนอื่นมักมองคุณเป็น...',
+    question: 'เมื่อคุณมองมาที่ตัวคุณ คนอื่นมักมองคุณเป็น...',
     backgroundColor: '#1a5566',
     background: [
       '/background/intro/background1.webp',
@@ -273,7 +263,6 @@ export const quizQuestions: QuizPageData[] = [
     ],
     navigation: 'button',
   },
-
   {
     id: 'investigation-3',
     navigation: 'tap-anywhere',
@@ -283,7 +272,6 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/hurricane/2.webp',
       '/background/quiz/hurricane/3.webp',
       '/background/quiz/hurricane/4.webp',
-
     ],
     sound: '/audio/score for interactive project.mp3',
     flashTransition: 'black',
@@ -297,14 +285,12 @@ export const quizQuestions: QuizPageData[] = [
       '/background/quiz/hurricane/2.webp',
       '/background/quiz/hurricane/3.webp',
       '/background/quiz/hurricane/4.webp',
-
     ],
     sound: '/audio/score for interactive project.mp3',
   },
   {
     id: 'q3',
-    question:
-      'ท่ามกลางเกลียวคลื่นที่หมุนวนอย่างบ้าคลั่งนั้น\nปฏิกิริยาแรกของคุณคือ',
+    question: 'ท่ามกลางเกลียวคลื่นที่หมุนวนอย่างบ้าคลั่งนั้น\nปฏิกิริยาแรกของคุณคือ',
     backgroundColor: '#164252',
     background: '/background/quiz/deepcoral/background.webp',
     sound: '/audio/score for interactive project.mp3',
@@ -331,8 +317,7 @@ export const quizQuestions: QuizPageData[] = [
   },
   {
     id: 'q4',
-    question:
-      'ทุกอย่างดูแปลกตา เงียบงัน\nและเต็มไปด้วยความไม่แน่นอน\nหัวใจของคุณจะรู้สึก...',
+    question: 'ทุกอย่างดูแปลกตา เงียบงัน\nและเต็มไปด้วยความไม่แน่นอน\nหัวใจของคุณจะรู้สึก...',
     backgroundColor: '#133948',
     background: '/background/quiz/deepcoral/background.webp',
     sound: '/audio/score for interactive project.mp3',
@@ -356,11 +341,9 @@ export const quizQuestions: QuizPageData[] = [
     sound: '/audio/score for interactive project.mp3',
     flashTransition: 'black',
   },
-
   {
     id: 'q5',
-    question:
-      'ในความนิ่งเงียบนั้น ความคิดของคุณค่อย ๆ\nลอยขึ้นมาจากก้นบึ้งของจิตใจ วนเวียนอยู่กับ...',
+    question: 'ในความนิ่งเงียบนั้น ความคิดของคุณค่อย ๆ\nลอยขึ้นมาจากก้นบึ้งของจิตใจ วนเวียนอยู่กับ...',
     backgroundColor: '#10303e',
     background: [
       '/background/quiz/cave/1.webp',
