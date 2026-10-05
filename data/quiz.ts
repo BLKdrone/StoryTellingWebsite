@@ -84,7 +84,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/dolphin/animal.webp',
     downloadImage: '/background/quiz/character/dolphin/cutedolphin.png',
     animationType: 'zoom',
-    link: 'https://www.instagram.com/stories/highlights/18107041910594665/',
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTA3MDQxOTEwNTk0NjY1?story_media_id=4001051543203092508_78111083071&stkn=MWk0aWRqdm81YWMxMw==",
   },
   seal: {
     key: 'seal',
@@ -106,7 +106,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/seal/animal.webp',
     downloadImage: '/background/quiz/character/seal/cuteseal.png',
     animationType: 'float',
-    link: 'https://www.instagram.com/stories/highlights/18284468482291093/',
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4Mjg0NDY4NDgyMjkxMDkz?story_media_id=4001050608636593673_78111083071&stkn=M2Yxb2ZiOGx4NmRp"
   },
   octopus: {
     key: 'octopus',
@@ -129,7 +129,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     downloadImage: '/background/quiz/character/octopus/cuteoctopus.png',
     decoration: '/background/quiz/character/octopus/decoration.webp',
     animationType: 'float',
-    link: 'https://www.instagram.com/stories/highlights/18138441013627204/',
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM4NDQxMDEzNjI3MjA0?story_media_id=4001051937442390984_78111083071&stkn=MTNsazJtc21vYnh1Zg==",
   },
   pufferfish: {
     key: 'pufferfish',
@@ -151,7 +151,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/pufferfish/animal.webp',
     downloadImage: '/background/quiz/character/pufferfish/cutepufferfish.png',
     animationType: 'float',
-    link: 'https://www.instagram.com/stories/highlights/18030447665884449/',
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMwNDQ3NjY1ODg0NDQ5?story_media_id=4001050121501822146_78111083071&stkn=emVwc3RvOWZ3a2ht",
   },
   'sea-turtle': {
     key: 'sea-turtle',
@@ -173,7 +173,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     downloadImage: '/background/quiz/character/turtle/cuteturtle.png',
     decoration: '/background/quiz/character/turtle/decoration.webp',
     animationType: 'glide',
-    link: 'https://www.instagram.com/stories/highlights/18107422751341746/',
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTA3NDIyNzUxMzQxNzQ2?story_media_id=4001051039291052192_78111083071&stkn=aWhoaGtuN2Rpbzhv",
   },
 }
 
