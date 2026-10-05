@@ -196,22 +196,23 @@ export default function OutroPage() {
           </div>
 
           {/* Instagram highlight: plain <a> opening in a new tab/app (next/link is for internal routes) */}
-          <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
+          <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-md flex-col gap-4 px-6">
             <a
               href={animal.link}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: 'default', size: 'lg' }),
-                'h-14 w-full max-w-sm rounded-2xl text-base',
+                'h-14 w-full rounded-2xl text-base',
               )}
             >
-              Link to share in Instagram
+              Link to share in Instagram (Add yours)
             </a>
-            <p className="text-xs leading-relaxed text-center font-semibold text-white ">ทำในโทรศัพท์ได้เท่านั้น</p>
+            <p className="text-xs leading-relaxed text-center font-semibold text-white ">ทำในโทรศัพท์ได้เท่านั้นและถ้า Story unavalible
+              เข้าโปรไฟล์แล้วกดไฮไลท์</p>
           </div>
 
-          <div className="relative z-10 mx-auto mt-8 mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
+          <div className="relative z-10 mx-auto mb-10 flex w-full max-w-xs flex-col gap-4 px-6">
             <a
               href={animal.downloadImage}
               download
