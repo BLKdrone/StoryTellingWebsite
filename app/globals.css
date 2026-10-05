@@ -255,7 +255,7 @@
 }
 
 .scroll-up {
-  animation: scrollUp 2s linear infinite;
+  animation: scrollUp 12s linear infinite;
 }
 
 /* Animal-specific animations */

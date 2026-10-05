@@ -26,7 +26,7 @@ export default function OutroPage() {
   const page = outroPages[index]
   const background = Array.isArray(page.background) ? page.background : [page.background]
   const result = getQuizResult()
-  usePageAudio(showResult ? '' : page.sound)
+  usePageAudio(showResult ? '/audio/score for interactive project.mp3' : page.sound)
 
   const finish = () => {
     router.push('/chapter-checkpoint?from=outro')
@@ -163,7 +163,7 @@ export default function OutroPage() {
             </div>
           </div>
 
-            {/* <div className="relative z-10 mt-4 w-full mx-auto max-w-md ">
+          {/* <div className="relative z-10 mt-4 w-full mx-auto max-w-md ">
             <div className="rounded-3xl border-[3px] border-black bg-white p-5 text-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
               <p className="text-center text-base leading-relaxed">{animal.description}</p>
             </div>

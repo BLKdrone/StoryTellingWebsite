@@ -18,7 +18,7 @@ const chapterBackgrounds: Record<ChapterKey, string> = {
     quiz: '/background/quiz/cave/1.webp',
     'mood-checkin': '/background/mood-checkin/normal.webp',
     'self-worth': '/background/selfworth/oceans1.webp',
-    burnout: '/background/burnout/oceans1.webp',
+    burnout: '/background/burnout/oceans.webp',
 }
 
 const STORAGE_KEY = 'quiet-journey-progress'

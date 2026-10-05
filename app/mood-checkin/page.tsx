@@ -9,7 +9,7 @@ import type { MoodKey, MoodPage } from '@/data/mood-checkin'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
 import { WhaleGlide } from '@/components/whale-guilde'
-import { cn } from '@/lib/utils'
+import { cn, wrapTextAtLength } from '@/lib/utils'
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 const HAPPY_WHALE_FRAMES = [
@@ -216,7 +216,7 @@ function MoodCheckinPageInner() {
   }
 
   const interpolateText = (text = '') =>
-    text.replace(/\{text-([\w-]+)\}/g, (_, id) => answers[id] ?? '')
+    text.replace(/\{text-([\w-]+)\}/g, (_, id) => wrapTextAtLength(answers[id] ?? ''))
 
   // Page 1: Intro
   if (pageState === 'question') {
@@ -290,8 +290,9 @@ function MoodCheckinPageInner() {
                       key={option.key}
                       onClick={(e) => { e.stopPropagation(); handleSelectMood(option.key) }}
                       disabled={exitingMood !== null}
-                      className="relative min-h-[300px] overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                      className="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
                       style={{
+                        minHeight: 250,
                         opacity: isFadingOut ? 0 : 1,
                         transform: isFadingOut ? 'scale(0.9)' : undefined,
                         pointerEvents: exitingMood ? 'none' : undefined,

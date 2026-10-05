@@ -160,7 +160,10 @@ function SelfWorthPageInner() {
                                         <button
                                             key={option.letter}
                                             onClick={() => handleSelectLetter(option.letter)}
-                                            className="relative min-h-[400px] overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                                            className="relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                                            style={{
+                                                minHeight: 220,
+                                            }}
                                         >
                                             {option.background ? (
                                                 <>

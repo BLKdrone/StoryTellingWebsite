@@ -7,7 +7,7 @@ import { introPages, type IntroPage } from '@/data/intro'
 import { BackgroundSlideshow } from '@/components/animations/background-slideshow'
 import { usePageAudio } from '@/components/page-audio'
 import { SlideNext } from '@/components/flash-transition'
-import { cn } from '@/lib/utils'
+import { cn, wrapTextAtLength } from '@/lib/utils'
 
 const NAME_TOKEN = '{{name}}'
 
@@ -79,7 +79,7 @@ function IntroPageInner() {
     usePageAudio(page.sound)
     const pageText = page.text ?? ''
     const resolvedText = pageText.includes(NAME_TOKEN)
-        ? pageText.replace(NAME_TOKEN, name)
+        ? pageText.replace(NAME_TOKEN, wrapTextAtLength(name))
         : pageText
 
     return (

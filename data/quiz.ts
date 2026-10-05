@@ -93,7 +93,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/dolphin/animal.webp',
     downloadImage: '/background/quiz/character/dolphin/dolphin.jpg',
     animationType: 'zoom',
-    link: "https://www.instagram.com/stories/goose.3533321/3972855821932823957?utm_source=ig_story_item_share&igsi=aXJidTU2eW9tNjRr",
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTA3MDQxOTEwNTk0NjY1?story_media_id=4001051543203092508_78111083071&stkn=MWk0aWRqdm81YWMxMw==",
   },
   seal: {
     key: 'seal',
@@ -110,12 +110,12 @@ export const animals: Record<AnimalKey, AnimalResult> = {
       'มีความเมตตากรุณาสูง คอยสนับสนุนผู้อื่นได้ดี และเป็นผู้ฟังที่ยอดเยี่ยม ช่วยนำความกลมเกลียวและความรู้สึกปลอดภัยทางใจมาสู่ทุกกลุ่มที่อยู่ด้วย',
     weakness:
       'ประสบปัญหาในการกำหนดขอบเขตในความพยายามที่จะรักษาความสันติ หลีกเลี่ยงการเผชิญหน้าที่จำเป็น มักซึมซับความเครียดของผู้อื่น และปล่อยให้ถูกเอาเปรียบได้ง่าย',
-    iconColor: '#7a9a7e',
+    iconColor: '#fff1fd',
     background: '/background/quiz/character/seal/background.webp',
     animal: '/background/quiz/character/seal/animal.webp',
     downloadImage: '/background/quiz/character/seal/seal.jpg',
     animationType: 'float',
-    link: "https://www.instagram.com/stories/goose.3533321/3972854483486579899?utm_source=ig_story_item_share&igsi=bHI4ejVwanY4bmVp"
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4Mjg0NDY4NDgyMjkxMDkz?story_media_id=4001050608636593673_78111083071&stkn=M2Yxb2ZiOGx4NmRp"
   },
   octopus: {
     key: 'octopus',
@@ -138,7 +138,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     downloadImage: '/background/quiz/character/octopus/octopus.jpg',
     decoration: '/background/quiz/character/octopus/decoration.webp',
     animationType: 'float',
-    link: "https://www.instagram.com/stories/goose.3533321/3972855360408509006?utm_source=ig_story_item_share&igsi=cnVrd3p1cDY0aHYy",
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM4NDQxMDEzNjI3MjA0?story_media_id=4001051937442390984_78111083071&stkn=MTNsazJtc21vYnh1Zg==",
   },
   pufferfish: {
     key: 'pufferfish',
@@ -160,7 +160,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     animal: '/background/quiz/character/pufferfish/animal.webp',
     downloadImage: '/background/quiz/character/pufferfish/pufferfish.jpg',
     animationType: 'float',
-    link: "https://www.instagram.com/stories/goose.3533321/3972855360408509006?utm_source=ig_story_item_share&igsi=cnVrd3p1cDY0aHYy",
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMwNDQ3NjY1ODg0NDQ5?story_media_id=4001050121501822146_78111083071&stkn=emVwc3RvOWZ3a2ht",
   },
   'sea-turtle': {
     key: 'sea-turtle',
@@ -182,7 +182,7 @@ export const animals: Record<AnimalKey, AnimalResult> = {
     downloadImage: '/background/quiz/character/turtle/turtle.jpg',
     decoration: '/background/quiz/character/turtle/decoration.webp',
     animationType: 'glide',
-    link: "https://www.instagram.com/stories/goose.3533321/3972839636432484625?utm_source=ig_story_item_share&igsi=MWVydzllejVxZ3N5aQ==",
+    link: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTA3NDIyNzUxMzQxNzQ2?story_media_id=4001051039291052192_78111083071&stkn=aWhoaGtuN2Rpbzhv",
   },
 }
 
@@ -269,7 +269,7 @@ export const quizQuestions: QuizPageData[] = [
       { letter: 'B', prefix: 'ว่ายหาความอบอุ่น', label: 'ปลอบโยนตัวเองผ่านการดูแลใครสักคน หรือซึมซับความอ่อนโยนจากคนที่รัก' },
       { letter: 'C', prefix: 'สำรวจสิ่งแปลกใหม่', label: 'เบี่ยงเบนความสนใจด้วยการค้นหาปริศนาหรือสิ่งใหม่ ๆ ที่น่าตื่นเต้น' },
       { letter: 'D', prefix: 'ดำดิ่งสู่ความลึก', label: 'ถอยกลับไปยังมุมสงบเงียบ เพื่อทบทวนความรู้สึกของตัวเองตามลำพัง' },
-      { letter: 'E', prefix: 'กลับสู่ชายฝั่ง', label: 'หันกลับไปหาความคุ้นเคย จัดระเบียบชีวิตและสิ่งรอบตัว เพื่อให้รู้สึกควบคุมทุกอย่างได้อีกครั้ง' },
+      { letter: 'E', prefix: 'กลับสู่ชายฝั่ง', label: 'หันกลับไปหาความคุ้นเคย จัดระเบียบชีวิตและสิ่งรอบตัวเพื่อให้รู้สึกควบคุมทุกอย่างได้อีกครั้ง' },
     ],
     navigation: 'button',
   },

@@ -18,6 +18,7 @@ import { motion } from 'motion/react'
 
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
+const HELP_WHALE_GOAL = 7
 
 const RESUME_KEY = 'burnout-resume'
 
@@ -58,6 +59,7 @@ function BurnoutPageInner() {
 
     const total = burnoutPages.length
     const page = burnoutPages[index]
+    const isHelpWhalePage = page.id === 'helpwhale'
     const hasDecoration = Boolean(page.decorationFrames || page.decorationBubble)
     // const decorationFrames = 'decorationFrames' in page ? page.decorationFrames : undefined
     // const backgroundImage = Array.isArray(page.background) ? page.background[0] : page.background
@@ -89,6 +91,15 @@ function BurnoutPageInner() {
         const timeoutId = window.setTimeout(() => setShowBlurStopButton(true), 700)
         return () => window.clearTimeout(timeoutId)
     }, [isBlurPage, page.id])
+
+    useEffect(() => {
+        if (!isHelpWhalePage || whalePosition === 0 || whalePosition >= HELP_WHALE_GOAL) return
+
+        const timeoutId = window.setTimeout(() => {
+            setWhalePosition((position) => Math.max(position - 1, 0))
+        }, 1400)
+        return () => window.clearTimeout(timeoutId)
+    }, [isHelpWhalePage, page.id, whalePosition])
 
     const finish = () => {
         // No data is collected/saved for burnout — this chapter is
@@ -141,9 +152,7 @@ function BurnoutPageInner() {
     )
 
     const helpWhale = () => {
-        if (whalePosition >= 3) return
-        const nextPosition = whalePosition + 1
-        setWhalePosition(nextPosition)
+        setWhalePosition((position) => Math.min(position + 1, HELP_WHALE_GOAL))
     }
 
     const flashOverlay = <SlideNext pageKey={page.id} color={page.flashTransition} />
@@ -155,7 +164,7 @@ function BurnoutPageInner() {
                 <div key={page.id} className="relative flex min-h-dvh flex-1 flex-col">
                     <BackgroundSlideshow images={page.background} intervalMs={1200} />
                     {page.decorationFrames && (
-                        <DecorationBackground images={page.decorationFrames} intervalMs={1500} />
+                        <DecorationBackground images={page.decorationFrames} intervalMs={2000} />
                     )}
                     {decorationBubble}
                     <div className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
@@ -186,7 +195,6 @@ function BurnoutPageInner() {
     }
 
     // Tap-anywhere narrative / interaction page
-    const isHelpWhalePage = page.id === 'helpwhale'
     const isZoomWhalePage = page.id === 'zoom-whale'
 
     return (
@@ -262,7 +270,7 @@ function BurnoutPageInner() {
                                         aria-label="ช่วยวาฬว่าย"
                                         className="absolute left-1/2 w-[28rem] cursor-pointer transition-transform duration-500 ease-out focus:outline-none"
                                         style={{
-                                            transform: `translateX(calc(-50% - ${whalePosition * 60}px))`,
+                                            transform: `translateX(calc(-50% - ${whalePosition * 30}px))`,
                                         }}
                                         onClick={(e) => {
                                             e.stopPropagation()
@@ -297,7 +305,33 @@ function BurnoutPageInner() {
                                     <span className={cn(textChip, 'leading-relaxed')}>{page.text}</span>
                                 </p>
                             )}
-                            {page.interactionLabel && !isBlurPage && (!isHelpWhalePage || whalePosition >= 3) && (
+                            {isHelpWhalePage && (
+                                <div className="relative z-20 flex flex-col items-center gap-3 px-6">
+                                    <p className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
+                                        <span className={cn(textChip, 'leading-relaxed')}>
+                                            {whalePosition >= HELP_WHALE_GOAL
+                                                ? 'วาฬฝ่ากระแสน้ำได้แล้ว'
+                                                : 'แตะวาฬซ้ำ ๆ เพื่อฝ่ากระแสน้ำ'}
+                                        </span>
+                                    </p>
+                                    {whalePosition < HELP_WHALE_GOAL && (
+                                        <div
+                                            role="progressbar"
+                                            aria-label="ความคืบหน้าการช่วยวาฬ"
+                                            aria-valuemin={0}
+                                            aria-valuemax={HELP_WHALE_GOAL}
+                                            aria-valuenow={whalePosition}
+                                            className="h-2.5 w-44 overflow-hidden rounded-full border border-white/60 bg-black/35"
+                                        >
+                                            <div
+                                                className="h-full rounded-full bg-white transition-[width] duration-300"
+                                                style={{ width: `${(whalePosition / HELP_WHALE_GOAL) * 100}%` }}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                            {page.interactionLabel && !isBlurPage && (!isHelpWhalePage || whalePosition >= HELP_WHALE_GOAL) && (
                                 <button
                                     type="button"
                                     onClick={(e) => {
@@ -305,11 +339,12 @@ function BurnoutPageInner() {
                                         if (isHelpWhalePage) advance()
                                     }}
                                     onKeyDown={(e) => e.stopPropagation()}
-                                    className="relative z-10 rounded-[5px] bg-white px-4 py-3 text-base font-serif text-black transition-colors hover:bg-white/90"
+                                    className="relative z-20 h-12 w-full max-w-sm rounded-[5px] bg-white text-base font-serif font-medium text-black hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-50"
                                 >
                                     {isHelpWhalePage ? 'ไปต่อ' : page.interactionLabel}
                                 </button>
                             )}
+
                         </div>
                     </div>
                 </div>

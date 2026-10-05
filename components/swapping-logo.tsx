@@ -15,7 +15,7 @@ export function SwappingLogo() {
   }, [])
 
   return (
-    <div className="relative h-[900px] w-[2500px] max-w-full mx-auto z-20 -mt-72 pointer-events-none">
+    <div className="relative h-[900px] w-[2500px] max-w-full mx-auto z-20 -mt-[330px] pointer-events-none">
       {showLogo1 ? (
         <Image
           src="/background/intro/logo1.PNG"
