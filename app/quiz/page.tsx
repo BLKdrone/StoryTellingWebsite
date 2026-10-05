@@ -151,7 +151,7 @@ function QuizPageInner() {
               className={cn(
                 'w-[800px] h-auto z-10',
                 page.decorationMotion === 'bob'
-                  ? 'absolute top-0 left-[20vw] -translate-x-1/2'
+                  ? 'absolute top-0 left-1/2 -translate-x-1/2'
                   : 'absolute top-0 left-0 -translate-x-1/2'
               )}
             />
