@@ -49,6 +49,11 @@ function BottlePageInner() {
   const [selectedId, setSelectedId] = useState<string | null>(resumed?.selectedId ?? null)
   const [zooming, setZooming] = useState(false)
   const [foldsComplete, setFoldsComplete] = useState(false)
+  // True once the star has landed in the bottle, so going back to step 4 shows
+  // it resting inside instead of replaying the fall.
+  // Where the star ended up on the fold screen, so the bottle screen starts from the same spot.
+  const [starPoint, setStarPoint] = useState<{ x: number; y: number } | null>(null)
+  const [bottleDone, setBottleDone] = useState(resumed?.step === 5)
   const [randomOutro, setRandomOutro] = useState<(typeof bottleOutros)[number] | null>(
     resumed?.outroIndex != null ? bottleOutros[resumed.outroIndex] : null
   )
@@ -62,6 +67,7 @@ function BottlePageInner() {
   const handleBottleComplete = () => {
     const outroIndex = Math.floor(Math.random() * bottleOutros.length)
     setRandomOutro(bottleOutros[outroIndex])
+    setBottleDone(true)
     setStep(5)
   }
 
@@ -74,6 +80,8 @@ function BottlePageInner() {
       setRandomOutro(null)
       setStep(4)
     } else if (step === 4) {
+      setBottleDone(false)
+      setStarPoint(null)
       setStep(3)
     } else if (step === 3) {
       setSelectedId(null)
@@ -193,9 +201,11 @@ function BottlePageInner() {
               onCompleteAction={(foldStep) => {
                 if (foldStep === 3) {
                   setFoldsComplete(true)
-                } else if (foldStep === 4) {
-                  setTimeout(() => setStep(4), 650)
                 }
+              }}
+              onStarSettled={(centre) => {
+                setStarPoint(centre)
+                setStep(4)
               }}
             >
               <div className="whitespace-pre-line p-8 flex flex-col items-center justify-center text-center text-slate-800 font-serif text-2xl h-full w-full">
@@ -211,13 +221,15 @@ function BottlePageInner() {
         {/* Step 4: Bottle Toss (skips the CSS fold phase) */}
         {step === 4 && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: starPoint ? 1 : 0 }}
             animate={{ opacity: 1 }}
             className="flex flex-1 flex-col items-center justify-center"
           >
             <BottleFold
               answer={selectedText}
               skipFold={true}
+              settled={bottleDone}
+              startPoint={starPoint ?? undefined}
               onComplete={handleBottleComplete}
               backgroundImage="/background/mood-checkin/bottle/star.webp"
               bottleImage="/background/mood-checkin/bottle/bottle.webp"

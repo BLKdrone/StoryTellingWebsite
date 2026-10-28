@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, type ReactNode } from 'react'
+import { useRef, useState, type ReactNode } from 'react'
 import { flushSync } from 'react-dom'
 import { motion, useAnimationControls } from 'motion/react'
+import { STAR_CROP, STAR_H, STAR_W } from './star-crop'
 
 type FoldAxis = 'vertical' | 'horizontal'
 const FOLD_SEQUENCE: FoldAxis[] = ['vertical', 'horizontal', 'vertical']
@@ -22,6 +23,7 @@ export function FoldAnimation({
   height = 420,
   className,
   onCompleteAction,
+  onStarSettled,
   finalImage,
 }: {
   children?: ReactNode
@@ -30,6 +32,8 @@ export function FoldAnimation({
   height?: number
   className?: string
   onCompleteAction?: (step: number) => void
+  /** Fires once the star has finished sliding to the middle, with its centre in viewport coordinates. */
+  onStarSettled?: (centre: { x: number; y: number }) => void
   finalImage?: string
 }) {
   const [visW, setVisW] = useState(width)
@@ -39,6 +43,7 @@ export function FoldAnimation({
   const [showFinalImage, setShowFinalImage] = useState(false)
   const [flapRect, setFlapRect] = useState<FlapRect | null>(null)
   const flap = useAnimationControls()
+  const starRef = useRef<HTMLDivElement>(null)
 
   const isComplete = step >= FOLD_SEQUENCE.length
   const easeCurve = [0.4, 0, 0.2, 1] as const
@@ -107,19 +112,30 @@ export function FoldAnimation({
     >
       <div className="relative" style={{ width, height, transformStyle: 'preserve-3d' }}>
         {showFinalImage && finalImage ? (
-          <motion.img
-            src={finalImage}
-            alt=""
-            initial={{ opacity: 0, scale: 0.45, rotate: -90 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="absolute object-contain"
+          // The folded paper sits in the top-left of the box. The star pops out
+          // of it, then slides horizontally to the middle of the box.
+          <motion.div
+            ref={starRef}
+            aria-hidden
+            onAnimationComplete={() => {
+              const r = starRef.current?.getBoundingClientRect()
+              if (r) onStarSettled?.({ x: r.left + r.width / 2, y: r.top + r.height / 2 })
+            }}
+            initial={{ opacity: 0, scale: 0.45, rotate: -90, x: 0 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0, x: width / 2 - visW / 2 }}
+            transition={{
+              opacity: { duration: 0.45, ease: 'easeOut' },
+              scale: { duration: 0.45, ease: 'easeOut' },
+              rotate: { duration: 0.45, ease: 'easeOut' },
+              x: { delay: 0.55, duration: 0.7, ease: 'easeInOut' },
+            }}
+            className="absolute"
             style={{
-              width: visW * 5,
-              height: visH * 5,
-              left: -visW * 0.9,
-              top: -visH * 2,
-
+              left: visW / 2 - STAR_W / 2,
+              top: visH / 2 - STAR_H / 2,
+              width: STAR_W,
+              height: STAR_H,
+              ...STAR_CROP,
             }}
           />
         ) : (
