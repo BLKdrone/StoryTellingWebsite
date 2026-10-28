@@ -12,7 +12,7 @@ const bubbles = [
     { left: '92%', size: 36, duration: 12, delay: -3, opacity: 0.4 },
 ]
 
-const manyBubbleImage = '/background/burnout/manybubble.PNG'
+const manyBubbleImage = '/background/burnout/manybubble.webp'
 const manyBubbleAspectRatio = '3600 / 6400'
 
 type DecorationBubbleType = 'one' | 'many'

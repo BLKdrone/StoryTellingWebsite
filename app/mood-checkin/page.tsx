@@ -238,7 +238,7 @@ function MoodCheckinPageInner() {
           </button>
           <Image src={moodIntro.background} alt="" fill className="object-cover -z-10" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
-          <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center text-center">
+          <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center px-6 text-center">
             {moodQuestion.text?.trim() && (
               <h1 className="text-balance whitespace-pre-line text-center font-serif text-2xl leading-relaxed">
                 <span className={cn(textChip, 'leading-relaxed')}>{moodIntro.text}</span>
@@ -397,7 +397,7 @@ function MoodCheckinPageInner() {
                     <button
                       onClick={handleSubmit}
                       disabled={!answer.trim()}
-                      className="h-12 w-full max-w-sm rounded-lg bg-black/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="h-12 w-full max-w-sm rounded-[5px] bg-white text-base font-serif font-medium text-black hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {page.buttonLabel || 'Let it drift'}
                     </button>
@@ -473,6 +473,7 @@ function MoodCheckinPageInner() {
                 />
               </div>
             )}
+            <div>
             <div className="relative z-10 flex min-h-dvh flex-1 flex-col items-center justify-center p-8 text-center">
               {interpolateText(page.text).trim() && (
                 <p className={cn(
@@ -494,12 +495,13 @@ function MoodCheckinPageInner() {
                   event.stopPropagation()
                   handleAdvanceBranch()
                 }}
-                className="absolute bottom-[160px] left-1/2 z-20 h-12 w-full max-w-sm -translate-x-1/2 rounded-lg bg-black/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30"
+                className="absolute bottom-[80px] left-1/2 z-20 h-12 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 rounded-[5px] bg-white text-base font-serif font-medium text-black hover:bg-white/90"
               >
                 ไปต่อ
               </button>
             )}
             <SlideNext pageKey={page.id} color={page.flashTransition} />
+          </div>
           </div>
         </div>
       </MobileFrame>

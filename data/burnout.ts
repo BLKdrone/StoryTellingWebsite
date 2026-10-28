@@ -76,6 +76,7 @@ export const burnoutPages: BurnoutPage[] = [
         background: deepOceanBackground,
         decorationBubble: 'many',
         sound: '/audio/deepOcean.mp3',
+        flashTransition: 'black',
     },
     {
         id: 'burnout-4',
@@ -221,7 +222,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-12',
         navigation: 'tap-anywhere',
         text: 'น้องวาฬเดินทางมาไกลมากเลยนะ ก็เหมือนกับเธอ',
-        background: '/background/burnout/deepsea.png',
+        background: '/background/burnout/deepsea.webp',
 
         sound: '/audio/score for interactive project.mp3',
     },
@@ -229,7 +230,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-13',
         navigation: 'tap-anywhere',
         text: 'ถ้าวันไหนเหนื่อยมากจริง ๆ\nการหยุดไม่ได้แปลว่าอ่อนแอ\nบางทีมันอาจจะเป็นแค่การหยุดหายใจก่อนจะไปต่อได้',
-        background: '/background/burnout/deepsea.png',
+        background: '/background/burnout/deepsea.webp',
 
         sound: '/audio/score for interactive project.mp3',
     },
@@ -237,7 +238,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-14',
         navigation: 'tap-anywhere',
         text: 'ค่อย ๆ ว่ายในจังหวะของตัวเองไปนะ',
-        background: '/background/burnout/deepsea.png',
+        background: '/background/burnout/deepsea.webp',
 
         sound: '/audio/score for interactive project.mp3',
     },

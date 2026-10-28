@@ -150,7 +150,7 @@ function IntroPageInner() {
                         <button
                             onClick={handleNameSubmit}
                             disabled={!inputValue.trim()}
-                            className="h-12 w-full max-w-sm rounded-lg bg-black/20 text-base font-serif font-medium text-white backdrop-blur-md hover:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="h-12 w-full max-w-sm rounded-[5px] bg-white text-base font-serif font-medium text-black hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {page.buttonLabel || 'Let it drift'}
                         </button>
