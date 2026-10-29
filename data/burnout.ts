@@ -72,7 +72,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-3',
         navigation: 'tap-anywhere',
-        text: 'ตรงหน้าคือมหาสมุทรอันกว้างใหญ่\nเป็นเส้นทางที่ยาวไกลเหมือนเดิม เหมือนทุกวัน',
+        text: 'ตรงหน้าคือมหาสมุทรอันกว้างใหญ่\nเป็นเส้นทางที่ยาวไกลเหมือนเดิม \nเหมือนทุกวัน',
         background: deepOceanBackground,
         decorationBubble: 'many',
         sound: '/audio/deepOcean.mp3',
