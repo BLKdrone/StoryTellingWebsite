@@ -17,7 +17,7 @@ import { StopWhale } from '@/components/stop-whale'
 import { motion } from 'motion/react'
 
 
-const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
+const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-balance font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 const HELP_WHALE_GOAL = 7
 
 const RESUME_KEY = 'burnout-resume'

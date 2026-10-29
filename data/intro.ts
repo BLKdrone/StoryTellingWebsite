@@ -114,7 +114,7 @@ export const introPages: IntroPage[] = [
     id: 'intro-explain-journey',
     navigation: 'tap-anywhere',
     speaker: 'whale',
-    text: '"ในระหว่างการเดินทางนี้ ฉันจะทำให้เธอได้ลองตอบ\nคำถามต่อไปนี้ เพื่อฉันจะได้รู้จักเธอมากขึ้น"',
+    text: '"ในระหว่างการเดินทางนี้ ฉันจะทำให้\nเธอได้ลองตอบคำถามต่อไปนี้\nเพื่อฉันจะได้รู้จักเธอมากขึ้น"',
     background: [
       '/background/intro/whale1.webp',
       '/background/intro/whale2.webp',

@@ -13,7 +13,7 @@ const heroImages = [
   '/background/intro/background2.webp',
   '/background/intro/background3.webp',
 ]
-const textChip = 'inline-block rounded-2xl border border-black/60 bg-black/40 px-4 py-3 whitespace-pre-line text-pretty font-body text-2lg text-white leading-relaxed backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)]'
+const textChip = 'inline-block rounded-2xl border border-black/60 bg-black/40 px-4 py-3 whitespace-pre-line text-balance font-body text-2lg text-white leading-relaxed backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)]'
 export default function HomePage() {
   return (
     <MobileFrame>
