@@ -91,25 +91,18 @@ export const DecorationBackground = memo(
 
     return (
       <div aria-hidden className="absolute inset-0 overflow-hidden z-9">
-        {/* Previous image stays visible so there is never a blank flash during network lag */}
-        {safeImages[safePrevIndex] && safePrevIndex !== safeIndex && (
+        {safeImages.map((src, i) => (
           <Image
-            src={safeImages[safePrevIndex]}
+            key={src}
+            src={src}
             alt=""
             fill
-            className="object-cover"
+            className={`object-cover transition-opacity duration-300 ${i === safeIndex ? 'opacity-100' : 'opacity-0'
+              }`}
             priority
+            onLoad={() => markLoaded(src)}
           />
-        )}
-
-        <Image
-          src={safeImages[safeIndex]}
-          alt=""
-          fill
-          className="object-cover"
-          priority
-          onLoad={() => markLoaded(safeImages[safeIndex])}
-        />
+        ))}
       </div>
     )
   },
