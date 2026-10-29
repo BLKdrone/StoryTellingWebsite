@@ -152,6 +152,7 @@ export const burnoutPages: BurnoutPage[] = [
         background: ManyWhaleBackground,
         decorationBubble: 'many',
         sound: '/audio/deepOcean.mp3',
+         flashTransition: 'black',
     },
     {
         id: 'burnout-tolerance',
@@ -197,7 +198,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-10-reflection',
         navigation: 'tap-anywhere',
-        text: 'วาฬเริ่มไม่แน่ใจว่าที่ผ่านมา\nเราว่ายตามกระแสน้ำ หรือว่ายตามอะไรกันแน่',
+        text: 'วาฬเริ่มไม่แน่ใจว่าที่ผ่านมา\nเราว่ายตามกระแสน้ำ\nหรือว่ายตามอะไรกันแน่',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',

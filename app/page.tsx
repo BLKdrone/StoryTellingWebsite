@@ -41,8 +41,8 @@ export default function HomePage() {
           </div>
 
           <p className="rounded-2xl border border-white/60 bg-white/20 px-4 py-3 whitespace-pre-line text-pretty font-body text-sm leading-relaxed text-gray-900 backdrop-blur-sm float-up">
-            คำชี้แจง: นี่เป็นแบบทดสอบเพื่อพาคุณสำรวจความรู้สึกในช่วงนี้ ไม่ใช่แบบทดสอบเพื่อการวินิจฉัยโรค หากทำแบบทดสอบแล้วเกิด<br />
-            ความรู้สึกไม่สบายใจ สามารถหยุดทำได้ทันที และหากต้องการความ <br />
+            คำชี้แจง: นี่เป็นแบบทดสอบเพื่อพาคุณสำรวจความรู้สึกในช่วงนี้ ไม่ใช่แบบทดสอบเพื่อการวินิจฉัยโรค หากทำแบบทดสอบแล้วเกิด
+            ความรู้สึกไม่สบายใจ สามารถหยุดทำได้ทันที และหากต้องการความ
             ช่วยเหลือทันที ติดต่อ 1323 สายด่วนสุขภาพจิตได้ตลอด 24 ชม. หรือใช้บริการ MDCU Let’s talk ผ่าน Application MDCU wellness
 
           </p>

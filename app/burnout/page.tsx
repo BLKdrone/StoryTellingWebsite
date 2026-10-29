@@ -19,6 +19,10 @@ import { motion } from 'motion/react'
 
 const textChip = 'inline-block rounded-2xl border border-white/60 bg-white/40 px-4 py-3 whitespace-pre-line text-balance font-body text-lg leading-relaxed text-gray-900 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.15)] float-up'
 const HELP_WHALE_GOAL = 7
+const HELP_WHALE_FRAMES = [
+    '/background/quiz/shallowcoral/whale1.webp',
+    '/background/quiz/shallowcoral/whale2.webp',
+]
 
 const RESUME_KEY = 'burnout-resume'
 
@@ -285,10 +289,7 @@ function BurnoutPageInner() {
                                         }}
                                     >
                                         <WhaleGlide
-                                            frames={[
-                                                '/background/quiz/shallowcoral/whale1.webp',
-                                                '/background/quiz/shallowcoral/whale2.webp',
-                                            ]}
+                                            frames={HELP_WHALE_FRAMES}
                                             motion="bob"
                                             className="h-[28rem] w-[28rem] object-contain"
                                         />

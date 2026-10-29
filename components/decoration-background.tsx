@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, useEffect, useRef, useState, useCallback } from 'react'
+import { memo, useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
 
 interface DecorationBackgroundProps {
@@ -27,7 +27,8 @@ export const DecorationBackground = memo(
     images,
     intervalMs = 1200,
   }: DecorationBackgroundProps) {
-    const safeImages = normalizeImages(images)
+    const imagesKey = normalizeImages(images).join(',')
+    const safeImages = useMemo(() => normalizeImages(images), [imagesKey])
     const [index, setIndex] = useState(0)
     const prevIndex = useRef(0)
     const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({})
@@ -35,8 +36,6 @@ export const DecorationBackground = memo(
     const markLoaded = useCallback((src: string) => {
       setLoadedMap((prev) => (prev[src] ? prev : { ...prev, [src]: true }))
     }, [])
-
-    const imagesKey = safeImages.join(',')
 
     // Preload all frames into browser cache
     useEffect(() => {
