@@ -365,7 +365,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
       {
         id: 'overwhelmed-5',
         navigation: 'tap-anywhere',
-        text: 'ไม่ว่าตอนนี้จะเป็นยังไง\nยังมีแสงแดดของวันที่สดใสรออยู่ข้างหน้านะ',
+        text: 'ไม่ว่าตอนนี้จะเป็นยังไง\nยังมีแสงแดดของวันที่สดใส\nรออยู่ข้างหน้านะ',
         background: '/background/mood-checkin/normal.webp',
         sound: '/audio/score for interactive project.mp3',
       },

@@ -65,25 +65,12 @@ function BurnoutPageInner() {
     const page = burnoutPages[index]
     const isHelpWhalePage = page.id === 'helpwhale'
     const hasDecoration = Boolean(page.decorationFrames || page.decorationBubble)
-    // const decorationFrames = 'decorationFrames' in page ? page.decorationFrames : undefined
-    // const backgroundImage = Array.isArray(page.background) ? page.background[0] : page.background
-    // const [decorationFrameIndex, setDecorationFrameIndex] = useState(0)
     const isBlurPage = page.id === 'stop-whale'
     const isBlurCleared = blurClearedPageId === page.id
     const decorationBubble = page.decorationBubble
         ? <DecorationBubble type={page.decorationBubble} />
         : null
     usePageAudio(page.sound)
-
-    // useEffect(() => {
-    //     setDecorationFrameIndex(0)
-    //     if (!decorationFrames || decorationFrames.length < 2) return
-
-    //     const intervalId = window.setInterval(() => {
-    //         setDecorationFrameIndex((frameIndex) => (frameIndex + 1) % decorationFrames.length)
-    //     }, 900)
-    //     return () => window.clearInterval(intervalId)
-    // }, [page.id, decorationFrames])
 
     useEffect(() => {
         if (!isBlurPage) {
@@ -230,30 +217,33 @@ function BurnoutPageInner() {
                     {/* Main background image */}
                     {isZoomWhalePage ? (
                         <ZoomAnimation
-                            focalPoint="58% 29%"
+                            focalPoint="57% 29%"
                             peakScale={10}
                             duration={2.5}
                             className="absolute inset-0"
                         >
                             <Image src={page.background} alt="" fill className="object-cover" priority />
+                            {page.decorationFrames && (
+                                <DecorationBackground images={page.decorationFrames} intervalMs={1200} />
+                            )}
                             <WhaleGlide
                                 frames={[
                                     '/background/burnout/whale1.webp',
                                     '/background/burnout/whale2.webp',
                                 ]}
                                 motion="still"
-                                className="pointer-events-none absolute left-1/2 top-[11%] z-[5] h-[28rem] w-[28rem] -translate-x-1/2 object-contain"
+                                className="pointer-events-none absolute left-1/2 top-[11%] z-[10] h-[28rem] w-[28rem] -translate-x-1/2 object-contain"
                             />
                         </ZoomAnimation>
                     ) : (
                         <Image src={page.background} alt="" fill className="object-cover" priority />
                     )}
-                    {page.decorationFrames && (
+                    {page.decorationFrames && !isZoomWhalePage && (
                         <motion.div
-                            className="absolute inset-0"
-                            style={{ transformOrigin: '58% 29%' }}
+                            className="absolute inset-0 z-9"
+                            style={{ transformOrigin: '57% 29%' }}
                             initial={{ scale: 1 }}
-                            animate={{ scale: isZoomWhalePage ? 10 : 1 }}
+                            animate={{ scale: 1 }}
                             transition={{ duration: 2.5, ease: 'easeInOut' }}
                         >
                             <DecorationBackground
@@ -263,6 +253,22 @@ function BurnoutPageInner() {
                         </motion.div>
                     )}
                     {decorationBubble}
+                    {isHelpWhalePage && (
+                        <div className="pointer-events-none absolute inset-x-0 top-[22%] z-[8] h-[28rem] overflow-visible">
+                            <div
+                                className="absolute left-1/2 w-[28rem] transition-transform duration-500 ease-out"
+                                style={{
+                                    transform: `translateX(calc(-50% - ${whalePosition * 30}px))`,
+                                }}
+                            >
+                                <WhaleGlide
+                                    frames={HELP_WHALE_FRAMES}
+                                    motion="fight"
+                                    className="h-[28rem] w-[28rem] object-contain"
+                                />
+                            </div>
+                        </div>
+                    )}
                     <div key={page.id} className="relative z-10 flex min-h-dvh flex-1 flex-col p-6">
                         {backButton}
                         <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
@@ -290,7 +296,7 @@ function BurnoutPageInner() {
                                     >
                                         <WhaleGlide
                                             frames={HELP_WHALE_FRAMES}
-                                            motion="bob"
+                                            motion="fight"
                                             className="h-[28rem] w-[28rem] object-contain"
                                         />
                                     </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, useEffect, useMemo, useRef, useState, useCallback } from 'react'
+import { memo, useEffect, useMemo, useState, useCallback } from 'react'
 import Image from 'next/image'
 
 interface DecorationBackgroundProps {
@@ -30,7 +30,6 @@ export const DecorationBackground = memo(
     const imagesKey = normalizeImages(images).join(',')
     const safeImages = useMemo(() => normalizeImages(images), [imagesKey])
     const [index, setIndex] = useState(0)
-    const prevIndex = useRef(0)
     const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({})
 
     const markLoaded = useCallback((src: string) => {
@@ -54,7 +53,6 @@ export const DecorationBackground = memo(
 
     useEffect(() => {
       setIndex(0)
-      prevIndex.current = 0
     }, [imagesKey])
 
     // Advance only when next frame has finished loading
@@ -69,7 +67,6 @@ export const DecorationBackground = memo(
           const nextSrc = safeImages[nextIdx]
 
           if (loadedMap[nextSrc]) {
-            prevIndex.current = index
             setIndex(nextIdx)
           } else {
             scheduleNext()
@@ -87,18 +84,18 @@ export const DecorationBackground = memo(
     }
 
     const safeIndex = index % safeImages.length
-    const safePrevIndex = prevIndex.current % safeImages.length
 
     return (
-      <div aria-hidden className="absolute inset-0 overflow-hidden z-9">
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden z-9">
         {safeImages.map((src, i) => (
           <Image
             key={src}
             src={src}
             alt=""
             fill
-            className={`object-cover transition-opacity duration-300 ${i === safeIndex ? 'opacity-100' : 'opacity-0'
-              }`}
+            className={`object-cover transition-opacity duration-300 ${
+              i === safeIndex ? 'opacity-100' : 'opacity-0'
+            }`}
             priority
             onLoad={() => markLoaded(src)}
           />

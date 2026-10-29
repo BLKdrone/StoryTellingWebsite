@@ -7,7 +7,7 @@ interface WhaleGlideProps {
   frames: string[]
   className?: string
   frameIntervalMs?: number
-  motion?: 'glide' | 'bob' | 'still'
+  motion?: 'glide' | 'bob' | 'fight' | 'still'
   bounceKey?: number
 }
 
@@ -74,6 +74,7 @@ export function WhaleGlide({
         'pointer-events-none select-none',
         motion === 'glide' && 'animate-animal-gliding',
         motion === 'bob' && 'animate-animal-bob',
+        motion === 'fight' && 'animate-animal-fight-wind',
         bounceKey !== undefined && bounceKey > 0 && 'animate-whale-click',
         className
       )}
