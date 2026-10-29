@@ -277,7 +277,7 @@ export const moodBranches: Record<MoodKey, MoodBranch> = {
               {
                 id: 'sad-keep-1',
                 navigation: 'tap-anywhere',
-                text: 'ไม่เป็นไรนะที่จะเสียใจ\nแต่อย่าให้ความเศร้ากลบแสงสว่างในตัวคุณ\nให้เรื่องนี้เป็นประสบการณ์ที่จะ\nทำให้คุณเติบโตขึ้นนะ',
+                text: 'ไม่เป็นไรนะที่จะเสียใจ\nแต่อย่าให้ความเศร้า\nกลบแสงสว่างในตัวคุณ\nให้เรื่องนี้เป็นประสบการณ์ที่จะ\nทำให้คุณเติบโตขึ้นนะ',
                 background: '/background/mood-checkin/sad1.webp',
                 sound: '/audio/score for interactive project.mp3',
               },

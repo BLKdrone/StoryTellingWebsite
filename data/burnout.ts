@@ -173,7 +173,7 @@ export const burnoutPages: BurnoutPage[] = [
         id: 'burnout-9',
         navigation: 'tap-anywhere',
         decorationBubble: 'many',
-        text: 'วาฬพยายามเร่งตาม ยิ่งเร่ง น้ำยิ่งหนัก ยิ่งเร่ง\nยิ่งเหนื่อย วาฬตัวนี้เร่งจนสุดแรงจนภาพเริ่มเบลอ',
+        text: 'วาฬพยายามเร่งตาม\n ยิ่งเร่ง น้ำยิ่งหนัก ยิ่งเร่งยิ่งเหนื่อย \nวาฬตัวนี้เร่งจนสุดแรงจนภาพเริ่มเบลอ',
         background: ManyWhaleBackground,
 
         sound: '/audio/score for interactive project.mp3',
@@ -230,7 +230,7 @@ export const burnoutPages: BurnoutPage[] = [
     {
         id: 'burnout-13',
         navigation: 'tap-anywhere',
-        text: 'ถ้าวันไหนเหนื่อยมากจริง ๆ\nการหยุดไม่ได้แปลว่าอ่อนแอ\nบางทีมันอาจจะเป็นแค่การหยุดหายใจก่อนจะไปต่อได้',
+        text: 'ถ้าวันไหนเหนื่อยมากจริง ๆ\nการหยุดไม่ได้แปลว่าอ่อนแอ\nบางทีมันอาจจะเป็นแค่การหยุดหายใจ\nก่อนจะไปต่อได้',
         background: '/background/burnout/deepsea.webp',
 
         sound: '/audio/score for interactive project.mp3',

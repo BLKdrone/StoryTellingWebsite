@@ -217,11 +217,12 @@ function BurnoutPageInner() {
                     {/* Main background image */}
                     {isZoomWhalePage ? (
                         <ZoomAnimation
-                            focalPoint="57% 29%"
+                            focalPoint="56% 33%"
                             peakScale={10}
                             duration={2.5}
                             className="absolute inset-0"
                         >
+                            {/* Layer order: text (z-10, outside) > whale (z-[10]) > wind (z-9) > background */}
                             <Image src={page.background} alt="" fill className="object-cover" priority />
                             {page.decorationFrames && (
                                 <DecorationBackground images={page.decorationFrames} intervalMs={1200} />
@@ -294,10 +295,12 @@ function BurnoutPageInner() {
                                             }
                                         }}
                                     >
+                                        {/* Invisible hit target only — the visible whale is rendered
+                                            below the wind layer (text > wind > whale > background). */}
                                         <WhaleGlide
                                             frames={HELP_WHALE_FRAMES}
                                             motion="fight"
-                                            className="h-[28rem] w-[28rem] object-contain"
+                                            className="h-[28rem] w-[28rem] object-contain opacity-0"
                                         />
                                     </div>
                                 </div>
